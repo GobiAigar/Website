@@ -9,6 +9,7 @@ Govi Agiar project service documentation
 ```http
   GET https://website-z9b7.onrender.com/api/website
   GET https://website-z9b7.onrender.com/api/news
+  GET https://website-z9b7.onrender.com/api/messages
 ```
 
 #### Update item
@@ -18,7 +19,7 @@ Govi Agiar project service documentation
 
 ```
 
-####updateWebsite(title,english,mongolia,image_url1,image_url2,image_url3,image_url4)
+##updateWebsite(title,english,mongolia,image_url1,image_url2,image_url3,image_url4)
 
 | Parameter    | Type     | Description                       |
 | :----------- | :------- | :-------------------------------- |
@@ -30,25 +31,39 @@ Govi Agiar project service documentation
 | `image_url3` | `string` | it is posible null                |
 | `image_url4` | `string` | it is posible null                |
 
-#### Create news
+## Create news
 
 ```https
   POST /api/createNews
   ####createNews(title,english,mongolia,image_url1,image_url2,image_url3,image_url4)
-
-| Parameter    | Type     | Description                       |
-| :----------- | :------- | :-------------------------------- |
-| `entitle`      | `string` | **Required**                    |
-| `mntitle`    | `string` |  **Required**                     |
-| `endescription`   | `string` |  **Required**                |
-| `mndescription` | `string` |  **Required**                  |
-| `journalist` | `string` |  **Required**                     |
-| `image_url` | `string` |  **Required**                      |
-
 ```
+
+| Parameter       | Type     | Description  |
+| :-------------- | :------- | :----------- |
+| `entitle`       | `string` | **Required** |
+| `mntitle`       | `string` | **Required** |
+| `endescription` | `string` | **Required** |
+| `mndescription` | `string` | **Required** |
+| `journalist`    | `string` | **Required** |
+| `image_url`     | `string` | **Required** |
 
 ```https
   POST /api/deleteNews/:id
   ####delete news(id)
 
 ```
+
+POST /api/createMessages
+
+| Parameter     | Type     | Description                      |
+| :------------ | :------- | :------------------------------- |
+| `purpose`     | `enum`   | `international, domestic, other` |
+| `firstname`   | `string` | **Required**                     |
+| `lastname`    | `string` | **Required**                     |
+| `email`       | `string` | **Required**                     |
+| `phonenumber` | `string` | **Required**                     |
+| `country`     | `string` | **Required**                     |
+| `state`       | `string` | **Required**                     |
+| `city`        | `string` | **Required**                     |
+| `bussiness`   | `string` | **Required**                     |
+| `plan`        | `string` | **Required**                     |
