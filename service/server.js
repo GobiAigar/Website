@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { neon } from "@neondatabase/serverless";
-import router from "./routes/website.route.js";
+import websiteRouter from "./routes/website.route.js";
+import newsRouter from "./routes/news.route.js";
+import messageRouter from "./routes/messages.route.js";
 
 dotenv.config();
 export const sql = neon(`${process.env.DATABASE_URL}`);
@@ -18,7 +20,9 @@ server.get("/", (_, res) => {
   res.send("Welcome to the server!");
 });
 
-server.use("/api", router);
+server.use("/api", websiteRouter);
+server.use("/api", newsRouter);
+server.use("/api", messageRouter);
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
