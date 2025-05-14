@@ -1,0 +1,87 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "title": "New Innovation in Mongolian Cashmere",
+      "date": "2025-05-12",
+      "author": "Erdene B.",
+      "content": "A new processing method has improved the quality and softness of Mongolian cashmere. This innovation is expected to boost exports and benefit local herders.",
+      "image": "https://images.unsplash.com/photo-1641642231157-0849081598a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzaG1lcmV8ZW58MHx8MHx8fDI%3D"
+    },
+    {
+      "id": 2,
+      "title": "Spring Festival Celebrations Begin",
+      "date": "2025-05-10",
+      "author": "Naran T.",
+      "content": "Communities across Mongolia have started celebrating the Spring Festival with traditional music, food, and sporting events.",
+      "tags": ["festival", "culture", "spring"],
+      "image": "https://images.unsplash.com/photo-1641642231157-0849081598a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzaG1lcmV8ZW58MHx8MHx8fDI%3D"
+    },
+    {
+      "id": 3,
+      "title": "Wool Prices Surge After Cold Winter",
+      "date": "2025-05-08",
+      "author": "Batbayar S.",
+      "content": "Following a harsh winter, the demand for high-quality wool has surged, driving prices to their highest levels in five years.",
+      "tags": ["wool", "economy", "market"],
+      "image": "https://images.unsplash.com/photo-1641642231157-0849081598a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzaG1lcmV8ZW58MHx8MHx8fDI%3D"
+    },
+    {
+      "id": 4,
+      "title": "Young Designers Showcase Modern Nomadic Fashion",
+      "date": "2025-05-05",
+      "author": "Saruul E.",
+      "content": "A new wave of young designers in Ulaanbaatar is blending traditional Mongolian styles with modern fashion in a recent design exhibition.",
+      "tags": ["fashion", "design", "tradition"],
+      "image": "https://images.unsplash.com/photo-1641642231157-0849081598a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzaG1lcmV8ZW58MHx8MHx8fDI%3D"
+    },
+    {
+      "id": 5,
+      "title": "Eco-Friendly Wool Washing Plant Opens in Arkhangai",
+      "date": "2025-05-01",
+      "author": "Tungalag G.",
+      "content": "A new eco-friendly wool washing plant has opened in Arkhangai province, aiming to reduce water pollution and improve local employment.",
+      "tags": ["environment", "wool", "sustainability"],
+      "image": "https://images.unsplash.com/photo-1641642231157-0849081598a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzaG1lcmV8ZW58MHx8MHx8fDI%3D"
+    }
+  ],
+
+  "collaborationRequests": [
+    {
+      "id": 1,
+      "date": "2025-05-12",
+      "name": "john doe",
+      "email": "altan@example.com",
+      "phoneNumber": "+97688112233",
+      "country": "Mongolia",
+      "stateOrProvince": "Arkhangai",
+      "city": "Tsetserleg",
+      "currentBusiness": "Cashmere Clothing Production",
+      "businessPlanOverview": "We plan to expand our operations by collaborating with local herders for raw material sourcing and launching an eco-friendly fashion line that blends Mongolian tradition with modern design."
+    },
+    {
+      "id": 2,
+      "date": "2025-05-12",
+      "name": "john doe",
+      "email": "saraa@example.com",
+      "phoneNumber": "+97699114455",
+      "country": "Mongolia",
+      "stateOrProvince": "Ulaanbaatar",
+      "city": "Bayanzurkh",
+      "currentBusiness": "Online Wool Export",
+      "businessPlanOverview": "Our goal is to build a digital platform that connects international buyers with Mongolian wool producers, ensuring transparency and fair trade."
+    },
+    {
+      "id": 3,
+      "date": "2025-05-12",
+      "name": "john doe",
+      "email": "tuvshin@example.com",
+      "phoneNumber": "+97688119988",
+      "country": "Mongolia",
+      "stateOrProvince": "Dornod",
+      "city": "Choibalsan",
+      "currentBusiness": "Goat Herding and Raw Wool Supply",
+      "businessPlanOverview": "We aim to improve raw wool quality through better nutrition and care for animals, and form partnerships with textile companies for consistent supply."
+    }
+  ]
+}
