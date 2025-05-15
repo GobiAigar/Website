@@ -1,62 +1,110 @@
-import { Button } from "@mui/material";
+import { Button, Box, Grid, Typography } from "@mui/material";
 import React from "react";
+import { EmailIcon, RightArrowIcon } from "./Icon";
 
 const TradeSection = ({ title, image, description, list }) => {
   return (
-    <div className="flex flex-col sm:flex-row  text-black ">
-      <div className="w-full sm:w-1/2 flex justify-start items-start">
-        <img
-          src={image}
-          alt={title}
-          className="w-full max-w-md object-cover shadow"
-        />
-      </div>
-
-      <div className="w-full sm:w-1/2 flex flex-col justify-start text-justify">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">{title}</h1>
-        <p className="mb-4 text-lg text-[#5C4B47]">{description}</p>
-
-        <ul className="list-disc pl-6 space-y-1 text-lg text-[#5C4B47]">
-          {list.map((item, index) => (
-            <li key={index}>
-              {item.text}
-              {item.subList && (
-                <ul
-                  className="pl-6 mt-2 space-y-1"
-                  style={{ listStyleType: "lower-alpha" }}
-                >
-                  {item.subList.map((subItem, subIndex) => (
-                    <li key={subIndex}>{subItem}</li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* 📌 Button - responsive width + right aligned on desktop */}
-        <div className="flex justify-center sm:justify-end mt-6">
-          <Button
-            fullWidth
+    <Grid container spacing={4} alignItems="flex-start">
+      <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+        <Box display="flex" justifyContent="start" alignItems="start">
+          <Box
+            component="img"
+            src={image}
+            alt={title}
             sx={{
-              maxWidth: { xs: "100%", sm: "12rem" }, // xs: full, sm+: 192px
-              backgroundColor: "#6E1221",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              "&:hover": {
-                backgroundColor: "#4a0d17",
-              },
+              width: "100%",
+              objectFit: "cover",
+              boxShadow: 3,
+              borderRadius: 1,
             }}
+          />
+        </Box>
+      </Grid>
+
+      <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+        <Box>
+          <Typography
+            variant="h5"
+            fontWeight={700}
+            mb={2}
+            sx={{ color: "#333" }}
           >
-            <img src="/email.svg" alt="icon" className="w-5 h-5" />
-            Contact Us
-            <img src="/arrow-right.svg" alt="icon" className="w-5 h-5" />
-          </Button>
-        </div>
-      </div>
-    </div>
+            {title}
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "#5C4B47", mb: 2 }}
+          >
+            {description}
+          </Typography>
+
+          <Box
+            component="ul"
+            sx={{ pl: 3, color: "#5C4B47", typography: "body1" }}
+          >
+            {list.map((item, index) => (
+              <Box key={index} component="li" sx={{ mb: 1 }}>
+                {item.text}
+                {item.subList && (
+                  <Box
+                    component="ul"
+                    sx={{ pl: 3, mt: 1, listStyleType: "lower-alpha" }}
+                  >
+                    {item.subList.map((subItem, subIndex) => (
+                      <Box component="li" key={subIndex}>
+                        {subItem}
+                      </Box>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+            ))}
+          </Box>
+
+          <Box
+            mt={4}
+            display="flex"
+            justifyContent={{ xs: "center", sm: "flex-end" }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                maxWidth: { xs: "100%", sm: 192 },
+                backgroundColor: "#6E1221",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                px: 2,
+                "&:hover": {
+                  backgroundColor: "#4a0d17",
+                },
+              }}
+              fullWidth
+            >
+              {/* <Box
+                component="img"
+                src="/email.svg"
+                alt="icon"
+                sx={{ width: 20, height: 20 }}
+              /> */}
+              <EmailIcon />
+              Contact Us
+              {/* <Box
+                component="img"
+                src="/arrow-right.svg"
+                alt="icon"
+                sx={{ width: 20, height: 20 }}
+              /> */}
+              <RightArrowIcon />
+            </Button>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
+
 export default TradeSection;

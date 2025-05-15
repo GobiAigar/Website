@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { Box, Card, CardContent } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, IconButton } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 
@@ -33,68 +33,70 @@ const Video = ({ src }) => {
           setIsPlaying(false);
         }
       },
-      {
-        threshold: 0.6,
-      }
+      { threshold: 0.6 }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
+    if (containerRef.current) observer.observe(containerRef.current);
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
+      if (containerRef.current) observer.unobserve(containerRef.current);
     };
   }, []);
 
   return (
     <Box
       ref={containerRef}
-      sx={{ maxWidth: 600, margin: "auto", position: "relative" }}
+      sx={{
+        width: "100%",
+        aspectRatio: {
+          xs: "4/3",
+          sm: "16/9",
+        },
+        mx: "auto",
+        position: "relative",
+      }}
     >
-      <Card>
-        <CardContent
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          sx={{ p: 0, position: "relative" }}
-        >
-          <video
-            ref={videoRef}
-            width="100%"
-            className="rounded-2xl h-auto"
-            muted
-            playsInline
-          >
-            <source src={src} type="video/mp4" />
-            Таны browser энэ бичлэгийг дэмжихгүй байна.
-          </video>
+      <Card
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        sx={{ width: "100%", height: "100%", position: "relative" }}
+      >
+        <CardMedia
+          component="video"
+          ref={videoRef}
+          src={src}
+          muted
+          playsInline
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: 2,
+          }}
+        />
 
-          {isHovered && (
-            <Box
-              onClick={handlePlayPause}
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                cursor: "pointer",
-                backgroundColor: "rgba(0, 0, 0, 0.3)",
-                borderRadius: "50%",
-                padding: 1,
-                color: "white",
-                zIndex: 2,
-              }}
-            >
-              {isPlaying ? (
-                <PauseCircleIcon sx={{ fontSize: 40 }} />
-              ) : (
-                <PlayCircleIcon sx={{ fontSize: 40 }} />
-              )}
-            </Box>
-          )}
-        </CardContent>
+        {isHovered && (
+          <IconButton
+            onClick={handlePlayPause}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "rgba(0,0,0,0.4)",
+              color: "#fff",
+              zIndex: 2,
+              "&:hover": {
+                backgroundColor: "rgba(0,0,0,0.6)",
+              },
+            }}
+          >
+            {isPlaying ? (
+              <PauseCircleIcon sx={{ fontSize: 48 }} />
+            ) : (
+              <PlayCircleIcon sx={{ fontSize: 48 }} />
+            )}
+          </IconButton>
+        )}
       </Card>
     </Box>
   );

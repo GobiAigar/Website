@@ -1,45 +1,93 @@
 "use client";
 import React from "react";
+import { Box, Container, Grid, Typography, Link } from "@mui/material";
 import ScrollTopButton from "./ScrollTopButton";
 
 const Footer = () => {
   return (
-    <div className="relative bg-white px-4 sm:px-8 md:px-16 lg:px-32 py-8 sm:py-12 lg:py-16">
-      <div className="flex flex-col lg:flex-row justify-between text-black gap-10 lg:gap-24">
-        <div className="w-full lg:w-1/4">
-          <img src="logo.png" alt="logo" className="w-32 sm:w-40" />
-        </div>
-        <div className="w-full lg:w-1/4 flex flex-col gap-4">
-          <p className="text-base sm:text-lg pb-2">
-            130a, manufacturing west area, 20th khoroo Bayangol District,
-            Ulaanbaatar, Mongolia
-          </p>
-          <p className="text-sm">+(976) 7777 6040</p>
-          <p className="text-sm">support@agrixglobal.com</p>
-        </div>
-        <div className="w-full lg:w-1/4 flex justify-between gap-8 text-sm">
-          <div className="flex flex-col gap-2">
-            <a>About</a>
-            <a>Product</a>
-            <a>Sustainability</a>
-            <a>Partners</a>
-            <a>Contact</a>
-          </div>
-          <div className="flex flex-col gap-2">
-            <a>Facebook</a>
-            <a>Twitter</a>
-            <a>Linkedin</a>
-            <a>Instagram</a>
-          </div>
-        </div>
-        <div className="mt-6 lg:mt-0">
-          <ScrollTopButton />
-        </div>
-      </div>
-      <p className="text-gray-700 text-sm mt-6 text-center">
-        © 2025 GOBI AIGAR. All rights reserved.
-      </p>
-    </div>
+    <Box sx={{ bgcolor: "white", py: { xs: 6, sm: 8, lg: 10 }, color: "black" }}>
+      <Container maxWidth="lg">
+        <Grid
+          container
+          spacing={4}
+          justifyContent="space-between"
+          alignItems="flex-start"
+        >
+          <Grid item xs={12} sm={6} md={3}>
+            <Box>
+              <Box
+                component="img"
+                src="logo.png"
+                alt="logo"
+                sx={{ width: { xs: 120, sm: 160 } }}
+              />
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Typography variant="body1">
+                130a, manufacturing west area, 20th khoroo Bayangol District,
+                Ulaanbaatar, Mongolia
+              </Typography>
+              <Typography variant="body2">+(976) 7777 6040</Typography>
+              <Typography variant="body2">support@agrixglobal.com</Typography>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Box display="flex" justifyContent="space-between" gap={4}>
+              <Box display="flex" flexDirection="column" gap={1}>
+                <Link href="#" underline="hover" color="inherit">
+                  About
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Product
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Sustainability
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Partners
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Contact
+                </Link>
+              </Box>
+              <Box display="flex" flexDirection="column" gap={1}>
+                <Link href="#" underline="hover" color="inherit">
+                  Facebook
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Twitter
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Linkedin
+                </Link>
+                <Link href="#" underline="hover" color="inherit">
+                  Instagram
+                </Link>
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Box mt={{ xs: 2, lg: 0 }}>
+              <ScrollTopButton />
+            </Box>
+          </Grid>
+        </Grid>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          align="center"
+          sx={{ mt: 6 }}
+        >
+          © 2025 GOBI AIGAR. All rights reserved.
+        </Typography>
+      </Container>
+    </Box>
   );
 };
 

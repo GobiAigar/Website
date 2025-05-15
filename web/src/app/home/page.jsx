@@ -1,5 +1,3 @@
-// Refactored Home.jsx with full Material UI components and dark mode readiness
-
 "use client";
 import React from "react";
 import {
@@ -40,10 +38,11 @@ const sectionsData = [
   {
     img: ["/wool1.jpg"],
     title: "WHERE DID OUR STORY BEGIN?",
-    text: "Mongolian a people with a deep connection to the sky and the earth...",
+    text: "Mongolian a people with a deep connection to the sky and the earth. We have an ancient heritage and a rich history, living in harmony with nature by moving with our livestock through the four seasons.",
     text2:
-      "Because of this, we have always honored and praised our homeland...",
-    text3: "Therefore, we created this icon in tribute to the birthplace...",
+      "Because of this, we have always honored and praised our homeland — the land where we were born and raised — entrusting our fate, hopes, and dreams to the natural world. In doing so, we offer pure white gifts to nature and live in reverence.",
+    text3:
+      "Therefore, we created this icon in tribute to the birthplace of our company’s founder — Govi-Altai, Mongolia’s second-largest province — and in honor of their ancestral heritage.",
     quote:
       "A name to pass on to the destined childrenA name to inherit by future generations  — Sh. Surenjav",
   },
@@ -142,8 +141,9 @@ const Home = () => {
         </Typography>
         <ProductImageList itemData={itemData} />
       </Container>
-
-      <SplitSection sections={sectionsData} />
+      <Container sx={{ py: 8 }}>
+        <SplitSection sections={sectionsData} />
+      </Container>
 
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Grid container alignItems="stretch" spacing={2}>
@@ -157,7 +157,7 @@ const Home = () => {
                 />
               </Grid>
 
-              {index < data.length - 1 && (
+              {(index + 1) % 3 !== 0 && index < data.length - 1 && (
                 <Grid
                   item
                   sx={{
@@ -172,7 +172,7 @@ const Home = () => {
                     sx={{
                       borderColor: "#8B4513",
                       borderRightWidth: 2,
-                      alignSelf: "stretch", // Divider-ийг parent item өндөртэй тэнцүүлж сунгах
+                      alignSelf: "stretch",
                     }}
                   />
                 </Grid>
@@ -195,33 +195,75 @@ const Home = () => {
       </Container>
 
       <Container sx={{ py: 8 }}>
-        <Typography variant="h4" fontWeight={700} mb={4}>
+        <Typography
+          variant="h4"
+          fontWeight={700}
+          mb={4}
+          sx={{
+            fontSize: {
+              xs: "24px", // mobile
+              sm: "28px", // tablet
+              md: "32px", // desktop
+            },
+          }}
+        >
           Statistics
         </Typography>
-        <Grid container spacing={6}>
-          <Grid item xs={12} md={6}>
-            <ul
-              style={{
-                paddingLeft: 16,
-                fontSize: "0.875rem",
-                lineHeight: 1.75,
+
+        <Grid
+          container
+          spacing={4}
+          alignItems="stretch"
+          justifyContent="center"
+        >
+          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
               }}
             >
-              <li>Монгол Улсын нийт хүн амын 10% нь малчин ард иргэд байна</li>
-              <li>Ноолуур нь малчдын орлогын 65%-ийг дангаар бүрдүүлдэг</li>
-              <li>Дунджаар 3ш ямаанаас 1ш цамц бүтээх ноолуур гардаг</li>
-              <li>Монгол Улсын газар нутгийн 70% нь бэлчээрийн газар</li>
-            </ul>
+              <Box
+                component="ul"
+                sx={{
+                  pl: 3,
+                  fontSize: "1rem",
+                  lineHeight: 4,
+                  color: "text.secondary",
+                  listStyleType: "disc",
+                  m: 0,
+                }}
+              >
+                <li>
+                  Монгол Улсын нийт хүн амын 10% нь малчин ард иргэд байна
+                </li>
+                <li>Ноолуур нь малчдын орлогын 65%-ийг дангаар бүрдүүлдэг</li>
+                <li>Дунджаар 3ш ямаанаас 1ш цамц бүтээх ноолуур гардаг</li>
+                <li>Монгол Улсын газар нутгийн 70% нь бэлчээрийн газар</li>
+              </Box>
+            </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Video src={videoData.url} />
+
+          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Video src={videoData.url} />
+            </Box>
           </Grid>
         </Grid>
       </Container>
 
       <Container sx={{ py: 8 }}>
         <Grid container spacing={6}>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
             <Typography variant="h4" fontWeight={700} mb={2}>
               Proudly Made in the Land of Cashmere
             </Typography>
@@ -232,7 +274,7 @@ const Home = () => {
               sx={{ width: "100%", borderRadius: 2 }}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
             <FAQSection />
           </Grid>
         </Grid>

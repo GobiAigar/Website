@@ -77,9 +77,10 @@ const Header = () => {
           isHome && !isScrolled
             ? "transparent"
             : isScrolled
-            ? "rgba(0,0,0,0.7)"
+            ? "rgba(0,0,0,0.4)"
             : "white",
-        color: isHome && !isScrolled ? "white" : "white",
+        color: !isHome && !isScrolled ? "black" : "white",
+
         backdropFilter: isScrolled ? "blur(6px)" : "none",
         transition: "all 0.3s ease",
       }}

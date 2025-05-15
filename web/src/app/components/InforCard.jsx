@@ -7,17 +7,24 @@ const InfoCard = ({ imageSrc, title, description }) => {
   return (
     <Box
       sx={{
-        px: { xs: 2, md: 3 },
-        py: 4,
+        px: { xs: 0, sm: 1, md: 2 }, 
+        py: { xs: 2, sm: 3, md: 4 },
         display: "flex",
         justifyContent: "center",
+        width: "100%",
       }}
     >
       <Box
         sx={{
           textAlign: "center",
-          maxWidth: 300,
           width: "100%",
+          maxWidth: {
+            xs: "100%", 
+            sm: 212,
+            md: 270,
+            lg: 329,
+            xl: 380,
+          },
           color: theme.palette.text.primary,
           display: "flex",
           flexDirection: "column",

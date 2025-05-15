@@ -1,8 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Button } from "@mui/material";
+import { Button, Box, Container, Typography, Grid } from "@mui/material";
 import TradeSection from "../components/TradeSection";
+import { GlobeIcon, HomeHashtagIcon } from "../components/Icon";
 
 const tradeData = [
   {
@@ -34,78 +37,145 @@ const tradeData = [
       },
     ],
   },
+  {
+    title: "International trade",
+    image: "/international.png",
+    description: "Product prices for domestic sales are listed in US dollars.",
+    list: [
+      {
+        text: "The prices of products sold in foreign markets are quoted in US dollars, and payments must be made exclusively in US dollars through the international SWIFT banking system.",
+      },
+      {
+        text: "In all cases, preliminary price offers are subject to change depending on the current market price of raw materials.",
+      },
+      {
+        text: "Export sales are conducted under the FCA-Ulaanbaatar Incoterm, meaning the supplier covers all relevant costs up to the Mongolian border. This includes pressing costs to reduce package volume, export and import documentation fees, etc.",
+      },
+      {
+        text: "Clients may either:",
+        subList: [
+          "Supply their own raw cashmere for initial processing — sorting, washing, and dehairing,",
+          "Or purchase dehaired cashmere already available in the company’s warehouse, and agree on a delivery timeline for production.",
+        ],
+      },
+      {
+        text: "For either collaboration method, payment terms must be mutually agreed upon and specified in a formal contract between the supplier and the buyer.",
+      },
+      {
+        text: "Clients may arrange transportation using their preferred logistics company, or use the supplier's contracted freight service with available discounts.",
+      },
+      {
+        text: "The supplier guarantees that the dehaired cashmere will fully comply with the technical requirements outlined in MNS 3683:2015.",
+      },
+      {
+        text: "Product samples purchased by the client will be tested in the company’s in-house laboratory. Upon request, third-party accredited organizations can also conduct sample testing to confirm product quality standards.",
+      },
+    ],
+  },
 ];
 
 const Product = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const selectedTradeData = tradeData[activeIndex];
   return (
-    <div className="overflow-hidden">
+    <Box sx={{ overflow: "hidden", backgroundColor: "white" }}>
       <Header />
 
-      <div
-        className="relative w-full h-64 sm:h-[80vh] bg-cover bg-center"
-        style={{ backgroundImage: "url('/product.png')" }}
-      >
-        <div className="relative z-10 flex items-center justify-center h-full"></div>
-      </div>
+      <Box
+        sx={{
+          width: "100%",
+          height: { xs: 300, sm: "80vh" },
+          backgroundImage: "url('/product.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
+        }}
+      />
 
-      <div className="bg-white py-12 px-4 sm:px-8 lg:px-16 xl:px-32">
-        <h1 className="text-2xl sm:text-3xl mb-6 text-black font-bold">
+      <Container sx={{ py: 10 }}>
+        <Typography
+          variant="h4"
+          fontWeight={700}
+          mb={6}
+          sx={{
+            fontSize: { xs: "24px", sm: "28px", md: "32px" },
+            color: "black",
+          }}
+        >
           Gobi Aigar Collaboration Application Form 2024
-        </h1>
+        </Typography>
 
-        <div className="flex flex-col sm:flex-row gap-4 pb-12">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#6E1221",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              px: 2,
-              "&:hover": {
-                backgroundColor: "#4a0d17",
-              },
-            }}
-          >
-            <img src="/home-hashtag.svg" alt="icon" className="w-5 h-5" />
-            Domestic
-          </Button>
+        <Grid container spacing={2} mb={6}>
+          <Grid item xs={12} sm="auto">
+            <Button
+              variant={activeIndex === 0 ? "contained" : "outlined"}
+              onClick={() => setActiveIndex(0)}
+              sx={{
+                backgroundColor: activeIndex === 0 ? "#6E1221" : "transparent",
+                color: activeIndex === 0 ? "#fff" : "#6E1221",
+                border: activeIndex === 0 ? "none" : "2px solid #6E1221",
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                px: 2,
+                "&:hover": {
+                  backgroundColor:
+                    activeIndex === 0 ? "#4a0d17" : "rgba(78,18,33,0.05)",
+                },
+              }}
+            >
+              {/* <Box
+                component="img"
+                src="/home-hashtag.svg"
+                alt="icon"
+                sx={{
+                  width: 20,
+                  height: 20,
+                  transition: "0.3s",
+                }}
+              /> */}
+              <HomeHashtagIcon color={activeIndex === 0 ? "#fff" : "#4a0d17"} />
+              Domestic
+            </Button>
+          </Grid>
 
-          <Button
-            variant="outlined"
-            sx={{
-              color: "#6E1221",
-              border: "2px solid #6E1221",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              px: 2,
-              "&:hover": {
-                border: "2px solid #4a0d17",
-                backgroundColor: "rgba(78,18,33,0.05)",
-              },
-            }}
-          >
-            <img src="/global.svg" alt="icon" className="w-5 h-5" />
-            International
-          </Button>
-        </div>
+          <Grid item xs={12} sm="auto">
+            <Button
+              variant={activeIndex === 1 ? "contained" : "outlined"}
+              onClick={() => setActiveIndex(1)}
+              sx={{
+                backgroundColor: activeIndex === 1 ? "#6E1221" : "transparent",
+                color: activeIndex === 1 ? "#fff" : "#6E1221",
+                border: activeIndex === 1 ? "none" : "2px solid #6E1221",
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                px: 2,
+                "&:hover": {
+                  backgroundColor:
+                    activeIndex === 1 ? "#4a0d17" : "rgba(78,18,33,0.05)",
+                },
+              }}
+            >
+              <GlobeIcon color={activeIndex === 1 ? "#fff" : "#4a0d17"} />
+              International
+            </Button>
+          </Grid>
+        </Grid>
 
-        {tradeData.map((item, idx) => (
-          <div key={idx} className="mb-12">
-            <TradeSection
-              title={item.title}
-              image={item.image}
-              description={item.description}
-              list={item.list}
-            />
-          </div>
-        ))}
-      </div>
+        <Box mb={10}>
+          <TradeSection
+            title={selectedTradeData.title}
+            image={selectedTradeData.image}
+            description={selectedTradeData.description}
+            list={selectedTradeData.list}
+          />
+        </Box>
+      </Container>
 
       <Footer />
-    </div>
+    </Box>
   );
 };
 

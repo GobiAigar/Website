@@ -1,61 +1,115 @@
 import React from "react";
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 const SplitSection = ({ sections }) => {
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
-    <div className="px-8 md:px-32 py-16 bg-white space-y-16">
+    <Box
+      sx={{ px: { xs: 2, sm: 4, md: 8 }, py: 8, bgcolor: "background.paper" }}
+    >
       {sections.map((section, index) => {
         const images = section.img || [];
-
-        let imageLayoutClass = "grid";
-        if (images.length === 1) {
-          imageLayoutClass = "flex";
-        } else {
-          imageLayoutClass = "grid grid-cols-2 gap-2";
-        }
+        const isReversed = index % 2 === 1;
 
         return (
-          <div
+          <Grid
+            container
+            spacing={4}
             key={index}
-            className={`flex flex-col md:flex-row items-stretch ${
-              index % 2 === 1 ? "md:flex-row-reverse" : ""
-            } gap-4`}
+            direction={{ xs: "column", md: isReversed ? "row-reverse" : "row" }}
+            alignItems="stretch"
+            sx={{ mb: 8, flexWrap: "wrap" }}
           >
-            <div className={`w-full md:w-1/2 md:px-4 ${imageLayoutClass}`}>
-              {images.map((imgSrc, i) => (
-                <img
-                  key={i}
-                  src={imgSrc}
-                  alt={section.alt || `Section image ${i + 1}`}
-                  className={`w-full rounded object-cover ${
-                    images.length === 1
-                      ? "h-auto"
-                      : "aspect-[4/3] max-h-[300px]"
-                  }`}
-                />
-              ))}
-            </div>
+            <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+              <Box
+                sx={{
+                  display: images.length === 1 ? "flex" : "grid",
+                  gridTemplateColumns:
+                    images.length > 1 ? "repeat(2, 1fr)" : "none",
+                  gap: 2,
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                {images.map((imgSrc, i) => (
+                  <Box
+                    component="img"
+                    key={i}
+                    src={imgSrc}
+                    alt={section.alt || `Section image ${i + 1}`}
+                    sx={{
+                      width: "100%",
+                      height:
+                        images.length > 1
+                          ? { xs: 160, sm: 180, md: 220, lg: 260 }
+                          : { xs: "auto", md: "100%" },
+                      objectFit: "cover",
+                      borderRadius: 2,
+                    }}
+                  />
+                ))}
+              </Box>
+            </Grid>
 
-            <div className="w-full md:w-1/2 md:px-4 text-black flex flex-col justify-center">
-              {section.title && (
-                <h1 className="text-3xl md:text-4xl font-bold text-center md:text-left mb-4">
-                  {section.title}
-                </h1>
-              )}
-              <div className="text-lg font-inter space-y-2">
-                {section.text && <p>{section.text}</p>}
-                {section.text2 && <p>{section.text2}</p>}
-                {section.text3 && <p>{section.text3}</p>}
-              </div>
-              {section.quote && (
-                <div className="mt-4 italic text-gray-600">
-                  <p>{section.quote}</p>
-                </div>
-              )}
-            </div>
-          </div>
+            <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+              <Box
+                sx={{
+                  px: { xs: 0, sm: 2, md: 4 },
+                  py: { xs: 2, sm: 3, md: 4 },
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                {section.title && (
+                  <Typography
+                    variant="h5"
+                    textAlign={{
+                      xs: "center",
+                      md: isReversed ? "right" : "left",
+                    }}
+                    sx={{
+                      fontSize: {
+                        xs: "22px",
+                        sm: "26px",
+                        md: "30px",
+                        lg: "32px",
+                      },
+                    }}
+                    fontWeight={700}
+                    gutterBottom
+                  >
+                    {section.title}
+                  </Typography>
+                )}
+                <Box sx={{ typography: "body2", mb: 2 }}>
+                  {section.text && (
+                    <Typography paragraph>{section.text}</Typography>
+                  )}
+                  {section.text2 && (
+                    <Typography paragraph>{section.text2}</Typography>
+                  )}
+                  {section.text3 && (
+                    <Typography paragraph>{section.text3}</Typography>
+                  )}
+                </Box>
+                {section.quote && (
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ fontStyle: "italic", color: "text.secondary" }}
+                  >
+                    {section.quote}
+                  </Typography>
+                )}
+              </Box>
+            </Grid>
+          </Grid>
         );
       })}
-    </div>
+    </Box>
   );
 };
 
