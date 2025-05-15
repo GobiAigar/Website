@@ -1,8 +1,9 @@
 "use client";
-import LoginBasic from "@/Login/Basic";
-import React from "react";
+
+import { API_BASE_URL } from "@/config";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  return <LoginBasic />;
+  return <>da</>;
 };
 export default Home;

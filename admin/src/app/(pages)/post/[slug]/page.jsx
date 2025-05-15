@@ -1,20 +1,33 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import datas from "../../../../components/constants/constants.json";
-
-import React from "react";
+import { Backend_Endpoint } from "@/config";
 
 const Page = () => {
+  const [datas, setDatas] = useState([]);
   const params = useParams();
-  const news = params.slug;
+  const id = params.slug;
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${Backend_Endpoint}/api/news`);
+      const news = await response.json();
+      setDatas([news.find((item) => item.id == id)]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="container px-4 py-8 flex flex-col flex-wrap gap-4 justify-center items-center ">
-      {(() => {
-        const data = datas?.news.find((data) => data.id == news);
-        return data && <div key={data.id}>{data.title}</div>;
-      })()}
+      {datas.map((data) => (
+        <div key={data?.id}>{data?.entitle}</div>
+      ))}
     </div>
   );
 };

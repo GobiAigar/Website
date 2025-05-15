@@ -1,4 +1,4 @@
-import * as React from "react";
+import timeFormater from "@/utils/timeFormater";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -7,41 +7,46 @@ export default function MessageCard({ data }) {
   return (
     <Card
       sx={{
+        minWidth: 300,
         maxWidth: 400,
         height: 250,
         borderRadius: 4,
+        display: "flex",
+        flexDirection: "column",
         justifyContent: "space-between",
       }}
     >
-      <CardContent>
-        <div className="flex justify-between">
-          <Typography gutterBottom variant="h5">
-            {data?.name}
+      <CardContent className="h-full flex flex-col justify-between ">
+        <div>
+          <div className=" flex justify-between">
+            <Typography gutterBottom variant="h5">
+              {data?.purpose}
+            </Typography>
+            <Typography
+              sx={{
+                color: "text.secondary",
+              }}
+            >
+              {data?.date ? timeFormater(data?.date) : ""}
+            </Typography>
+          </div>
+          <div className="flex justify-between">
+            <Typography>{data?.firstname}</Typography>
+            <Typography>{data?.lastname}</Typography>
+          </div>
+          <Typography variant="body1" component="div">
+            {data?.email}
           </Typography>
-          <Typography>{data?.phoneNumber}</Typography>
+          <Typography variant="body2">
+            {data?.country} {data?.state} {data?.city}
+          </Typography>
+          <Typography variant="h5">{data?.bussiness}</Typography>
         </div>
-
-        <Typography variant="h5" component="div">
-          {data?.email}
-        </Typography>
-        <Typography variant="body2">
-          {data?.country} {data?.city}
-        </Typography>
-
-        <Typography variant="body2" sx={{ mb: 1.5 }}>
-          {data?.currentBusiness}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {data?.businessPlanOverview}
-        </Typography>
         <Typography
           variant="body2"
-          sx={{
-            color: "text.secondary",
-          }}
-          className="flex items-center justify-end"
+          sx={{ color: "text.secondary", minHeight: "90px" }}
         >
-          {data?.date}
+          {data?.plan}
         </Typography>
       </CardContent>
     </Card>

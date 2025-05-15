@@ -8,34 +8,35 @@ import Link from "next/link";
 
 const GridCard = ({ data }) => {
   return (
-    <Card sx={{ maxWidth: 250, height: 350, borderRadius: 4 }}>
+    <Card sx={{ width: 250, maxeight: 350, borderRadius: 4 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image={data?.image}
-        title="green iguana"
+        image={data?.image_url}
+        alt={data?.image_url}
+        title={data?.entitle}
       />
-      <CardContent>
+      <CardContent className="flex flex-col justify-between">
         <Typography
           gutterBottom
           variant="h5"
           component="div"
           className="line-clamp-2"
         >
-          {data?.title}
+          {data?.entitle}
         </Typography>
         <Typography
           variant="body2"
           sx={{ color: "text.secondary" }}
           className="line-clamp-3"
         >
-          {data?.content}
+          {data?.endescription}
         </Typography>
+        <CardActions className="flex justify-end">
+          <Link href={`/post/${data?.id}`}>
+            <Button size="small">Дэлгэрэнгүй</Button>
+          </Link>
+        </CardActions>
       </CardContent>
-      <CardActions className="flex justify-end">
-        <Link href={`/post/${data?.id}`}>
-          <Button size="small">Дэлгэрэнгүй</Button>
-        </Link>
-      </CardActions>
     </Card>
   );
 };

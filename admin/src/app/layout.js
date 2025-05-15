@@ -8,17 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <HelmetProvider>
-        <Provider store={store}>
-          <SidebarProvider>
-            <BrowserRouter>
-              <ScrollTop />
-              <AuthProvider>{children}</AuthProvider>
-            </BrowserRouter>
-          </SidebarProvider>
-        </Provider>
-      </HelmetProvider>
-      ,
+      <body>{children}</body>
     </html>
   );
 }

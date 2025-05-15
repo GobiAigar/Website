@@ -1,14 +1,31 @@
 "use client";
-import React from "react";
-import datas from "../../../components/constants/constants.json";
+import { useState, useEffect } from "react";
+
 import GridCard from "@/components/static/GridCard";
 import { Button } from "@mui/material";
 import Forms from "@/components/static/Form";
 import ListCard from "@/components/static/ListCard";
+import { Backend_Endpoint } from "@/config";
 
 const Page = () => {
-  const [isGrid, setIsGrid] = React.useState(true);
-  const news = datas.news;
+  const [isGrid, setIsGrid] = useState(true);
+  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${Backend_Endpoint}/api/news`);
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(data);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="container w-full px-4 py-8 flex flex-col flex-wrap gap-4 justify-center items-center ">
       <div className="w-full flex justify-end">
@@ -17,10 +34,10 @@ const Page = () => {
       <div className="flex items-start gap-8">
         <div className=" flex flex-wrap gap-4 justify-center md:justify-between items-center w-full">
           {isGrid
-            ? news.map((data) => {
+            ? data.map((data) => {
                 return <GridCard key={data.id} data={data} />;
               })
-            : news.map((data) => {
+            : data.map((data) => {
                 return <ListCard key={data.id} data={data} />;
               })}
         </div>

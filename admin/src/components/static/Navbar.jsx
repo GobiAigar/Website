@@ -1,6 +1,5 @@
 import { Avatar, Button } from "@mui/material";
 import Link from "next/link";
-import React from "react";
 import Logo from "../constants/logo";
 
 const Navbar = () => {
@@ -13,10 +12,7 @@ const Navbar = () => {
       </Link>
 
       <div className="flex items-center h-[64px]">
-        <Link
-          href="/website
-        "
-        >
+        <Link href="/website">
           <Button variant="primary">Загвар өөрчлөх</Button>
         </Link>
         <Link href="/messages">
