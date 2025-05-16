@@ -1,10 +1,10 @@
 import express from "express";
 import { websiteController } from "../controllers/website.controller.js";
 
-const router = express.Router();
+const websiteRouter = express.Router();
 
-router.get("/website", websiteController.getAllWebsites);
-router.post("/createWebsite", websiteController.createWebsite);
-router.put("/updateWebsite", websiteController.updateWebsite);
+websiteRouter.get("/website", websiteController.getAllWebsites);
+websiteRouter.post("/createWebsite", websiteController.createWebsite);
+websiteRouter.put("/updateWebsite", websiteController.updateWebsite);
 
-export default router;
+export default websiteRouter;

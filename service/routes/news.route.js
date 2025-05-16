@@ -1,10 +1,11 @@
 import express from "express";
 import { newsController } from "../controllers/news.controller.js";
 
-const router = express.Router();
+const newsRouter = express.Router();
 
-router.get("/news", newsController.getAllNews);
-router.post("/createNews", newsController.createNews);
-router.delete("/deleteNews/:id", newsController.deleteNews);
+newsRouter.get("/news", newsController.getAllNews);
+newsRouter.get("/news/:id", newsController.getByIdNews);
+newsRouter.post("/createNews", newsController.createNews);
+newsRouter.delete("/deleteNews/:id", newsController.deleteNews);
 
-export default router;
+export default newsRouter;

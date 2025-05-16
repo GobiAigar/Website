@@ -21,23 +21,10 @@ function HomeHero({ data }) {
       }}
     >
       <div>
-        <Typography
-          sx={{
-            color: `${theme.colors.alpha.trueWhite[100]}`,
-          }}
-          gutterBottom
-          variant="h2"
-        >
+        <Typography gutterBottom variant="h2">
           {data?.entitle}
         </Typography>
-        <Typography
-          sx={{
-            color: `${theme.colors.alpha.trueWhite[70]}`,
-          }}
-          variant="subtitle2"
-        >
-          {data?.ensubtitle}
-        </Typography>
+        <Typography variant="subtitle2">{data?.ensubtitle}</Typography>
       </div>
     </Card>
   );

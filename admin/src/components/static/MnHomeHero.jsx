@@ -21,23 +21,8 @@ function MnHomeHero({ data }) {
       }}
     >
       <div>
-        <Typography
-          sx={{
-            color: `${theme.colors.alpha.trueWhite[100]}`,
-          }}
-          gutterBottom
-          variant="h2"
-        >
-          {data?.mntitle}
-        </Typography>
-        <Typography
-          sx={{
-            color: `${theme.colors.alpha.trueWhite[70]}`,
-          }}
-          variant="subtitle2"
-        >
-          {data?.mnsubtitle}
-        </Typography>
+        <Typography variant="h2">{data?.mntitle}</Typography>
+        <Typography variant="subtitle2">{data?.mnsubtitle}</Typography>
       </div>
     </Card>
   );

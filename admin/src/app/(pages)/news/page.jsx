@@ -20,7 +20,6 @@ const Page = () => {
       console.log(error);
     }
   };
-  console.log(data);
 
   useEffect(() => {
     fetchData();

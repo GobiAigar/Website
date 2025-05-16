@@ -67,6 +67,3 @@ POST /api/createMessages
 | `city`        | `string` | **Required**                     |
 | `bussiness`   | `string` | **Required**                     |
 | `plan`        | `string` | **Required**                     |
-
-NEXT_PUBLIC_API_BASE_URL=https://website-z9b7.onrender.com
-DATABASE_URL="postgresql://neondb_owner:npg_NxG7ZMaJyDe9@ep-still-credit-a1fhxoiq-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"

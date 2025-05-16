@@ -32,7 +32,7 @@ const GridCard = ({ data }) => {
           {data?.endescription}
         </Typography>
         <CardActions className="flex justify-end">
-          <Link href={`/post/${data?.id}`}>
+          <Link href={`/news/${data?.id}`}>
             <Button size="small">Дэлгэрэнгүй</Button>
           </Link>
         </CardActions>
