@@ -17,6 +17,7 @@ const Page = () => {
   };
 
   useEffect(() => {
+    const user = sessionStorage.getItem("user");
     fetchData();
   }, []);
 

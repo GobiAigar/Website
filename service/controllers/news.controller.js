@@ -10,20 +10,37 @@ export const newsController = {
     }
   },
 
+  getByIdNews: async (req, res) => {
+    const id = req.params.id;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID is required" });
+    }
+    try {
+      const response = await sql`SELECT * FROM news WHERE id = ${id}`;
+      res.status(200).json(response);
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+
   createNews: async (req, res) => {
+    
     let {
       entitle,
       mntitle,
       endescription,
       mndescription,
-      journalist,
+      enjournalist,
+      mnjournalist,
       image_url,
     } = req.body;
     const date = new Date();
 
     try {
       const response =
-        await sql`INSERT INTO news(entitle, mntitle, endescription, mndescription, journalist, image_url, date) VALUES (${entitle}, ${mntitle}, ${endescription}, ${mndescription}, ${journalist}, ${image_url}, ${date}) RETURNING *`;
+        await sql`INSERT INTO news(entitle, mntitle, endescription, mndescription, enjournalist,mnjournalist, image_url, date) VALUES (${entitle}, ${mntitle}, ${endescription}, ${mndescription}, ${enjournalist},${mnjournalist}, ${image_url}, ${date}) RETURNING *`;
       res.status(201).json(response);
     } catch (error) {
       console.error("Error creating news:", error);
