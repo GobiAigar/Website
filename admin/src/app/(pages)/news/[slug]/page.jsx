@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Backend_Endpoint } from "@/config";
+import SlugNews from "@/components/static/SlugNews";
 
 const Page = () => {
   const [datas, setDatas] = useState([]);
@@ -11,9 +12,9 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${Backend_Endpoint}/api/news`);
+      const response = await fetch(`${Backend_Endpoint}/api/news/${id}`);
       const news = await response.json();
-      setDatas([news.find((item) => item.id == id)]);
+      setDatas(news);
     } catch (error) {
       console.log(error);
     }
@@ -23,13 +24,7 @@ const Page = () => {
     fetchData();
   }, []);
 
-  return (
-    <div className="container px-4 py-8 flex flex-col flex-wrap gap-4 justify-center items-center ">
-      {datas.map((data) => (
-        <div key={data?.id}>{data?.entitle}</div>
-      ))}
-    </div>
-  );
+  return <SlugNews data={datas[0]} />;
 };
 
 export default Page;

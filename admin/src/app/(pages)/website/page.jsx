@@ -39,7 +39,7 @@ const Page = () => {
 
   return (
     <div className="flex w-screen container pt-8 ">
-      <div className="w-1/2 min-h-screen px-4 flex flex-col gap-4">
+      <div className="w-1/2 min-h-screen px-4 flex flex-col gap-4 ">
         <HomeHero data={filteredData} />
         <MnHomeHero data={filteredData} />
       </div>

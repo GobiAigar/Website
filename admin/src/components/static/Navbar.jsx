@@ -18,7 +18,7 @@ const Navbar = () => {
         <Link href="/messages">
           <Button variant="primary">Мессеж</Button>
         </Link>
-        <Link href="/post">
+        <Link href="/news">
           <Button variant="primary">Мэдээнүүд</Button>
         </Link>
         <Avatar>H</Avatar>
