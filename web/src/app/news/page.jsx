@@ -1,27 +1,57 @@
-import { Box, Container, Typography } from "@mui/material";
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+} from "@mui/material";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import NewsCard from "../components/Card";
+import { useRouter } from "next/navigation";
+
+const truncateWords = (text, limit) => {
+  const words = text.split(" ");
+  return words.length > limit ? words.slice(0, limit).join(" ") + "..." : text;
+};
 
 const News = () => {
+  const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedNews, setSelectedNews] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch("https://website-z9b7.onrender.com/api/news")
+      .then((res) => res.json())
+      .then((data) => {
+        setNewsList(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError("Failed to load news.");
+        setLoading(false);
+      });
+  }, []);
+
   return (
-    <Box
-      sx={{
-        overflow: "hidden",
-        bgcolor: "background.default",
-      }}
-    >
-      <Box
-        sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
-      ></Box>
+    <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
       <Header />
+
       <Box
         sx={{
           position: "relative",
           width: "100%",
           minHeight: "100vh",
-          backgroundImage: "url('/news.jpg')",
+          backgroundImage: `url('${
+            selectedNews ? selectedNews.image_url : "/news.jpg"
+          }')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center bottom",
@@ -39,7 +69,6 @@ const News = () => {
             zIndex: 1,
           }}
         />
-
         <Container
           maxWidth="lg"
           sx={{ pt: 40, position: "relative", zIndex: 2 }}
@@ -57,8 +86,118 @@ const News = () => {
           </Typography>
         </Container>
       </Box>
+
       <Container>
-        <NewsCard />
+        {loading ? (
+          <Typography sx={{ py: 10 }}>Loading...</Typography>
+        ) : error ? (
+          <Typography color="error">{error}</Typography>
+        ) : selectedNews ? (
+          <Box sx={{ py: 8 }}>
+            <Typography variant="caption" color="text.secondary">
+              {new Date(selectedNews.date).toLocaleDateString()}
+            </Typography>
+            {/* <Typography variant="h4" fontWeight="bold" mt={2}>
+              {selectedNews.entitle}
+            </Typography> */}
+            <Typography
+              variant="subtitle2"
+              align="right"
+              color="text.secondary"
+              mb={2}
+            >
+              Journalist
+              <span
+                style={{ fontWeight: "bold", fontSize: "20px", marginLeft: 4 }}
+              >
+                {selectedNews.enjournalist}
+              </span>
+            </Typography>
+
+            <Typography variant="body1">
+              {selectedNews.endescription}
+            </Typography>
+            <Box textAlign="right" mt={4}>
+              <Button variant="outlined" onClick={() => setSelectedNews(null)}>
+                Back
+              </Button>
+            </Box>
+          </Box>
+        ) : (
+          <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
+            {newsList.map((item) => (
+              <Grid item key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
+                <Card
+                  sx={{
+                    borderRadius: 3,
+                    boxShadow: 4,
+                    overflow: "hidden",
+                    height: 200,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={item.image_url}
+                    alt={item.entitle}
+                    sx={{ height: 100 }}
+                  />
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      gap: 1,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight="bold">
+                        {item.entitle}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        mt: "auto",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        gap: 1,
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {truncateWords(item.endescription, 10)}
+                      </Typography>
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        sx={{
+                          borderRadius: "10px",
+                          textTransform: "none",
+                          minWidth: 100,
+                          maxHeight: 40,
+                        }}
+                        onClick={() => setSelectedNews(item)}
+                      >
+                        See more
+                      </Button>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Container>
       <Footer />
     </Box>

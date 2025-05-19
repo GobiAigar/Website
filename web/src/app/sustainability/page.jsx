@@ -36,10 +36,30 @@ const Sustainability = () => {
         }}
       >
         <Container maxWidth="sm">
-          <Typography variant="h3" fontWeight="bold">
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: {
+                xs: "24px",
+                sm: "28px",
+                md: "32px",
+              },
+              fontWeight: "bold",
+            }}
+          >
             Sustainability
           </Typography>
-          <Typography variant="h6" sx={{ mt: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mt: 2,
+              fontSize: {
+                xs: "12px",
+                sm: "16px",
+                md: "20px",
+              },
+            }}
+          >
             All the cashmere fiber North Land uses is sustainable Mongolian
             cashmere that comes from cashmere goats living in Inner Mongolia,
             famous for the best cashmere quality it produces.
@@ -52,6 +72,7 @@ const Sustainability = () => {
           <Box
             sx={{
               position: "absolute",
+
               left: "50%",
               top: 0,
               bottom: 0,
@@ -113,8 +134,7 @@ const Sustainability = () => {
 
               <Grid
                 item
-                xs={12}
-                md={6}
+                size={{ xs: 12, sm: 6 }}
                 sx={{
                   position: "relative",
                   display: "flex",
@@ -159,8 +179,6 @@ const Sustainability = () => {
                   {item.label}
                 </Typography>
               </Grid>
-
-              <Grid item xs={12} md={6}></Grid>
             </Grid>
           ))}
         </Box>

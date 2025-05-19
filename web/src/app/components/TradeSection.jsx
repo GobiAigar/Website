@@ -5,7 +5,7 @@ import { EmailIcon, RightArrowIcon } from "./Icon";
 const TradeSection = ({ title, image, description, list }) => {
   return (
     <Grid container spacing={4} alignItems="flex-start">
-      <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+      <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
         <Box display="flex" justifyContent="start" alignItems="start">
           <Box
             component="img"
@@ -21,7 +21,7 @@ const TradeSection = ({ title, image, description, list }) => {
         </Box>
       </Grid>
 
-      <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+      <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
         <Box>
           <Typography
             variant="h5"
@@ -32,11 +32,7 @@ const TradeSection = ({ title, image, description, list }) => {
             {title}
           </Typography>
 
-          <Typography
-            variant="body1"
-            paragraph
-            sx={{ color: "#5C4B47", mb: 2 }}
-          >
+          <Typography variant="body1" sx={{ color: "#5C4B47", mb: 2 }}>
             {description}
           </Typography>
 
@@ -84,20 +80,8 @@ const TradeSection = ({ title, image, description, list }) => {
               }}
               fullWidth
             >
-              {/* <Box
-                component="img"
-                src="/email.svg"
-                alt="icon"
-                sx={{ width: 20, height: 20 }}
-              /> */}
               <EmailIcon />
               Contact Us
-              {/* <Box
-                component="img"
-                src="/arrow-right.svg"
-                alt="icon"
-                sx={{ width: 20, height: 20 }}
-              /> */}
               <RightArrowIcon />
             </Button>
           </Box>
