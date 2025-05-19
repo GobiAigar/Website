@@ -29,11 +29,9 @@ const sectionsData = [
   {
     img: ["/noos1.png", "/noos2.png", "/noos3.png", "/noos4.png"],
     title: "The Uniqueness of Mongolian Cashmere",
-    text: "Due to Mongolia’s harsh and extreme climate, our country produces some of the highest-quality cashmere in the world. The goats that have adapted to winters reaching as low as -40°C grow exceptionally warm undercoats, which are the source of this luxurious fiber.",
-    text2:
-      "In addition to its warmth, Mongolian cashmere is globally renowned for being some of the finest and longest in fiber...",
-    text3:
-      "The finer the fiber, the warmer and softer the cashmere feels — and the more highly it is valued worldwide.",
+    text: "Due to Mongolia’s harsh and extreme climate, our country produces some of the highest-quality cashmere in the world. The goats that have adapted to winters reaching as low as -40°C grow exceptionally warm undercoats, which are the source of this luxurious fiber. In addition to its warmth, Mongolian cashmere is globally renowned for being some of the finest and longest in fiber... The finer the fiber, the warmer and softer the cashmere feels — and the more highly it is valued worldwide.",
+    text2: "",
+    text3: "",
   },
   {
     img: ["/wool1.jpg"],
@@ -149,7 +147,7 @@ const Home = () => {
         <Grid container alignItems="stretch" spacing={2}>
           {data.map((item, index) => (
             <React.Fragment key={index}>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item size={{ xs: 12, sm: 3.7, md: 3.84 }}>
                 <InfoCard
                   imageSrc={item.imageSrc}
                   title={item.title}
@@ -161,7 +159,10 @@ const Home = () => {
                 <Grid
                   item
                   sx={{
-                    display: { xs: "none", md: "flex" },
+                    display: {
+                      xs: "none",
+                      sm: "flex",
+                    },
                     alignItems: "stretch",
                     justifyContent: "center",
                   }}
@@ -171,8 +172,8 @@ const Home = () => {
                     flexItem
                     sx={{
                       borderColor: "#8B4513",
-                      borderRightWidth: 2,
-                      alignSelf: "stretch",
+                      borderRightWidth: 1,
+                      height: "100%",
                     }}
                   />
                 </Grid>
@@ -216,7 +217,7 @@ const Home = () => {
           alignItems="stretch"
           justifyContent="center"
         >
-          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+          <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
             <Box
               sx={{
                 height: "100%",
@@ -230,7 +231,7 @@ const Home = () => {
                 sx={{
                   pl: 3,
                   fontSize: "1rem",
-                  lineHeight: 4,
+                  lineHeight: 2,
                   color: "text.secondary",
                   listStyleType: "disc",
                   m: 0,
@@ -246,7 +247,7 @@ const Home = () => {
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+          <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
             <Box
               sx={{
                 height: "100%",
@@ -263,7 +264,7 @@ const Home = () => {
 
       <Container sx={{ py: 8 }}>
         <Grid container spacing={6}>
-          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+          <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
             <Typography variant="h4" fontWeight={700} mb={2}>
               Proudly Made in the Land of Cashmere
             </Typography>
@@ -274,7 +275,7 @@ const Home = () => {
               sx={{ width: "100%", borderRadius: 2 }}
             />
           </Grid>
-          <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+          <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
             <FAQSection />
           </Grid>
         </Grid>

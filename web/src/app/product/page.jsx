@@ -107,7 +107,7 @@ const Product = () => {
         </Typography>
 
         <Grid container spacing={2} mb={6}>
-          <Grid item xs={12} sm="auto">
+          <Grid>
             <Button
               variant={activeIndex === 0 ? "contained" : "outlined"}
               onClick={() => setActiveIndex(0)}
@@ -125,22 +125,12 @@ const Product = () => {
                 },
               }}
             >
-              {/* <Box
-                component="img"
-                src="/home-hashtag.svg"
-                alt="icon"
-                sx={{
-                  width: 20,
-                  height: 20,
-                  transition: "0.3s",
-                }}
-              /> */}
               <HomeHashtagIcon color={activeIndex === 0 ? "#fff" : "#4a0d17"} />
               Domestic
             </Button>
           </Grid>
 
-          <Grid item xs={12} sm="auto">
+          <Grid>
             <Button
               variant={activeIndex === 1 ? "contained" : "outlined"}
               onClick={() => setActiveIndex(1)}

@@ -1,14 +1,12 @@
+"use client";
 import React from "react";
-import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 
 const SplitSection = ({ sections }) => {
   const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Box
-      sx={{ px: { xs: 2, sm: 4, md: 8 }, py: 8, bgcolor: "background.paper" }}
-    >
+    <Box sx={{ py: 8, bgcolor: "background.paper", width: "100%" }}>
       {sections.map((section, index) => {
         const images = section.img || [];
         const isReversed = index % 2 === 1;
@@ -18,14 +16,18 @@ const SplitSection = ({ sections }) => {
             container
             spacing={4}
             key={index}
-            direction={{ xs: "column", md: isReversed ? "row-reverse" : "row" }}
-            alignItems="stretch"
-            sx={{ mb: 8, flexWrap: "wrap" }}
+            direction={{
+              xs: "column",
+              md: isReversed ? "row-reverse" : "row",
+            }}
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mb: 8, width: "100%" }}
           >
-            <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+            <Grid item size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
               <Box
                 sx={{
-                  display: images.length === 1 ? "flex" : "grid",
+                  display: images.length > 1 ? "grid" : "block",
                   gridTemplateColumns:
                     images.length > 1 ? "repeat(2, 1fr)" : "none",
                   gap: 2,
@@ -38,70 +40,61 @@ const SplitSection = ({ sections }) => {
                     component="img"
                     key={i}
                     src={imgSrc}
-                    alt={section.alt || `Section image ${i + 1}`}
+                    alt={`Section image ${i + 1}`}
                     sx={{
                       width: "100%",
                       height:
                         images.length > 1
-                          ? { xs: 160, sm: 180, md: 220, lg: 260 }
+                          ? { xs: 160, sm: 200, md: 240 }
                           : { xs: "auto", md: "100%" },
                       objectFit: "cover",
                       borderRadius: 2,
+                      display: "block",
                     }}
                   />
                 ))}
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 6, md: 6 }} zeroMinWidth>
+            <Grid item size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
               <Box
                 sx={{
-                  px: { xs: 0, sm: 2, md: 4 },
-                  py: { xs: 2, sm: 3, md: 4 },
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
+                  textAlign: {
+                    xs: "start",
+                    md: isReversed ? "right" : "left",
+                  },
+                  width: "100%",
+                  height: {
+                    xs: "auto",
+                    md: "100vh",
+                  },
                 }}
               >
                 {section.title && (
                   <Typography
                     variant="h5"
-                    textAlign={{
-                      xs: "center",
-                      md: isReversed ? "right" : "left",
-                    }}
+                    fontWeight={700}
                     sx={{
+                      textAlign: "center",
                       fontSize: {
                         xs: "22px",
                         sm: "26px",
                         md: "30px",
                         lg: "32px",
                       },
+                      mb: 2,
                     }}
-                    fontWeight={700}
-                    gutterBottom
                   >
                     {section.title}
                   </Typography>
                 )}
-                <Box sx={{ typography: "body2", mb: 2 }}>
-                  {section.text && (
-                    <Typography paragraph>{section.text}</Typography>
-                  )}
-                  {section.text2 && (
-                    <Typography paragraph>{section.text2}</Typography>
-                  )}
-                  {section.text3 && (
-                    <Typography paragraph>{section.text3}</Typography>
-                  )}
-                </Box>
-                {section.quote && (
+                {section.text && (
                   <Typography
-                    variant="subtitle2"
-                    sx={{ fontStyle: "italic", color: "text.secondary" }}
+                    sx={{
+                      textAlign: "start",
+                    }}
                   >
-                    {section.quote}
+                    {section.text}
                   </Typography>
                 )}
               </Box>
