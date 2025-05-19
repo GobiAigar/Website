@@ -19,7 +19,7 @@ function Forms() {
     },
     onSubmit: async (values) => {
       try {
-        const response = await fetch(`${Backend_Endpoint}/api/createNews`, {
+        const response = await fetch(`${Backend_Endpoint}/api/news`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
@@ -36,16 +36,17 @@ function Forms() {
   });
 
   return (
-    <div className="container  flex flex-wrap gap-4 justify-center items-center">
+    <div className="container flex flex-wrap gap-4 justify-center items-center">
       <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
         <Grid
           container
           justifyContent="center"
           alignItems="stretch"
           spacing={3}
-          width={600}
+          minWidth={500}
+          width="auto"
         >
-          <Grid item xs={6}>
+          <Grid>
             <Card>
               <CardHeader title="Мэдээ нэмэх хэсэг" />
               <Divider />

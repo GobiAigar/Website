@@ -26,11 +26,11 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="container w-full px-4 py-8 flex flex-col flex-wrap gap-4 justify-center items-center ">
+    <div className="container w-full py-8 flex flex-col flex-wrap gap-4 justify-center items-center ">
       <div className="w-full flex justify-end">
         <Button onClick={() => setIsGrid(!isGrid)}>Загвар өөрчлөх</Button>
       </div>
-      <div className="flex items-start gap-8">
+      <div className="w-full flex justify-between items-start gap-8">
         <div className=" flex flex-wrap gap-4 justify-center md:justify-between items-center w-full">
           {isGrid
             ? data.map((data) => {
@@ -40,7 +40,7 @@ const Page = () => {
                 return <ListCard key={data.id} data={data} />;
               })}
         </div>
-        <div className="w-fit flex justify-center items-center">
+        <div className="w-auto">
           <Forms />
         </div>
       </div>

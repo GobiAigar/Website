@@ -7,6 +7,7 @@ import websiteRouter from "./routes/website.route.js";
 import newsRouter from "./routes/news.route.js";
 import userRouter from "./routes/user.route.js";
 import messageRouter from './routes/messages.route.js'
+import faqRouter from "./routes/faq.route.js";
 
 
 
@@ -27,6 +28,7 @@ server.use("/api", websiteRouter);
 server.use("/api", newsRouter);
 server.use("/api", messageRouter);
 server.use("/api", userRouter)
+server.use("/api", faqRouter)
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

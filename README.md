@@ -10,12 +10,13 @@ Govi Agiar project service documentation
   GET https://website-z9b7.onrender.com/api/website
   GET https://website-z9b7.onrender.com/api/news
   GET https://website-z9b7.onrender.com/api/messages
+  GET https://website-z9b7.onrender.com/api/faq
 ```
 
 #### Update item
 
 ```https
-  PUT /api/updateWebsite
+  PUT /api/website
 
 ```
 
@@ -34,7 +35,7 @@ Govi Agiar project service documentation
 ## Create news
 
 ```https
-  POST /api/createNews
+  POST /api/news
   ####createNews(title,english,mongolia,image_url1,image_url2,image_url3,image_url4)
 ```
 
@@ -48,12 +49,12 @@ Govi Agiar project service documentation
 | `image_url`     | `string` | **Required** |
 
 ```https
-  POST /api/deleteNews/:id
+  POST /api/news/:id
   ####delete news(id)
 
 ```
 
-POST /api/createMessages
+POST /api/messages
 
 | Parameter     | Type     | Description                      |
 | :------------ | :------- | :------------------------------- |

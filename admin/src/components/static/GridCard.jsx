@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const GridCard = ({ data }) => {
   return (
-    <Card sx={{ width: 250, maxeight: 350, borderRadius: 4 }}>
+    <Card sx={{ maxWidth: 300, maxeight: "auto", borderRadius: 1 }}>
       <CardMedia
         sx={{ height: 140 }}
         image={data?.image_url}

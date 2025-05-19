@@ -11,8 +11,6 @@ import {
   Button,
   Dialog,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
   DialogActions,
 } from "@mui/material";
 
@@ -88,9 +86,13 @@ function SlugNews({ data }) {
 
   const submit = async () => {
     try {
-      const response = await fetch(`${Backend_Endpoint}/api/post/${id}`);
+      const response = await fetch(`${Backend_Endpoint}/api/news/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
       const data = await response.json();
-      console.log(data);
       handleClose();
       router.push("/news");
     } catch (error) {
@@ -99,7 +101,7 @@ function SlugNews({ data }) {
   };
 
   return (
-    <Card>
+    <div>
       <CardActionAreaWrapper>
         <CardMedia
           component="img"
@@ -112,7 +114,7 @@ function SlugNews({ data }) {
           }}
         />
         <CardActions>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button variant="outlined" color="white" onClick={handleClickOpen}>
             Устгах
           </Button>
           <Dialog
@@ -188,7 +190,7 @@ function SlugNews({ data }) {
           {data?.endescription}
         </Typography>
       </Box>
-    </Card>
+    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { websiteController } from "../controllers/website.controller.js";
 const websiteRouter = express.Router();
 
 websiteRouter.get("/website", websiteController.getAllWebsites);
-websiteRouter.post("/createWebsite", websiteController.createWebsite);
-websiteRouter.put("/updateWebsite", websiteController.updateWebsite);
+websiteRouter.post("/website", websiteController.createWebsite);
+websiteRouter.put("/website", websiteController.updateWebsite);
 
 export default websiteRouter;
