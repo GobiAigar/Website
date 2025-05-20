@@ -3,20 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "echo ❌ next export is disabled && exit 1"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@formatjs/intl-localematcher": "^0.6.1",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "formik": "^2.4.6",
     "framer-motion": "^12.11.1",
-    "next": "^15.3.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "negotiator": "^1.0.0",
+    "next": "^14.2.3",
+    "next-intl": "^4.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

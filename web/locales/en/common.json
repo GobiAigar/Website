@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Home",
+    "product": "Product",
+    "sustainability": "Sustainability",
+    "news": "News",
+    "contact": "Contact"
+  },
+  "HomePage": {
+    "title": "Welcome to homepage",
+    "seeProduct": "See product",
+    "ourHistory": "Our History"
+  },
+  "Contact": {
+    "contactInfo": "Contact Information",
+    "startChat": "Say something to start a live chat!",
+    "contactUs": "CONTACT US",
+    "contactDesc": "Let’s talk. Leave us a quick message and we’ll respond in a timely manner. Make sure your email is correct so we can get back to you.",
+    "selectPurpose": "Select the purpose",
+    "generalInquiry": "General Inquiry",
+    "support": "Support",
+    "business": "Business",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone number",
+    "country": "Country",
+    "state": "State or province",
+    "city": "City",
+    "overview": "Overview of your business plan",
+    "submit": "Submit",
+    "clear": "Clear",
+    "invalidEmail": "Invalid email format",
+    "required": "This field is required"
+  },
+  "news": {
+    "title": "CULTURAL BRILLIANCE",
+    "subtitle": "From Mongolia, with Love.",
+    "loading": "Loading...",
+    "error": "Failed to load news.",
+    "back": "Back",
+    "seeMore": "See more",
+    "journalist": "Journalist"
+  },
+  "sustainability": {
+    "title": "Sustainability",
+    "description": "All the cashmere fiber North Land uses is sustainable Mongolian cashmere that comes from cashmere goats living in Inner Mongolia, famous for the best cashmere quality it produces."
+  },
+  "product": {
+    "title": "Gobi Aigar Collaboration Application Form 2024",
+    "domestic": "Domestic",
+    "international": "International",
+    "contact": "Contact Us"
+  },
+  "footer": {
+    "address": "130a, manufacturing west area, 20th khoroo Bayangol District, Ulaanbaatar, Mongolia",
+    "phone": "+(976) 7777 6040",
+    "email": "support@agrixglobal.com",
+    "nav": {
+      "about": "About",
+      "product": "Product",
+      "sustainability": "Sustainability",
+      "partners": "Partners",
+      "contact": "Contact"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "copyright": "© 2025 GOBI AIGAR. All rights reserved."
+  }
+}

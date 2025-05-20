@@ -1,11 +1,13 @@
 import { Button, Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { EmailIcon, RightArrowIcon } from "./Icon";
+import { useTranslations } from "next-intl";
 
 const TradeSection = ({ title, image, description, list }) => {
+  const t = useTranslations("product");
   return (
     <Grid container spacing={4} alignItems="flex-start">
-      <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
+      <Grid size={{ xs: 12, md: 6 }}>
         <Box display="flex" justifyContent="start" alignItems="start">
           <Box
             component="img"
@@ -21,7 +23,7 @@ const TradeSection = ({ title, image, description, list }) => {
         </Box>
       </Grid>
 
-      <Grid size={{ xs: 12, md: 6 }} zeroMinWidth>
+      <Grid size={{ xs: 12, md: 6 }}>
         <Box>
           <Typography
             variant="h5"
@@ -67,11 +69,11 @@ const TradeSection = ({ title, image, description, list }) => {
             <Button
               variant="contained"
               sx={{
-                maxWidth: { xs: "100%", sm: 192 },
+                maxWidth: { xs: "100%", sm: 215 },
                 backgroundColor: "#6E1221",
                 color: "#fff",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "start",
                 gap: 1,
                 px: 2,
                 "&:hover": {
@@ -81,7 +83,7 @@ const TradeSection = ({ title, image, description, list }) => {
               fullWidth
             >
               <EmailIcon />
-              Contact Us
+              {t("contact")}
               <RightArrowIcon />
             </Button>
           </Box>

@@ -53,7 +53,6 @@ const NewsCard = () => {
       {data.map((item, index) => (
         <Grid
           alignItems="center"
-          item
           key={index}
           size={{ xs: 12, sm: 6, md: 4 }}
         >

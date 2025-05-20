@@ -20,11 +20,9 @@ const SplitSection = ({ sections }) => {
               xs: "column",
               md: isReversed ? "row-reverse" : "row",
             }}
-            alignItems="center"
-            justifyContent="center"
             sx={{ mb: 8, width: "100%" }}
           >
-            <Grid item size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
+            <Grid size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
               <Box
                 sx={{
                   display: images.length > 1 ? "grid" : "block",
@@ -56,7 +54,7 @@ const SplitSection = ({ sections }) => {
               </Box>
             </Grid>
 
-            <Grid item size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
+            <Grid size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
               <Box
                 sx={{
                   textAlign: {

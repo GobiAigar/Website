@@ -15,18 +15,18 @@ export default function ProductImageList({
 }) {
   const theme = useTheme();
 
-  // Breakpoint бүрийн зураг баганын тоо
-  const isXs = useMediaQuery(theme.breakpoints.down("sm")); // <600px
-  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md")); // 600-900px
-  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg")); // 900-1200px
-  const isLg = useMediaQuery(theme.breakpoints.between("lg", "xl")); // 1200-1536px
+
+  const isXs = useMediaQuery(theme.breakpoints.down("sm")); 
+  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md")); 
+  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isLg = useMediaQuery(theme.breakpoints.between("lg", "xl")); 
 
   let cols = 1;
   if (isXs) cols = 4;
   else if (isSm) cols = 4;
   else if (isMd) cols = 4;
   else if (isLg) cols = 4;
-  else cols = 4; // ≥1536px буюу 2K дэлгэцнүүд
+  else cols = 4; 
 
   return (
     <ImageList cols={cols} gap={gap} sx={{ width: "100%" }}>

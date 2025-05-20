@@ -2,8 +2,10 @@
 import React from "react";
 import { Box, Container, Grid, Typography, Link } from "@mui/material";
 import ScrollTopButton from "./ScrollTopButton";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations("footer");
   return (
     <Box
       sx={{ bgcolor: "white", py: { xs: 6, sm: 8, lg: 10 }, color: "black" }}
@@ -16,67 +18,72 @@ const Footer = () => {
           alignItems="flex-start"
           textAlign="start"
         >
-          <Grid size={{ xs: 6, md: 3 }} zeroMinWidth>
+          <Grid size={{ xs: 6, md: 3 }}>
             <Box>
               <Box
                 component="img"
-                src="logo.png"
+                src="/logo.png"
                 alt="logo"
-                sx={{ width: { xs: 120, sm: 160 } }}
+                sx={{
+                  width: { xs: 120, sm: 160 },
+                  height: "auto",
+                }}
               />
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 6, md: 3 }} zeroMinWidth>
+          <Grid size={{ xs: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
-              <Typography variant="body1">
-                130a, manufacturing west area, 20th khoroo Bayangol District,
-                Ulaanbaatar, Mongolia
-              </Typography>
-              <Typography variant="body2">+(976) 7777 6040</Typography>
-              <Typography variant="body2">support@agrixglobal.com</Typography>
+              <Typography variant="body1">{t("address")}</Typography>
+              <Typography variant="body2">{t("phone")}</Typography>
+              <Typography variant="body2">{t("email")}</Typography>
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 6, md: 3 }} zeroMinWidth>
+          <Grid size={{ xs: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
-              <Link href="#" underline="hover" color="inherit">
-                About
+              <Link href="#" passHref underline="hover" color="inherit">
+                {t("nav.about")}
               </Link>
-              <Link href="#" underline="hover" color="inherit">
-                Product
+              <Link href="product" passHref underline="hover" color="inherit">
+                {t("nav.product")}
               </Link>
-              <Link href="#" underline="hover" color="inherit">
-                Sustainability
+              <Link
+                href="sustainability"
+                passHref
+                underline="hover"
+                color="inherit"
+              >
+                {t("nav.sustainability")}
               </Link>
-              <Link href="#" underline="hover" color="inherit">
-                Partners
+              <Link href="#" passHref underline="hover" color="inherit">
+                {t("nav.partners")}
               </Link>
-              <Link href="#" underline="hover" color="inherit">
-                Contact
+              <Link href="contact" passHref underline="hover" color="inherit">
+                {t("nav.contact")}
               </Link>
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 6, sm: 6, md: 3 }} zeroMinWidth>
+          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
               <Link href="#" underline="hover" color="inherit">
-                Facebook
+                {t("social.facebook")}
               </Link>
               <Link href="#" underline="hover" color="inherit">
-                Twitter
+                {t("social.twitter")}
               </Link>
               <Link href="#" underline="hover" color="inherit">
-                Linkedin
+                {t("social.linkedin")}
               </Link>
               <Link href="#" underline="hover" color="inherit">
-                Instagram
+                {t("social.instagram")}
               </Link>
             </Box>
           </Grid>
         </Grid>
 
-        <Grid size={{ xs: 6, sm: 6, md: 3 }} zeroMinWidth>
+        <Grid size={{ xs: 6, sm: 6, md: 3 }}>
           <Box mt={{ xs: 2, lg: 0 }}>
             <ScrollTopButton />
           </Box>
@@ -88,7 +95,7 @@ const Footer = () => {
           align="center"
           sx={{ mt: 6 }}
         >
-          © 2025 GOBI AIGAR. All rights reserved.
+          {t("copyright")}
         </Typography>
       </Container>
     </Box>

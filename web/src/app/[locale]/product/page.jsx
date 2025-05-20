@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { Button, Box, Container, Typography, Grid } from "@mui/material";
-import TradeSection from "../components/TradeSection";
-import { GlobeIcon, HomeHashtagIcon } from "../components/Icon";
+import TradeSection from "../../components/TradeSection";
+import { GlobeIcon, HomeHashtagIcon } from "../../components/Icon";
+import { useTranslations } from "next-intl";
 
 const tradeData = [
   {
@@ -77,6 +78,8 @@ const tradeData = [
 const Product = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const t = useTranslations("product");
+
   const selectedTradeData = tradeData[activeIndex];
   return (
     <Box sx={{ overflow: "hidden", backgroundColor: "white" }}>
@@ -103,7 +106,7 @@ const Product = () => {
             color: "black",
           }}
         >
-          Gobi Aigar Collaboration Application Form 2024
+          {t("title")}
         </Typography>
 
         <Grid container spacing={2} mb={6}>
@@ -116,7 +119,7 @@ const Product = () => {
                 color: activeIndex === 0 ? "#fff" : "#6E1221",
                 border: activeIndex === 0 ? "none" : "2px solid #6E1221",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "start",
                 gap: 1,
                 px: 2,
                 "&:hover": {
@@ -126,7 +129,7 @@ const Product = () => {
               }}
             >
               <HomeHashtagIcon color={activeIndex === 0 ? "#fff" : "#4a0d17"} />
-              Domestic
+              {t("domestic")}
             </Button>
           </Grid>
 
@@ -139,7 +142,7 @@ const Product = () => {
                 color: activeIndex === 1 ? "#fff" : "#6E1221",
                 border: activeIndex === 1 ? "none" : "2px solid #6E1221",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "start",
                 gap: 1,
                 px: 2,
                 "&:hover": {
@@ -149,7 +152,7 @@ const Product = () => {
               }}
             >
               <GlobeIcon color={activeIndex === 1 ? "#fff" : "#4a0d17"} />
-              International
+              {t("international")}
             </Button>
           </Grid>
         </Grid>

@@ -1,7 +1,9 @@
+"use client";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { useTranslations } from "next-intl";
 
 const roadmapItems = [
   {
@@ -19,6 +21,7 @@ const roadmapItems = [
 ];
 
 const Sustainability = () => {
+  const t = useTranslations("sustainability");
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
       <Header />
@@ -47,7 +50,7 @@ const Sustainability = () => {
               fontWeight: "bold",
             }}
           >
-            Sustainability
+            {t("title")}
           </Typography>
           <Typography
             variant="h6"
@@ -60,9 +63,7 @@ const Sustainability = () => {
               },
             }}
           >
-            All the cashmere fiber North Land uses is sustainable Mongolian
-            cashmere that comes from cashmere goats living in Inner Mongolia,
-            famous for the best cashmere quality it produces.
+            {t("description")}
           </Typography>
         </Container>
       </Box>
@@ -133,7 +134,6 @@ const Sustainability = () => {
               </Box>
 
               <Grid
-                item
                 size={{ xs: 12, sm: 6 }}
                 sx={{
                   position: "relative",
@@ -183,7 +183,6 @@ const Sustainability = () => {
           ))}
         </Box>
       </Container>
-
       <Footer />
     </Box>
   );

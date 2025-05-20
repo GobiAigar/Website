@@ -11,9 +11,10 @@ import {
   CardMedia,
   Button,
 } from "@mui/material";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 const truncateWords = (text, limit) => {
   const words = text.split(" ");
@@ -26,6 +27,8 @@ const News = () => {
   const [error, setError] = useState(null);
   const [selectedNews, setSelectedNews] = useState(null);
   const router = useRouter();
+  const lang = useLocale();
+  const t = useTranslations("news");
 
   useEffect(() => {
     fetch("https://website-z9b7.onrender.com/api/news")
@@ -71,10 +74,14 @@ const News = () => {
         />
         <Container
           maxWidth="lg"
-          sx={{ pt: 40, position: "relative", zIndex: 2 }}
+          sx={{ pt: 20, position: "relative", zIndex: 2 }}
         >
           <Typography variant="h3" fontWeight="bold" color="white">
-            CULTURAL BRILLIANCE
+            {selectedNews
+              ? lang === "mn"
+                ? selectedNews?.mntitle
+                : selectedNews?.entitle
+              : t("title")}
           </Typography>
           <Typography
             variant="h4"
@@ -82,14 +89,14 @@ const News = () => {
             sx={{ mt: 2 }}
             color="white"
           >
-            From Mongolia, with Love.
+            {selectedNews ? "" : t("subtitle")}
           </Typography>
         </Container>
       </Box>
 
       <Container>
         {loading ? (
-          <Typography sx={{ py: 10 }}>Loading...</Typography>
+          <Typography sx={{ py: 10 }}>{t("loading")}</Typography>
         ) : error ? (
           <Typography color="error">{error}</Typography>
         ) : selectedNews ? (
@@ -97,36 +104,38 @@ const News = () => {
             <Typography variant="caption" color="text.secondary">
               {new Date(selectedNews.date).toLocaleDateString()}
             </Typography>
-            {/* <Typography variant="h4" fontWeight="bold" mt={2}>
-              {selectedNews.entitle}
-            </Typography> */}
+
             <Typography
               variant="subtitle2"
               align="right"
               color="text.secondary"
               mb={2}
             >
-              Journalist
+              {t("journalist")}
               <span
                 style={{ fontWeight: "bold", fontSize: "20px", marginLeft: 4 }}
               >
-                {selectedNews.enjournalist}
+                {lang === "mn"
+                  ? selectedNews.mnjournalist
+                  : selectedNews.enjournalist}
               </span>
             </Typography>
 
-            <Typography variant="body1">
-              {selectedNews.endescription}
+            <Typography variant="body1" color="black">
+              {lang === "mn"
+                ? selectedNews.mndescription
+                : selectedNews.endescription}
             </Typography>
             <Box textAlign="right" mt={4}>
               <Button variant="outlined" onClick={() => setSelectedNews(null)}>
-                Back
+                {t("back")}
               </Button>
             </Box>
           </Box>
         ) : (
           <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
             {newsList.map((item) => (
-              <Grid item key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card
                   sx={{
                     borderRadius: 3,
@@ -153,7 +162,7 @@ const News = () => {
                   >
                     <Box>
                       <Typography variant="subtitle1" fontWeight="bold">
-                        {item.entitle}
+                        {lang === "mn" ? item?.mntitle : item?.entitle}
                       </Typography>
                     </Box>
                     <Box
@@ -176,7 +185,12 @@ const News = () => {
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {truncateWords(item.endescription, 10)}
+                        {truncateWords(
+                          lang === "mn"
+                            ? item.mndescription
+                            : item.endescription,
+                          10
+                        )}
                       </Typography>
                       <Button
                         variant="outlined"
@@ -189,7 +203,7 @@ const News = () => {
                         }}
                         onClick={() => setSelectedNews(item)}
                       >
-                        See more
+                        {t("seeMore")}
                       </Button>
                     </Box>
                   </CardContent>
