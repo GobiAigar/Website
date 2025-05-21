@@ -27,11 +27,17 @@
     "country": "Country",
     "state": "State or province",
     "city": "City",
-    "overview": "Overview of your business plan",
+    "plan": "Overview of your business plan",
     "submit": "Submit",
     "clear": "Clear",
     "invalidEmail": "Invalid email format",
-    "required": "This field is required"
+    "required": "This field is required",
+    "domestic": "Domestic",
+    "international": "International",
+    "other": "Other",
+    "address": "130a, manufacturing west area, 20th khoroo Bayangol District, Ulaanbaatar, Mongolia",
+    "supportmail": "support@gobiaigar.com",
+    "phoneinfo": "(+976) 7777 6540"
   },
   "news": {
     "title": "CULTURAL BRILLIANCE",
@@ -70,5 +76,10 @@
       "instagram": "Instagram"
     },
     "copyright": "© 2025 GOBI AIGAR. All rights reserved."
+  },
+  "FAQ": {
+    "title": "FAQ",
+    "subtitle": "Need Help? See answers to some of the most commonly asked questions. Or",
+    "contact": "Contact Us"
   }
 }

@@ -144,6 +144,7 @@ const News = () => {
                     height: 200,
                     display: "flex",
                     flexDirection: "column",
+                    minWidth: 280,
                   }}
                 >
                   <CardMedia
@@ -162,7 +163,10 @@ const News = () => {
                   >
                     <Box>
                       <Typography variant="subtitle1" fontWeight="bold">
-                        {lang === "mn" ? item?.mntitle : item?.entitle}
+                        {truncateWords(
+                          lang === "mn" ? item?.mntitle : item?.entitle,
+                          5
+                        )}
                       </Typography>
                     </Box>
                     <Box

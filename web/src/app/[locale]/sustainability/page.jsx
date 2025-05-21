@@ -1,27 +1,74 @@
 "use client";
-import { Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { useTranslations } from "next-intl";
-
-const roadmapItems = [
-  {
-    image: "/certificate.jpg",
-    label: "ISO 9001:2015 Чанарын удирдлагын тогтолцоо",
-  },
-  {
-    image: "/certificate.jpg",
-    label: "ISO 22000:2018 Хүнсний аюулгүй байдлын тогтолцоо",
-  },
-  {
-    image: "/certificate.jpg",
-    label: "OEKO-TEX Standard 100 батламж",
-  },
-];
+import { useLocale } from "next-intl";
 
 const Sustainability = () => {
-  const t = useTranslations("sustainability");
+  const lang = useLocale();
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [mainInfo, setMainInfo] = useState(null);
+  const [roadmapItems, setRoadmapItems] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/api/sustainability");
+        const json = await res.json();
+        setData(json.data || []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch sustainability data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      const main = data.find((item) => item.id === 1);
+      const roadmap = data
+        .filter((item) => item.id !== 1)
+        .map((item) => ({
+          label: lang === "mn" ? item.mndescription : item.endescription,
+          image: item.image_url,
+        }));
+      setMainInfo(main);
+      setRoadmapItems(roadmap);
+    }
+  }, [data, lang]);
+
+  if (loading || !mainInfo) {
+    return (
+      <Box
+        sx={{
+          height: "80vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "text.primary",
+        }}
+      >
+        <CircularProgress color="secondary" />
+        <Typography variant="h6" sx={{ mt: 2 }}>
+          Түр хүлээнэ үү...
+        </Typography>
+      </Box>
+    );
+  }
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
       <Header />
@@ -50,7 +97,7 @@ const Sustainability = () => {
               fontWeight: "bold",
             }}
           >
-            {t("title")}
+            {lang === "mn" ? mainInfo.mntitle : mainInfo.entitle}
           </Typography>
           <Typography
             variant="h6"
@@ -63,7 +110,7 @@ const Sustainability = () => {
               },
             }}
           >
-            {t("description")}
+            {lang === "mn" ? mainInfo.mndescription : mainInfo.endescription}
           </Typography>
         </Container>
       </Box>
@@ -73,7 +120,6 @@ const Sustainability = () => {
           <Box
             sx={{
               position: "absolute",
-
               left: "50%",
               top: 0,
               bottom: 0,
@@ -125,7 +171,7 @@ const Sustainability = () => {
                     top: 0,
                     [index % 2 === 0 ? "right" : "left"]: "50%",
                     width: "calc(50% - 330px)",
-                    height: "2px",
+                    height: "1px",
                     backgroundColor: "#828282",
                     transform: "translateY(-50%)",
                     zIndex: 1,

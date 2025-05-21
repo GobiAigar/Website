@@ -2,8 +2,9 @@ import { Button, Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { EmailIcon, RightArrowIcon } from "./Icon";
 import { useTranslations } from "next-intl";
+import { Link } from "../../i18n/navigation";
 
-const TradeSection = ({ title, image, description, list }) => {
+const TradeSection = ({ title, image, description }) => {
   const t = useTranslations("product");
   return (
     <Grid container spacing={4} alignItems="flex-start">
@@ -39,34 +40,13 @@ const TradeSection = ({ title, image, description, list }) => {
           </Typography>
 
           <Box
-            component="ul"
-            sx={{ pl: 3, color: "#5C4B47", typography: "body1" }}
-          >
-            {list.map((item, index) => (
-              <Box key={index} component="li" sx={{ mb: 1 }}>
-                {item.text}
-                {item.subList && (
-                  <Box
-                    component="ul"
-                    sx={{ pl: 3, mt: 1, listStyleType: "lower-alpha" }}
-                  >
-                    {item.subList.map((subItem, subIndex) => (
-                      <Box component="li" key={subIndex}>
-                        {subItem}
-                      </Box>
-                    ))}
-                  </Box>
-                )}
-              </Box>
-            ))}
-          </Box>
-
-          <Box
             mt={4}
             display="flex"
             justifyContent={{ xs: "center", sm: "flex-end" }}
           >
             <Button
+              component={Link}
+              href="/contact"
               variant="contained"
               sx={{
                 maxWidth: { xs: "100%", sm: 215 },

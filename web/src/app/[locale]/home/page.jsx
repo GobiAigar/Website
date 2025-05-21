@@ -9,6 +9,7 @@ import {
   Divider,
   Button,
   CircularProgress,
+  TextField,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Header from "../../components/Header";
@@ -22,16 +23,18 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../../i18n/navigation";
 
 const Home = () => {
-  const [homeData, setHomeData] = useState([]);
-  const lang = useLocale();
+  const [rawData, setRawData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const lang = useLocale();
   const t = useTranslations("HomePage");
 
   useEffect(() => {
-    fetch("https://website-z9b7.onrender.com/api/website")
+    // fetch("https://website-z9b7.onrender.com/api/website")
+    fetch("http://localhost:8000/api/website")
       .then((res) => res.json())
       .then((data) => {
-        setHomeData(data);
+        setRawData(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -40,11 +43,35 @@ const Home = () => {
       });
   }, []);
 
+  if (loading || !rawData) {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  const websiteData = rawData.website || [];
+  const statisticsList = rawData.statistics || [];
+  const faqs = rawData.faq || [];
+
   const getItemsByTitle = (title) =>
-    homeData.filter((item) => item.title === title);
+    websiteData.filter((item) => item.title === title);
 
   const getSingleByTitle = (title) =>
-    homeData.find((item) => item.title === title);
+    websiteData.find((item) => item.title === title);
+
+  const homeSectionA = getSingleByTitle("HomeSectionA");
+  const endSection = getSingleByTitle("HomeEndsection");
+  const herderSection = getSingleByTitle("Herder");
+  const statisticsSection = getSingleByTitle("Statistics");
 
   const infoCards = ["sloganA", "sloganB", "sloganC"]
     .map((title) => getSingleByTitle(title))
@@ -67,12 +94,6 @@ const Home = () => {
         : null;
     })
     .filter(Boolean);
-
-  const herderSection = getSingleByTitle("Herder");
-  const endSection = getSingleByTitle("HomeEndsection");
-  const homeSectionA = getSingleByTitle("HomeSectionA");
-  const faqs = homeData.filter((d) => d.title?.includes("FAQ"));
-
   return (
     <Box sx={{ bgcolor: "background.default", color: "text.primary" }}>
       <Box
@@ -99,157 +120,212 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-          {loading ? (
-            <CircularProgress color="inherit" />
-          ) : (
-            <>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                color="common.white"
-                gutterBottom
+          <Typography
+            variant="h3"
+            fontWeight="bold"
+            color="common.white"
+            gutterBottom
+            sx={{
+              fontSize: {
+                xs: "28px",
+                sm: "36px",
+                md: "48px",
+                lg: "56px",
+              },
+            }}
+          >
+            {lang === "mn" ? homeSectionA?.mntitle : homeSectionA?.entitle}
+          </Typography>
+          <Typography
+            variant="h5"
+            color="common.white"
+            mb={4}
+            sx={{
+              fontSize: {
+                xs: "12px",
+                sm: "16px",
+                md: "20px",
+                lg: "28px",
+              },
+            }}
+          >
+            {lang === "mn"
+              ? homeSectionA?.mnsubtitle
+              : homeSectionA?.ensubtitle}
+          </Typography>
+          <Grid container spacing={2} justifyContent="center">
+            <Grid>
+              <Button
+                component={Link}
+                href="/product"
+                variant="contained"
                 sx={{
-                  fontSize: {
-                    xs: "28px",
-                    sm: "36px",
-                    md: "48px",
-                    lg: "56px",
-                  },
+                  textTransform: "none",
+                  pt: 1,
+                  borderRadius: 3,
+                  background: "white",
+                  color: "black",
                 }}
               >
-                {lang === "mn" ? homeSectionA?.mntitle : homeSectionA?.entitle}
-              </Typography>
-              <Typography
-                variant="h5"
-                color="common.white"
-                mb={4}
+                {t("seeProduct")}
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                component={Link}
+                href="/sustainability"
+                variant="outlined"
+                endIcon={<ArrowForwardIcon />}
                 sx={{
-                  fontSize: {
-                    xs: "12px",
-                    sm: "16px",
-                    md: "20px",
-                    lg: "28px",
-                  },
+                  textTransform: "none",
+                  pt: 1,
+                  color: "white",
+                  borderColor: "white",
+                  borderRadius: 3,
                 }}
               >
-                {lang === "mn"
-                  ? homeSectionA?.mnsubtitle
-                  : homeSectionA?.ensubtitle}
-              </Typography>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid>
-                  <Link href="/product" passHref>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        textTransform: "none",
-                        pt: 1,
-                        borderRadius: 3,
-                        background: "white",
-                        color: "black",
-                      }}
-                    >
-                      {t("seeProduct")}
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid>
-                  <Link href="/sustainability" passHref>
-                    <Button
-                      variant="outlined"
-                      endIcon={<ArrowForwardIcon />}
-                      sx={{
-                        textTransform: "none",
-                        pt: 1,
-                        color: "white",
-                        borderColor: "white",
-                        borderRadius: 3,
-                      }}
-                    >
-                      {t("ourHistory")}
-                    </Button>
-                  </Link>
-                </Grid>
-              </Grid>
-            </>
-          )}
+                {t("ourHistory")}
+              </Button>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
 
-      {!loading && (
-        <>
-          <Container sx={{ py: 8 }}>
-            <SplitSection sections={splitSections} />
-          </Container>
+      <Container sx={{ py: 8 }}>
+        <SplitSection sections={splitSections} />
+      </Container>
 
-          <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Grid container alignItems="stretch" spacing={2}>
-              {infoCards.map((item, index) => (
-                <React.Fragment key={item.id}>
-                  <Grid size={{ xs: 12, sm: 3.7, md: 3.84 }}>
-                    <InfoCard
-                      imageSrc={item.image_url1}
-                      title={lang === "mn" ? item.mntitle : item.entitle}
-                      description={
-                        lang === "mn" ? item.mnsubtitle : item.ensubtitle
-                      }
-                    />
-                  </Grid>
-                  {(index + 1) % 3 !== 0 && index < infoCards.length - 1 && (
-                    <Grid
-                      sx={{
-                        display: { xs: "none", sm: "flex" },
-                        alignItems: "stretch",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Divider
-                        orientation="vertical"
-                        flexItem
-                        sx={{ borderColor: "#8B4513", borderRightWidth: 1 }}
-                      />
-                    </Grid>
-                  )}
-                </React.Fragment>
-              ))}
-            </Grid>
-          </Container>
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Grid container alignItems="stretch" spacing={2}>
+          {infoCards.map((item, index) => (
+            <React.Fragment key={item.id}>
+              <Grid size={{ xs: 12, sm: 3.7, md: 3.84 }}>
+                <InfoCard
+                  imageSrc={item.image_url1}
+                  title={lang === "mn" ? item.mntitle : item.entitle}
+                  description={
+                    lang === "mn" ? item.mnsubtitle : item.ensubtitle
+                  }
+                />
+              </Grid>
+              {(index + 1) % 3 !== 0 && index < infoCards.length - 1 && (
+                <Grid
+                  sx={{
+                    display: { xs: "none", sm: "flex" },
+                    alignItems: "stretch",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Divider
+                    orientation="vertical"
+                    flexItem
+                    sx={{ borderColor: "#8B4513", borderRightWidth: 1 }}
+                  />
+                </Grid>
+              )}
+            </React.Fragment>
+          ))}
+        </Grid>
+      </Container>
+      <Container sx={{ py: 8 }}>
+        <Typography
+          variant="h4"
+          fontWeight={700}
+          mb={4}
+          sx={{
+            fontSize: {
+              xs: "24px",
+              sm: "28px",
+              md: "32px",
+            },
+          }}
+        >
+          {lang === "mn"
+            ? statisticsSection?.mntitle
+            : statisticsSection?.entitle}
+        </Typography>
+        <Grid
+          container
+          spacing={4}
+          alignItems="stretch"
+          justifyContent="center"
+        >
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "start",
+              }}
+            >
+              <Box
+                component="ul"
+                sx={{
+                  pl: 3,
+                  fontSize: "1rem",
+                  lineHeight: 2,
+                  color: "text.secondary",
+                  listStyleType: "disc",
+                  m: 0,
+                }}
+              >
+                {statisticsList.map((item) => (
+                  <li key={item.id}>
+                    {lang === "mn" ? item.mongolia : item.english}
+                  </li>
+                ))}
+              </Box>
+            </Box>
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Video src={statisticsSection?.image_url1} />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
 
-          {herderSection && (
-            <Container sx={{ py: 8 }}>
-              <Typography variant="h4" fontWeight={700} mb={4}>
-                {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
+      {herderSection && (
+        <Container sx={{ py: 8 }}>
+          <Typography variant="h4" fontWeight={700} mb={4}>
+            {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
+          </Typography>
+          <Box
+            component="img"
+            src={herderSection.image_url1}
+            alt="supply image"
+            sx={{ width: "100%", borderRadius: 2 }}
+          />
+        </Container>
+      )}
+
+      {endSection && (
+        <Container sx={{ py: 8 }}>
+          <Grid container spacing={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Typography variant="h4" fontWeight={700} mb={2}>
+                {lang === "mn" ? endSection.mntitle : endSection.entitle}
               </Typography>
               <Box
                 component="img"
-                src={herderSection.image_url1}
-                alt="supply image"
+                src={endSection.image_url1}
+                alt="end-section"
                 sx={{ width: "100%", borderRadius: 2 }}
               />
-            </Container>
-          )}
-
-          {endSection && (
-            <Container sx={{ py: 8 }}>
-              <Grid container spacing={6}>
-                <Grid size={{ xs: 12, md: 6 }}>
-                  <Typography variant="h4" fontWeight={700} mb={2}>
-                    {lang === "mn" ? endSection.mntitle : endSection.entitle}
-                  </Typography>
-                  <Box
-                    component="img"
-                    src={endSection.image_url1}
-                    alt="end-section"
-                    sx={{ width: "100%", borderRadius: 2 }}
-                  />
-                </Grid>
-                <Grid size={{ xs: 12, md: 6 }}>
-                  <FAQSection faqItems={faqs} lang={lang} />
-                </Grid>
-              </Grid>
-            </Container>
-          )}
-        </>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <FAQSection faqItems={faqs} lang={lang} />
+            </Grid>
+          </Grid>
+        </Container>
       )}
 
       <Footer />
