@@ -2,7 +2,7 @@ import { sql } from "../server.js";
 export const productController = {
   get: async (_, res) => {
     try {
-      const statistics = await sql`SELECT * FROM product`
+      const statistics = await sql`SELECT * FROM product order by id`
       res.status(200).json({'success': true, "data": statistics});
     } catch (error) {
       res.status(500).json({"success": false, "error": error });
