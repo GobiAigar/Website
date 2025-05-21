@@ -49,8 +49,6 @@ export const newsController = {
   },
 
   deleteNews: async (req, res) => {
-    console.log(req.params.id);
-    
     const id = req.params.id;
 
     if (!id) {

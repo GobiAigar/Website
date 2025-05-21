@@ -8,10 +8,12 @@ import newsRouter from "./routes/news.route.js";
 import userRouter from "./routes/user.route.js";
 import messageRouter from './routes/messages.route.js'
 import faqRouter from "./routes/faq.route.js";
-
+import statisticsRouter from "./routes/statistics.route.js";
+import productRouter from "./routes/product.route.js";
 
 
 dotenv.config();
+
 export const sql = neon(`${process.env.DATABASE_URL}`);
 
 const server = express();
@@ -29,6 +31,8 @@ server.use("/api", newsRouter);
 server.use("/api", messageRouter);
 server.use("/api", userRouter)
 server.use("/api", faqRouter)
+server.use("/api", statisticsRouter)
+server.use("/api", productRouter)
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
