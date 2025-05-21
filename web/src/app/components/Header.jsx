@@ -87,6 +87,7 @@ const Header = () => {
               src="/logo.png"
               alt="Logo"
               fill
+              sizes="(max-width: 600px) 120px, (max-width: 960px) 160px, 200px"
               style={{ objectFit: "contain" }}
               priority
             />
@@ -111,6 +112,7 @@ const Header = () => {
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <Typography
+                    component="span"
                     variant="body1"
                     sx={{ fontSize: { sm: 12, md: 18, lg: 20 } }}
                   >
@@ -129,19 +131,29 @@ const Header = () => {
         open={isMobileMenuOpen}
         onClose={toggleMobileMenu}
         PaperProps={{
-          sx: { backgroundColor: "black", color: "white", width: "250px" },
+          sx: {
+            background: "rgba(0, 0, 0, 0.4)",
+            backdropFilter: "blur(2px)",
+            color: "white",
+            width: "250px",
+          },
         }}
       >
         <Box sx={{ p: 3 }}>
           <List>
             {navLinks.map((link) => (
-              <Link key={link.path} href={`/${locale}/${link.path}`} passHref>
-                <ListItem disablePadding onClick={toggleMobileMenu}>
-                  <ListItemButton>
-                    <ListItemText primary={link.label} />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
+              <ListItem
+                key={link.path}
+                disablePadding
+                onClick={toggleMobileMenu}
+              >
+                <ListItemButton
+                  component={Link}
+                  href={`/${locale}/${link.path}`}
+                >
+                  <ListItemText primary={link.label} />
+                </ListItemButton>
+              </ListItem>
             ))}
             <ListItem>
               <ToggleButton />

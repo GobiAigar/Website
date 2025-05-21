@@ -1,11 +1,25 @@
 "use client";
 import React from "react";
-import { Box, Container, Grid, Typography, Link } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Link as MuiLink,
+} from "@mui/material";
 import ScrollTopButton from "./ScrollTopButton";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const Footer = () => {
   const t = useTranslations("footer");
+  const navLinks = [
+    { href: "/#", label: t("nav.about") },
+    { href: "/product", label: t("nav.product") },
+    { href: "/sustainability", label: t("nav.sustainability") },
+    { href: "/#", label: t("nav.partners") },
+    { href: "/contact", label: t("nav.contact") },
+  ];
   return (
     <Box
       sx={{ bgcolor: "white", py: { xs: 6, sm: 8, lg: 10 }, color: "black" }}
@@ -42,43 +56,35 @@ const Footer = () => {
 
           <Grid size={{ xs: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
-              <Link href="#" passHref underline="hover" color="inherit">
-                {t("nav.about")}
-              </Link>
-              <Link href="product" passHref underline="hover" color="inherit">
-                {t("nav.product")}
-              </Link>
-              <Link
-                href="sustainability"
-                passHref
-                underline="hover"
-                color="inherit"
-              >
-                {t("nav.sustainability")}
-              </Link>
-              <Link href="#" passHref underline="hover" color="inherit">
-                {t("nav.partners")}
-              </Link>
-              <Link href="contact" passHref underline="hover" color="inherit">
-                {t("nav.contact")}
-              </Link>
+              {navLinks.map(({ href, label }, index) => (
+                <Link
+                  key={index}
+                  href={href}
+                  underline="hover"
+                  color="inherit"
+                  sx={{ mx: 1 }}
+                  component="a"
+                >
+                  {label}
+                </Link>
+              ))}
             </Box>
           </Grid>
 
           <Grid size={{ xs: 6, sm: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
-              <Link href="#" underline="hover" color="inherit">
+              <MuiLink href="#" underline="hover" color="inherit">
                 {t("social.facebook")}
-              </Link>
-              <Link href="#" underline="hover" color="inherit">
+              </MuiLink>
+              <MuiLink href="#" underline="hover" color="inherit">
                 {t("social.twitter")}
-              </Link>
-              <Link href="#" underline="hover" color="inherit">
+              </MuiLink>
+              <MuiLink href="#" underline="hover" color="inherit">
                 {t("social.linkedin")}
-              </Link>
-              <Link href="#" underline="hover" color="inherit">
+              </MuiLink>
+              <MuiLink href="#" underline="hover" color="inherit">
                 {t("social.instagram")}
-              </Link>
+              </MuiLink>
             </Box>
           </Grid>
         </Grid>

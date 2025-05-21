@@ -28,26 +28,44 @@ const Contact = () => {
   const formik = useFormik({
     initialValues: {
       purpose: "",
-      firstName: "",
-      lastName: "",
+      firstname: "",
+      lastname: "",
       email: "",
-      phone: "",
+      phonenumber: "",
       country: "",
       state: "",
       city: "",
-      business: "",
-      overview: "",
+      bussiness: "",
+      plan: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().email(t("invalidEmail")).required(t("required")),
-      firstName: Yup.string().required(t("required")),
-      lastName: Yup.string().required(t("required")),
-      phone: Yup.string().required(t("required")),
+      firstname: Yup.string().required(t("required")),
+      lastname: Yup.string().required(t("required")),
+      phonenumber: Yup.string().required(t("required")),
       purpose: Yup.string().required(t("required")),
+      bussiness: Yup.string().required(t("required")),
     }),
-    onSubmit: (values, { resetForm }) => {
-      console.log("Form data", values);
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const res = await fetch("http://localhost:8000/api/messages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        console.log("res", values);
+
+        if (res.ok) {
+          console.log("amjilttai");
+          resetForm();
+        } else {
+          console.error("Failed to send message");
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     },
   });
 
@@ -83,23 +101,15 @@ const Contact = () => {
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <PhoneIcon className="mr-6" />
-                    <Typography variant="body2">(+976) 7777 6540</Typography>
+                    <Typography variant="body2">{t("phoneinfo")}</Typography>
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <ContactEmailIcon className="mr-6" />
-                    <Typography variant="body2">
-                      support@gobiaigar.com
-                    </Typography>
+                    <Typography variant="body2">{t("supportmail")}</Typography>
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "flex-start" }}>
                     <LocationIcon className="mr-6" />
-                    <Typography variant="body2">
-                      130a, manufacturing west area, 20th khoroo
-                      <br />
-                      Bayangol District,
-                      <br />
-                      Ulaanbaatar, Mongolia
-                    </Typography>
+                    <Typography variant="body2">{t("address")}</Typography>
                   </Box>
                 </Box>
               </Box>
@@ -129,11 +139,11 @@ const Contact = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                       >
-                        <MenuItem value="general">
-                          {t("generalInquiry")}
+                        <MenuItem value="international">
+                          {t("international")}
                         </MenuItem>
-                        <MenuItem value="support">{t("support")}</MenuItem>
-                        <MenuItem value="business">{t("business")}</MenuItem>
+                        <MenuItem value="domestic">{t("domestic")}</MenuItem>
+                        <MenuItem value="other">{t("other")}</MenuItem>
                       </Select>
                       {formik.touched.purpose && formik.errors.purpose && (
                         <Typography variant="caption" color="error">
@@ -144,14 +154,14 @@ const Contact = () => {
                   </Grid>
 
                   {[
-                    { name: "firstName", label: t("firstName") },
-                    { name: "lastName", label: t("lastName") },
+                    { name: "firstname", label: t("firstName") },
+                    { name: "lastname", label: t("lastName") },
                     { name: "email", label: t("email") },
-                    { name: "phone", label: t("phone") },
+                    { name: "phonenumber", label: t("phone") },
                     { name: "country", label: t("country") },
                     { name: "state", label: t("state") },
                     { name: "city", label: t("city") },
-                    { name: "business", label: t("business") },
+                    { name: "bussiness", label: t("business") },
                   ].map((field, index) => (
                     <Grid size={{ xs: 12, sm: 6 }} key={index}>
                       <TextField
@@ -177,9 +187,9 @@ const Contact = () => {
                       fullWidth
                       multiline
                       rows={3}
-                      name="overview"
-                      label={t("overview")}
-                      value={formik.values.overview}
+                      name="plan"
+                      label={t("plan")}
+                      value={formik.values.plan}
                       onChange={formik.handleChange}
                     />
                   </Grid>
