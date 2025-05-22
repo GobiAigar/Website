@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslations } from "next-intl";
 
 const FAQSection = ({ faqItems = [], lang = "en" }) => {
-  const t = useTranslations("FAQ");
+  const t = useTranslations("faq");
   return (
     <Container maxWidth="md" sx={{ color: "black", py: 8, p: 0 }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>

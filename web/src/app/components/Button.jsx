@@ -3,7 +3,7 @@
 import { Button, Menu, MenuItem, ListItemText } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useRouter, usePathname } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 
 const ToggleButton = () => {
@@ -12,6 +12,8 @@ const ToggleButton = () => {
   const currentLocale = useLocale();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const t = useTranslations("button");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -42,10 +44,10 @@ const ToggleButton = () => {
       </Button>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={() => handleSelect("en")}>
-          <ListItemText>English</ListItemText>
+          <ListItemText>{t("English")}</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => handleSelect("mn")}>
-          <ListItemText>Монгол</ListItemText>
+          <ListItemText>{t("Mongolia")}</ListItemText>
         </MenuItem>
       </Menu>
     </>

@@ -6,12 +6,12 @@
     "news": "News",
     "contact": "Contact"
   },
-  "HomePage": {
+  "home": {
     "title": "Welcome to homepage",
     "seeProduct": "See product",
     "ourHistory": "Our History"
   },
-  "Contact": {
+  "contact": {
     "contactInfo": "Contact Information",
     "startChat": "Say something to start a live chat!",
     "contactUs": "CONTACT US",
@@ -77,9 +77,13 @@
     },
     "copyright": "© 2025 GOBI AIGAR. All rights reserved."
   },
-  "FAQ": {
+  "faq": {
     "title": "FAQ",
     "subtitle": "Need Help? See answers to some of the most commonly asked questions. Or",
     "contact": "Contact Us"
+  },
+  "button": {
+    "English": "English",
+    "Mongolia": "Mongolia"
   }
 }

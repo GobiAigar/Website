@@ -23,7 +23,7 @@ import {
 import { useTranslations } from "next-intl";
 
 const Contact = () => {
-  const t = useTranslations("Contact");
+  const t = useTranslations("contact");
 
   const formik = useFormik({
     initialValues: {

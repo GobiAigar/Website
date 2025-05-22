@@ -1,4 +1,3 @@
-// Header.jsx
 "use client";
 
 import Link from "next/link";
@@ -26,6 +25,7 @@ import {
 
 import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
+import { GobiAigarIcon } from "./Icon";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -82,15 +82,16 @@ const Header = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-          <Box sx={{ position: "relative", width: 200, height: 40 }}>
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              fill
-              sizes="(max-width: 600px) 120px, (max-width: 960px) 160px, 200px"
-              style={{ objectFit: "contain" }}
-              priority
-            />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              height: { xs: 30, sm: 40 },
+              width: { xs: 120, sm: 160, md: 200 },
+              backgroundColor: "white",
+            }}
+          >
+            <GobiAigarIcon />
           </Box>
 
           {isMobile ? (

@@ -9,17 +9,21 @@ import {
 } from "@mui/material";
 import ScrollTopButton from "./ScrollTopButton";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import Link from "next/link";
+import { GobiAigarIcon } from "./Icon";
 
 const Footer = () => {
   const t = useTranslations("footer");
+  const locale = useLocale();
   const navLinks = [
-    { href: "/#", label: t("nav.about") },
-    { href: "/product", label: t("nav.product") },
-    { href: "/sustainability", label: t("nav.sustainability") },
-    { href: "/#", label: t("nav.partners") },
-    { href: "/contact", label: t("nav.contact") },
+    { href: `/${locale}/`, label: t("nav.about") },
+    { href: `/${locale}/product`, label: t("nav.product") },
+    { href: `/${locale}/sustainability`, label: t("nav.sustainability") },
+    { href: `/${locale}/`, label: t("nav.partners") },
+    { href: `/${locale}/contact`, label: t("nav.contact") },
   ];
+
   return (
     <Box
       sx={{ bgcolor: "white", py: { xs: 6, sm: 8, lg: 10 }, color: "black" }}
@@ -33,16 +37,8 @@ const Footer = () => {
           textAlign="start"
         >
           <Grid size={{ xs: 6, md: 3 }}>
-            <Box>
-              <Box
-                component="img"
-                src="/logo.png"
-                alt="logo"
-                sx={{
-                  width: { xs: 120, sm: 160 },
-                  height: "auto",
-                }}
-              />
+            <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+              <GobiAigarIcon />
             </Box>
           </Grid>
 
@@ -57,15 +53,10 @@ const Footer = () => {
           <Grid size={{ xs: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
               {navLinks.map(({ href, label }, index) => (
-                <Link
-                  key={index}
-                  href={href}
-                  underline="hover"
-                  color="inherit"
-                  sx={{ mx: 1 }}
-                  component="a"
-                >
-                  {label}
+                <Link key={index} href={href} passHref legacyBehavior>
+                  <MuiLink underline="hover" color="inherit" sx={{ mx: 1 }}>
+                    {label}
+                  </MuiLink>
                 </Link>
               ))}
             </Box>

@@ -27,7 +27,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   const lang = useLocale();
-  const t = useTranslations("HomePage");
+  const t = useTranslations("home");
 
   useEffect(() => {
     // fetch("https://website-z9b7.onrender.com/api/website")
