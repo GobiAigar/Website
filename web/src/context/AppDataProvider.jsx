@@ -1,0 +1,68 @@
+"use client";
+
+import React, { createContext, useContext, useEffect, useState } from "react";
+
+const AppDataContext = createContext(null);
+
+export const AppDataProvider = ({ children }) => {
+  const [data, setData] = useState({
+    website: null,
+    news: null,
+    product: null,
+    sustainability: null,
+    loadingWebsite: true,
+    loadingAll: true,
+    error: null,
+  });
+
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const websiteRes = await fetch(
+          "http://localhost:8000/api/website"
+        ).then((r) => r.json());
+
+        setData((prev) => ({
+          ...prev,
+          website: websiteRes,
+          loadingWebsite: false,
+        }));
+
+        const [newsRes, productRes, sustainabilityRes] = await Promise.all([
+          fetch("https://website-z9b7.onrender.com/api/news").then((r) =>
+            r.json()
+          ),
+          fetch("http://localhost:8000/api/product").then((r) => r.json()),
+          fetch("http://localhost:8000/api/sustainability").then((r) =>
+            r.json()
+          ),
+        ]);
+
+        setData((prev) => ({
+          ...prev,
+          news: newsRes,
+          product: productRes,
+          sustainability: sustainabilityRes,
+          loadingAll: false,
+          error: null,
+        }));
+      } catch (err) {
+        console.error("AppData fetch failed:", err);
+        setData((prev) => ({
+          ...prev,
+          loadingWebsite: false,
+          loadingAll: false,
+          error: err,
+        }));
+      }
+    };
+
+    fetchAll();
+  }, []);
+
+  return (
+    <AppDataContext.Provider value={data}>{children}</AppDataContext.Provider>
+  );
+};
+
+export const useAppData = () => useContext(AppDataContext);

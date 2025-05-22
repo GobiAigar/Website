@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
   Container,
@@ -9,7 +9,6 @@ import {
   Divider,
   Button,
   CircularProgress,
-  TextField,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Header from "../../components/Header";
@@ -21,29 +20,14 @@ import Video from "../../components/Video";
 import FAQSection from "../../components/FAQSection";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../../i18n/navigation";
+import { useAppData } from "../../../context/AppDataProvider";
 
 const Home = () => {
-  const [rawData, setRawData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+  const { website, loadingWebsite } = useAppData();
   const lang = useLocale();
   const t = useTranslations("home");
 
-  useEffect(() => {
-    // fetch("https://website-z9b7.onrender.com/api/website")
-    fetch("http://localhost:8000/api/website")
-      .then((res) => res.json())
-      .then((data) => {
-        setRawData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch home data", err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading || !rawData) {
+  if (loadingWebsite || !website) {
     return (
       <Box
         sx={{
@@ -58,6 +42,7 @@ const Home = () => {
     );
   }
 
+  const rawData = website;
   const websiteData = rawData.website || [];
   const statisticsList = rawData.statistics || [];
   const faqs = rawData.faq || [];
@@ -91,6 +76,7 @@ const Home = () => {
         : null;
     })
     .filter(Boolean);
+
   return (
     <Box sx={{ bgcolor: "background.default", color: "text.primary" }}>
       <Box
@@ -224,6 +210,7 @@ const Home = () => {
           ))}
         </Grid>
       </Container>
+
       <Container sx={{ py: 8 }}>
         <Typography
           variant="h4"
