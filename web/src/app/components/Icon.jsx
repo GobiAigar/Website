@@ -1,4 +1,3 @@
-// components/icons/Icons.jsx
 import React from "react";
 
 export const HomeHashtagIcon = ({ color = "#4a0d17", size = 20 }) => (
