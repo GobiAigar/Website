@@ -62,9 +62,6 @@ const Home = () => {
   const statisticsList = rawData.statistics || [];
   const faqs = rawData.faq || [];
 
-  const getItemsByTitle = (title) =>
-    websiteData.filter((item) => item.title === title);
-
   const getSingleByTitle = (title) =>
     websiteData.find((item) => item.title === title);
 
@@ -101,7 +98,7 @@ const Home = () => {
           position: "relative",
           width: "100%",
           minHeight: "100vh",
-          backgroundImage: "url('/Background.png')",
+          backgroundImage: `url(${homeSectionA?.image_url1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

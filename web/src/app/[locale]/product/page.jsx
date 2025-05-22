@@ -5,13 +5,20 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import TradeSection from "../../components/TradeSection";
 import { GlobeIcon, HomeHashtagIcon } from "../../components/Icon";
-import { Box, Container, Typography, Grid, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import { useTranslations, useLocale } from "next-intl";
 
 const Product = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedId, setSelectedId] = useState(2); // Default: Domestic
+  const [selectedId, setSelectedId] = useState(2);
 
   const t = useTranslations("product");
   const lang = useLocale();
@@ -33,7 +40,18 @@ const Product = () => {
   }, []);
 
   if (loading || !data.length) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   const banner = data.find((item) => item.id === 1);

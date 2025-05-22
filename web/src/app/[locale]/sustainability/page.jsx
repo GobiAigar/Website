@@ -62,10 +62,7 @@ const Sustainability = () => {
           color: "text.primary",
         }}
       >
-        <CircularProgress color="secondary" />
-        <Typography variant="h6" sx={{ mt: 2 }}>
-          Түр хүлээнэ үү...
-        </Typography>
+        <CircularProgress />
       </Box>
     );
   }
