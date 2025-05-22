@@ -169,3 +169,28 @@ export const LocationIcon = ({ size = 24, className = "" }) => (
     />
   </svg>
 );
+
+export const ArrowTopIcon = ({ size = 24, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="26"
+    viewBox="0 0 25 26"
+    fill="none"
+  >
+    <path
+      d="M12.7334 5.5874L12.7334 22.0822"
+      stroke="white"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M18.7334 11.7731L13.143 4.76056C13.0918 4.69647 13.0289 4.64514 12.9584 4.60998C12.8878 4.57482 12.8113 4.55664 12.7339 4.55664C12.6566 4.55664 12.5801 4.57482 12.5095 4.60998C12.439 4.64514 12.376 4.69647 12.3249 4.76056L6.7334 11.7731"
+      stroke="white"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);

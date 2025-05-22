@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Fab, Zoom } from "@mui/material";
+import { ArrowTopIcon } from "./Icon";
 
 const ScrollTopButton = () => {
   const [showScroll, setShowScroll] = useState(false);
@@ -19,15 +20,22 @@ const ScrollTopButton = () => {
   };
 
   return (
-    showScroll && (
-      <button
+    <Zoom in={showScroll}>
+      <Fab
+        color="primary"
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-50 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-4 shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1"
-        aria-label="Scroll to top"
+        aria-label="scroll back to top"
+        sx={{
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          zIndex: 1300,
+          boxShadow: 6,
+        }}
       >
-        <img src="/arrow-top.svg" alt="arrow" />
-      </button>
-    )
+        <ArrowTopIcon />
+      </Fab>
+    </Zoom>
   );
 };
 
