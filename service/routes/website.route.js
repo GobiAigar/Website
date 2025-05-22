@@ -5,6 +5,6 @@ const websiteRouter = express.Router();
 
 websiteRouter.get("/website", websiteController.getAllWebsites);
 websiteRouter.post("/website", websiteController.createWebsite);
-websiteRouter.put("/website", websiteController.updateWebsite);
+websiteRouter.put("/website/:id", websiteController.updateWebsite);
 
 export default websiteRouter;

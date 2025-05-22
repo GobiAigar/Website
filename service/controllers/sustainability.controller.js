@@ -2,7 +2,7 @@ import { sql } from "../server.js";
 export const sustainabilityController = {
   getAll: async (_, res) => {
     try {
-      const response = await sql`SELECT * FROM sustainability`;
+      const response = await sql`SELECT * FROM sustainability ORDER BY id ASC`;
       return res.status(200).json({"success": true, data: response});
     } catch (error) {
       console.error("Error fetching websites:", error);

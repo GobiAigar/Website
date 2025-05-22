@@ -1,4 +1,5 @@
 import { sql } from "../server.js";
+
 export const websiteController = {
   getAllWebsites: async (_, res) => {
     try {
@@ -49,6 +50,8 @@ export const websiteController = {
   },
 
   updateWebsite: async (req, res) => {
+    
+    const id = req.params.id
     let {
       title,
       entitle,
@@ -61,8 +64,8 @@ export const websiteController = {
       image_url4,
     } = req.body;
 
-    if (!title) {
-      return res.status(400).json({ error: "Title is required" });
+    if (!id) {
+      return res.status(400).json({ error: "id is required" });
     }
 
     entitle = entitle ?? null;
@@ -76,7 +79,7 @@ export const websiteController = {
 
     try {
       const response =
-        await sql`UPDATE website SET entitle=${entitle}, mntitle=${mntitle}, ensubtitle=${ensubtitle}, mnsubtitle=${mnsubtitle},image_url1=${image_url1}, image_url2 = ${image_url2}, image_url3 = ${image_url3}, image_url4 = ${image_url4} WHERE title = ${title} RETURNING *`;
+        await sql`UPDATE website SET entitle=${entitle}, mntitle=${mntitle}, ensubtitle=${ensubtitle}, mnsubtitle=${mnsubtitle},image_url1=${image_url1}, image_url2 = ${image_url2}, image_url3 = ${image_url3}, image_url4 = ${image_url4} WHERE id = ${id} RETURNING *`;
 
       res.status(201).json(response);
     } catch (error) {
