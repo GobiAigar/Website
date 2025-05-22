@@ -1,20 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import {
   Box,
   Container,
   Typography,
   Grid,
+  CircularProgress,
   Card,
   CardContent,
   CardMedia,
   Button,
 } from "@mui/material";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { useAppData } from "../../../context/AppDataProvider";
 
 const truncateWords = (text, limit) => {
   const words = text.split(" ");
@@ -22,26 +23,25 @@ const truncateWords = (text, limit) => {
 };
 
 const News = () => {
-  const [newsList, setNewsList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { news, loading, error } = useAppData();
   const [selectedNews, setSelectedNews] = useState(null);
-  const router = useRouter();
   const lang = useLocale();
   const t = useTranslations("news");
 
-  useEffect(() => {
-    fetch("https://website-z9b7.onrender.com/api/news")
-      .then((res) => res.json())
-      .then((data) => {
-        setNewsList(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to load news.");
-        setLoading(false);
-      });
-  }, []);
+  if (loading || !news) {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
@@ -95,9 +95,7 @@ const News = () => {
       </Box>
 
       <Container>
-        {loading ? (
-          <Typography sx={{ py: 10 }}>{t("loading")}</Typography>
-        ) : error ? (
+        {error ? (
           <Typography color="error">{error}</Typography>
         ) : selectedNews ? (
           <Box sx={{ py: 8 }}>
@@ -113,7 +111,11 @@ const News = () => {
             >
               {t("journalist")}
               <span
-                style={{ fontWeight: "bold", fontSize: "20px", marginLeft: 4 }}
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  marginLeft: 4,
+                }}
               >
                 {lang === "mn"
                   ? selectedNews.mnjournalist
@@ -134,7 +136,7 @@ const News = () => {
           </Box>
         ) : (
           <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
-            {newsList.map((item) => (
+            {news.map((item) => (
               <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card
                   sx={{

@@ -1,54 +1,30 @@
 "use client";
 
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  CircularProgress,
+} from "@mui/material";
 import { useLocale } from "next-intl";
+import { useAppData } from "../../../context/AppDataProvider";
 
 const Sustainability = () => {
+  const { sustainability, loading } = useAppData();
   const lang = useLocale();
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [mainInfo, setMainInfo] = useState(null);
-  const [roadmapItems, setRoadmapItems] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("http://localhost:8000/api/sustainability");
-        const json = await res.json();
-        setData(json.data || []);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch sustainability data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (data.length > 0) {
-      const main = data.find((item) => item.id === 1);
-      const roadmap = data
-        .filter((item) => item.id !== 1)
-        .map((item) => ({
-          label: lang === "mn" ? item.mndescription : item.endescription,
-          image: item.image_url,
-        }));
-      setMainInfo(main);
-      setRoadmapItems(roadmap);
-    }
-  }, [data, lang]);
+  const data = sustainability?.data || [];
+  const mainInfo = data.find((item) => item.id === 1);
+  const roadmapItems = data
+    .filter((item) => item.id !== 1)
+    .map((item) => ({
+      label: lang === "mn" ? item.mndescription : item.endescription,
+      image: item.image_url,
+    }));
 
   if (loading || !mainInfo) {
     return (
@@ -66,6 +42,7 @@ const Sustainability = () => {
       </Box>
     );
   }
+
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
       <Header />
@@ -86,11 +63,7 @@ const Sustainability = () => {
           <Typography
             variant="h3"
             sx={{
-              fontSize: {
-                xs: "24px",
-                sm: "28px",
-                md: "32px",
-              },
+              fontSize: { xs: "24px", sm: "28px", md: "32px" },
               fontWeight: "bold",
             }}
           >
@@ -100,11 +73,7 @@ const Sustainability = () => {
             variant="h6"
             sx={{
               mt: 2,
-              fontSize: {
-                xs: "12px",
-                sm: "16px",
-                md: "20px",
-              },
+              fontSize: { xs: "12px", sm: "16px", md: "20px" },
             }}
           >
             {lang === "mn" ? mainInfo.mndescription : mainInfo.endescription}

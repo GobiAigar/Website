@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import TradeSection from "../../components/TradeSection";
@@ -14,32 +14,16 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useTranslations, useLocale } from "next-intl";
+import { useAppData } from "../../../context/AppDataProvider";
 
 const Product = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { product, loading } = useAppData();
   const [selectedId, setSelectedId] = useState(2);
 
   const t = useTranslations("product");
   const lang = useLocale();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("http://localhost:8000/api/product");
-        const json = await res.json();
-        setData(json.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch product data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading || !data.length) {
+  if (loading || !product || !product.data?.length) {
     return (
       <Box
         sx={{
@@ -54,6 +38,7 @@ const Product = () => {
     );
   }
 
+  const data = product.data;
   const banner = data.find((item) => item.id === 1);
   const selectedTrade = data.find((item) => item.id === selectedId);
 
