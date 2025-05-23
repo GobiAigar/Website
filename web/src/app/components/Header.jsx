@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ToggleButton from "./Button";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -36,6 +35,12 @@ const Header = () => {
   const locale = useLocale();
 
   const isHome = pathname === `/${locale}/home`;
+  const isActive = (path) => {
+    if (path === "home") {
+      return pathname === `/${locale}` || pathname === `/${locale}/home`;
+    }
+    return pathname === `/${locale}/${path}`;
+  };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -69,13 +74,7 @@ const Header = () => {
       position="fixed"
       elevation={isScrolled ? 4 : 0}
       sx={{
-        backgroundColor:
-          isHome && !isScrolled
-            ? "transparent"
-            : isScrolled
-            ? "rgba(0,0,0,0.4)"
-            : "white",
-        color: !isHome && !isScrolled ? "black" : "white",
+        backgroundColor: "rgba(0,0,0,0.3)",
         backdropFilter: isScrolled ? "blur(6px)" : "none",
         transition: "all 0.3s ease",
       }}
@@ -107,19 +106,41 @@ const Header = () => {
               }}
             >
               {navLinks.map((link) => (
-                <Link
+                <Box
                   key={link.path}
-                  href={`/${locale}/${link.path}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  sx={{
+                    position: "relative",
+                    cursor: "pointer",
+                    "&:after": {
+                      content: '""',
+                      position: "absolute",
+                      left: 0,
+                      bottom: -4,
+                      width: isActive(link.path) ? "100%" : 0,
+                      height: "2px",
+                      backgroundColor: "white",
+                      transition: "width 0.3s ease",
+                    },
+                    "&:hover:after": {
+                      width: "100%",
+                    },
+                  }}
                 >
-                  <Typography
-                    component="span"
-                    variant="body1"
-                    sx={{ fontSize: { sm: 12, md: 18, lg: 20 } }}
+                  <Link
+                    href={`/${locale}/${link.path}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    {link.label}
-                  </Typography>
-                </Link>
+                    <Typography
+                      component="span"
+                      variant="body1"
+                      sx={{
+                        fontSize: { sm: 12, md: 18, lg: 20 },
+                      }}
+                    >
+                      {link.label}
+                    </Typography>
+                  </Link>
+                </Box>
               ))}
               <ToggleButton />
             </Box>

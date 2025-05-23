@@ -87,6 +87,10 @@ const Home = () => {
           backgroundImage: `url(${homeSectionA?.image_url1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          display: "flex",
+          alignItems: "center", 
+          justifyContent: "center",
+          flexDirection: "column",
         }}
       >
         <Box
@@ -96,11 +100,12 @@ const Home = () => {
         <Container
           sx={{
             position: "relative",
-            py: 20,
             textAlign: "center",
+            height: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <Typography

@@ -52,7 +52,7 @@ const Product = () => {
   };
 
   return (
-    <Box sx={{ overflow: "hidden", backgroundColor: "white" }}>
+    <Box sx={{ bgcolor: "background.default", color: "text.primary" }}>
       <Header />
 
       <Box

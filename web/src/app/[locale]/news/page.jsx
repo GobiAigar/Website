@@ -13,6 +13,7 @@ import {
   CardContent,
   CardMedia,
   Button,
+  CardActionArea,
 } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
@@ -43,6 +44,8 @@ const News = () => {
     );
   }
 
+  const displayNews = selectedNews || news[0];
+
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
       <Header />
@@ -52,9 +55,7 @@ const News = () => {
           position: "relative",
           width: "100%",
           minHeight: "100vh",
-          backgroundImage: `url('${
-            selectedNews ? selectedNews.image_url : "/news.jpg"
-          }')`,
+          backgroundImage: `url('${displayNews.image_url}')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center bottom",
@@ -77,109 +78,97 @@ const News = () => {
           sx={{ pt: 20, position: "relative", zIndex: 2 }}
         >
           <Typography variant="h3" fontWeight="bold" color="white">
-            {selectedNews
-              ? lang === "mn"
-                ? selectedNews?.mntitle
-                : selectedNews?.entitle
-              : t("title")}
-          </Typography>
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            sx={{ mt: 2 }}
-            color="white"
-          >
-            {selectedNews ? "" : t("subtitle")}
+            {lang === "mn" ? displayNews.mntitle : displayNews.entitle}
           </Typography>
         </Container>
       </Box>
 
       <Container>
-        {error ? (
-          <Typography color="error">{error}</Typography>
-        ) : selectedNews ? (
-          <Box sx={{ py: 8 }}>
-            <Typography variant="caption" color="text.secondary">
-              {new Date(selectedNews.date).toLocaleDateString()}
-            </Typography>
+        <Box sx={{ py: 8 }}>
+          <Typography variant="caption" color="text.secondary">
+            {new Date(displayNews.date).toLocaleDateString()}
+          </Typography>
 
-            <Typography
-              variant="subtitle2"
-              align="right"
-              color="text.secondary"
-              mb={2}
+          <Typography
+            variant="subtitle2"
+            align="right"
+            color="text.secondary"
+            mb={2}
+          >
+            {t("journalist")}
+            <span
+              style={{
+                fontWeight: "bold",
+                fontSize: "20px",
+                marginLeft: 4,
+              }}
             >
-              {t("journalist")}
-              <span
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "20px",
-                  marginLeft: 4,
-                }}
-              >
-                {lang === "mn"
-                  ? selectedNews.mnjournalist
-                  : selectedNews.enjournalist}
-              </span>
-            </Typography>
-
-            <Typography variant="body1" color="black">
               {lang === "mn"
-                ? selectedNews.mndescription
-                : selectedNews.endescription}
-            </Typography>
+                ? displayNews.mnjournalist
+                : displayNews.enjournalist}
+            </span>
+          </Typography>
+
+          <Typography variant="body1" color="black">
+            {lang === "mn"
+              ? displayNews.mndescription
+              : displayNews.endescription}
+          </Typography>
+
+          {selectedNews && (
             <Box textAlign="right" mt={4}>
               <Button variant="outlined" onClick={() => setSelectedNews(null)}>
                 {t("back")}
               </Button>
             </Box>
-          </Box>
-        ) : (
+          )}
+        </Box>
+      </Container>
+
+      {!selectedNews && (
+        <Container>
           <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
-            {news.map((item) => (
+            {news.slice(1).map((item) => (
               <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card
                   sx={{
+                    position: "relative",
                     borderRadius: 3,
                     boxShadow: 4,
                     overflow: "hidden",
-                    height: 200,
-                    display: "flex",
-                    flexDirection: "column",
                     minWidth: 280,
+                    transition: "all 0.3s ease",
+                    "&:hover .hoverOverlay": {
+                      transform: "translateY(0%)",
+                      opacity: 1,
+                    },
                   }}
+                  onClick={() => setSelectedNews(item)}
                 >
-                  <CardMedia
-                    component="img"
-                    image={item.image_url}
-                    alt={item.entitle}
-                    sx={{ height: 100 }}
-                  />
-                  <CardContent
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      gap: 1,
-                    }}
-                  >
-                    <Box>
-                      <Typography variant="subtitle1" fontWeight="bold">
-                        {truncateWords(
-                          lang === "mn" ? item?.mntitle : item?.entitle,
-                          5
-                        )}
-                      </Typography>
-                    </Box>
-                    <Box
+                  <CardActionArea sx={{ height: "100%" }}>
+                    <CardMedia
+                      component="img"
+                      image={item.image_url}
+                      alt={item.entitle}
+                      sx={{ height: 140 }}
+                    />
+                    <CardContent
                       sx={{
-                        mt: "auto",
                         display: "flex",
-                        flexDirection: "row",
+                        flexDirection: "column",
                         justifyContent: "space-between",
                         gap: 1,
+                        height: 100,
                       }}
                     >
+                      <Box>
+                        <Typography variant="subtitle1" fontWeight="bold">
+                          {truncateWords(
+                            lang === "mn" ? item?.mntitle : item?.entitle,
+                            5
+                          )}
+                        </Typography>
+                      </Box>
                       <Typography
                         variant="body2"
                         color="text.secondary"
@@ -195,30 +184,54 @@ const News = () => {
                           lang === "mn"
                             ? item.mndescription
                             : item.endescription,
-                          10
+                          6
                         )}
                       </Typography>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        sx={{
-                          borderRadius: "10px",
-                          textTransform: "none",
-                          minWidth: 100,
-                          maxHeight: 40,
-                        }}
-                        onClick={() => setSelectedNews(item)}
-                      >
-                        {t("seeMore")}
-                      </Button>
-                    </Box>
-                  </CardContent>
+                    </CardContent>
+                  </CardActionArea>
+
+                  <Box
+                    className="hoverOverlay"
+                    sx={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      bgcolor: "rgba(0, 0, 0, 0.5)",
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0,
+                      transform: "translateY(100%)",
+                      transition: "all 0.4s ease",
+                      zIndex: 1,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      fontWeight="bold"
+                      sx={{
+                        display: "flex",
+                        justifyItems: "center",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        p: 5,
+                        textAlign: "center",
+                      }}
+                    >
+                      Мэдээн дээр дарж дэлгэрэнгүй уншина уу
+                    </Typography>
+                  </Box>
                 </Card>
               </Grid>
             ))}
           </Grid>
-        )}
-      </Container>
+        </Container>
+      )}
+
       <Footer />
     </Box>
   );
