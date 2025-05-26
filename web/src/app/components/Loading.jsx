@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import { Box } from "@mui/material";
-import { keyframes } from "@emotion/react"; 
+import { keyframes } from "@emotion/react";
 
 const l10 = keyframes`
   0%    {box-shadow: 0 -30px #F4DD51, calc(30px*0.707) calc(-30px*0.707) #E3AAD6,30px 0 #F4DD51, 0 0 #E3AAD6,
