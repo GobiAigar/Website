@@ -3,12 +3,12 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import CustomLoader from "../../components/Loading";
 import {
   Box,
   Container,
   Typography,
   Grid,
-  CircularProgress,
   Card,
   CardContent,
   CardMedia,
@@ -39,7 +39,7 @@ const News = () => {
           justifyContent: "center",
         }}
       >
-        <CircularProgress />
+        <CustomLoader />
       </Box>
     );
   }

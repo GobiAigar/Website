@@ -3,13 +3,8 @@
 import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  CircularProgress,
-} from "@mui/material";
+import CustomLoader from "../../components/Loading";
+import { Box, Container, Typography, Grid } from "@mui/material";
 import { useLocale } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 
@@ -30,15 +25,13 @@ const Sustainability = () => {
     return (
       <Box
         sx={{
-          height: "80vh",
+          minHeight: "100vh",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
-          color: "text.primary",
+          justifyContent: "center",
         }}
       >
-        <CircularProgress />
+        <CustomLoader />
       </Box>
     );
   }

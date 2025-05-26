@@ -21,11 +21,13 @@ import FAQSection from "../../components/FAQSection";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../../i18n/navigation";
 import { useAppData } from "../../../context/AppDataProvider";
+import CustomLoader from "../../components/Loading";
 
 const Home = () => {
   const { website, loadingWebsite } = useAppData();
   const lang = useLocale();
   const t = useTranslations("home");
+
 
   if (loadingWebsite || !website) {
     return (
@@ -37,7 +39,7 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        <CircularProgress />
+        <CustomLoader />
       </Box>
     );
   }
@@ -88,7 +90,7 @@ const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
-          alignItems: "center", 
+          alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
         }}

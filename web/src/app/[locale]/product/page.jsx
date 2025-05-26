@@ -3,16 +3,10 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import CustomLoader from "../../components/Loading";
 import TradeSection from "../../components/TradeSection";
 import { GlobeIcon, HomeHashtagIcon } from "../../components/Icon";
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Button,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { useTranslations, useLocale } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 
@@ -33,7 +27,7 @@ const Product = () => {
           justifyContent: "center",
         }}
       >
-        <CircularProgress />
+        <CustomLoader />
       </Box>
     );
   }
