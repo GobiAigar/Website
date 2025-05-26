@@ -18,9 +18,9 @@ export const AppDataProvider = ({ children }) => {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const websiteRes = await fetch(
-          "http://localhost:8000/api/website"
-        ).then((r) => r.json());
+        const websiteRes = await fetch("http://localhost:8000/api/website", {
+          cache: "force-cache",
+        }).then((r) => r.json());
 
         setData((prev) => ({
           ...prev,
@@ -28,23 +28,41 @@ export const AppDataProvider = ({ children }) => {
           loadingWebsite: false,
         }));
 
-        const [newsRes, productRes, sustainabilityRes] = await Promise.all([
-          fetch("https://website-z9b7.onrender.com/api/news").then((r) =>
-            r.json()
-          ),
-          fetch("http://localhost:8000/api/product").then((r) => r.json()),
-          fetch("http://localhost:8000/api/sustainability").then((r) =>
-            r.json()
-          ),
+        const productPromise = fetch("http://localhost:8000/api/product", {
+          cache: "force-cache",
+        }).then((r) => r.json());
+
+        const sustainabilityPromise = fetch(
+          "http://localhost:8000/api/sustainability",
+          { cache: "force-cache" }
+        ).then((r) => r.json());
+
+        const newsPromise = fetch(
+          "https://website-z9b7.onrender.com/api/news",
+          {
+            cache: "force-cache",
+          }
+        ).then((r) => r.json());
+
+        const [productRes, sustainabilityRes] = await Promise.all([
+          productPromise,
+          sustainabilityPromise,
         ]);
 
         setData((prev) => ({
           ...prev,
-          news: newsRes,
           product: productRes,
           sustainability: sustainabilityRes,
           loadingAll: false,
           error: null,
+        }));
+
+        // 5. News fetch дуусахыг хүлээж update хийнэ
+        const newsRes = await newsPromise;
+
+        setData((prev) => ({
+          ...prev,
+          news: newsRes,
         }));
       } catch (err) {
         console.error("AppData fetch failed:", err);
