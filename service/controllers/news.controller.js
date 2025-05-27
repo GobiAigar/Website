@@ -24,9 +24,42 @@ export const newsController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  updateNews: async (req, res) => {
+    const id = req.params.id;
+    const {
+      entitle,
+      mntitle,
+      endescription,
+      mndescription,
+      enjournalist,
+      mnjournalist,
+      image_url,
+    } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID is required" });
+    }
+    try {
+      const response = await sql`
+       UPDATE news 
+       SET 
+       entitle = ${entitle}, 
+       mntitle = ${mntitle},
+      endescription = ${endescription},
+      mndescription = ${mndescription},
+      enjournalist = ${enjournalist},
+      mnjournalist = ${mnjournalist},
+      image_url = ${image_url}
+       WHERE id = ${id} RETURNING *`;
+
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.log("Error updating news:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 
   createNews: async (req, res) => {
-    
     let {
       entitle,
       mntitle,

@@ -8,7 +8,6 @@
 !.yarn/versions
 yarn.lock
 
-
 # testing
 /coverage
 
@@ -37,3 +36,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/google-service-account.json
