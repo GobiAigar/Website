@@ -87,7 +87,7 @@ const Header = () => {
               alignItems: "center",
               height: { xs: 30, sm: 40 },
               width: { xs: 120, sm: 160, md: 200 },
-              backgroundColor: "white",
+              transition: "background-color 0.3s ease",
             }}
           >
             <GobiAigarIcon />
@@ -124,6 +124,7 @@ const Header = () => {
                     "&:hover:after": {
                       width: "100%",
                     },
+                    display: "flex",
                   }}
                 >
                   <Link
@@ -134,7 +135,7 @@ const Header = () => {
                       component="span"
                       variant="body1"
                       sx={{
-                        fontSize: { sm: 12, md: 18, lg: 20 },
+                        fontSize: { sm: 10, md: 12, lg: 16 },
                       }}
                     >
                       {link.label}
