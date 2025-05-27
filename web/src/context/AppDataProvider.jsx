@@ -7,7 +7,6 @@ const AppDataContext = createContext(null);
 export const AppDataProvider = ({ children }) => {
   const [data, setData] = useState({
     website: null,
-    news: null,
     product: null,
     sustainability: null,
     loadingWebsite: true,
@@ -37,13 +36,6 @@ export const AppDataProvider = ({ children }) => {
           { cache: "force-cache" }
         ).then((r) => r.json());
 
-        const newsPromise = fetch(
-          "https://website-z9b7.onrender.com/api/news",
-          {
-            cache: "force-cache",
-          }
-        ).then((r) => r.json());
-
         const [productRes, sustainabilityRes] = await Promise.all([
           productPromise,
           sustainabilityPromise,
@@ -55,14 +47,6 @@ export const AppDataProvider = ({ children }) => {
           sustainability: sustainabilityRes,
           loadingAll: false,
           error: null,
-        }));
-
-        // 5. News fetch дуусахыг хүлээж update хийнэ
-        const newsRes = await newsPromise;
-
-        setData((prev) => ({
-          ...prev,
-          news: newsRes,
         }));
       } catch (err) {
         console.error("AppData fetch failed:", err);

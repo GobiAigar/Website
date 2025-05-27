@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslations } from "next-intl";
+import { Link } from "../../i18n/navigation";
 
 const FAQSection = ({ faqItems = [], lang = "en" }) => {
   const t = useTranslations("faq");
@@ -21,12 +22,12 @@ const FAQSection = ({ faqItems = [], lang = "en" }) => {
       </Typography>
       <Typography variant="body1" paragraph>
         {t("subtitle")}
-        <a
+        <Link
           href="/contact"
           style={{ textDecoration: "underline", color: "#1976d2" }}
         >
           {t("contact")}
-        </a>
+        </Link>
         .
       </Typography>
 
