@@ -9,51 +9,42 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
 export const getAnalyticsViews = async (req, res) => {
   try {
     const { timeframe } = req.query;
-    const today = new Date();
-    const isoToday = today.toISOString().split("T")[0];
-    let startDate;
+    const now = new Date();
+    const nowMongolia = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+    const isoToday = nowMongolia.toISOString().split("T")[0];
 
-    switch (timeframe) {
-      case "day":
-        startDate = isoToday;
-        break;
-      case "week":
-        startDate = new Date(today);
-        startDate.setDate(today.getDate() - 7);
-        startDate = startDate.toISOString().split("T")[0];
-        break;
-      case "month":
-        startDate = new Date(today);
-        startDate.setMonth(today.getMonth() - 1);
-        startDate = startDate.toISOString().split("T")[0];
-        break;
-      case "last_3_months":
-        startDate = new Date(today);
-        startDate.setMonth(today.getMonth() - 3);
-        startDate = startDate.toISOString().split("T")[0];
-        break;
-      case "last_6_months":
-        startDate = new Date(today);
-        startDate.setMonth(today.getMonth() - 6);
-        startDate = startDate.toISOString().split("T")[0];
-        break;
-      case "year":
-        startDate = new Date(today);
-        startDate.setFullYear(today.getFullYear() - 1);
-        startDate = startDate.toISOString().split("T")[0];
-        break;
-      default:
-        startDate = new Date(today);
-        startDate.setDate(today.getDate() - 7);
-        startDate = startDate.toISOString().split("T")[0];
-        break;
+    let startDate;
+    if (timeframe === "day") {
+      startDate = isoToday;
+    } else {
+      const d = new Date(nowMongolia);
+      switch (timeframe) {
+        case "week":
+          d.setDate(d.getDate() - 7);
+          break;
+        case "month":
+          d.setMonth(d.getMonth() - 1);
+          break;
+        case "last_3_months":
+          d.setMonth(d.getMonth() - 3);
+          break;
+        case "last_6_months":
+          d.setMonth(d.getMonth() - 6);
+          break;
+        case "year":
+          d.setFullYear(d.getFullYear() - 1);
+          break;
+        default:
+          d.setDate(d.getDate() - 7);
+      }
+      startDate = d.toISOString().split("T")[0];
     }
 
     const [response] = await analyticsDataClient.runReport({
       property: `properties/${process.env.GA4_PROPERTY_ID}`,
       dateRanges: [{ startDate, endDate: isoToday }],
       dimensions: [
-        { name: "date" },
+        { name: timeframe === "day" ? "dateHour" : "date" },
         { name: "pagePath" },
         { name: "country" },
         { name: "city" },

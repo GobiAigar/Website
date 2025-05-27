@@ -203,6 +203,7 @@ export const GobiAigarIcon = ({ size = 24, className = "" }) => (
     height="102.000000pt"
     viewBox="0 0 464.000000 102.000000"
     preserveAspectRatio="xMidYMid meet"
+    className={className}
   >
     <g
       transform="translate(0.000000,102.000000) scale(0.100000,-0.100000)"
