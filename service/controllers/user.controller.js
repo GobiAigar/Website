@@ -97,9 +97,12 @@ export const userController = {
         });
       }
       // Send welcome email
+      sendEmail(email);
+      // Insert new user into the database
+      const date = new Date();
+      const formattedDate = date.toISOString().split("T")[0]; // Format date to YYYY-MM-DD
       const newUser =
-        await sql`INSERT INTO users (email, username, password) VALUES (${email}, ${username}, ${password}) RETURNING *`;
-
+        await sql`INSERT INTO users (email, username, password, regiter_date) VALUES (${email}, ${username}, ${password}, ${formattedDate}) RETURNING *`;
       return res.status(201).json({
         status: "success",
         message: "Хэрэглэгч амжилттай нэмэгдлээ",
