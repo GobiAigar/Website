@@ -10,6 +10,8 @@ export const statisticsController = {
     }
   },
   post: async (req, res) => {
+    console.log(req.body, "req.body");
+    
     const {english, mongolia} = req.body
     try {
       const response = await sql`INSERT INTO statistics(english,mongolia) VALUES (${english},${mongolia}) returning *`;

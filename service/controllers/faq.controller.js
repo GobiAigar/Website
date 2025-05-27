@@ -2,6 +2,15 @@ import { sql } from "../server.js";
 
 export const faqController = {
 
+  get: async (_, res) => {
+    try {
+      const response = await sql`SELECT * FROM faq`;
+      res.status(200).json(response);
+    } catch (error) {
+      console.log("error", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
   postFaq: async (req, res) => {
     const { id, mnquestion, enquestion, mnanswer, enanswer } = req.body;
     try {

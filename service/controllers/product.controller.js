@@ -32,7 +32,6 @@ export const productController = {
 
   put: async (req, res) => {
     const id = req.params.id
-console.log(req.body);
 
     let {
       entitle,
