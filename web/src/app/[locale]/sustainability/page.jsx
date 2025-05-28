@@ -129,7 +129,7 @@ const Sustainability = () => {
                     position: "absolute",
                     top: 0,
                     [index % 2 === 0 ? "right" : "left"]: "50%",
-                    width: "calc(50% - 330px)",
+                    width: "calc(35% - 330px)",
                     height: "1px",
                     backgroundColor: "#828282",
                     transform: "translateY(-50%)",

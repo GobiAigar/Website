@@ -1,56 +1,40 @@
 "use client";
 
-import { Button, Menu, MenuItem, ListItemText } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useRouter, usePathname } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+import { Button, Box, Typography } from "@mui/material";
+import ReactCountryFlag from "react-country-flag";
+import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 
 const ToggleButton = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const currentLocale = useLocale();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
 
-  const t = useTranslations("button");
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleSelect = (selectedLang) => {
+  const toggleLocale = () => {
+    const newLocale = currentLocale === "mn" ? "en" : "mn";
     const regex = /^\/(en|mn)(\/|$)/;
     const pathWithoutLocale = pathname.replace(regex, "/");
-    const newPath = `/${selectedLang}${pathWithoutLocale}`;
-
+    const newPath = `/${newLocale}${pathWithoutLocale}`;
     window.location.assign(newPath);
-    handleClose();
   };
 
   return (
-    <>
-      <Button
-        variant="outlined"
-        onClick={handleClick}
-        endIcon={<ExpandMoreIcon />}
-        sx={{ backgroundColor: "#f3f3f3", color: "black", minWidth: 40 }}
-      >
-        {currentLocale === "mn" ? "Монгол" : "English"}
-      </Button>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={() => handleSelect("en")}>
-          <ListItemText>{t("English")}</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={() => handleSelect("mn")}>
-          <ListItemText>{t("Mongolia")}</ListItemText>
-        </MenuItem>
-      </Menu>
-    </>
+    <Button
+      variant="outlined"
+      onClick={toggleLocale}
+      sx={{
+        minWidth: "2.5rem",
+        borderColor: "none",
+        border: 0,
+        "&:hover": { bgcolor: "rgba(255, 255, 255, 0.1)" },
+        px: "0.5rem",
+      }}
+    >
+      <ReactCountryFlag
+        countryCode={currentLocale === "mn" ? "MN" : "US"}
+        svg
+        style={{ fontSize: "1.7rem" }}
+      />
+    </Button>
   );
 };
 
