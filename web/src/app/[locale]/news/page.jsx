@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import NewsClient from "../../components/NewsClient";
 
 const NewsPage = async () => {
-  const res = await fetch("https://website-z9b7.onrender.com/api/news", {
+  const res = await fetch("http://localhost:8000/api/news", {
     cache: "no-store",
   });
   const news = await res.json();

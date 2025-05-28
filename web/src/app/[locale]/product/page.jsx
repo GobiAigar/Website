@@ -52,7 +52,7 @@ const Product = () => {
       <Box
         sx={{
           width: "100%",
-          height: { xs: 300, sm: "80vh" },
+          height: { xs: "18.75rem", sm: "80vh" },
           backgroundImage: `url(${banner?.image_url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -60,20 +60,30 @@ const Product = () => {
         }}
       />
 
-      <Container sx={{ py: 10 }}>
+      <Container sx={{ py: "2.5rem" }}>
         <Typography
           variant="h4"
           fontWeight={700}
-          mb={6}
+          mb="1.5rem"
           sx={{
-            fontSize: { xs: "24px", sm: "28px", md: "32px" },
+            fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
             color: "black",
           }}
         >
           {lang === "mn" ? banner?.mntitle : banner?.entitle}
         </Typography>
+        <Typography
+          variant="h6"
+          mb="1.5rem"
+          sx={{
+            fontSize: { xs: "0.75rem", md: "1rem" },
+            color: "#5C4B47",
+          }}
+        >
+          {lang === "mn" ? banner?.mndescription : banner?.endescription}
+        </Typography>
 
-        <Grid container spacing={2} mb={6}>
+        <Grid container spacing="0.5rem" mb="1.5rem">
           <Grid>
             <Button
               variant={selectedId === 2 ? "contained" : "outlined"}
@@ -81,11 +91,11 @@ const Product = () => {
               sx={{
                 backgroundColor: selectedId === 2 ? "#6E1221" : "transparent",
                 color: selectedId === 2 ? "#fff" : "#6E1221",
-                border: selectedId === 2 ? "none" : "2px solid #6E1221",
+                border: selectedId === 2 ? "none" : "0.125rem solid #6E1221",
                 display: "flex",
                 alignItems: "start",
-                gap: 1,
-                px: 2,
+                gap: "0.25rem",
+                px: "0.5rem",
               }}
             >
               <HomeHashtagIcon color={selectedId === 2 ? "#fff" : "#4a0d17"} />
@@ -100,11 +110,11 @@ const Product = () => {
               sx={{
                 backgroundColor: selectedId === 3 ? "#6E1221" : "transparent",
                 color: selectedId === 3 ? "#fff" : "#6E1221",
-                border: selectedId === 3 ? "none" : "2px solid #6E1221",
+                border: selectedId === 3 ? "none" : "0.125rem solid #6E1221",
                 display: "flex",
                 alignItems: "start",
-                gap: 1,
-                px: 2,
+                gap: "0.25rem",
+                px: "0.5rem",
               }}
             >
               <GlobeIcon color={selectedId === 3 ? "#fff" : "#4a0d17"} />
@@ -113,7 +123,7 @@ const Product = () => {
           </Grid>
         </Grid>
 
-        <Box mb={10}>
+        <Box mb="2.5rem">
           <TradeSection
             title={tradeMapped.title}
             image={tradeMapped.image}

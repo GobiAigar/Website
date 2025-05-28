@@ -19,20 +19,23 @@ const ToggleButton = () => {
 
   return (
     <Button
-      variant="outlined"
+      variant="text"
       onClick={toggleLocale}
       sx={{
         minWidth: "2.5rem",
-        borderColor: "none",
-        border: 0,
         "&:hover": { bgcolor: "rgba(255, 255, 255, 0.1)" },
         px: "0.5rem",
+        lineHeight: 1,
       }}
     >
       <ReactCountryFlag
         countryCode={currentLocale === "mn" ? "MN" : "US"}
         svg
-        style={{ fontSize: "1.7rem" }}
+        style={{
+          fontSize: "1.7rem",
+          display: "block",
+          verticalAlign: "middle",
+        }}
       />
     </Button>
   );
