@@ -37,7 +37,9 @@
     "other": "Other",
     "address": "130a, manufacturing west area, 20th khoroo Bayangol District, Ulaanbaatar, Mongolia",
     "supportmail": "support@gobiaigar.com",
-    "phoneinfo": "(+976) 7777 6540"
+    "phoneinfo": "(+976) 7777 6540",
+    "success": "Successfully sent",
+    "error": "An error occurred. Please try again!"
   },
   "news": {
     "title": "CULTURAL BRILLIANCE",
@@ -82,5 +84,4 @@
     "subtitle": "Need Help? See answers to some of the most commonly asked questions. Or ",
     "contact": "Contact Us"
   }
-
 }

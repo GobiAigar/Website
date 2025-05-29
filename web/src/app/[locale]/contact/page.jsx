@@ -11,6 +11,8 @@ import {
   FormControl,
   InputLabel,
   Select,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -21,9 +23,14 @@ import {
   PhoneIcon,
 } from "../../components/Icon";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 const Contact = () => {
   const t = useTranslations("contact");
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   const formik = useFormik({
     initialValues: {
@@ -55,16 +62,23 @@ const Contact = () => {
           },
           body: JSON.stringify(values),
         });
-        console.log("res", values);
 
         if (res.ok) {
-          console.log("amjilttai");
+          setSnackbarMessage(t("success"));
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
           resetForm();
         } else {
           console.error("Failed to send message");
+          setSnackbarMessage(t("error"));
+          setSnackbarSeverity("error");
+          setSnackbarOpen(true);
         }
       } catch (error) {
         console.error("Error submitting form:", error);
+        setSnackbarMessage(t("error"));
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
       }
     },
   });
@@ -219,6 +233,20 @@ const Contact = () => {
           </Grid>
         </Container>
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={4000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          severity={snackbarSeverity}
+          onClose={() => setSnackbarOpen(false)}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
