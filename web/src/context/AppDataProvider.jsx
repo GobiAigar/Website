@@ -17,9 +17,9 @@ export const AppDataProvider = ({ children }) => {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const websiteRes = await fetch("http://localhost:8000/api/website", {
-          cache: "force-cache",
-        }).then((r) => r.json());
+        const websiteRes = await fetch(
+          "http://localhost:8000/api/website"
+        ).then((r) => r.json());
 
         setData((prev) => ({
           ...prev,
@@ -27,13 +27,12 @@ export const AppDataProvider = ({ children }) => {
           loadingWebsite: false,
         }));
 
-        const productPromise = fetch("http://localhost:8000/api/product", {
-          cache: "force-cache",
-        }).then((r) => r.json());
+        const productPromise = fetch("http://localhost:8000/api/product").then(
+          (r) => r.json()
+        );
 
         const sustainabilityPromise = fetch(
-          "http://localhost:8000/api/sustainability",
-          { cache: "force-cache" }
+          "http://localhost:8000/api/sustainability"
         ).then((r) => r.json());
 
         const [productRes, sustainabilityRes] = await Promise.all([

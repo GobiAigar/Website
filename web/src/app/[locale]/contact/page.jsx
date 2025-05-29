@@ -154,8 +154,8 @@ const Contact = () => {
                   </Grid>
 
                   {[
-                    { name: "firstname", label: t("firstName") },
                     { name: "lastname", label: t("lastName") },
+                    { name: "firstname", label: t("firstName") },
                     { name: "email", label: t("email") },
                     { name: "phonenumber", label: t("phone") },
                     { name: "country", label: t("country") },
