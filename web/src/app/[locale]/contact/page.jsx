@@ -159,8 +159,8 @@ const Contact = () => {
                     { name: "email", label: t("email") },
                     { name: "phonenumber", label: t("phone") },
                     { name: "country", label: t("country") },
-                    { name: "state", label: t("state") },
                     { name: "city", label: t("city") },
+                    { name: "state", label: t("state") },
                     { name: "bussiness", label: t("business") },
                   ].map((field, index) => (
                     <Grid size={{ xs: 12, sm: 6 }} key={index}>
