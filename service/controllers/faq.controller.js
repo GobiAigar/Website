@@ -1,7 +1,6 @@
 import { sql } from "../server.js";
 
 export const faqController = {
-
   get: async (_, res) => {
     try {
       const response = await sql`SELECT * FROM faq`;
@@ -12,7 +11,7 @@ export const faqController = {
     }
   },
   postFaq: async (req, res) => {
-    const { id, mnquestion, enquestion, mnanswer, enanswer } = req.body;
+    const { mnquestion, enquestion, mnanswer, enanswer } = req.body;
     try {
       const response =
         await sql`INSERT INTO faq(mnquestion,enquestion,mnanswer,enanswer) VALUES(${mnquestion},${enquestion},${mnanswer},${enanswer}) RETURNING *`;
@@ -23,8 +22,9 @@ export const faqController = {
     }
   },
   updateFaq: async (req, res) => {
-    const { id, mnquestion, enquestion, mnanswer, enanswer } = req.body;
-  
+    const id = req.params.id;
+    const { mnquestion, enquestion, mnanswer, enanswer } = req.body;
+
     try {
       const response = await sql`UPDATE faq 
     SET 
@@ -41,17 +41,14 @@ export const faqController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
-  deleteFaq: async(req,res)=>{
-    const id = req.params.id
- try{
-    const response = await sql`DELETE FROM faq WHERE id = ${id}`;
-    res.status(200).json(response);
-
- }catch(error){
-console.log("log",error);
-res.status(500).json({error:"Internal Server Error"})
-
- }
-    
-  }
+  deleteFaq: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const response = await sql`DELETE FROM faq WHERE id = ${id}`;
+      res.status(200).json(response);
+    } catch (error) {
+      console.log("log", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };

@@ -4,9 +4,11 @@ export const websiteController = {
   getAllWebsites: async (_, res) => {
     try {
       const response = await sql`SELECT * FROM website`;
-      const statistics =await sql`SELECT * FROM statistics`
-      const faq = await sql`SELECT * FROM FAQ`
-      res.status(200).json({'website':response,'statistics':statistics, 'faq': faq});
+      const statistics = await sql`SELECT * FROM statistics`;
+      const faq = await sql`SELECT * FROM FAQ`;
+      res
+        .status(200)
+        .json({ website: response, statistics: statistics, faq: faq });
     } catch (error) {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Server Error" });
@@ -50,10 +52,8 @@ export const websiteController = {
   },
 
   updateWebsite: async (req, res) => {
-    
-    const id = req.params.id
+    const id = req.params.id;
     let {
-      title,
       entitle,
       mntitle,
       ensubtitle,

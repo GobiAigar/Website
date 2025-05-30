@@ -10,11 +10,10 @@ export const statisticsController = {
     }
   },
   post: async (req, res) => {
-    console.log(req.body, "req.body");
-    
-    const {english, mongolia} = req.body
+    const { english, mongolia } = req.body;
     try {
-      const response = await sql`INSERT INTO statistics(english,mongolia) VALUES (${english},${mongolia}) returning *`;
+      const response =
+        await sql`INSERT INTO statistics(english,mongolia) VALUES(${english},${mongolia}) returning *`;
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error fetching websites:", error);
@@ -22,13 +21,14 @@ export const statisticsController = {
     }
   },
   update: async (req, res) => {
-    const id = req.params.id
-    const {english, mongolia} = req.body
+    const id = req.params.id;
+    const { english, mongolia } = req.body;
 
     console.log(id, english, mongolia);
-    
+
     try {
-      const response = await sql`UPDATE statistics SET english = ${english},mongolia= ${mongolia} WHERE id = ${id} RETURNING *`;
+      const response =
+        await sql`UPDATE statistics SET english = ${english},mongolia= ${mongolia} WHERE id = ${id} RETURNING *`;
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error fetching websites:", error);
@@ -36,7 +36,7 @@ export const statisticsController = {
     }
   },
   delete: async (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
     try {
       const response = await sql`DELETE FROM statistics Where id = ${id}`;
       return res.status(200).json(response);
@@ -44,6 +44,5 @@ export const statisticsController = {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
-  }
-
-}
+  },
+};
