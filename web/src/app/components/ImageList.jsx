@@ -1,88 +1,61 @@
 import * as React from "react";
-import {
-  ImageList,
-  ImageListItem,
-  Box,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { ImageList, ImageListItem, Box, Typography } from "@mui/material";
 
-export default function ProductImageList({
-  itemData = [],
-  gap = 8,
-  itemStyle = {},
-}) {
-  const theme = useTheme();
+export default function ProductImageList({ sections, lang = "en", gap = 1 }) {
+  const cols = 4;
 
+  const safeSections = sections || {};
 
-  const isXs = useMediaQuery(theme.breakpoints.down("sm")); 
-  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md")); 
-  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  const isLg = useMediaQuery(theme.breakpoints.between("lg", "xl")); 
+  const itemData = [
+    safeSections.image_url1,
+    safeSections.image_url2,
+    safeSections.image_url3,
+    safeSections.image_url4,
+  ].filter(Boolean);
 
-  let cols = 1;
-  if (isXs) cols = 4;
-  else if (isSm) cols = 4;
-  else if (isMd) cols = 4;
-  else if (isLg) cols = 4;
-  else cols = 4; 
+  const commonTitle =
+    lang === "mn" ? safeSections.mntitle : safeSections.entitle;
 
   return (
-    <ImageList cols={cols} gap={gap} sx={{ width: "100%" }}>
-      {itemData.map((item) => (
-        <ImageListItem
-          key={item.img}
+    <Box sx={{ width: "100%" }}>
+      {commonTitle && (
+        <Typography
+          variant="h5"
           sx={{
-            position: "relative",
-            borderRadius: 1,
-            overflow: "hidden",
+            mb: 2,
+            textAlign: "center",
+            fontWeight: 600,
+            color: "text.primary",
           }}
         >
-          <Box
-            component="img"
-            src={item.img}
-            alt={item.title}
-            loading="lazy"
-            sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
-          />
+          {commonTitle}
+        </Typography>
+      )}
 
-          <Box
+      <ImageList cols={cols} gap={gap} sx={{ width: "100%" }}>
+        {itemData.map((img, index) => (
+          <ImageListItem
+            key={index}
             sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              bgcolor: "rgba(0, 0, 0, 0.4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              px: 2,
-              boxSizing: "border-box",
-              textAlign: "center",
-              ...itemStyle,
+              borderRadius: 1,
+              overflow: "hidden",
             }}
           >
-            <Typography
-              variant="subtitle1"
+            <Box
+              component="img"
+              src={img}
+              alt=""
+              loading="lazy"
               sx={{
-                color: "common.white",
-                textShadow: "0px 0px 4px rgba(0,0,0,0.7)",
-                fontSize: isXs ? "12px" : itemStyle.fontSize || "20px",
-                fontWeight: 600,
+                width: "100%",
+                aspectRatio: "4/3",
+                objectFit: "cover",
+                display: "block",
               }}
-            >
-              {item.title}
-            </Typography>
-          </Box>
-        </ImageListItem>
-      ))}
-    </ImageList>
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box>
   );
 }

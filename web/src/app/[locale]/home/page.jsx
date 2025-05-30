@@ -28,7 +28,6 @@ const Home = () => {
   const lang = useLocale();
   const t = useTranslations("home");
 
-
   if (loadingWebsite || !website) {
     return (
       <Box
@@ -53,6 +52,7 @@ const Home = () => {
     websiteData.find((item) => item.title === title);
 
   const homeSectionA = getSingleByTitle("HomeSectionA");
+  const homeSectionB = getSingleByTitle("HomeSectionb");
   const endSection = getSingleByTitle("HomeEndsection");
   const herderSection = getSingleByTitle("Herder");
   const statisticsSection = getSingleByTitle("Statistics");
@@ -180,6 +180,10 @@ const Home = () => {
           </Grid>
         </Container>
       </Box>
+
+      <Container sx={{ py: 8 }}>
+        <ProductImageList sections={homeSectionB} lang={lang} />
+      </Container>
 
       <Container sx={{ py: 8 }}>
         <SplitSection sections={splitSections} />
