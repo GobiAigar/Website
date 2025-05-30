@@ -59,4 +59,14 @@ export const messageController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  deleteMessages: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const response = await sql`DELETE FROM messages Where id = ${id}`;
+      return res.status(200).json(response);
+    } catch (error) {
+      console.error("Error fetching websites:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };

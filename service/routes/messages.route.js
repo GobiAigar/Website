@@ -6,5 +6,6 @@ const messageRouter = express.Router();
 messageRouter.get("/messages", messageController.getAllMessages);
 messageRouter.get("/messages/:id", messageController.getByIdMessages);
 messageRouter.post("/messages", messageController.createMessage);
+messageRouter.delete("/messages/:id", messageController.deleteMessages)
 
 export default messageRouter;
