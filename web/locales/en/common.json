@@ -48,11 +48,13 @@
     "error": "Failed to load news.",
     "back": "Back",
     "seeMore": "See more",
-    "journalist": "Journalist"
+    "journalist": "Journalist",
+    "seeLess": "Compile",
+    "clickSeeMore": "Click on the news to read more.",
+    "notFoundNews": "No news found yet."
   },
   "sustainability": {
-    "title": "Sustainability",
-    "description": "All the cashmere fiber North Land uses is sustainable Mongolian cashmere that comes from cashmere goats living in Inner Mongolia, famous for the best cashmere quality it produces."
+    "notFoundInformations": "No information found yet."
   },
   "product": {
     "title": "Gobi Aigar Collaboration Application Form 2024",

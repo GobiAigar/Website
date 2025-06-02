@@ -8,7 +8,7 @@ import {
   Grid,
   Divider,
   Button,
-  CircularProgress,
+  Skeleton,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Header from "../../components/Header";
@@ -21,29 +21,13 @@ import FAQSection from "../../components/FAQSection";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../../i18n/navigation";
 import { useAppData } from "../../../context/AppDataProvider";
-import CustomLoader from "../../components/Loading";
 
 const Home = () => {
   const { website, loadingWebsite } = useAppData();
   const lang = useLocale();
   const t = useTranslations("home");
 
-  if (loadingWebsite || !website) {
-    return (
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <CustomLoader />
-      </Box>
-    );
-  }
-
-  const rawData = website;
+  const rawData = website || {};
   const websiteData = rawData.website || [];
   const statisticsList = rawData.statistics || [];
   const faqs = rawData.faq || [];
@@ -86,7 +70,9 @@ const Home = () => {
           position: "relative",
           width: "100%",
           minHeight: "100vh",
-          backgroundImage: `url(${homeSectionA?.image_url1})`,
+          backgroundImage: loadingWebsite
+            ? "none"
+            : `url(${homeSectionA?.image_url1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
@@ -97,7 +83,7 @@ const Home = () => {
       >
         <Box
           sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.6)" }}
-        ></Box>
+        />
         <Header />
         <Container
           sx={{
@@ -110,116 +96,136 @@ const Home = () => {
             justifyContent: "center",
           }}
         >
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            color="common.white"
-            gutterBottom
-            sx={{
-              fontSize: {
-                xs: "28px",
-                sm: "36px",
-                md: "48px",
-                lg: "56px",
-              },
-            }}
-          >
-            {lang === "mn" ? homeSectionA?.mntitle : homeSectionA?.entitle}
-          </Typography>
-          <Typography
-            variant="h5"
-            color="common.white"
-            mb={4}
-            sx={{
-              fontSize: {
-                xs: "12px",
-                sm: "16px",
-                md: "20px",
-                lg: "28px",
-              },
-            }}
-          >
-            {lang === "mn"
-              ? homeSectionA?.mnsubtitle
-              : homeSectionA?.ensubtitle}
-          </Typography>
-          <Grid container spacing={2} justifyContent="center">
-            <Grid>
-              <Button
-                component={Link}
-                href="/product"
-                variant="contained"
+          {loadingWebsite ? (
+            <>
+              <Skeleton width="80%" height={60} sx={{ bgcolor: "grey.700" }} />
+              <Skeleton width="60%" height={40} sx={{ mt: 2 }} />
+            </>
+          ) : (
+            <>
+              <Typography
+                variant="h3"
+                fontWeight="bold"
+                color="common.white"
+                gutterBottom
                 sx={{
-                  textTransform: "none",
-                  pt: 1,
-                  borderRadius: 3,
-                  background: "white",
-                  color: "black",
+                  fontSize: { xs: "28px", sm: "36px", md: "48px", lg: "56px" },
                 }}
               >
-                {t("seeProduct")}
-              </Button>
-            </Grid>
-            <Grid>
-              <Button
-                component={Link}
-                href="/sustainability"
-                variant="outlined"
-                endIcon={<ArrowForwardIcon />}
+                {lang === "mn" ? homeSectionA?.mntitle : homeSectionA?.entitle}
+              </Typography>
+              <Typography
+                variant="h5"
+                color="common.white"
+                mb={4}
                 sx={{
-                  textTransform: "none",
-                  pt: 1,
-                  color: "white",
-                  borderColor: "white",
-                  borderRadius: 3,
+                  fontSize: { xs: "12px", sm: "16px", md: "20px", lg: "28px" },
                 }}
               >
-                {t("ourHistory")}
-              </Button>
-            </Grid>
-          </Grid>
+                {lang === "mn"
+                  ? homeSectionA?.mnsubtitle
+                  : homeSectionA?.ensubtitle}
+              </Typography>
+              <Grid container spacing={2} justifyContent="center">
+                <Grid size="auto">
+                  <Button
+                    component={Link}
+                    href="/product"
+                    variant="contained"
+                    sx={{
+                      textTransform: "none",
+                      pt: 1,
+                      borderRadius: 3,
+                      background: "white",
+                      color: "black",
+                    }}
+                  >
+                    {t("seeProduct")}
+                  </Button>
+                </Grid>
+                <Grid size="auto">
+                  <Button
+                    component={Link}
+                    href="/sustainability"
+                    variant="outlined"
+                    endIcon={<ArrowForwardIcon />}
+                    sx={{
+                      textTransform: "none",
+                      pt: 1,
+                      color: "white",
+                      borderColor: "white",
+                      borderRadius: 3,
+                    }}
+                  >
+                    {t("ourHistory")}
+                  </Button>
+                </Grid>
+              </Grid>
+            </>
+          )}
         </Container>
       </Box>
 
       <Container sx={{ py: 8 }}>
-        <ProductImageList sections={homeSectionB} lang={lang} />
+        {loadingWebsite ? (
+          <Skeleton variant="rectangular" width="100%" height={300} />
+        ) : (
+          <ProductImageList sections={homeSectionB} lang={lang} />
+        )}
       </Container>
 
       <Container sx={{ py: 8 }}>
-        <SplitSection sections={splitSections} />
+        {loadingWebsite ? (
+          <Skeleton variant="rectangular" width="100%" height={400} />
+        ) : (
+          <SplitSection sections={splitSections} />
+        )}
       </Container>
 
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Grid container alignItems="stretch" spacing={2}>
-          {infoCards.map((item, index) => (
-            <React.Fragment key={item.id}>
-              <Grid size={{ xs: 12, sm: 3.7, md: 3.84 }}>
-                <InfoCard
-                  imageSrc={item.image_url1}
-                  title={lang === "mn" ? item.mntitle : item.entitle}
-                  description={
-                    lang === "mn" ? item.mnsubtitle : item.ensubtitle
-                  }
-                />
+        {loadingWebsite ? (
+          <Grid container spacing={2}>
+            {Array.from(new Array(3)).map((_, index) => (
+              <Grid size={{ xs: 12, sm: 4 }} key={index}>
+                <Skeleton variant="rectangular" width="100%" height={200} />
+                <Skeleton width="80%" sx={{ mt: 2 }} />
+                <Skeleton width="60%" />
               </Grid>
-              {(index + 1) % 3 !== 0 && index < infoCards.length - 1 && (
-                <Grid
-                  sx={{
-                    display: { xs: "none", sm: "flex" },
-                    alignItems: "stretch",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Divider
-                    orientation="vertical"
-                    flexItem
-                    sx={{ borderColor: "#8B4513", borderRightWidth: 1 }}
+            ))}
+          </Grid>
+        ) : (
+          <Grid container alignItems="stretch" spacing={2}>
+            {infoCards.map((item, index) => (
+              <React.Fragment key={item.id}>
+                <Grid size={{ xs: 12, sm: 3.7, md: 3.84 }}>
+                  <InfoCard
+                    imageSrc={item.image_url1}
+                    title={lang === "mn" ? item.mntitle : item.entitle}
+                    description={
+                      lang === "mn" ? item.mnsubtitle : item.ensubtitle
+                    }
                   />
                 </Grid>
-              )}
-            </React.Fragment>
-          ))}
-        </Grid>
+                {(index + 1) % 3 !== 0 && index < infoCards.length - 1 && (
+                  <Grid
+                    size="auto"
+                    sx={{
+                      display: { xs: "none", sm: "flex" },
+                      alignItems: "stretch",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Divider
+                      orientation="vertical"
+                      flexItem
+                      sx={{ borderColor: "#8B4513", borderRightWidth: 1 }}
+                    />
+                  </Grid>
+                )}
+              </React.Fragment>
+            ))}
+          </Grid>
+        )}
       </Container>
 
       <Container sx={{ py: 8 }}>
@@ -228,32 +234,21 @@ const Home = () => {
           fontWeight={700}
           mb={4}
           sx={{
-            fontSize: {
-              xs: "24px",
-              sm: "28px",
-              md: "32px",
-            },
+            fontSize: { xs: "24px", sm: "28px", md: "32px" },
           }}
         >
-          {lang === "mn"
+          {loadingWebsite
+            ? "..."
+            : lang === "mn"
             ? statisticsSection?.mntitle
             : statisticsSection?.entitle}
         </Typography>
-        <Grid
-          container
-          spacing={4}
-          alignItems="stretch"
-          justifyContent="center"
-        >
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box
-              sx={{
-                height: "100%",
-                display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "start",
-              }}
-            >
+
+        {loadingWebsite ? (
+          <Skeleton variant="rectangular" width="100%" height={300} />
+        ) : (
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Box
                 component="ul"
                 sx={{
@@ -271,34 +266,31 @@ const Home = () => {
                   </li>
                 ))}
               </Box>
-            </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box
-              sx={{
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Video src={statisticsSection?.image_url1} />
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Container>
 
       {herderSection && (
         <Container sx={{ py: 8 }}>
-          <Typography variant="h4" fontWeight={700} mb={4}>
-            {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
-          </Typography>
-          <Box
-            component="img"
-            src={herderSection.image_url1}
-            alt="supply image"
-            sx={{ width: "100%", borderRadius: 2 }}
-          />
+          {loadingWebsite ? (
+            <Skeleton variant="rectangular" width="100%" height={400} />
+          ) : (
+            <>
+              <Typography variant="h4" fontWeight={700} mb={4}>
+                {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
+              </Typography>
+              <Box
+                component="img"
+                src={herderSection.image_url1}
+                alt="supply image"
+                sx={{ width: "100%", borderRadius: 2 }}
+              />
+            </>
+          )}
         </Container>
       )}
 
@@ -306,18 +298,28 @@ const Home = () => {
         <Container sx={{ py: 8 }}>
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, md: 6 }}>
-              <Typography variant="h4" fontWeight={700} mb={2}>
-                {lang === "mn" ? endSection.mntitle : endSection.entitle}
-              </Typography>
-              <Box
-                component="img"
-                src={endSection.image_url1}
-                alt="end-section"
-                sx={{ width: "100%", borderRadius: 2 }}
-              />
+              {loadingWebsite ? (
+                <Skeleton variant="rectangular" width="100%" height={200} />
+              ) : (
+                <>
+                  <Typography variant="h4" fontWeight={700} mb={2}>
+                    {lang === "mn" ? endSection.mntitle : endSection.entitle}
+                  </Typography>
+                  <Box
+                    component="img"
+                    src={endSection.image_url1}
+                    alt="end-section"
+                    sx={{ width: "100%", borderRadius: 2 }}
+                  />
+                </>
+              )}
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <FAQSection faqItems={faqs} lang={lang} />
+              {loadingWebsite ? (
+                <Skeleton variant="rectangular" width="100%" height={200} />
+              ) : (
+                <FAQSection faqItems={faqs} lang={lang} />
+              )}
             </Grid>
           </Grid>
         </Container>

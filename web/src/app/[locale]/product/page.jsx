@@ -3,12 +3,18 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import CustomLoader from "../../components/Loading";
-import TradeSection from "../../components/TradeSection";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Button,
+  Skeleton,
+} from "@mui/material";
 import { GlobeIcon, HomeHashtagIcon } from "../../components/Icon";
-import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { useTranslations, useLocale } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
+import TradeSection from "../../components/TradeSection";
 
 const Product = () => {
   const { product, loading } = useAppData();
@@ -19,15 +25,50 @@ const Product = () => {
 
   if (loading || !product || !product.data?.length) {
     return (
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <CustomLoader />
+      <Box sx={{ bgcolor: "background.default" }}>
+        <Header />
+
+        <Box
+          sx={{
+            width: "100%",
+            height: { xs: "18.75rem", sm: "80vh" },
+            backgroundColor: "#f0f0f0",
+          }}
+        >
+          <Skeleton variant="rectangular" width="100%" height="100%" />
+        </Box>
+
+        <Container sx={{ py: "2.5rem" }}>
+          <Skeleton variant="text" width="60%" height={40} />
+          <Skeleton variant="text" width="80%" height={25} sx={{ mt: 2 }} />
+
+          <Grid container spacing={1} mt={3} mb={3}>
+            <Grid>
+              <Skeleton
+                variant="rectangular"
+                width={120}
+                height={40}
+                sx={{ borderRadius: 1 }}
+              />
+            </Grid>
+            <Grid>
+              <Skeleton
+                variant="rectangular"
+                width={150}
+                height={40}
+                sx={{ borderRadius: 1 }}
+              />
+            </Grid>
+          </Grid>
+
+          <Box>
+            <Skeleton variant="rectangular" width="100%" height={300} />
+            <Skeleton variant="text" width="100%" height={40} sx={{ mt: 2 }} />
+            <Skeleton variant="text" width="100%" height={40} />
+          </Box>
+        </Container>
+
+        <Footer />
       </Box>
     );
   }

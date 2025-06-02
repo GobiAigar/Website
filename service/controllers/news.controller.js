@@ -96,4 +96,19 @@ export const newsController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  getPaginatedNews: async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = page === 1 ? 7 : 6;
+    const offset = (page - 1) * 6;
+
+    try {
+      const data =
+        await sql`SELECT * FROM news ORDER BY date DESC LIMIT ${limit} OFFSET ${offset}`;
+      const [{ count }] = await sql`SELECT COUNT(*)::int as count FROM news`;
+      res.status(200).json({ data, total: count });
+    } catch (error) {
+      console.error("Error fetching paginated news:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };

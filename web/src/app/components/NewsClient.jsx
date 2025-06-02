@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -11,6 +11,8 @@ import {
   CardMedia,
   Button,
   CardActionArea,
+  Pagination,
+  Skeleton,
 } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -19,12 +21,121 @@ const truncateWords = (text, limit) => {
   return words.length > limit ? words.slice(0, limit).join(" ") + "..." : text;
 };
 
-const NewsClient = ({ news }) => {
+const NewsClient = () => {
+  const [initialNews, setInitialNews] = useState(null);
+  const [news, setNews] = useState([]);
+  const [total, setTotal] = useState(0);
   const [selectedNews, setSelectedNews] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  const itemsPerPage = 6;
   const lang = useLocale();
   const t = useTranslations("news");
 
-  const displayNews = selectedNews || news[0];
+  useEffect(() => {
+    const fetchNews = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `http://localhost:8000/api/news/paginated?page=${currentPage}&limit=${itemsPerPage}`,
+          { cache: "no-store" }
+        );
+        const { data, total } = await res.json();
+
+        if (currentPage === 1) {
+          setInitialNews(data[0]);
+          setNews(data.slice(1));
+        } else {
+          setNews(data);
+        }
+
+        setTotal(total);
+      } catch (error) {
+        console.error("Error fetching paginated news:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, [currentPage]);
+
+  const handlePageChange = (_, page) => {
+    setCurrentPage(page);
+    setShowFullDescription(false);
+  };
+
+  const displayNews = selectedNews || initialNews;
+
+  if (loading) {
+    return (
+      <Box sx={{ bgcolor: "background.default" }}>
+        <Box
+          sx={{
+            width: "100%",
+            minHeight: "60vh",
+            bgcolor: "grey.300",
+          }}
+        >
+          <Skeleton variant="rectangular" width="100%" height="100%" />
+        </Box>
+
+        <Container>
+          <Box sx={{ py: 8 }}>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Skeleton variant="text" width="30%" height={20} />
+              <Skeleton variant="text" width="50%" height={20} />
+            </Box>
+
+            <Skeleton variant="rectangular" width="100%" height={100} />
+          </Box>
+        </Container>
+
+        <Container>
+          <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
+            {Array.from(new Array(itemsPerPage)).map((_, index) => (
+              <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
+                <Skeleton
+                  variant="rectangular"
+                  width="100%"
+                  height={200}
+                  sx={{ borderRadius: 2 }}
+                />
+                <Skeleton width="80%" height={30} sx={{ mt: 1 }} />
+                <Skeleton width="60%" height={20} />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+    );
+  }
+
+  if (!displayNews) {
+    return (
+      <Box
+        minHeight="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bgcolor="white"
+      >
+        <Typography variant="h6" color="text.secondary">
+          {t("notFoundNews")}
+        </Typography>
+      </Box>
+    );
+  }
+
+  const description =
+    lang === "mn" ? displayNews.mndescription : displayNews.endescription;
 
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
@@ -68,39 +179,68 @@ const NewsClient = ({ news }) => {
 
       <Container>
         <Box sx={{ py: 8 }}>
-          <Typography variant="caption" color="text.secondary">
-            {new Date(displayNews.date).toLocaleDateString()}
-          </Typography>
-
-          <Typography
-            variant="subtitle2"
-            align="right"
-            color="text.secondary"
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
             mb={2}
           >
-            {t("journalist")}
-            <span
-              style={{
-                fontWeight: "bold",
-                fontSize: "20px",
-                marginLeft: 4,
+            <Typography variant="caption" color="text.secondary">
+              {new Date(displayNews.date).toLocaleDateString()}
+            </Typography>
+
+            <Typography
+              variant="subtitle2"
+              color="text.secondary"
+              sx={{
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              {lang === "mn"
-                ? displayNews.mnjournalist
-                : displayNews.enjournalist}
-            </span>
-          </Typography>
+              {t("journalist")}
+              <span
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  marginLeft: 7,
+                }}
+              >
+                {lang === "mn"
+                  ? displayNews.mnjournalist
+                  : displayNews.enjournalist}
+              </span>
+            </Typography>
+          </Box>
 
-          <Typography
-            variant="body1"
-            color="black"
-            sx={{ whiteSpace: "pre-line" }}
-          >
-            {lang === "mn"
-              ? displayNews.mndescription
-              : displayNews.endescription}
-          </Typography>
+          <Box>
+            <Typography
+              variant="body1"
+              color="black"
+              sx={{ display: "inline", whiteSpace: "pre-line" }}
+            >
+              {selectedNews || showFullDescription
+                ? description
+                : description.split(" ").slice(0, 50).join(" ") + " "}
+            </Typography>
+
+            {!selectedNews && description.split(" ").length > 50 && (
+              <Typography
+                component="span"
+                variant="body1"
+                onClick={() => setShowFullDescription(!showFullDescription)}
+                sx={{
+                  cursor: "pointer",
+                  color: "primary.main",
+                  fontWeight: "bold",
+                  ml: 1,
+                  display: "inline",
+                  "&:hover": { textDecoration: "underline" },
+                }}
+              >
+                {showFullDescription ? t("seeLess") : t("seeMore")}
+              </Typography>
+            )}
+          </Box>
 
           {selectedNews && (
             <Box textAlign="right" mt={4}>
@@ -115,7 +255,7 @@ const NewsClient = ({ news }) => {
       {!selectedNews && (
         <Container>
           <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
-            {news.slice(1).map((item) => (
+            {news.map((item) => (
               <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card
                   sx={{
@@ -150,7 +290,7 @@ const NewsClient = ({ news }) => {
                       <Box>
                         <Typography variant="subtitle1" fontWeight="bold">
                           {truncateWords(
-                            lang === "mn" ? item?.mntitle : item?.entitle,
+                            lang === "mn" ? item.mntitle : item.entitle,
                             5
                           )}
                         </Typography>
@@ -199,18 +339,26 @@ const NewsClient = ({ news }) => {
                     <Typography
                       variant="subtitle1"
                       fontWeight="bold"
-                      sx={{
-                        p: 5,
-                        textAlign: "center",
-                      }}
+                      sx={{ p: 5, textAlign: "center" }}
                     >
-                      Мэдээн дээр дарж дэлгэрэнгүй уншина уу
+                      {t("clickSeeMore")}
                     </Typography>
                   </Box>
                 </Card>
               </Grid>
             ))}
           </Grid>
+
+          {total > itemsPerPage && (
+            <Box display="flex" justifyContent="center" pb={4}>
+              <Pagination
+                count={Math.ceil((total - 1) / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+              />
+            </Box>
+          )}
         </Container>
       )}
     </Box>

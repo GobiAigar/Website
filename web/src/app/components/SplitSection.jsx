@@ -20,16 +20,20 @@ const SplitSection = ({ sections }) => {
               xs: "column",
               md: isReversed ? "row-reverse" : "row",
             }}
+            alignItems="stretch" 
             sx={{ mb: 8, width: "100%" }}
           >
-            <Grid size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
+            <Grid
+              size={{ xs: 12, md: 6 }}
+              sx={{ width: "100%", display: "flex" }}
+            >
               <Box
                 sx={{
-                  display: images.length > 1 ? "grid" : "block",
+                  display: images.length > 1 ? "grid" : "flex",
                   gridTemplateColumns:
                     images.length > 1 ? "repeat(2, 1fr)" : "none",
                   gap: 2,
-                  width: "100%",
+                  flex: 1, 
                   height: "100%",
                 }}
               >
@@ -44,7 +48,7 @@ const SplitSection = ({ sections }) => {
                       height:
                         images.length > 1
                           ? { xs: 160, sm: 200, md: 240 }
-                          : { xs: "auto", md: "100%" },
+                          : "100%",
                       objectFit: "cover",
                       borderRadius: 2,
                       display: "block",
@@ -54,18 +58,21 @@ const SplitSection = ({ sections }) => {
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 6 }} sx={{ width: "100%" }}>
+            <Grid
+              size={{ xs: 12, md: 6 }}
+              sx={{
+                width: "100%",
+                display: "flex", 
+                alignItems: "center", 
+              }}
+            >
               <Box
                 sx={{
                   textAlign: {
                     xs: "start",
                     md: isReversed ? "right" : "left",
                   },
-                  width: "100%",
-                  height: {
-                    xs: "auto",
-                    md: "100vh",
-                  },
+                  flex: 1, 
                 }}
               >
                 {section.title && (
@@ -90,6 +97,7 @@ const SplitSection = ({ sections }) => {
                   <Typography
                     sx={{
                       textAlign: "start",
+                      color: "text.secondary",
                     }}
                   >
                     {section.text}

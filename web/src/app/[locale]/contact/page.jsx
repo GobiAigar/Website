@@ -57,9 +57,7 @@ const Contact = () => {
       try {
         const res = await fetch("http://localhost:8000/api/messages", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
         });
 
@@ -85,21 +83,31 @@ const Contact = () => {
 
   return (
     <Box
-      sx={{ overflow: "hidden", bgcolor: "background.default", height: "100%" }}
+      sx={{
+        overflow: "hidden",
+        bgcolor: "background.default",
+        minHeight: "100vh",
+      }}
     >
       <Header />
 
       <Box sx={{ position: "relative", zIndex: 1, py: 8, pt: 16 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={4}>
-            <Grid size={{ xs: 12, sm: 6 }}>
+          <Grid container spacing={4} alignItems="stretch">
+            <Grid
+              size={{ xs: 12, sm: 6 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Box
                 sx={{
                   bgcolor: "#7b1c2e",
                   color: "white",
                   borderRadius: 2,
                   p: 4,
-                  height: "100%",
+                  flex: 1,
                   display: "flex",
                   flexDirection: "column",
                   gap: 14,
@@ -128,111 +136,128 @@ const Contact = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant="h6" gutterBottom color="black">
-                {t("contactUs")}
-              </Typography>
-              <Typography variant="body2" color="grey" sx={{ mb: 3 }}>
-                {t("contactDesc")}
-              </Typography>
 
-              <form onSubmit={formik.handleSubmit}>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12 }}>
-                    <FormControl
-                      fullWidth
-                      error={Boolean(
-                        formik.touched.purpose && formik.errors.purpose
-                      )}
-                    >
-                      <InputLabel>{t("selectPurpose")}</InputLabel>
-                      <Select
-                        name="purpose"
-                        label={t("selectPurpose")}
-                        value={formik.values.purpose}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
+            <Grid
+              size={{ xs: 12, sm: 6 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                <Typography variant="h6" gutterBottom color="black">
+                  {t("contactUs")}
+                </Typography>
+                <Typography variant="body2" color="grey" sx={{ mb: 3 }}>
+                  {t("contactDesc")}
+                </Typography>
+
+                <form
+                  onSubmit={formik.handleSubmit}
+                  style={{ flex: 1, display: "flex", flexDirection: "column" }}
+                >
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 12 }}>
+                      <FormControl
+                        fullWidth
+                        error={Boolean(
+                          formik.touched.purpose && formik.errors.purpose
+                        )}
                       >
-                        <MenuItem value="international">
-                          {t("international")}
-                        </MenuItem>
-                        <MenuItem value="domestic">{t("domestic")}</MenuItem>
-                        <MenuItem value="other">{t("other")}</MenuItem>
-                      </Select>
-                      {formik.touched.purpose && formik.errors.purpose && (
-                        <Typography variant="caption" color="error">
-                          {formik.errors.purpose}
-                        </Typography>
-                      )}
-                    </FormControl>
-                  </Grid>
+                        <InputLabel>{t("selectPurpose")}</InputLabel>
+                        <Select
+                          name="purpose"
+                          label={t("selectPurpose")}
+                          value={formik.values.purpose}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                        >
+                          <MenuItem value="international">
+                            {t("international")}
+                          </MenuItem>
+                          <MenuItem value="domestic">{t("domestic")}</MenuItem>
+                          <MenuItem value="other">{t("other")}</MenuItem>
+                        </Select>
+                        {formik.touched.purpose && formik.errors.purpose && (
+                          <Typography variant="caption" color="error">
+                            {formik.errors.purpose}
+                          </Typography>
+                        )}
+                      </FormControl>
+                    </Grid>
 
-                  {[
-                    { name: "lastname", label: t("lastName") },
-                    { name: "firstname", label: t("firstName") },
-                    { name: "email", label: t("email") },
-                    { name: "phonenumber", label: t("phone") },
-                    { name: "country", label: t("country") },
-                    { name: "city", label: t("city") },
-                    { name: "state", label: t("state") },
-                    { name: "bussiness", label: t("business") },
-                  ].map((field, index) => (
-                    <Grid size={{ xs: 12, sm: 6 }} key={index}>
+                    {[
+                      { name: "lastname", label: t("lastName") },
+                      { name: "firstname", label: t("firstName") },
+                      { name: "email", label: t("email") },
+                      { name: "phonenumber", label: t("phone") },
+                      { name: "country", label: t("country") },
+                      { name: "city", label: t("city") },
+                      { name: "state", label: t("state") },
+                      { name: "bussiness", label: t("business") },
+                    ].map((field, index) => (
+                      <Grid size={{ xs: 12, sm: 6 }} key={index}>
+                        <TextField
+                          fullWidth
+                          name={field.name}
+                          label={field.label}
+                          value={formik.values[field.name]}
+                          onChange={formik.handleChange}
+                          error={Boolean(
+                            formik.touched[field.name] &&
+                              formik.errors[field.name]
+                          )}
+                          helperText={
+                            formik.touched[field.name] &&
+                            formik.errors[field.name]
+                          }
+                        />
+                      </Grid>
+                    ))}
+
+                    <Grid size={{ xs: 12 }}>
                       <TextField
                         fullWidth
-                        name={field.name}
-                        label={field.label}
-                        value={formik.values[field.name]}
+                        multiline
+                        rows={3}
+                        name="plan"
+                        label={t("plan")}
+                        value={formik.values.plan}
                         onChange={formik.handleChange}
-                        error={Boolean(
-                          formik.touched[field.name] &&
-                            formik.errors[field.name]
-                        )}
-                        helperText={
-                          formik.touched[field.name] &&
-                          formik.errors[field.name]
-                        }
                       />
                     </Grid>
-                  ))}
 
-                  <Grid size={{ xs: 12 }}>
-                    <TextField
-                      fullWidth
-                      multiline
-                      rows={3}
-                      name="plan"
-                      label={t("plan")}
-                      value={formik.values.plan}
-                      onChange={formik.handleChange}
-                    />
-                  </Grid>
-
-                  <Grid
-                    size={{ xs: 12 }}
-                    sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}
-                  >
-                    <Button onClick={formik.handleReset} variant="outlined">
-                      {t("clear")}
-                    </Button>
-                    <Button
-                      type="submit"
-                      variant="contained"
+                    <Grid
+                      size={{ xs: 12 }}
                       sx={{
-                        background: "#6E1221",
-                        border: "2px solid #6E1221",
-                        "&:hover": { backgroundColor: "#4a0d17" },
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: 2,
                       }}
                     >
-                      {t("submit")}
-                    </Button>
+                      <Button onClick={formik.handleReset} variant="outlined">
+                        {t("clear")}
+                      </Button>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                          background: "#6E1221",
+                          border: "2px solid #6E1221",
+                          "&:hover": { backgroundColor: "#4a0d17" },
+                        }}
+                      >
+                        {t("submit")}
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </form>
+                </form>
+              </Box>
             </Grid>
           </Grid>
         </Container>
       </Box>
+
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={4000}
