@@ -3,7 +3,7 @@ import { sql } from "../server.js";
 export const websiteController = {
   getAllWebsites: async (_, res) => {
     try {
-      const response = await sql`SELECT * FROM website`;
+      const response = await sql`SELECT * FROM website ORDER BY ID asc`;
       const statistics = await sql`SELECT * FROM statistics`;
       const faq = await sql`SELECT * FROM FAQ`;
       res
