@@ -20,7 +20,7 @@ const SplitSection = ({ sections }) => {
               xs: "column",
               md: isReversed ? "row-reverse" : "row",
             }}
-            alignItems="stretch" 
+            alignItems="stretch"
             sx={{ mb: 8, width: "100%" }}
           >
             <Grid
@@ -33,7 +33,7 @@ const SplitSection = ({ sections }) => {
                   gridTemplateColumns:
                     images.length > 1 ? "repeat(2, 1fr)" : "none",
                   gap: 2,
-                  flex: 1, 
+                  flex: 1,
                   height: "100%",
                 }}
               >
@@ -62,8 +62,8 @@ const SplitSection = ({ sections }) => {
               size={{ xs: 12, md: 6 }}
               sx={{
                 width: "100%",
-                display: "flex", 
-                alignItems: "center", 
+                display: "flex",
+                alignItems: "center",
               }}
             >
               <Box
@@ -72,7 +72,7 @@ const SplitSection = ({ sections }) => {
                     xs: "start",
                     md: isReversed ? "right" : "left",
                   },
-                  flex: 1, 
+                  flex: 1,
                 }}
               >
                 {section.title && (
@@ -96,8 +96,9 @@ const SplitSection = ({ sections }) => {
                 {section.text && (
                   <Typography
                     sx={{
-                      textAlign: "start",
+                      textAlign: "justify",
                       color: "text.secondary",
+                      whiteSpace: "pre-line",
                     }}
                   >
                     {section.text}

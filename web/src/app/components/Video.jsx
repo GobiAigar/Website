@@ -104,7 +104,7 @@ const Video = ({ src }) => {
               component="video"
               ref={videoRef}
               src={src}
-              muted
+              muted={false}
               playsInline
               sx={{
                 width: "100%",

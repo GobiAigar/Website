@@ -7,7 +7,7 @@ const InfoCard = ({ imageSrc, title, description }) => {
   return (
     <Box
       sx={{
-        px: { xs: 0, sm: 1, md: 2 }, 
+        px: { xs: 0, sm: 1, md: 2 },
         py: { xs: 2, sm: 3, md: 4 },
         display: "flex",
         justifyContent: "center",
@@ -19,7 +19,7 @@ const InfoCard = ({ imageSrc, title, description }) => {
           textAlign: "center",
           width: "100%",
           maxWidth: {
-            xs: "100%", 
+            xs: "100%",
             sm: 212,
             md: 270,
             lg: 329,
@@ -33,7 +33,7 @@ const InfoCard = ({ imageSrc, title, description }) => {
         }}
       >
         {imageSrc && (
-          <Avatar
+          <img
             src={imageSrc}
             alt={title || "Info image"}
             sx={{ width: 48, height: 48 }}

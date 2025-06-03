@@ -35,7 +35,12 @@ const TradeSection = ({ title, image, description }) => {
             {title}
           </Typography>
 
-          <Typography variant="body1" sx={{ color: "#5C4B47", mb: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ color: "#5C4B47", mb: 2, height: "750px" }}
+            align="justify"
+            whiteSpace="pre-line"
+          >
             {description}
           </Typography>
 

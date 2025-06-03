@@ -3,6 +3,7 @@ export const newsController = {
   getAllNews: async (_, res) => {
     try {
       const response = await sql`SELECT * FROM news`;
+
       res.status(200).json(response);
     } catch (error) {
       console.error("Error fetching news:", error);
