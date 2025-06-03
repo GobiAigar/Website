@@ -24,8 +24,6 @@ export const statisticsController = {
     const id = req.params.id;
     const { english, mongolia } = req.body;
 
-    console.log(id, english, mongolia);
-
     try {
       const response =
         await sql`UPDATE statistics SET english = ${english},mongolia= ${mongolia} WHERE id = ${id} RETURNING *`;
