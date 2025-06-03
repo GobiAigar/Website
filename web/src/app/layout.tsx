@@ -6,7 +6,7 @@ import Analytics from "./_analytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "My App",
+  title: "Gobi Aigar",
   description: "Internationalized app with Next.js",
 };
 

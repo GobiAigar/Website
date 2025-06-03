@@ -18,12 +18,18 @@ export const newsController = {
     }
     try {
       const response = await sql`SELECT * FROM news WHERE id = ${id}`;
-      res.status(200).json(response);
+
+      if (response.length === 0) {
+        return res.status(404).json({ error: "News not found" });
+      }
+
+      res.status(200).json(response[0]);
     } catch (error) {
       console.error("Error fetching news:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+
   updateNews: async (req, res) => {
     const id = req.params.id;
     const {
@@ -102,8 +108,11 @@ export const newsController = {
     const offset = (page - 1) * 6;
 
     try {
-      const data =
-        await sql`SELECT * FROM news ORDER BY date DESC LIMIT ${limit} OFFSET ${offset}`;
+      const data = await sql`SELECT id, entitle,
+        mntitle,
+        enjournalist,
+        mnjournalist,
+        image_url, date FROM news ORDER BY date DESC LIMIT ${limit} OFFSET ${offset}`;
       const [{ count }] = await sql`SELECT COUNT(*)::int as count FROM news`;
       res.status(200).json({ data, total: count });
     } catch (error) {
