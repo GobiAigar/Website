@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Gobi Aigar",
-  description: "Internationalized app with Next.js",
+  description: "Cashmere",
 };
 
 export default function RootLayout({
@@ -36,6 +36,7 @@ export default function RootLayout({
             `,
           }}
         />
+        <link rel="icon" href="/smallLogo.png.png" />
       </head>
       <body className={inter.className}>
         {children}
