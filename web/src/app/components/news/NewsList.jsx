@@ -46,9 +46,9 @@ const NewsList = ({ news, initialNews }) => {
               <CardActionArea sx={{ height: "100%" }}>
                 <CardMedia
                   component="img"
-                  image={item.image_url}
+                  image={item.thumbnail}
                   alt={item.entitle}
-                  sx={{ height: 140 }}
+                  sx={{ height: 140, width: "100%", objectFit: "cover" }}
                   loading="lazy"
                 />
                 <CardContent

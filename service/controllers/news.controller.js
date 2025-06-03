@@ -40,6 +40,7 @@ export const newsController = {
       enjournalist,
       mnjournalist,
       image_url,
+      thumbnail,
     } = req.body;
 
     if (!id) {
@@ -55,7 +56,8 @@ export const newsController = {
       mndescription = ${mndescription},
       enjournalist = ${enjournalist},
       mnjournalist = ${mnjournalist},
-      image_url = ${image_url}
+      image_url = ${image_url},
+      thumbnail = ${thumbnail}
        WHERE id = ${id} RETURNING *`;
 
       res.status(200).json({ success: true, data: response });
@@ -74,12 +76,13 @@ export const newsController = {
       enjournalist,
       mnjournalist,
       image_url,
+      thumbnail,
     } = req.body;
     const date = new Date();
 
     try {
       const response =
-        await sql`INSERT INTO news(entitle, mntitle, endescription, mndescription, enjournalist,mnjournalist, image_url, date) VALUES (${entitle}, ${mntitle}, ${endescription}, ${mndescription}, ${enjournalist},${mnjournalist}, ${image_url}, ${date}) RETURNING *`;
+        await sql`INSERT INTO news(entitle, mntitle, endescription, mndescription, enjournalist,mnjournalist, image_url, thumbnail, date) VALUES (${entitle}, ${mntitle}, ${endescription}, ${mndescription}, ${enjournalist},${mnjournalist}, ${image_url}, ${thumbnail}, ${date}) RETURNING *`;
       res.status(201).json(response);
     } catch (error) {
       console.error("Error creating news:", error);
@@ -112,7 +115,7 @@ export const newsController = {
         mntitle,
         enjournalist,
         mnjournalist,
-        image_url, date FROM news ORDER BY date DESC LIMIT ${limit} OFFSET ${offset}`;
+        thumbnail, date FROM news ORDER BY date DESC LIMIT ${limit} OFFSET ${offset}`;
       const [{ count }] = await sql`SELECT COUNT(*)::int as count FROM news`;
       res.status(200).json({ data, total: count });
     } catch (error) {

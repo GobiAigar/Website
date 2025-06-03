@@ -23,6 +23,8 @@ const Product = () => {
   const t = useTranslations("product");
   const lang = useLocale();
 
+  console.log("product", product);
+
   if (loading || !product || !product.data?.length) {
     return (
       <Box sx={{ bgcolor: "background.default" }}>
