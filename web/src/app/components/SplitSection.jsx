@@ -2,14 +2,14 @@
 import React from "react";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 
-const SplitSection = ({ sections }) => {
+const SplitSection = ({ sections, reverse }) => {
   const theme = useTheme();
 
   return (
     <Box sx={{ py: 8, bgcolor: "background.paper", width: "100%" }}>
       {sections.map((section, index) => {
         const images = section.img || [];
-        const isReversed = index % 2 === 1;
+        const isReversed = reverse ? true : index % 2 === 1;
 
         return (
           <Grid
@@ -21,7 +21,7 @@ const SplitSection = ({ sections }) => {
               md: isReversed ? "row-reverse" : "row",
             }}
             alignItems="stretch"
-            sx={{ mb: 8, width: "100%" }}
+            sx={{ width: "100%" }}
           >
             <Grid
               size={{ xs: 12, md: 6 }}

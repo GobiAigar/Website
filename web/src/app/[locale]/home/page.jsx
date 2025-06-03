@@ -98,8 +98,12 @@ const Home = () => {
         >
           {loadingWebsite ? (
             <>
-              <Skeleton width="80%" height={60} sx={{ bgcolor: "grey.700" }} />
-              <Skeleton width="60%" height={40} sx={{ mt: 2 }} />
+              <Skeleton
+                width="80%"
+                height="3.75rem"
+                sx={{ bgcolor: "grey.700" }}
+              />
+              <Skeleton width="60%" height="2.5rem" sx={{ mt: "0.5rem" }} />
             </>
           ) : (
             <>
@@ -109,7 +113,12 @@ const Home = () => {
                 color="common.white"
                 gutterBottom
                 sx={{
-                  fontSize: { xs: "28px", sm: "36px", md: "48px", lg: "56px" },
+                  fontSize: {
+                    xs: "1.75rem",
+                    sm: "2.25rem",
+                    md: "3rem",
+                    lg: "3.5rem",
+                  },
                 }}
               >
                 {lang === "mn" ? homeSectionA?.mntitle : homeSectionA?.entitle}
@@ -117,9 +126,14 @@ const Home = () => {
               <Typography
                 variant="h5"
                 color="common.white"
-                mb={4}
+                mb="1rem"
                 sx={{
-                  fontSize: { xs: "12px", sm: "16px", md: "20px", lg: "28px" },
+                  fontSize: {
+                    xs: "0.75rem",
+                    sm: "1rem",
+                    md: "1.25rem",
+                    lg: "1.75rem",
+                  },
                 }}
               >
                 {lang === "mn"
@@ -134,10 +148,12 @@ const Home = () => {
                     variant="contained"
                     sx={{
                       textTransform: "none",
-                      pt: 1,
-                      borderRadius: 3,
+                      py: "0.5rem",
+                      px: "1rem",
+                      borderRadius: "0.75rem",
                       background: "white",
                       color: "black",
+                      fontSize: "1rem",
                     }}
                   >
                     {t("seeProduct")}
@@ -151,10 +167,12 @@ const Home = () => {
                     endIcon={<ArrowForwardIcon />}
                     sx={{
                       textTransform: "none",
-                      pt: 1,
+                      py: "0.5rem",
+                      px: "1rem",
                       color: "white",
                       borderColor: "white",
-                      borderRadius: 3,
+                      borderRadius: "0.75rem",
+                      fontSize: "1rem",
                     }}
                   >
                     {t("ourHistory")}
@@ -166,29 +184,21 @@ const Home = () => {
         </Container>
       </Box>
 
-      <Container sx={{ py: 8 }}>
+      <Container>
         {loadingWebsite ? (
-          <Skeleton variant="rectangular" width="100%" height={300} />
+          <Skeleton variant="rectangular" width="100%" height="25rem" />
         ) : (
-          <ProductImageList sections={homeSectionB} lang={lang} />
+          <SplitSection sections={[splitSections[1]]} reverse={true} />
         )}
       </Container>
 
-      <Container sx={{ py: 8 }}>
-        {loadingWebsite ? (
-          <Skeleton variant="rectangular" width="100%" height={400} />
-        ) : (
-          <SplitSection sections={splitSections} />
-        )}
-      </Container>
-
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth="lg" sx={{ py: "2rem" }}>
         {loadingWebsite ? (
           <Grid container spacing={2}>
             {Array.from(new Array(3)).map((_, index) => (
               <Grid size={{ xs: 12, sm: 4 }} key={index}>
-                <Skeleton variant="rectangular" width="100%" height={200} />
-                <Skeleton width="80%" sx={{ mt: 2 }} />
+                <Skeleton variant="rectangular" width="100%" height="12.5rem" />
+                <Skeleton width="80%" sx={{ mt: "0.5rem" }} />
                 <Skeleton width="60%" />
               </Grid>
             ))}
@@ -218,7 +228,10 @@ const Home = () => {
                     <Divider
                       orientation="vertical"
                       flexItem
-                      sx={{ borderColor: "#8B4513", borderRightWidth: 1 }}
+                      sx={{
+                        borderColor: "#8B4513",
+                        borderRightWidth: "0.0625rem",
+                      }}
                     />
                   </Grid>
                 )}
@@ -228,13 +241,49 @@ const Home = () => {
         )}
       </Container>
 
-      <Container sx={{ py: 8 }}>
+      <Container>
+        {loadingWebsite ? (
+          <Skeleton variant="rectangular" width="100%" height="25rem" />
+        ) : (
+          <SplitSection sections={[splitSections[0]]} reverse={false} />
+        )}
+      </Container>
+
+      <Container sx={{ py: "2rem" }}>
+        {loadingWebsite ? (
+          <Skeleton variant="rectangular" width="100%" height="18.75rem" />
+        ) : (
+          <ProductImageList sections={homeSectionB} lang={lang} />
+        )}
+      </Container>
+
+      {herderSection && (
+        <Container sx={{ py: "2rem" }}>
+          {loadingWebsite ? (
+            <Skeleton variant="rectangular" width="100%" height="25rem" />
+          ) : (
+            <>
+              <Typography variant="h4" fontWeight={700} mb="1rem">
+                {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
+              </Typography>
+              <Box
+                component="img"
+                src={herderSection.image_url1}
+                alt="supply image"
+                sx={{ width: "100%", borderRadius: "0.125rem" }}
+              />
+            </>
+          )}
+        </Container>
+      )}
+
+      <Container sx={{ py: "2rem" }}>
         <Typography
           variant="h4"
           fontWeight={700}
-          mb={4}
+          mb="1rem"
           sx={{
-            fontSize: { xs: "24px", sm: "28px", md: "32px" },
+            fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
           }}
         >
           {loadingWebsite
@@ -245,14 +294,14 @@ const Home = () => {
         </Typography>
 
         {loadingWebsite ? (
-          <Skeleton variant="rectangular" width="100%" height={300} />
+          <Skeleton variant="rectangular" width="100%" height="18.75rem" />
         ) : (
           <Grid container spacing={4}>
             <Grid size={{ xs: 12, md: 6 }}>
               <Box
                 component="ul"
                 sx={{
-                  pl: 3,
+                  pl: "0.75rem",
                   fontSize: "1rem",
                   lineHeight: 2,
                   color: "text.secondary",
@@ -274,49 +323,29 @@ const Home = () => {
         )}
       </Container>
 
-      {herderSection && (
-        <Container sx={{ py: 8 }}>
-          {loadingWebsite ? (
-            <Skeleton variant="rectangular" width="100%" height={400} />
-          ) : (
-            <>
-              <Typography variant="h4" fontWeight={700} mb={4}>
-                {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
-              </Typography>
-              <Box
-                component="img"
-                src={herderSection.image_url1}
-                alt="supply image"
-                sx={{ width: "100%", borderRadius: 2 }}
-              />
-            </>
-          )}
-        </Container>
-      )}
-
       {endSection && (
-        <Container sx={{ py: 8 }}>
+        <Container sx={{ py: "2rem" }}>
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, md: 6 }}>
               {loadingWebsite ? (
-                <Skeleton variant="rectangular" width="100%" height={200} />
+                <Skeleton variant="rectangular" width="100%" height="12.5rem" />
               ) : (
                 <>
-                  <Typography variant="h4" fontWeight={700} mb={2}>
+                  <Typography variant="h4" fontWeight={700} mb="0.5rem">
                     {lang === "mn" ? endSection.mntitle : endSection.entitle}
                   </Typography>
                   <Box
                     component="img"
                     src={endSection.image_url1}
                     alt="end-section"
-                    sx={{ width: "100%", borderRadius: 2 }}
+                    sx={{ width: "100%", borderRadius: "0.125rem" }}
                   />
                 </>
               )}
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
               {loadingWebsite ? (
-                <Skeleton variant="rectangular" width="100%" height={200} />
+                <Skeleton variant="rectangular" width="100%" height="12.5rem" />
               ) : (
                 <FAQSection faqItems={faqs} lang={lang} />
               )}
