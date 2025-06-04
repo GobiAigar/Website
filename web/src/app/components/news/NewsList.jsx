@@ -12,10 +12,8 @@ import { useLocale, useTranslations } from "next-intl";
 import NewsOverlay from "./NewsOverlay";
 import { useRouter } from "next/navigation";
 
-const truncateWords = (text, limit) =>
-  text.split(" ").length > limit
-    ? text.split(" ").slice(0, limit).join(" ") + "..."
-    : text;
+const truncateChars = (text, limit) =>
+  text.length > limit ? text.slice(0, limit) + "..." : text;
 
 const NewsList = ({ news, initialNews }) => {
   const lang = useLocale();
@@ -61,9 +59,9 @@ const NewsList = ({ news, initialNews }) => {
                   }}
                 >
                   <Typography variant="subtitle1" fontWeight="bold">
-                    {truncateWords(
+                    {truncateChars(
                       lang === "mn" ? item.mntitle : item.entitle,
-                      5
+                      39
                     )}
                   </Typography>
                   <Box

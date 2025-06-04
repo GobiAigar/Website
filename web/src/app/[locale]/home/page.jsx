@@ -107,78 +107,88 @@ const Home = () => {
             </>
           ) : (
             <>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                color="common.white"
-                gutterBottom
+              <Box
                 sx={{
-                  fontSize: {
-                    xs: "1.75rem",
-                    sm: "2.25rem",
-                    md: "3rem",
-                    lg: "3.5rem",
-                  },
+                  gap: "3.75rem",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                {lang === "mn" ? homeSectionA?.mntitle : homeSectionA?.entitle}
-              </Typography>
-              <Typography
-                variant="h5"
-                color="common.white"
-                mb="1rem"
-                sx={{
-                  fontSize: {
-                    xs: "0.75rem",
-                    sm: "1rem",
-                    md: "1.25rem",
-                    lg: "1.75rem",
-                  },
-                }}
-              >
-                {lang === "mn"
-                  ? homeSectionA?.mnsubtitle
-                  : homeSectionA?.ensubtitle}
-              </Typography>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid size="auto">
-                  <Button
-                    component={Link}
-                    href="/product"
-                    variant="contained"
-                    sx={{
-                      textTransform: "none",
-                      py: "0.5rem",
-                      px: "1rem",
-                      borderRadius: "0.75rem",
-                      background: "white",
-                      color: "black",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    {t("seeProduct")}
-                  </Button>
+                <Typography
+                  variant="h3"
+                  fontWeight="bold"
+                  color="common.white"
+                  gutterBottom
+                  sx={{
+                    fontSize: {
+                      xs: "1.75rem",
+                      sm: "2.25rem",
+                      md: "3rem",
+                      lg: "3.5rem",
+                    },
+                  }}
+                >
+                  {lang === "mn"
+                    ? homeSectionA?.mntitle
+                    : homeSectionA?.entitle}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="common.white"
+                  mb="1rem"
+                  sx={{
+                    fontSize: {
+                      xs: "0.75rem",
+                      sm: "1rem",
+                      md: "1.25rem",
+                      lg: "1.75rem",
+                    },
+                  }}
+                >
+                  {lang === "mn"
+                    ? homeSectionA?.mnsubtitle
+                    : homeSectionA?.ensubtitle}
+                </Typography>
+                <Grid container spacing={2} justifyContent="center">
+                  <Grid size="auto">
+                    <Button
+                      component={Link}
+                      href="/product"
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        py: "0.7rem",
+                        px: "3rem",
+                        borderRadius: "0.75rem",
+                        background: "white",
+                        color: "black",
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      {t("seeProduct")}
+                    </Button>
+                  </Grid>
+                  <Grid size="auto">
+                    <Button
+                      component={Link}
+                      href="/sustainability"
+                      variant="outlined"
+                      endIcon={<ArrowForwardIcon />}
+                      sx={{
+                        textTransform: "none",
+                        py: "0.7rem",
+                        px: "3rem",
+                        color: "white",
+                        borderColor: "white",
+                        borderRadius: "0.75rem",
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      {t("ourHistory")}
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid size="auto">
-                  <Button
-                    component={Link}
-                    href="/sustainability"
-                    variant="outlined"
-                    endIcon={<ArrowForwardIcon />}
-                    sx={{
-                      textTransform: "none",
-                      py: "0.5rem",
-                      px: "1rem",
-                      color: "white",
-                      borderColor: "white",
-                      borderRadius: "0.75rem",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    {t("ourHistory")}
-                  </Button>
-                </Grid>
-              </Grid>
+              </Box>
             </>
           )}
         </Container>
