@@ -140,44 +140,74 @@ const Sustainability = () => {
   }
 
   return (
-    <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
-      <Header />
-
+    <Box
+      sx={{
+        overflow: "hidden",
+        bgcolor: "background.default",
+      }}
+    >
       <Box
         sx={{
-          minHeight: "60vh",
+          position: "relative",
+          width: "100%",
+          height: { xs: "18.75rem", sm: "80vh" },
+          backgroundImage: `url(${mainInfo?.image_url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          textAlign: "center",
-          color: "black",
-          px: 4,
-          mt: 10,
+          justifyContent: "center",
+          flexDirection: "column",
         }}
       >
-        <Container maxWidth="sm">
-          <Typography
-            variant="h3"
-            sx={{
-              fontSize: { xs: "24px", sm: "28px", md: "32px" },
-              fontWeight: "bold",
-            }}
-          >
-            {lang === "mn" ? mainInfo.mntitle : mainInfo.entitle}
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontSize: { xs: "12px", sm: "16px", md: "20px" },
-            }}
-          >
-            {lang === "mn" ? mainInfo.mndescription : mainInfo.endescription}
-          </Typography>
-        </Container>
+        <Header />
+
+        <Box
+          sx={{
+            minHeight: "60vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            color: "black",
+            px: 4,
+            mt: 10,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              variant="h3"
+              sx={{
+                fontSize: {
+                  xs: "24px",
+                  sm: "28px",
+                  md: "32px",
+                  color: "white",
+                },
+                fontWeight: "bold",
+              }}
+            >
+              {lang === "mn" ? mainInfo.mntitle : mainInfo.entitle}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                mt: 2,
+                fontSize: {
+                  xs: "12px",
+                  sm: "16px",
+                  md: "20px",
+                  color: "white",
+                },
+              }}
+            >
+              {lang === "mn" ? mainInfo.mndescription : mainInfo.endescription}
+            </Typography>
+          </Container>
+        </Box>
       </Box>
 
-      <Container sx={{ py: 10, color: "black" }}>
+      <Container sx={{ pb: 10, color: "black" }}>
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -203,6 +233,7 @@ const Sustainability = () => {
                 flexDirection: index % 2 === 0 ? "row" : "row-reverse",
                 alignItems: "flex-start",
                 position: "relative",
+                top: "140px",
               }}
             >
               <Box

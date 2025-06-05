@@ -16,7 +16,7 @@ import Footer from "../../components/Footer";
 import ProductImageList from "../../components/ImageList";
 import SplitSection from "../../components/SplitSection";
 import InfoCard from "../../components/InforCard";
-import Video from "../../components/Video";
+import ImageCard from "../../components/ImageCard";
 import FAQSection from "../../components/FAQSection";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../../i18n/navigation";
@@ -288,46 +288,46 @@ const Home = () => {
       )}
 
       <Container sx={{ py: "2rem" }}>
-        <Typography
-          variant="h4"
-          fontWeight={700}
-          mb="1rem"
-          sx={{
-            fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
-          }}
-        >
-          {loadingWebsite
-            ? "..."
-            : lang === "mn"
-            ? statisticsSection?.mntitle
-            : statisticsSection?.entitle}
-        </Typography>
-
         {loadingWebsite ? (
           <Skeleton variant="rectangular" width="100%" height="18.75rem" />
         ) : (
           <Grid container spacing={4}>
             <Grid size={{ xs: 12, md: 6 }}>
-              <Box
-                component="ul"
-                sx={{
-                  pl: "0.75rem",
-                  fontSize: "1rem",
-                  lineHeight: 2,
-                  color: "text.secondary",
-                  listStyleType: "disc",
-                  m: 0,
-                }}
-              >
-                {statisticsList.map((item) => (
-                  <li key={item.id}>
-                    {lang === "mn" ? item.mongolia : item.english}
-                  </li>
-                ))}
+              <Box component="ul">
+                <Typography
+                  variant="h4"
+                  fontWeight={700}
+                  mb="1rem"
+                  sx={{
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
+                  }}
+                >
+                  {loadingWebsite
+                    ? "..."
+                    : lang === "mn"
+                    ? statisticsSection?.mntitle
+                    : statisticsSection?.entitle}
+                </Typography>
+                <Typography
+                  sx={{
+                    pl: "0.75rem",
+                    fontSize: "1rem",
+                    lineHeight: 2,
+                    listStyleType: "disc",
+                    m: 0,
+                    color: "text.secondary",
+                  }}
+                >
+                  {statisticsList.map((item) => (
+                    <li key={item.id}>
+                      {lang === "mn" ? item.mongolia : item.english}
+                    </li>
+                  ))}
+                </Typography>
               </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <Video src={statisticsSection?.image_url1} />
+              <ImageCard src={statisticsSection?.image_url1} />
             </Grid>
           </Grid>
         )}

@@ -26,15 +26,27 @@ const Footer = () => {
 
   return (
     <Box
-      sx={{ bgcolor: "white", py: { xs: 6, sm: 8, lg: 10 }, color: "black" }}
+      sx={{
+        bgcolor: "white",
+        py: { xs: 6, sm: 8, lg: 10 },
+        color: "black",
+      }}
     >
-      <Container maxWidth="lg">
+      <Container
+        maxWidth="lg"
+        sx={{
+          borderTopWidth: "1px",
+          borderTopStyle: "solid",
+          borderTopColor: "grey",
+        }}
+      >
         <Grid
           container
           spacing={5}
           justifyContent="space-between"
           alignItems="flex-start"
           textAlign="start"
+          sx={{ pt: 2 }}
         >
           <Grid size={{ xs: 6, md: 3 }}>
             <Box sx={{ display: "flex", alignItems: "flex-start" }}>

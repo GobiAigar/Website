@@ -85,25 +85,38 @@ export const GlobeIcon = ({ color = "#4a0d17", size = 20 }) => (
   </svg>
 );
 
-export const EmailIcon = ({ size = 24 }) => (
+export const EditIcon = ({ size = 24, className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="25"
-    height="24"
-    viewBox="0 0 25 24"
+    width={size}
+    height={size}
+    viewBox="0 0 20 20"
     fill="none"
+    className={className}
   >
-    <g clipPath="url(#clip0_1734_628)">
-      <path
-        d="M22.5059 3.99048H2.49882C1.39781 3.99048 0.5 4.88829 0.5 5.99402V18.0106C0.5 19.1116 1.39781 20.0094 2.49882 20.0094H22.5012C23.6022 20.0094 24.5 19.1116 24.5 18.0106V5.99402C24.5047 4.88829 23.6069 3.99048 22.5059 3.99048ZM21.9672 5.32775L12.4976 13.3183L3.03751 5.32775H21.9672ZM1.83255 17.8499V6.05545L8.86385 11.9905L1.83255 17.8499ZM2.92882 18.6721L9.8987 12.8647L12.0676 14.6981C12.1905 14.8021 12.3464 14.854 12.4976 14.854C12.6488 14.854 12.8048 14.8021 12.9276 14.6981L15.1013 12.8647L22.0806 18.6721H2.92882ZM23.1722 17.8452L16.1361 11.9905L23.1722 6.05073V17.8452Z"
-        fill="white"
-      />
-    </g>
-    <defs>
-      <clipPath id="clip0_1734_628">
-        <rect width="24" height="24" fill="white" transform="translate(0.5)" />
-      </clipPath>
-    </defs>
+    <path
+      d="M9.16663 1.66675H7.49996C3.33329 1.66675 1.66663 3.33341 1.66663 7.50008V12.5001C1.66663 16.6667 3.33329 18.3334 7.49996 18.3334H12.5C16.6666 18.3334 18.3333 16.6667 18.3333 12.5001V10.8334"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M13.3667 2.51663L6.80002 9.0833C6.55002 9.3333 6.30002 9.82497 6.25002 10.1833L5.89169 12.6916C5.75835 13.6 6.40002 14.2333 7.30835 14.1083L9.81669 13.75C10.1667 13.7 10.6584 13.45 10.9167 13.2L17.4834 6.6333C18.6167 5.49997 19.15 4.1833 17.4834 2.51663C15.8167 0.849966 14.5 1.3833 13.3667 2.51663Z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.425 3.45825C12.9834 5.44992 14.5417 7.00825 16.5417 7.57492"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 

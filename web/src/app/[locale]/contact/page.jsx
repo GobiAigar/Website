@@ -13,20 +13,19 @@ import {
   Select,
   Snackbar,
   Alert,
+  Skeleton,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Header from "../../components/Header";
-import {
-  ContactEmailIcon,
-  LocationIcon,
-  PhoneIcon,
-} from "../../components/Icon";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useAppData } from "../../../context/AppDataProvider";
+import Footer from "../../components/Footer";
 
 const Contact = () => {
   const t = useTranslations("contact");
+  // const { product, loading } = useAppData();
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -36,22 +35,13 @@ const Contact = () => {
     initialValues: {
       purpose: "",
       firstname: "",
-      lastname: "",
       email: "",
-      phonenumber: "",
-      country: "",
-      state: "",
-      city: "",
-      bussiness: "",
       plan: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().email(t("invalidEmail")).required(t("required")),
       firstname: Yup.string().required(t("required")),
-      lastname: Yup.string().required(t("required")),
-      phonenumber: Yup.string().required(t("required")),
       purpose: Yup.string().required(t("required")),
-      bussiness: Yup.string().required(t("required")),
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
@@ -81,6 +71,59 @@ const Contact = () => {
     },
   });
 
+  // if (loading || !product || !product.data?.length) {
+  //   return (
+  //     <Box sx={{ bgcolor: "background.default" }}>
+  //       <Header />
+
+  //       <Box
+  //         sx={{
+  //           width: "100%",
+  //           height: { xs: "18.75rem", sm: "80vh" },
+  //           backgroundColor: "#f0f0f0",
+  //         }}
+  //       >
+  //         <Skeleton variant="rectangular" width="100%" height="100%" />
+  //       </Box>
+
+  //       <Container sx={{ py: "2.5rem" }}>
+  //         <Skeleton variant="text" width="60%" height={40} />
+  //         <Skeleton variant="text" width="80%" height={25} sx={{ mt: 2 }} />
+
+  //         <Grid container spacing={1} mt={3} mb={3}>
+  //           <Grid>
+  //             <Skeleton
+  //               variant="rectangular"
+  //               width={120}
+  //               height={40}
+  //               sx={{ borderRadius: 1 }}
+  //             />
+  //           </Grid>
+  //           <Grid>
+  //             <Skeleton
+  //               variant="rectangular"
+  //               width={150}
+  //               height={40}
+  //               sx={{ borderRadius: 1 }}
+  //             />
+  //           </Grid>
+  //         </Grid>
+
+  //         <Box>
+  //           <Skeleton variant="rectangular" width="100%" height={300} />
+  //           <Skeleton variant="text" width="100%" height={40} sx={{ mt: 2 }} />
+  //           <Skeleton variant="text" width="100%" height={40} />
+  //         </Box>
+  //       </Container>
+
+  //       <Footer />
+  //     </Box>
+  //   );
+  // }
+
+  // const data = product.data;
+  // const banner = data.find((item) => item.id === 1);
+
   return (
     <Box
       sx={{
@@ -89,13 +132,72 @@ const Contact = () => {
         minHeight: "100vh",
       }}
     >
-      <Header />
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: { xs: "18.75rem", sm: "80vh" },
+          // backgroundImage: `url(${banner?.image_url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Header />
 
-      <Box sx={{ position: "relative", zIndex: 1, py: 8, pt: 16 }}>
+        <Box
+          sx={{
+            gap: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            px: { xs: "2rem", sm: "4rem", lg: "12rem" },
+          }}
+        >
+          <Typography
+            variant="h3"
+            fontWeight="bold"
+            color="common.black"
+            gutterBottom
+            sx={{
+              fontSize: {
+                xs: "1.5rem",
+                sm: "2rem",
+                lg: "2.5rem",
+              },
+              textAlign: "center",
+            }}
+          >
+            {t("contactUs")}
+          </Typography>
+          <Typography
+            variant="h5"
+            color="common.black"
+            mb="1rem"
+            sx={{
+              fontSize: {
+                xs: "0.65rem",
+                sm: "0.875rem",
+                lg: "1.25rem",
+              },
+              px: { xs: "2rem", sm: "4rem", lg: "12rem", xl: "18rem" },
+              textAlign: "center",
+            }}
+          >
+            {t("contactDesc")}
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box sx={{ position: "relative", zIndex: 1, pb: "56px", pt: "42px" }}>
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="stretch">
             <Grid
-              size={{ xs: 12, sm: 6 }}
+              size={{ xs: 12 }}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -103,61 +205,29 @@ const Contact = () => {
             >
               <Box
                 sx={{
-                  bgcolor: "#7b1c2e",
-                  color: "white",
-                  borderRadius: 2,
-                  p: 4,
                   flex: 1,
                   display: "flex",
                   flexDirection: "column",
-                  gap: 14,
+                  px: { xs: "1rem", sm: "3rem", md: "7rem", lg: "11.25rem" },
                 }}
               >
-                <Box>
-                  <Typography variant="h6" gutterBottom>
-                    {t("contactInfo")}
-                  </Typography>
-                  <Typography variant="body2">{t("startChat")}</Typography>
-                </Box>
-
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <PhoneIcon className="mr-6" />
-                    <Typography variant="body2">{t("phoneinfo")}</Typography>
-                  </Box>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <ContactEmailIcon className="mr-6" />
-                    <Typography variant="body2">{t("supportmail")}</Typography>
-                  </Box>
-                  <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-                    <LocationIcon className="mr-6" />
-                    <Typography variant="body2">{t("address")}</Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-
-            <Grid
-              size={{ xs: 12, sm: 6 }}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                <Typography variant="h6" gutterBottom color="black">
-                  {t("contactUs")}
-                </Typography>
-                <Typography variant="body2" color="grey" sx={{ mb: 3 }}>
-                  {t("contactDesc")}
-                </Typography>
-
                 <form
                   onSubmit={formik.handleSubmit}
-                  style={{ flex: 1, display: "flex", flexDirection: "column" }}
+                  style={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
                 >
                   <Grid container spacing={2}>
-                    <Grid size={{ xs: 12 }}>
+                    <Grid
+                      size={{ xs: 12, sm: 4 }}
+                      sx={{
+                        gap: "16px",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       <FormControl
                         fullWidth
                         error={Boolean(
@@ -187,16 +257,10 @@ const Contact = () => {
                     </Grid>
 
                     {[
-                      { name: "lastname", label: t("lastName") },
-                      { name: "firstname", label: t("firstName") },
                       { name: "email", label: t("email") },
-                      { name: "phonenumber", label: t("phone") },
-                      { name: "country", label: t("country") },
-                      { name: "city", label: t("city") },
-                      { name: "state", label: t("state") },
-                      { name: "bussiness", label: t("business") },
+                      { name: "firstname", label: t("firstName") },
                     ].map((field, index) => (
-                      <Grid size={{ xs: 12, sm: 6 }} key={index}>
+                      <Grid size={{ xs: 12, sm: 4 }} key={index}>
                         <TextField
                           fullWidth
                           name={field.name}
@@ -231,13 +295,11 @@ const Contact = () => {
                       size={{ xs: 12 }}
                       sx={{
                         display: "flex",
-                        justifyContent: "flex-end",
+                        justifyContent: "center",
+                        alignItems: "center",
                         gap: 2,
                       }}
                     >
-                      <Button onClick={formik.handleReset} variant="outlined">
-                        {t("clear")}
-                      </Button>
                       <Button
                         type="submit"
                         variant="contained"
@@ -257,6 +319,8 @@ const Contact = () => {
           </Grid>
         </Container>
       </Box>
+
+      <Footer />
 
       <Snackbar
         open={snackbarOpen}

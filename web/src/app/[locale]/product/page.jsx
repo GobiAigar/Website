@@ -11,25 +11,20 @@ import {
   Button,
   Skeleton,
 } from "@mui/material";
-import { GlobeIcon, HomeHashtagIcon } from "../../components/Icon";
 import { useTranslations, useLocale } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 import TradeSection from "../../components/TradeSection";
 
 const Product = () => {
   const { product, loading } = useAppData();
-  const [selectedId, setSelectedId] = useState(2);
-
   const t = useTranslations("product");
   const lang = useLocale();
-
-  console.log("product", product);
+  const [selectedId, setSelectedId] = useState(2);
 
   if (loading || !product || !product.data?.length) {
     return (
       <Box sx={{ bgcolor: "background.default" }}>
         <Header />
-
         <Box
           sx={{
             width: "100%",
@@ -39,11 +34,9 @@ const Product = () => {
         >
           <Skeleton variant="rectangular" width="100%" height="100%" />
         </Box>
-
         <Container sx={{ py: "2.5rem" }}>
           <Skeleton variant="text" width="60%" height={40} />
           <Skeleton variant="text" width="80%" height={25} sx={{ mt: 2 }} />
-
           <Grid container spacing={1} mt={3} mb={3}>
             <Grid>
               <Skeleton
@@ -62,14 +55,12 @@ const Product = () => {
               />
             </Grid>
           </Grid>
-
           <Box>
             <Skeleton variant="rectangular" width="100%" height={300} />
             <Skeleton variant="text" width="100%" height={40} sx={{ mt: 2 }} />
             <Skeleton variant="text" width="100%" height={40} />
           </Box>
         </Container>
-
         <Footer />
       </Box>
     );
@@ -91,7 +82,6 @@ const Product = () => {
   return (
     <Box sx={{ bgcolor: "background.default", color: "text.primary" }}>
       <Header />
-
       <Box
         sx={{
           width: "100%",
@@ -100,77 +90,42 @@ const Product = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          gap: "0.625rem",
         }}
-      />
-
-      <Container sx={{ py: "2.5rem" }}>
+      >
         <Typography
           variant="h4"
           fontWeight={700}
-          mb="1.5rem"
           sx={{
             fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
-            color: "black",
+            color: "white",
           }}
         >
           {lang === "mn" ? banner?.mntitle : banner?.entitle}
         </Typography>
         <Typography
           variant="h6"
-          mb="1.5rem"
           sx={{
-            fontSize: { xs: "0.75rem", md: "1rem" },
-            color: "#5C4B47",
+            fontSize: { xs: "0.75rem", md: "1rem", lg: "1.25rem" },
+            color: "white",
           }}
         >
           {lang === "mn" ? banner?.mndescription : banner?.endescription}
         </Typography>
+      </Box>
 
-        <Grid container spacing="0.5rem" mb="1.5rem">
-          <Grid>
-            <Button
-              variant={selectedId === 2 ? "contained" : "outlined"}
-              onClick={() => setSelectedId(2)}
-              sx={{
-                backgroundColor: selectedId === 2 ? "#6E1221" : "transparent",
-                color: selectedId === 2 ? "#fff" : "#6E1221",
-                border: selectedId === 2 ? "none" : "0.125rem solid #6E1221",
-                display: "flex",
-                alignItems: "start",
-                gap: "0.25rem",
-                px: "0.5rem",
-              }}
-            >
-              <HomeHashtagIcon color={selectedId === 2 ? "#fff" : "#4a0d17"} />
-              {t("domestic")}
-            </Button>
-          </Grid>
-
-          <Grid>
-            <Button
-              variant={selectedId === 3 ? "contained" : "outlined"}
-              onClick={() => setSelectedId(3)}
-              sx={{
-                backgroundColor: selectedId === 3 ? "#6E1221" : "transparent",
-                color: selectedId === 3 ? "#fff" : "#6E1221",
-                border: selectedId === 3 ? "none" : "0.125rem solid #6E1221",
-                display: "flex",
-                alignItems: "start",
-                gap: "0.25rem",
-                px: "0.5rem",
-              }}
-            >
-              <GlobeIcon color={selectedId === 3 ? "#fff" : "#4a0d17"} />
-              {t("international")}
-            </Button>
-          </Grid>
-        </Grid>
-
+      <Container sx={{ py: "2.5rem" }}>
         <Box mb="2.5rem">
           <TradeSection
             title={tradeMapped.title}
             image={tradeMapped.image}
             description={tradeMapped.description}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
           />
         </Box>
       </Container>
