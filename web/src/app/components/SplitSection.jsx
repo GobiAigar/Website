@@ -10,7 +10,7 @@ const SplitSection = ({ sections, reverse }) => {
   return (
     <Box sx={{ py: 8, bgcolor: "background.paper", width: "100%" }}>
       {sections.map((section, index) => {
-        const images = section.img || [];
+        const images = section?.img || [];
         const isReversed = reverse ? true : index % 2 === 1;
 
         const [isHovered, setIsHovered] = useState(false);
@@ -31,12 +31,12 @@ const SplitSection = ({ sections, reverse }) => {
           >
             <Grid
               size={{ xs: 12, md: 6 }}
-              sx={{ display: "flex", justifyContent: "center" }}
+              sx={{ width: "100%", display: "flex", height: "600px" }}
             >
               <Box
                 sx={{
                   display: images.length > 1 ? "grid" : "flex",
-                  justifyContent: "center", 
+                  justifyContent: "center",
                   gridTemplateColumns:
                     images.length > 1 ? "repeat(2, 1fr)" : "none",
                   gap: 2,
@@ -123,9 +123,6 @@ const SplitSection = ({ sections, reverse }) => {
               size={{ xs: 12, md: 6 }}
               sx={{
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                alignItems: isReversed ? "flex-end" : "flex-start",
               }}
             >
               <Box
@@ -137,7 +134,7 @@ const SplitSection = ({ sections, reverse }) => {
                   flex: 1,
                 }}
               >
-                {section.title && (
+                {section?.title && (
                   <Typography
                     variant="h5"
                     fontWeight={700}
@@ -152,10 +149,10 @@ const SplitSection = ({ sections, reverse }) => {
                       mb: 2,
                     }}
                   >
-                    {section.title}
+                    {section?.title}
                   </Typography>
                 )}
-                {section.text && (
+                {section?.text && (
                   <Typography
                     sx={{
                       textAlign: "justify",
@@ -169,7 +166,7 @@ const SplitSection = ({ sections, reverse }) => {
                       },
                     }}
                   >
-                    {section.text}
+                    {section?.text}
                   </Typography>
                 )}
               </Box>

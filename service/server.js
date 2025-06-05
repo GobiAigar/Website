@@ -12,6 +12,7 @@ import statisticsRouter from "./routes/statistics.route.js";
 import productRouter from "./routes/product.route.js";
 import sustainabilityRouter from "./routes/sustainability.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
+import pageHeader from "./routes/page_header.route.js";
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ server.use("/api", faqRouter);
 server.use("/api", statisticsRouter);
 server.use("/api", productRouter);
 server.use("/api", sustainabilityRouter);
+server.use("/api", pageHeader);
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
