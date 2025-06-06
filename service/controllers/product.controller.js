@@ -3,7 +3,8 @@ export const productController = {
   get: async (_, res) => {
     try {
       const statistics = await sql`SELECT * FROM product order by id`;
-      res.status(200).json({ success: true, data: statistics });
+      const hero = await sql`SELECT * FROM website_headers WHERE id = 2`;
+      res.status(200).json({ success: true, data: { hero, statistics } });
     } catch (error) {
       res.status(500).json({ success: false, error: error });
     }

@@ -6,9 +6,12 @@ export const websiteController = {
       const response = await sql`SELECT * FROM website ORDER BY ID asc`;
       const statistics = await sql`SELECT * FROM statistics`;
       const faq = await sql`SELECT * FROM FAQ`;
-      res
-        .status(200)
-        .json({ website: response, statistics: statistics, faq: faq });
+      const hero = await sql`SELECT * FROM website_headers WHERE id = 1`;
+
+      res.status(200).json({
+        success: true,
+        data: { hero, response, statistics, faq },
+      });
     } catch (error) {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Server Error" });

@@ -3,41 +3,45 @@ export const sustainabilityController = {
   getAll: async (_, res) => {
     try {
       const response = await sql`SELECT * FROM sustainability ORDER BY id ASC`;
-      return res.status(200).json({"success": true, data: response});
+      const hero = await sql`SELECT * FROM website_headers WHERE id = 3`;
+      const datas = [hero[0], ...response];
+      return res.status(200).json({ success: true, data: datas });
     } catch (error) {
       console.error("Error fetching websites:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: "Internal Searver Error" });
     }
   },
   post: async (req, res) => {
-
-    const {entitle, mntitle, endescription,mndescription, image_url} = req.body
-    const date = new Date()
+    const { entitle, mntitle, endescription, mndescription, image_url } =
+      req.body;
+    const date = new Date();
 
     try {
-      const response = await sql`INSERT INTO sustainability(entitle,mntitle,endescription,mndescription,image_url,date) VALUES (${entitle},${mntitle},${endescription},${mndescription},${image_url}, ${date}) returning *`;
-      return res.status(200).json({"success": true, data: response});
+      const response =
+        await sql`INSERT INTO sustainability(entitle,mntitle,endescription,mndescription,image_url,date) VALUES (${entitle},${mntitle},${endescription},${mndescription},${image_url}, ${date}) returning *`;
+      return res.status(200).json({ success: true, data: response });
     } catch (error) {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
   update: async (req, res) => {
-
-    const id = req.params.id
-    const {entitle, mntitle, endescription,mndescription, image_url} = req.body
-    const date = new Date()
+    const id = req.params.id;
+    const { entitle, mntitle, endescription, mndescription, image_url } =
+      req.body;
+    const date = new Date();
 
     try {
-      const response = await sql`UPDATE sustainability SET entitle = ${entitle},mntitle= ${mntitle},endescription=${endescription},mndescription=${mndescription},image_url=${image_url} ,date=${date} WHERE id = ${id} RETURNING *`;
-      return res.status(200).json({"success": true, data: response});
+      const response =
+        await sql`UPDATE sustainability SET entitle = ${entitle},mntitle= ${mntitle},endescription=${endescription},mndescription=${mndescription},image_url=${image_url} ,date=${date} WHERE id = ${id} RETURNING *`;
+      return res.status(200).json({ success: true, data: response });
     } catch (error) {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
   delete: async (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
     try {
       const response = await sql`DELETE FROM sustainability Where id = ${id}`;
       return res.status(200).json(response);
@@ -45,6 +49,5 @@ export const sustainabilityController = {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
-  }
-
-}
+  },
+};

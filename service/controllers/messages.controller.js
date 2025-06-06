@@ -1,5 +1,15 @@
 import { sql } from "../server.js";
 export const messageController = {
+  web: async (_, res) => {
+    try {
+      const response = await sql`SELECT * FROM website_headers WHERE id = 5`;
+      res.status(200).json(response);
+    } catch (error) {
+      console.error("Error fetching messagess:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+
   getAllMessages: async (_, res) => {
     try {
       const response = await sql`SELECT * FROM messages ORDER BY date DESC`;

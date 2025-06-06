@@ -2,15 +2,15 @@ import { sql } from "../server.js";
 export const newsController = {
   getAllNews: async (_, res) => {
     try {
+      const header = await sql`SELECT * FROM website_headers WHERE id = 4`;
       const response = await sql`SELECT * FROM news`;
 
-      res.status(200).json(response);
+      res.status(200).json({ success: true, data: { header, response } });
     } catch (error) {
       console.error("Error fetching news:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
-
   getByIdNews: async (req, res) => {
     const id = req.params.id;
 
@@ -30,7 +30,6 @@ export const newsController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
-
   updateNews: async (req, res) => {
     const id = req.params.id;
     const {
@@ -67,7 +66,6 @@ export const newsController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
-
   createNews: async (req, res) => {
     let {
       entitle,
@@ -90,7 +88,6 @@ export const newsController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
-
   deleteNews: async (req, res) => {
     const id = req.params.id;
 
@@ -112,13 +109,15 @@ export const newsController = {
     const offset = (page - 1) * 6;
 
     try {
+      const header = await sql`SELECT * FROM website_headers id = 4`;
       const data = await sql`SELECT id, entitle,
         mntitle,
         enjournalist,
         mnjournalist,
         thumbnail, date FROM news ORDER BY date DESC LIMIT ${limit} OFFSET ${offset}`;
+
       const [{ count }] = await sql`SELECT COUNT(*)::int as count FROM news`;
-      res.status(200).json({ data, total: count });
+      res.status(200).json({ header, data, total: count });
     } catch (error) {
       console.error("Error fetching paginated news:", error);
       res.status(500).json({ error: "Internal Server Error" });
