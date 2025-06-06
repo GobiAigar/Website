@@ -105,11 +105,11 @@ export const newsController = {
   },
   getPaginatedNews: async (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = page === 1 ? 7 : 6;
-    const offset = (page - 1) * 6;
+    const limit = 6;
+    const offset = (page - 1) * limit;
 
     try {
-      const header = await sql`SELECT * FROM website_headers id = 4`;
+      const header = await sql`SELECT * FROM website_headers WHERE id = 4`;
       const data = await sql`SELECT id, entitle,
         mntitle,
         enjournalist,
