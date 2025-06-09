@@ -150,7 +150,7 @@ const Sustainability = () => {
         sx={{
           position: "relative",
           width: "100%",
-          height: { xs: "18.75rem", sm: "80vh" },
+          height: "20rem",
           backgroundImage: `url(${mainInfo?.image_url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -161,6 +161,9 @@ const Sustainability = () => {
         }}
       >
         <Header />
+        <Box
+          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.3)" }}
+        />
 
         <Box
           sx={{
@@ -172,6 +175,8 @@ const Sustainability = () => {
             color: "black",
             px: 4,
             mt: 10,
+            position: "absolute",
+            zIndex: 1,
           }}
         >
           <Container maxWidth="sm">

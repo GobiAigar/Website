@@ -18,14 +18,15 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Header from "../../components/Header";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { useAppData } from "../../../context/AppDataProvider";
 import Footer from "../../components/Footer";
 
 const Contact = () => {
   const t = useTranslations("contact");
-  // const { product, loading } = useAppData();
+  const lang = useLocale();
+  const { message, loading } = useAppData();
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -71,58 +72,12 @@ const Contact = () => {
     },
   });
 
-  // if (loading || !product || !product.data?.length) {
-  //   return (
-  //     <Box sx={{ bgcolor: "background.default" }}>
-  //       <Header />
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    if (!loading) setLoaded(true);
+  }, [loading]);
 
-  //       <Box
-  //         sx={{
-  //           width: "100%",
-  //           height: { xs: "18.75rem", sm: "80vh" },
-  //           backgroundColor: "#f0f0f0",
-  //         }}
-  //       >
-  //         <Skeleton variant="rectangular" width="100%" height="100%" />
-  //       </Box>
-
-  //       <Container sx={{ py: "2.5rem" }}>
-  //         <Skeleton variant="text" width="60%" height={40} />
-  //         <Skeleton variant="text" width="80%" height={25} sx={{ mt: 2 }} />
-
-  //         <Grid container spacing={1} mt={3} mb={3}>
-  //           <Grid>
-  //             <Skeleton
-  //               variant="rectangular"
-  //               width={120}
-  //               height={40}
-  //               sx={{ borderRadius: 1 }}
-  //             />
-  //           </Grid>
-  //           <Grid>
-  //             <Skeleton
-  //               variant="rectangular"
-  //               width={150}
-  //               height={40}
-  //               sx={{ borderRadius: 1 }}
-  //             />
-  //           </Grid>
-  //         </Grid>
-
-  //         <Box>
-  //           <Skeleton variant="rectangular" width="100%" height={300} />
-  //           <Skeleton variant="text" width="100%" height={40} sx={{ mt: 2 }} />
-  //           <Skeleton variant="text" width="100%" height={40} />
-  //         </Box>
-  //       </Container>
-
-  //       <Footer />
-  //     </Box>
-  //   );
-  // }
-
-  // const data = product.data;
-  // const banner = data.find((item) => item.id === 1);
+  const data = message?.[0];
 
   return (
     <Box
@@ -136,8 +91,9 @@ const Contact = () => {
         sx={{
           position: "relative",
           width: "100%",
-          height: { xs: "18.75rem", sm: "80vh" },
-          // backgroundImage: `url(${banner?.image_url})`,
+          height: "20rem",
+          backgroundImage:
+            loaded && data?.image_url ? `url(${data?.image_url})` : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
@@ -147,62 +103,80 @@ const Contact = () => {
         }}
       >
         <Header />
-
+        <Box
+          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.3)" }}
+        />
         <Box
           sx={{
-            gap: "1rem",
+            minHeight: "60vh",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
-            px: { xs: "2rem", sm: "4rem", lg: "12rem" },
+            alignItems: "center",
+            textAlign: "center",
+            color: "black",
+            px: 4,
+            mt: 10,
+            position: "absolute",
+            zIndex: 1,
+            width: "100%",
           }}
         >
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            color="common.black"
-            gutterBottom
-            sx={{
-              fontSize: {
-                xs: "1.5rem",
-                sm: "2rem",
-                lg: "2.5rem",
-              },
-              textAlign: "center",
-            }}
-          >
-            {t("contactUs")}
-          </Typography>
-          <Typography
-            variant="h5"
-            color="common.black"
-            mb="1rem"
-            sx={{
-              fontSize: {
-                xs: "0.65rem",
-                sm: "0.875rem",
-                lg: "1.25rem",
-              },
-              px: { xs: "2rem", sm: "4rem", lg: "12rem", xl: "18rem" },
-              textAlign: "center",
-            }}
-          >
-            {t("contactDesc")}
-          </Typography>
+          <Container maxWidth="sm">
+            {!loaded ? (
+              <>
+                <Skeleton
+                  variant="text"
+                  width="80%"
+                  height={40}
+                  sx={{ mx: "auto", mb: 2 }}
+                />
+                <Skeleton
+                  variant="text"
+                  width="60%"
+                  height={30}
+                  sx={{ mx: "auto" }}
+                />
+              </>
+            ) : (
+              <>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontSize: {
+                      xs: "24px",
+                      sm: "28px",
+                      md: "32px",
+                      color: "white",
+                    },
+                    fontWeight: "bold",
+                  }}
+                >
+                  {lang === "mn" ? data?.mntitle : data?.entitle}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    mt: 2,
+                    fontSize: {
+                      xs: "12px",
+                      sm: "16px",
+                      md: "20px",
+                      color: "white",
+                    },
+                  }}
+                >
+                  {lang === "mn" ? data?.mnsubtitle : data?.ensubtitle}
+                </Typography>
+              </>
+            )}
+          </Container>
         </Box>
       </Box>
 
       <Box sx={{ position: "relative", zIndex: 1, pb: "56px", pt: "42px" }}>
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="stretch">
-            <Grid
-              size={{ xs: 12 }}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Grid size={{ xs: 12 }}>
               <Box
                 sx={{
                   flex: 1,
@@ -211,109 +185,112 @@ const Contact = () => {
                   px: { xs: "1rem", sm: "3rem", md: "7rem", lg: "11.25rem" },
                 }}
               >
-                <form
-                  onSubmit={formik.handleSubmit}
-                  style={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
+                {!loaded ? (
                   <Grid container spacing={2}>
-                    <Grid
-                      size={{ xs: 12, sm: 4 }}
-                      sx={{
-                        gap: "16px",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <FormControl
-                        fullWidth
-                        error={Boolean(
-                          formik.touched.purpose && formik.errors.purpose
-                        )}
-                      >
-                        <InputLabel>{t("selectPurpose")}</InputLabel>
-                        <Select
-                          name="purpose"
-                          label={t("selectPurpose")}
-                          value={formik.values.purpose}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                        >
-                          <MenuItem value="international">
-                            {t("international")}
-                          </MenuItem>
-                          <MenuItem value="domestic">{t("domestic")}</MenuItem>
-                          <MenuItem value="other">{t("other")}</MenuItem>
-                        </Select>
-                        {formik.touched.purpose && formik.errors.purpose && (
-                          <Typography variant="caption" color="error">
-                            {formik.errors.purpose}
-                          </Typography>
-                        )}
-                      </FormControl>
-                    </Grid>
-
-                    {[
-                      { name: "email", label: t("email") },
-                      { name: "firstname", label: t("firstName") },
-                    ].map((field, index) => (
-                      <Grid size={{ xs: 12, sm: 4 }} key={index}>
-                        <TextField
-                          fullWidth
-                          name={field.name}
-                          label={field.label}
-                          value={formik.values[field.name]}
-                          onChange={formik.handleChange}
-                          error={Boolean(
-                            formik.touched[field.name] &&
-                              formik.errors[field.name]
-                          )}
-                          helperText={
-                            formik.touched[field.name] &&
-                            formik.errors[field.name]
-                          }
-                        />
+                    {[1, 2, 3, 4].map((i) => (
+                      <Grid size={{ xs: 12, sm: i <= 3 ? 4 : 12 }} key={i}>
+                        <Skeleton variant="rectangular" height={56} />
                       </Grid>
                     ))}
-
-                    <Grid size={{ xs: 12 }}>
-                      <TextField
-                        fullWidth
-                        multiline
-                        rows={3}
-                        name="plan"
-                        label={t("plan")}
-                        value={formik.values.plan}
-                        onChange={formik.handleChange}
-                      />
-                    </Grid>
-
                     <Grid
                       size={{ xs: 12 }}
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: 2,
-                      }}
+                      sx={{ display: "flex", justifyContent: "center" }}
                     >
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          background: "#6E1221",
-                          border: "2px solid #6E1221",
-                          "&:hover": { backgroundColor: "#4a0d17" },
-                        }}
-                      >
-                        {t("submit")}
-                      </Button>
+                      <Skeleton variant="rectangular" width={150} height={40} />
                     </Grid>
                   </Grid>
-                </form>
+                ) : (
+                  <form onSubmit={formik.handleSubmit}>
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, sm: 4 }}>
+                        <FormControl
+                          fullWidth
+                          error={Boolean(
+                            formik.touched.purpose && formik.errors.purpose
+                          )}
+                        >
+                          <InputLabel>{t("selectPurpose")}</InputLabel>
+                          <Select
+                            name="purpose"
+                            label={t("selectPurpose")}
+                            value={formik.values.purpose}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          >
+                            <MenuItem value="international">
+                              {t("international")}
+                            </MenuItem>
+                            <MenuItem value="domestic">
+                              {t("domestic")}
+                            </MenuItem>
+                            <MenuItem value="other">{t("other")}</MenuItem>
+                          </Select>
+                          {formik.touched.purpose && formik.errors.purpose && (
+                            <Typography variant="caption" color="error">
+                              {formik.errors.purpose}
+                            </Typography>
+                          )}
+                        </FormControl>
+                      </Grid>
+
+                      {[
+                        { name: "email", label: t("email") },
+                        { name: "firstname", label: t("firstName") },
+                      ].map((field, index) => (
+                        <Grid size={{ xs: 12, sm: 4 }} key={index}>
+                          <TextField
+                            fullWidth
+                            name={field.name}
+                            label={field.label}
+                            value={formik.values[field.name]}
+                            onChange={formik.handleChange}
+                            error={Boolean(
+                              formik.touched[field.name] &&
+                                formik.errors[field.name]
+                            )}
+                            helperText={
+                              formik.touched[field.name] &&
+                              formik.errors[field.name]
+                            }
+                          />
+                        </Grid>
+                      ))}
+
+                      <Grid size={{ xs: 12 }}>
+                        <TextField
+                          fullWidth
+                          multiline
+                          rows={3}
+                          name="plan"
+                          label={t("plan")}
+                          value={formik.values.plan}
+                          onChange={formik.handleChange}
+                        />
+                      </Grid>
+
+                      <Grid
+                        size={{ xs: 12 }}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          gap: 2,
+                        }}
+                      >
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            background: "#6E1221",
+                            border: "2px solid #6E1221",
+                            "&:hover": { backgroundColor: "#4a0d17" },
+                          }}
+                        >
+                          {t("submit")}
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </form>
+                )}
               </Box>
             </Grid>
           </Grid>

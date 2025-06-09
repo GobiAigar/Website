@@ -9,6 +9,7 @@ export const AppDataProvider = ({ children }) => {
     website: null,
     product: null,
     sustainability: null,
+    message: null,
     loadingWebsite: true,
     loadingAll: true,
     error: null,
@@ -34,16 +35,21 @@ export const AppDataProvider = ({ children }) => {
         const sustainabilityPromise = fetch(
           "http://localhost:8000/api/sustainability"
         ).then((r) => r.json());
+        const messagePromise = fetch(
+          "http://localhost:8000/api/contactHeader"
+        ).then((r) => r.json());
 
-        const [productRes, sustainabilityRes] = await Promise.all([
+        const [productRes, sustainabilityRes, messageRes] = await Promise.all([
           productPromise,
           sustainabilityPromise,
+          messagePromise,
         ]);
 
         setData((prev) => ({
           ...prev,
           product: productRes,
           sustainability: sustainabilityRes,
+          message: messageRes,
           loadingAll: false,
           error: null,
         }));

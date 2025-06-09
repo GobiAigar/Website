@@ -43,7 +43,15 @@ const SplitSection = ({ sections, reverse }) => {
           >
             <Grid
               size={{ xs: 12, md: 6 }}
-              sx={{ width: "100%", display: "flex", height: "600px" }}
+              sx={{
+                width: "100%",
+                display: "flex",
+                height: {
+                  xs: "auto",
+                  md: "30rem",
+                  lg: "37.5rem",
+                },
+              }}
             >
               <Box
                 sx={{
@@ -61,8 +69,17 @@ const SplitSection = ({ sections, reverse }) => {
                     src.match(/\.(mp4|webm|ogg)(\?.*)?$/i)
                   );
                   const commonSx = {
-                    width: "37.5rem",
-                    height: "37.5rem",
+                    width: {
+                      xs: "100%",
+                      sm: "100%",
+                      md: "30rem",
+                      lg: "37.5rem",
+                    },
+                    height: {
+                      xs: "auto",
+                      md: "30rem",
+                      lg: "37.5rem",
+                    },
                     objectFit: "cover",
                     borderRadius: 2,
                     display: "block",

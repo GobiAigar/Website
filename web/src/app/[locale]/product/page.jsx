@@ -99,10 +99,11 @@ const Product = () => {
   return (
     <Box sx={{ bgcolor: "background.default", color: "text.primary" }}>
       <Header />
+
       <Box
         sx={{
           width: "100%",
-          height: { xs: "18.75rem", sm: "80vh" },
+          height: { xs: "20rem" },
           backgroundImage: `url(${banner?.image_url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -114,25 +115,54 @@ const Product = () => {
           gap: "0.625rem",
         }}
       >
-        <Typography
-          variant="h4"
-          fontWeight={700}
+        <Box
+          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.3)" }}
+        />
+        <Box
           sx={{
-            fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
-            color: "white",
+            minHeight: "60vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            color: "black",
+            px: 4,
+            mt: 10,
+            position: "absolute",
+            zIndex: 1,
           }}
         >
-          {lang === "mn" ? banner?.mntitle : banner?.entitle}
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            fontSize: { xs: "0.75rem", md: "1rem", lg: "1.25rem" },
-            color: "white",
-          }}
-        >
-          {lang === "mn" ? banner?.mnsubtitle : banner?.ensubtitle}
-        </Typography>
+          <Container maxWidth="sm">
+            <Typography
+              variant="h3"
+              sx={{
+                fontSize: {
+                  xs: "24px",
+                  sm: "28px",
+                  md: "32px",
+                  color: "white",
+                },
+                fontWeight: "bold",
+              }}
+            >
+              {lang === "mn" ? banner?.mntitle : banner?.entitle}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                mt: 2,
+                fontSize: {
+                  xs: "12px",
+                  sm: "16px",
+                  md: "20px",
+                  color: "white",
+                },
+              }}
+            >
+              {lang === "mn" ? banner?.mnsubtitle : banner?.ensubtitle}
+            </Typography>
+          </Container>
+        </Box>
       </Box>
       <Container sx={{ py: "2.5rem" }}>
         <SplitSection sections={[splitSections[0]]} reverse={true} />
