@@ -27,7 +27,6 @@ const Home = () => {
   const lang = useLocale();
   const t = useTranslations("home");
 
-  console.log("web", website);
   const rawData = website?.data || {};
   const websiteData = rawData?.response || [];
   const statisticsList = rawData.statistics || [];
