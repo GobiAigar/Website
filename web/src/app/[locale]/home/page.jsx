@@ -27,6 +27,7 @@ const Home = () => {
   const lang = useLocale();
   const t = useTranslations("home");
 
+  console.log("web", website);
   const rawData = website?.data || {};
   const websiteData = rawData?.response || [];
   const statisticsList = rawData.statistics || [];
@@ -57,7 +58,7 @@ const Home = () => {
               sec.image_url4,
             ].filter(Boolean),
             title: lang === "mn" ? sec.mntitle : sec.entitle,
-            text: lang === "mn" ? sec.mnsubtitle : sec.ensubtitle,
+            text: lang === "mn" ? sec.mndescription : sec.endescription,
           }
         : null;
     })

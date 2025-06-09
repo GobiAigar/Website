@@ -30,16 +30,12 @@ const Footer = () => {
         bgcolor: "white",
         py: { xs: 6, sm: 8, lg: 10 },
         color: "black",
+        borderTopWidth: "1px",
+        borderTopStyle: "solid",
+        borderTopColor: "#8C182A",
       }}
     >
-      <Container
-        maxWidth="lg"
-        sx={{
-          borderTopWidth: "1px",
-          borderTopStyle: "solid",
-          borderTopColor: "grey",
-        }}
-      >
+      <Container maxWidth="lg">
         <Grid
           container
           spacing={5}

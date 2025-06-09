@@ -14,14 +14,15 @@ import {
 import { useTranslations, useLocale } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 import TradeSection from "../../components/TradeSection";
+import SplitSection from "../../components/SplitSection";
 
 const Product = () => {
   const { product, loading } = useAppData();
   const t = useTranslations("product");
   const lang = useLocale();
-  const [selectedId, setSelectedId] = useState(2);
+  const [selectedId, setSelectedId] = useState(3);
 
-  if (loading || !product || !product.data?.length) {
+  if (loading || !product || !product.data?.response?.length) {
     return (
       <Box sx={{ bgcolor: "background.default" }}>
         <Header />
@@ -66,9 +67,25 @@ const Product = () => {
     );
   }
 
-  const data = product.data;
-  const banner = data.find((item) => item.id === 1);
-  const selectedTrade = data.find((item) => item.id === selectedId);
+  const data = product?.data;
+  const banner = data?.hero.find((item) => item.id === 2);
+  const splitSections = data?.response
+    .filter((item) => item.id !== 3 && item.id !== 4)
+    .map((sec) => ({
+      img: [
+        sec.image_url1,
+        sec.image_url2,
+        sec.image_url3,
+        sec.image_url4,
+      ].filter(Boolean),
+      title: lang === "mn" ? sec.mntitle : sec.entitle,
+      text: lang === "mn" ? sec.mndescription : sec.endescription,
+    }))
+    .filter(Boolean);
+  const selectedTrade =
+    selectedId === 3 || selectedId === 4
+      ? data?.response?.find((item) => item.id === selectedId)
+      : null;
 
   const tradeMapped = {
     title: lang === "mn" ? selectedTrade?.mntitle : selectedTrade?.entitle,
@@ -76,7 +93,7 @@ const Product = () => {
       lang === "mn"
         ? selectedTrade?.mndescription
         : selectedTrade?.endescription,
-    image: selectedTrade?.image_url,
+    image: selectedTrade?.image_url1,
   };
 
   return (
@@ -114,9 +131,15 @@ const Product = () => {
             color: "white",
           }}
         >
-          {lang === "mn" ? banner?.mndescription : banner?.endescription}
+          {lang === "mn" ? banner?.mnsubtitle : banner?.ensubtitle}
         </Typography>
       </Box>
+      <Container sx={{ py: "2.5rem" }}>
+        <SplitSection sections={[splitSections[0]]} reverse={true} />
+      </Container>
+      <Container sx={{ py: "2.5rem" }}>
+        <SplitSection sections={[splitSections[1]]} reverse={false} />
+      </Container>
 
       <Container sx={{ py: "2.5rem" }}>
         <Box mb="2.5rem">
@@ -129,7 +152,9 @@ const Product = () => {
           />
         </Box>
       </Container>
-
+      <Container sx={{ py: "2.5rem" }}>
+        <SplitSection sections={[splitSections[2]]} reverse={false} />
+      </Container>
       <Footer />
     </Box>
   );

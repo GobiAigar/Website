@@ -17,43 +17,67 @@ const TradeSection = ({
     <Grid container spacing={4} alignItems="flex-start">
       <Grid size={{ xs: 12, md: 6 }}>
         <Box>
-          <Grid container spacing={1} mb={3}>
-            <Grid>
+          <Grid container mb={3}>
+            <Grid size={{ xs: 6 }}>
               <Button
-                variant={selectedId === 2 ? "contained" : "outlined"}
-                onClick={() => setSelectedId(2)}
+                onClick={() => setSelectedId(3)}
+                fullWidth
                 sx={{
-                  backgroundColor: selectedId === 2 ? "#6E1221" : "transparent",
-                  color: selectedId === 2 ? "#fff" : "#6E1221",
-                  border: selectedId === 2 ? "none" : "0.125rem solid #6E1221",
+                  backgroundColor: "transparent",
+                  color: selectedId === 3 ? "#6E1221" : "#6E1221",
+                  border: "none",
+                  borderBottom:
+                    selectedId === 3
+                      ? "0.125rem solid #6E1221"
+                      : "0.125rem solid transparent",
+                  borderRadius: 0,
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.25rem",
-                  px: "0.75rem",
+                  justifyContent: "center",
+                  gap: 1,
+                  fontSize: "16px",
+                  fontWeight: 500,
+                  px: 2,
+                  py: 1.5,
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                    borderBottom: "0.125rem solid #6E1221",
+                  },
                 }}
               >
-                <HomeHashtagIcon
-                  color={selectedId === 2 ? "#fff" : "#4a0d17"}
-                />
+                <HomeHashtagIcon color="#6E1221" />
                 {t("domestic")}
               </Button>
             </Grid>
 
-            <Grid>
+            <Grid size={{ xs: 6 }}>
               <Button
-                variant={selectedId === 3 ? "contained" : "outlined"}
-                onClick={() => setSelectedId(3)}
+                onClick={() => setSelectedId(4)}
+                fullWidth
                 sx={{
-                  backgroundColor: selectedId === 3 ? "#6E1221" : "transparent",
-                  color: selectedId === 3 ? "#fff" : "#6E1221",
-                  border: selectedId === 3 ? "none" : "0.125rem solid #6E1221",
+                  backgroundColor: "transparent",
+                  color: selectedId === 4 ? "#6E1221" : "#6E1221",
+                  border: "none",
+                  borderBottom:
+                    selectedId === 4
+                      ? "0.125rem solid #6E1221"
+                      : "0.125rem solid transparent",
+                  borderRadius: 0,
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.25rem",
-                  px: "0.75rem",
+                  justifyContent: "center",
+                  gap: 1,
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  px: 2,
+                  py: 1.5,
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                    borderBottom: "0.125rem solid #6E1221",
+                  },
                 }}
               >
-                <GlobeIcon color={selectedId === 3 ? "#fff" : "#4a0d17"} />
+                <GlobeIcon color="#6E1221" />
                 {t("international")}
               </Button>
             </Grid>
@@ -77,13 +101,12 @@ const TradeSection = ({
             {description}
           </Typography>
 
-          <Box display="flex" justifyContent={{ xs: "center" }}>
+          <Box display="flex" justifyContent={{ xs: "start" }}>
             <Button
               component={Link}
               href="/contact"
               variant="contained"
               sx={{
-                maxWidth: { xs: "100%", sm: 150 },
                 backgroundColor: "white",
                 borderColor: "#8C182A",
                 borderRadius: "12px",
@@ -92,17 +115,18 @@ const TradeSection = ({
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
-                px: "6px",
-                py: "3.5px",
+                px: "1.5rem",
+                py: "0.570rem",
                 "&:hover": {
                   backgroundColor: "#4a0d17",
                   color: "white",
                 },
+                fontSize: "1rem",
+                whiteSpace: "nowrap",
               }}
-              fullWidth
             >
               <EditIcon size={20} />
-              {t("contact")}
+              {t("getStartToday")}
             </Button>
           </Box>
         </Box>
