@@ -1,11 +1,19 @@
 "use client";
-import React, { useRef, useState } from "react";
-import { Box, Grid, Typography, useTheme, IconButton } from "@mui/material";
+import React, { useRef, useState, useEffect } from "react";
+import {
+  Box,
+  Grid,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  IconButton,
+} from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 
 const SplitSection = ({ sections, reverse }) => {
   const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <Box sx={{ py: 8, bgcolor: "background.paper", width: "100%" }}>
@@ -15,11 +23,23 @@ const SplitSection = ({ sections, reverse }) => {
 
         const [isHovered, setIsHovered] = useState(false);
         const [isPlaying, setIsPlaying] = useState(false);
+        const [showFull, setShowFull] = useState(false);
+        const [isOverflowing, setIsOverflowing] = useState(false);
+        const textRef = useRef(null);
         const videoRef = useRef(null);
+
+        useEffect(() => {
+          const el = textRef.current;
+          if (!el) return;
+          const timer = setTimeout(() => {
+            const { scrollHeight, clientHeight } = el;
+            setIsOverflowing(scrollHeight > clientHeight);
+          }, 50);
+          return () => clearTimeout(timer);
+        }, [section?.text]);
 
         const handleTogglePlay = () => {
           if (!videoRef.current) return;
-
           if (videoRef.current.paused) {
             videoRef.current.play();
             setIsPlaying(true);
@@ -34,23 +54,15 @@ const SplitSection = ({ sections, reverse }) => {
             container
             spacing={4}
             key={`section-${index}`}
-            direction={{
-              xs: "column",
-              md: isReversed ? "row-reverse" : "row",
-            }}
+            direction={{ xs: "column", md: isReversed ? "row-reverse" : "row" }}
             alignItems="stretch"
             sx={{ width: "100%" }}
           >
             <Grid
               size={{ xs: 12, md: 6 }}
               sx={{
-                width: "100%",
                 display: "flex",
-                height: {
-                  xs: "auto",
-                  md: "30rem",
-                  lg: "37.5rem",
-                },
+                height: { xs: "auto", md: "30rem", lg: "37.5rem" },
               }}
             >
               <Box
@@ -69,17 +81,8 @@ const SplitSection = ({ sections, reverse }) => {
                     src.match(/\.(mp4|webm|ogg)(\?.*)?$/i)
                   );
                   const commonSx = {
-                    width: {
-                      xs: "100%",
-                      sm: "100%",
-                      md: "30rem",
-                      lg: "37.5rem",
-                    },
-                    height: {
-                      xs: "auto",
-                      md: "30rem",
-                      lg: "37.5rem",
-                    },
+                    width: { xs: "100%", md: "30rem", lg: "37.5rem" },
+                    height: { xs: "auto", md: "30rem", lg: "37.5rem" },
                     objectFit: "cover",
                     borderRadius: 2,
                     display: "block",
@@ -140,19 +143,11 @@ const SplitSection = ({ sections, reverse }) => {
               </Box>
             </Grid>
 
-            <Grid
-              size={{ xs: 12, md: 6 }}
-              sx={{
-                display: "flex",
-              }}
-            >
+            <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
               <Box
                 sx={{
-                  textAlign: {
-                    xs: "start",
-                    md: isReversed ? "right" : "left",
-                  },
                   flex: 1,
+                  textAlign: { xs: "start", md: isReversed ? "right" : "left" },
                 }}
               >
                 {section?.title && (
@@ -175,20 +170,60 @@ const SplitSection = ({ sections, reverse }) => {
                   </Typography>
                 )}
                 {section?.text && (
-                  <Typography
+                  <Box
                     sx={{
-                      textAlign: "justify",
-                      color: "text.secondary",
-                      whiteSpace: "pre-line",
-                      fontSize: {
-                        xs: "12px",
-                        sm: "14px",
-                        md: "16px",
-                        lg: "18px",
+                      maxHeight: isDesktop && showFull ? "32rem" : "none",
+                      overflowY: isDesktop && showFull ? "auto" : "visible",
+                      pr: isDesktop && showFull ? 1 : 0,
+                      scrollbarWidth: isDesktop ? "thin" : "none",
+                      "&::-webkit-scrollbar": {
+                        width: isDesktop ? 0 : "0px",
+                      },
+                      "&:hover::-webkit-scrollbar": {
+                        width: isDesktop ? "6px" : "0px",
+                      },
+                      "&::-webkit-scrollbar-thumb": {
+                        backgroundColor: "#aaa",
+                        borderRadius: "6px",
                       },
                     }}
                   >
-                    {section?.text}
+                    <Typography
+                      ref={textRef}
+                      sx={{
+                        textAlign: "justify",
+                        color: "text.secondary",
+                        whiteSpace: "pre-line",
+                        overflow: isDesktop && !showFull ? "hidden" : "visible",
+                        display:
+                          isDesktop && !showFull ? "-webkit-box" : "block",
+                        WebkitLineClamp: isDesktop && !showFull ? 19 : "unset",
+                        WebkitBoxOrient: "vertical",
+                        fontSize: {
+                          xs: "12px",
+                          sm: "14px",
+                          md: "16px",
+                          lg: "18px",
+                        },
+                      }}
+                    >
+                      {section?.text}
+                    </Typography>
+                  </Box>
+                )}
+                {isOverflowing && isDesktop && (
+                  <Typography
+                    onClick={() => setShowFull(!showFull)}
+                    sx={{
+                      mt: 1,
+                      color: "primary.main",
+                      cursor: "pointer",
+                      fontWeight: 500,
+                      textAlign: "right",
+                      userSelect: "none",
+                    }}
+                  >
+                    {showFull ? "See less" : "See more"}
                   </Typography>
                 )}
               </Box>

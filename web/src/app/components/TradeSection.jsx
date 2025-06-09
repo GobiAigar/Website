@@ -1,5 +1,12 @@
 "use client";
-import { Button, Box, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Box,
+  Grid,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { EditIcon, GlobeIcon, HomeHashtagIcon } from "./Icon";
 import { useTranslations } from "next-intl";
@@ -13,6 +20,9 @@ const TradeSection = ({
   setSelectedId,
 }) => {
   const t = useTranslations("product");
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const textRef = useRef(null);
   const [showFull, setShowFull] = useState(false);
@@ -46,7 +56,6 @@ const TradeSection = ({
                 sx={{
                   backgroundColor: "transparent",
                   color: "#6E1221",
-                  border: "none",
                   borderBottom:
                     selectedId === 3
                       ? "0.125rem solid #6E1221"
@@ -62,7 +71,7 @@ const TradeSection = ({
                   py: 1.5,
                   "&:hover": {
                     backgroundColor: "transparent",
-                    borderBottom: "0.125rem solid #6E1221",
+                    borderBottom: "0.125rem solid #B67C7C",
                   },
                 }}
               >
@@ -70,7 +79,6 @@ const TradeSection = ({
                 {t("domestic")}
               </Button>
             </Grid>
-
             <Grid size={{ xs: 6 }}>
               <Button
                 onClick={() => setSelectedId(4)}
@@ -78,7 +86,6 @@ const TradeSection = ({
                 sx={{
                   backgroundColor: "transparent",
                   color: "#6E1221",
-                  border: "none",
                   borderBottom:
                     selectedId === 4
                       ? "0.125rem solid #6E1221"
@@ -94,7 +101,7 @@ const TradeSection = ({
                   py: 1.5,
                   "&:hover": {
                     backgroundColor: "transparent",
-                    borderBottom: "0.125rem solid #6E1221",
+                    borderBottom: "0.125rem solid #B67C7C",
                   },
                 }}
               >
@@ -112,12 +119,22 @@ const TradeSection = ({
           >
             {title}
           </Typography>
-
           <Box
             sx={{
-              maxHeight: showFull ? "25rem" : "auto",
-              overflowY: showFull ? "auto" : "hidden",
-              pr: showFull ? 1 : 0,
+              maxHeight: isDesktop && showFull ? "23rem" : "none",
+              overflowY: isDesktop && showFull ? "auto" : "visible",
+              pr: isDesktop && showFull ? 1 : 0,
+              scrollbarWidth: isDesktop ? "thin" : "none",
+              "&::-webkit-scrollbar": {
+                width: isDesktop ? 0 : "0px",
+              },
+              "&:hover::-webkit-scrollbar": {
+                width: isDesktop ? "6px" : "0px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#aaa",
+                borderRadius: "6px",
+              },
             }}
           >
             <Typography
@@ -127,9 +144,9 @@ const TradeSection = ({
               whiteSpace="pre-line"
               sx={{
                 color: "#5C4B47",
-                overflow: !showFull ? "hidden" : "visible",
-                display: !showFull ? "-webkit-box" : "block",
-                WebkitLineClamp: !showFull ? 16 : "unset",
+                overflow: isDesktop && !showFull ? "hidden" : "visible",
+                display: isDesktop && !showFull ? "-webkit-box" : "block",
+                WebkitLineClamp: isDesktop && !showFull ? 15 : "unset",
                 WebkitBoxOrient: "vertical",
               }}
             >
@@ -137,7 +154,7 @@ const TradeSection = ({
             </Typography>
           </Box>
 
-          {isOverflowing && (
+          {isOverflowing && isDesktop && (
             <Typography
               onClick={() => setShowFull(!showFull)}
               sx={{
@@ -156,7 +173,7 @@ const TradeSection = ({
           <Box
             display="flex"
             justifyContent={{ xs: "start" }}
-            sx={{ mt: "1rem" }}
+            sx={{ mt: "0.5rem" }}
           >
             <Button
               component={Link}

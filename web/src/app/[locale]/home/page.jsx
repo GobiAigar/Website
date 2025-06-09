@@ -230,7 +230,7 @@ const Home = () => {
                     imageSrc={item.image_url1}
                     title={lang === "mn" ? item.mntitle : item.entitle}
                     description={
-                      lang === "mn" ? item.mnsubtitle : item.ensubtitle
+                      lang === "mn" ? item.mndescription : item.endescription
                     }
                   />
                 </Grid>
