@@ -1,6 +1,7 @@
+"use client";
 import { Button, Box, Grid, Typography } from "@mui/material";
-import React from "react";
-import { EditIcon, RightArrowIcon, GlobeIcon, HomeHashtagIcon } from "./Icon";
+import React, { useEffect, useRef, useState } from "react";
+import { EditIcon, GlobeIcon, HomeHashtagIcon } from "./Icon";
 import { useTranslations } from "next-intl";
 import { Link } from "../../i18n/navigation";
 
@@ -13,6 +14,26 @@ const TradeSection = ({
 }) => {
   const t = useTranslations("product");
 
+  const textRef = useRef(null);
+  const [showFull, setShowFull] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+
+    const timer = setTimeout(() => {
+      const { scrollHeight, clientHeight } = el;
+      setIsOverflowing(scrollHeight > clientHeight);
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [description]);
+
+  useEffect(() => {
+    setShowFull(false);
+  }, [description]);
+
   return (
     <Grid container spacing={4} alignItems="flex-start">
       <Grid size={{ xs: 12, md: 6 }}>
@@ -24,7 +45,7 @@ const TradeSection = ({
                 fullWidth
                 sx={{
                   backgroundColor: "transparent",
-                  color: selectedId === 3 ? "#6E1221" : "#6E1221",
+                  color: "#6E1221",
                   border: "none",
                   borderBottom:
                     selectedId === 3
@@ -56,7 +77,7 @@ const TradeSection = ({
                 fullWidth
                 sx={{
                   backgroundColor: "transparent",
-                  color: selectedId === 4 ? "#6E1221" : "#6E1221",
+                  color: "#6E1221",
                   border: "none",
                   borderBottom:
                     selectedId === 4
@@ -92,16 +113,51 @@ const TradeSection = ({
             {title}
           </Typography>
 
-          <Typography
-            variant="body1"
-            sx={{ color: "#5C4B47", pb: 1 }}
-            align="justify"
-            whiteSpace="pre-line"
+          <Box
+            sx={{
+              maxHeight: showFull ? "25rem" : "auto",
+              overflowY: showFull ? "auto" : "hidden",
+              pr: showFull ? 1 : 0,
+            }}
           >
-            {description}
-          </Typography>
+            <Typography
+              ref={textRef}
+              variant="body1"
+              align="justify"
+              whiteSpace="pre-line"
+              sx={{
+                color: "#5C4B47",
+                overflow: !showFull ? "hidden" : "visible",
+                display: !showFull ? "-webkit-box" : "block",
+                WebkitLineClamp: !showFull ? 16 : "unset",
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {description}
+            </Typography>
+          </Box>
 
-          <Box display="flex" justifyContent={{ xs: "start" }}>
+          {isOverflowing && (
+            <Typography
+              onClick={() => setShowFull(!showFull)}
+              sx={{
+                mt: 1,
+                color: "primary.main",
+                cursor: "pointer",
+                fontWeight: 500,
+                textAlign: "right",
+                userSelect: "none",
+              }}
+            >
+              {showFull ? t("seeLess") : t("seeMore")}
+            </Typography>
+          )}
+
+          <Box
+            display="flex"
+            justifyContent={{ xs: "start" }}
+            sx={{ mt: "1rem" }}
+          >
             <Button
               component={Link}
               href="/contact"
@@ -131,6 +187,7 @@ const TradeSection = ({
           </Box>
         </Box>
       </Grid>
+
       <Grid size={{ xs: 12, md: 6 }}>
         <Box display="flex" justifyContent="start" alignItems="start">
           <Box

@@ -53,7 +53,7 @@ const Product = () => {
         <Box
           sx={{
             width: "100%",
-            height: { xs: "20rem", sm: "80vh" },
+            height: "20rem",
             backgroundColor: "#f0f0f0",
             position: "relative",
           }}
@@ -183,10 +183,10 @@ const Product = () => {
         </Box>
       </Box>
 
-      <Container sx={{ py: "2.5rem" }}>
+      <Container>
         <SplitSection sections={[splitSections[0]]} reverse={true} />
       </Container>
-      <Container sx={{ py: "2.5rem" }}>
+      <Container>
         <SplitSection sections={[splitSections[1]]} reverse={false} />
       </Container>
 
@@ -202,7 +202,7 @@ const Product = () => {
         </Box>
       </Container>
 
-      <Container sx={{ py: "2.5rem" }}>
+      <Container>
         <SplitSection sections={[splitSections[2]]} reverse={false} />
       </Container>
 

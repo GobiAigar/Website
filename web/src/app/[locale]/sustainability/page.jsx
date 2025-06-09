@@ -48,20 +48,28 @@ const Sustainability = () => {
         <Header />
         <Box
           sx={{
-            minHeight: "60vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            color: "black",
-            px: 4,
-            mt: 10,
+            width: "100%",
+            height: "20rem",
+            backgroundColor: "#f0f0f0",
+            position: "relative",
           }}
         >
-          <Container maxWidth="sm">
-            <Skeleton variant="text" width="80%" height={50} />
-            <Skeleton variant="text" width="100%" height={100} sx={{ mt: 2 }} />
-          </Container>
+          <Skeleton variant="rectangular" width="100%" height="100%" />
+          <Box
+            sx={{
+              position: "absolute",
+              top: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "100%",
+              px: 2,
+            }}
+          >
+            <Container maxWidth="sm">
+              <Skeleton variant="text" width="80%" height={40} sx={{ mb: 2 }} />
+              <Skeleton variant="text" width="60%" height={30} />
+            </Container>
+          </Box>
         </Box>
 
         <Container sx={{ py: 10 }}>
