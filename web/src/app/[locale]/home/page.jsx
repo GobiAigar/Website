@@ -143,6 +143,12 @@ const Home = () => {
                       md: "1.25rem",
                       lg: "1.75rem",
                     },
+                    px: {
+                      xs: "3rem",
+                      sm: "6rem",
+                      md: "8rem",
+                      lg: "12rem",
+                    },
                   }}
                 >
                   {lang === "mn"
