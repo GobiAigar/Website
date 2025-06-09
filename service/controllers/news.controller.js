@@ -109,7 +109,7 @@ export const newsController = {
     const offset = (page - 1) * 6;
 
     try {
-      const header = await sql`SELECT * FROM website_headers id = 4`;
+      const header = await sql`SELECT * FROM website_headers WHERE id = 4`;
       const data = await sql`SELECT id, entitle,
         mntitle,
         enjournalist,
