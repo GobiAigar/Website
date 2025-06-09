@@ -4,8 +4,7 @@ export const sustainabilityController = {
     try {
       const response = await sql`SELECT * FROM sustainability ORDER BY id ASC`;
       const hero = await sql`SELECT * FROM website_headers WHERE id = 3`;
-      const datas = [hero[0], ...response];
-      return res.status(200).json({ success: true, data: datas });
+      return res.status(200).json({ success: true, hero, response });
     } catch (error) {
       console.error("Error fetching websites:", error);
       res.status(500).json({ error: "Internal Searver Error" });

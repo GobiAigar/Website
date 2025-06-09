@@ -11,12 +11,12 @@ export const productController = {
   },
 
   post: async (req, res) => {
-    let { title, entitle, mntitle, endescription, mndescription, image_url } =
+    let { title, entitle, mntitle, endescription, mndescription, image_url1 } =
       req.body;
 
     try {
       const response =
-        await sql`INSERT INTO products(title,entitle,mntitle,endescription,mndescription, image_url) VALUES (${title},${entitle}, ${mntitle},${endescription},${mndescription},${image_url} ) RETURNING *`;
+        await sql`INSERT INTO products(title,entitle,mntitle,endescription,mndescription, image_url1) VALUES (${title},${entitle}, ${mntitle},${endescription},${mndescription},${image_url1} ) RETURNING *`;
       res.status(201).json(response);
     } catch (error) {
       console.error("Error creating website:", error);
@@ -27,7 +27,7 @@ export const productController = {
   put: async (req, res) => {
     const id = req.params.id;
 
-    let { title, entitle, mntitle, endescription, mndescription, image_url } =
+    let { title, entitle, mntitle, endescription, mndescription, image_url1 } =
       req.body;
 
     try {
@@ -38,7 +38,7 @@ export const productController = {
                               mntitle = ${mntitle}, 
                                       endescription = ${endescription}, 
                                               mndescription = ${mndescription}, 
-                                                      image_url = ${image_url}
+                                                      image_url1 = ${image_url1}
                                                             WHERE id = ${id}
                                                                   RETURNING *`;
       res.status(201).json({ success: true, data: response });
