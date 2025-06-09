@@ -9,8 +9,8 @@ const NewsHeader = ({ displayNews }) => {
       sx={{
         position: "relative",
         width: "100%",
-        minHeight: "60vh",
-        backgroundImage: `url('${displayNews.image_url}')`,
+        height: { xs: "18.75rem", sm: "80vh" },
+        backgroundImage: `url('${displayNews?.image_url}')`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -22,22 +22,47 @@ const NewsHeader = ({ displayNews }) => {
     >
       <Box
         sx={{
-          position: "absolute",
-          inset: 0,
-          bgcolor: "rgba(0,0,0,0.5)",
-          zIndex: 1,
+          minHeight: "60vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "black",
+          px: 4,
+          mt: 10,
         }}
-      />
-      <Container maxWidth="lg" sx={{ pt: 20, position: "relative", zIndex: 2 }}>
-        <Typography
-          variant="h3"
-          fontWeight="bold"
-          color="white"
-          sx={{ fontSize: { xs: "24px", sm: "32px", md: "48px" } }}
-        >
-          {lang === "mn" ? displayNews.mntitle : displayNews.entitle}
-        </Typography>
-      </Container>
+      >
+        <Container maxWidth="sm">
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: {
+                xs: "24px",
+                sm: "28px",
+                md: "32px",
+                color: "white",
+              },
+              fontWeight: "bold",
+            }}
+          >
+            {lang === "mn" ? displayNews.mntitle : displayNews.entitle}
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              mt: 2,
+              fontSize: {
+                xs: "12px",
+                sm: "16px",
+                md: "20px",
+                color: "white",
+              },
+            }}
+          >
+            {lang === "mn" ? displayNews.mnsubtitle : displayNews.ensubtitle}
+          </Typography>
+        </Container>
+      </Box>
     </Box>
   );
 };

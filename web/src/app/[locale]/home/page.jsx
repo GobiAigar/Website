@@ -27,15 +27,15 @@ const Home = () => {
   const lang = useLocale();
   const t = useTranslations("home");
 
-  const rawData = website || {};
-  const websiteData = rawData.website || [];
+  const rawData = website?.data || {};
+  const websiteData = rawData?.response || [];
   const statisticsList = rawData.statistics || [];
   const faqs = rawData.faq || [];
 
   const getSingleByTitle = (title) =>
     websiteData.find((item) => item.title === title);
 
-  const homeSectionA = getSingleByTitle("HomeSectionA");
+  const homeSectionA = rawData?.hero?.[0];
   const homeSectionB = getSingleByTitle("HomeSectionb");
   const endSection = getSingleByTitle("HomeEndsection");
   const herderSection = getSingleByTitle("Herder");
@@ -72,7 +72,7 @@ const Home = () => {
           minHeight: "100vh",
           backgroundImage: loadingWebsite
             ? "none"
-            : `url(${homeSectionA?.image_url1})`,
+            : `url(${homeSectionA?.image_url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
@@ -157,12 +157,13 @@ const Home = () => {
                       variant="contained"
                       sx={{
                         textTransform: "none",
-                        py: "0.7rem",
-                        px: "3rem",
+                        py: { xs: "0.6rem", sm: "0.7rem", md: "0.8rem" },
+                        px: { xs: "2rem", sm: "3rem", md: "4rem" },
                         borderRadius: "0.75rem",
                         background: "white",
                         color: "black",
-                        fontSize: "1.5rem",
+                        fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                        width: { xs: "auto" },
                       }}
                     >
                       {t("seeProduct")}
@@ -176,12 +177,13 @@ const Home = () => {
                       endIcon={<ArrowForwardIcon />}
                       sx={{
                         textTransform: "none",
-                        py: "0.7rem",
-                        px: "3rem",
+                        py: { xs: "0.6rem", sm: "0.7rem", md: "0.8rem" },
+                        px: { xs: "2rem", sm: "3rem", md: "4rem" },
                         color: "white",
                         borderColor: "white",
                         borderRadius: "0.75rem",
-                        fontSize: "1.5rem",
+                        fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                        width: { xs: "auto" },
                       }}
                     >
                       {t("ourHistory")}

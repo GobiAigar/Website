@@ -33,8 +33,11 @@ const Sustainability = () => {
     }
   }, [rawLoading]);
 
+  console.log("sustainability", sustainability);
+
   const data = sustainability?.data || [];
-  const mainInfo = data.find((item) => item.id === 1);
+  const mainInfo = data.find((item) => item.id === 3);
+  console.log("mainInfo", mainInfo);
   const roadmapItems = data
     .filter((item) => item.id !== 1)
     .map((item) => ({
@@ -201,7 +204,7 @@ const Sustainability = () => {
                 },
               }}
             >
-              {lang === "mn" ? mainInfo.mndescription : mainInfo.endescription}
+              {lang === "mn" ? mainInfo.mnsubtitle : mainInfo.ensubtitle}
             </Typography>
           </Container>
         </Box>
@@ -275,8 +278,8 @@ const Sustainability = () => {
               >
                 <Box
                   sx={{
-                    width: { xs: 300, sm: 450, md: 450, lg: 450 },
-                    height: { xs: 400, sm: 550, md: 650, lg: 650 },
+                    width: "auto",
+                    height: "auto",
                     backgroundColor: "#f5f5f5",
                     display: "flex",
                     justifyContent: "center",
@@ -292,8 +295,8 @@ const Sustainability = () => {
                     src={item.image}
                     alt={item.label}
                     sx={{
-                      width: "100%",
-                      height: "100%",
+                      width: "400px",
+                      height: "600px",
                       objectFit: "cover",
                       transition: "transform 0.2s",
                       "&:hover": { transform: "scale(1.05)" },
