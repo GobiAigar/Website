@@ -74,7 +74,7 @@ const Header = () => {
       position="fixed"
       elevation={isScrolled ? 4 : 0}
       sx={{
-        backgroundColor: "rgba(0,0,0,0.3)",
+        backgroundColor: isScrolled ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0)",
         backdropFilter: isScrolled ? "blur(6px)" : "none",
         transition: "all 0.3s ease",
       }}

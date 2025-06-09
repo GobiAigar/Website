@@ -3,14 +3,7 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Button,
-  Skeleton,
-} from "@mui/material";
+import { Box, Container, Typography, Grid, Skeleton } from "@mui/material";
 import { useTranslations, useLocale } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 import TradeSection from "../../components/TradeSection";
@@ -22,6 +15,37 @@ const Product = () => {
   const lang = useLocale();
   const [selectedId, setSelectedId] = useState(3);
 
+  const renderSplitSkeleton = () => (
+    <Container sx={{ py: "2.5rem" }}>
+      <Grid container spacing={4}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Skeleton variant="text" height={40} width="80%" sx={{ mb: 2 }} />
+          <Skeleton variant="text" height={30} width="100%" />
+          <Skeleton variant="text" height={30} width="100%" />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Skeleton variant="rectangular" height={300} />
+        </Grid>
+      </Grid>
+    </Container>
+  );
+
+  const renderTradeSkeleton = () => (
+    <Container sx={{ py: "2.5rem" }}>
+      <Skeleton variant="text" width="40%" height={40} sx={{ mb: 2 }} />
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Skeleton variant="rectangular" width="100%" height={250} />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Skeleton variant="text" height={30} width="100%" sx={{ mb: 2 }} />
+          <Skeleton variant="text" height={30} width="100%" />
+          <Skeleton variant="text" height={30} width="80%" />
+        </Grid>
+      </Grid>
+    </Container>
+  );
+
   if (loading || !product || !product.data?.response?.length) {
     return (
       <Box sx={{ bgcolor: "background.default" }}>
@@ -29,39 +53,34 @@ const Product = () => {
         <Box
           sx={{
             width: "100%",
-            height: { xs: "18.75rem", sm: "80vh" },
+            height: { xs: "20rem", sm: "80vh" },
             backgroundColor: "#f0f0f0",
+            position: "relative",
           }}
         >
           <Skeleton variant="rectangular" width="100%" height="100%" />
-        </Box>
-        <Container sx={{ py: "2.5rem" }}>
-          <Skeleton variant="text" width="60%" height={40} />
-          <Skeleton variant="text" width="80%" height={25} sx={{ mt: 2 }} />
-          <Grid container spacing={1} mt={3} mb={3}>
-            <Grid>
-              <Skeleton
-                variant="rectangular"
-                width={120}
-                height={40}
-                sx={{ borderRadius: 1 }}
-              />
-            </Grid>
-            <Grid>
-              <Skeleton
-                variant="rectangular"
-                width={150}
-                height={40}
-                sx={{ borderRadius: 1 }}
-              />
-            </Grid>
-          </Grid>
-          <Box>
-            <Skeleton variant="rectangular" width="100%" height={300} />
-            <Skeleton variant="text" width="100%" height={40} sx={{ mt: 2 }} />
-            <Skeleton variant="text" width="100%" height={40} />
+          <Box
+            sx={{
+              position: "absolute",
+              top: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "100%",
+              px: 2,
+            }}
+          >
+            <Container maxWidth="sm">
+              <Skeleton variant="text" width="80%" height={40} sx={{ mb: 2 }} />
+              <Skeleton variant="text" width="60%" height={30} />
+            </Container>
           </Box>
-        </Container>
+        </Box>
+
+        {renderSplitSkeleton()}
+        {renderSplitSkeleton()}
+        {renderTradeSkeleton()}
+        {renderSplitSkeleton()}
+
         <Footer />
       </Box>
     );
@@ -80,8 +99,8 @@ const Product = () => {
       ].filter(Boolean),
       title: lang === "mn" ? sec.mntitle : sec.entitle,
       text: lang === "mn" ? sec.mndescription : sec.endescription,
-    }))
-    .filter(Boolean);
+    }));
+
   const selectedTrade =
     selectedId === 3 || selectedId === 4
       ? data?.response?.find((item) => item.id === selectedId)
@@ -112,7 +131,6 @@ const Product = () => {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          gap: "0.625rem",
         }}
       >
         <Box
@@ -164,6 +182,7 @@ const Product = () => {
           </Container>
         </Box>
       </Box>
+
       <Container sx={{ py: "2.5rem" }}>
         <SplitSection sections={[splitSections[0]]} reverse={true} />
       </Container>
@@ -182,9 +201,11 @@ const Product = () => {
           />
         </Box>
       </Container>
+
       <Container sx={{ py: "2.5rem" }}>
         <SplitSection sections={[splitSections[2]]} reverse={false} />
       </Container>
+
       <Footer />
     </Box>
   );

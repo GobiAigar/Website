@@ -33,10 +33,10 @@ const Sustainability = () => {
     }
   }, [rawLoading]);
 
-  const data = sustainability?.data || [];
-  const mainInfo = data.find((item) => item.id === 3);
-  const roadmapItems = data
-    .filter((item) => item.id !== 1)
+  const data = sustainability || [];
+  const mainInfo = data?.hero?.[0];
+  const roadmapItems = data?.response
+    ?.filter((item) => item.id !== 1)
     .map((item) => ({
       label: lang === "mn" ? item.mndescription : item.endescription,
       image: item.image_url,
