@@ -57,7 +57,7 @@ const Home = () => {
               sec.image_url4,
             ].filter(Boolean),
             title: lang === "mn" ? sec.mntitle : sec.entitle,
-            text: lang === "mn" ? sec.mnsubtitle : sec.ensubtitle,
+            text: lang === "mn" ? sec.mndescription : sec.endescription,
           }
         : null;
     })
@@ -142,6 +142,12 @@ const Home = () => {
                       sm: "1rem",
                       md: "1.25rem",
                       lg: "1.75rem",
+                    },
+                    px: {
+                      xs: "3rem",
+                      sm: "6rem",
+                      md: "8rem",
+                      lg: "12rem",
                     },
                   }}
                 >

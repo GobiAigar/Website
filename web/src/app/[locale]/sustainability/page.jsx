@@ -33,11 +33,8 @@ const Sustainability = () => {
     }
   }, [rawLoading]);
 
-  console.log("sustainability", sustainability);
-
   const data = sustainability?.data || [];
   const mainInfo = data.find((item) => item.id === 3);
-  console.log("mainInfo", mainInfo);
   const roadmapItems = data
     .filter((item) => item.id !== 1)
     .map((item) => ({

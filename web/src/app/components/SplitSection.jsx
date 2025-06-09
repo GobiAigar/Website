@@ -14,8 +14,20 @@ const SplitSection = ({ sections, reverse }) => {
         const isReversed = reverse ? true : index % 2 === 1;
 
         const [isHovered, setIsHovered] = useState(false);
-        const [isPlaying, setIsPlaying] = useState(true);
+        const [isPlaying, setIsPlaying] = useState(false);
         const videoRef = useRef(null);
+
+        const handleTogglePlay = () => {
+          if (!videoRef.current) return;
+
+          if (videoRef.current.paused) {
+            videoRef.current.play();
+            setIsPlaying(true);
+          } else {
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
+        };
 
         return (
           <Grid
@@ -73,15 +85,7 @@ const SplitSection = ({ sections, reverse }) => {
                         />
                         {isHovered && (
                           <IconButton
-                            onClick={() => {
-                              if (!videoRef.current) return;
-                              if (isPlaying) {
-                                videoRef.current.pause();
-                              } else {
-                                videoRef.current.play();
-                              }
-                              setIsPlaying(!isPlaying);
-                            }}
+                            onClick={handleTogglePlay}
                             sx={{
                               position: "absolute",
                               top: "50%",
@@ -96,9 +100,9 @@ const SplitSection = ({ sections, reverse }) => {
                             }}
                           >
                             {isPlaying ? (
-                              <PauseCircleIcon sx={{ fontSize: 48 }} />
+                              <PauseCircleIcon sx={{ fontSize: "3rem" }} />
                             ) : (
-                              <PlayCircleIcon sx={{ fontSize: 48 }} />
+                              <PlayCircleIcon sx={{ fontSize: "3rem" }} />
                             )}
                           </IconButton>
                         )}
@@ -140,6 +144,7 @@ const SplitSection = ({ sections, reverse }) => {
                     fontWeight={700}
                     sx={{
                       textAlign: "center",
+                      textAlign: reverse ? "left" : "right",
                       fontSize: {
                         xs: "22px",
                         sm: "26px",
