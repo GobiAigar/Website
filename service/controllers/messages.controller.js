@@ -36,18 +36,9 @@ export const messageController = {
   },
 
   createMessage: async (req, res) => {
-    const {
-      purpose,
-      firstname,
-      lastname,
-      email,
-      phonenumber,
-      country,
-      state,
-      city,
-      bussiness,
-      plan,
-    } = req.body;
+    console.log(req.body);
+
+    const { purpose, firstname, email, plan } = req.body;
 
     const date = new Date();
 
@@ -55,14 +46,8 @@ export const messageController = {
       const response = await sql`INSERT INTO messages(
         purpose,
       firstname,
-      lastname,
       email,
-      phonenumber,
-      country,
-      state,
-      city,
-      bussiness,
-      plan, date) VALUES (${purpose},${firstname},${lastname}, ${email},${phonenumber},${country},${state},${city},${bussiness},${plan},${date}) RETURNING *`;
+      plan, date) VALUES (${purpose},${firstname},${email},${plan},${date}) RETURNING *`;
       res.status(201).json(response);
     } catch (error) {
       console.error("Error creating messages:", error);
