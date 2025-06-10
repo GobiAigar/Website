@@ -58,14 +58,22 @@ const Sustainability = () => {
           <Box
             sx={{
               position: "absolute",
-              top: "30%",
+              top: "50%",
               left: "50%",
               transform: "translateX(-50%)",
               width: "100%",
               px: 2,
             }}
           >
-            <Container maxWidth="sm">
+            <Container
+              maxWidth="sm"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
               <Skeleton variant="text" width="80%" height={40} sx={{ mb: 2 }} />
               <Skeleton variant="text" width="60%" height={30} />
             </Container>
