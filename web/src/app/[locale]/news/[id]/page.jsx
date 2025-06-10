@@ -165,7 +165,7 @@ export default function NewsDetailPage() {
             {lang === "mn" ? newsItem.mndescription : newsItem.endescription}
           </Typography>
         </Box>
-        <Box textAlign="end">
+        <Box textAlign="end" sx={{ mb: "1.5rem" }}>
           <Button variant="outlined" onClick={() => router.back()}>
             {t("back") || "Буцах"}
           </Button>

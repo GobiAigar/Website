@@ -1,14 +1,18 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import Script from "next/script";
 import Analytics from "./_analytics";
-
-const inter = Inter({ subsets: ["latin"] });
+import AppThemeProvider from "./theme-provider";
 
 export const metadata = {
   title: "Gobi Aigar",
   description: "Cashmere",
 };
+
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -38,8 +42,8 @@ export default function RootLayout({
         />
         <link rel="icon" href="/smallLogo.png.png" />
       </head>
-      <body className={inter.className}>
-        {children}
+      <body className={roboto.className}>
+        <AppThemeProvider>{children}</AppThemeProvider>
         <Analytics />
       </body>
     </html>
