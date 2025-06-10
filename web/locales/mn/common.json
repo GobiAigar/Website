@@ -9,7 +9,11 @@
   "home": {
     "title": "Тавтай морил",
     "seeProduct": "Бүтээгдэхүүн үзэх",
-    "ourHistory": "Манай түүх"
+    "ourHistory": "Манай түүх",
+    "White": "Цагаан",
+    "Beige": "Шаргал",
+    "GreyBlue": "Хөх саарал",
+    "DarkGrey": "Хар саарал"
   },
   "contact": {
     "selectPurpose": "Зорилгоо сонгоно уу",

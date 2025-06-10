@@ -213,8 +213,8 @@ export const GobiAigarIcon = ({ size = 24, className = "" }) => (
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
     width={size}
-    height={(size * 102) / 164}
-    viewBox="0 0 464.000000 102.000000"
+    height="40"
+    viewBox="0 0 464 102"
     preserveAspectRatio="xMidYMid meet"
     className={className}
   >

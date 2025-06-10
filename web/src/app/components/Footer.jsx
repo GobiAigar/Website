@@ -80,20 +80,6 @@ const Footer = () => {
             <Typography variant="body2">
               {t("office")}: {getValue(5)}
             </Typography>
-            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
-              <MuiLink href={getValue(9)} target="_blank" rel="noopener">
-                <LinkedInIcon sx={{ color: "white" }} />
-              </MuiLink>
-              <MuiLink href={getValue(10)} target="_blank" rel="noopener">
-                <InstagramIcon sx={{ color: "white" }} />
-              </MuiLink>
-              <MuiLink href={getValue(8)} target="_blank" rel="noopener">
-                <FacebookIcon sx={{ color: "white" }} />
-              </MuiLink>
-              <MuiLink href="#" target="_blank" rel="noopener">
-                <XIcon sx={{ color: "white" }} />
-              </MuiLink>
-            </Box>
           </Grid>
           <Grid
             size={{ xs: 12, sm: 12, md: 4 }}
@@ -111,6 +97,20 @@ const Footer = () => {
             <Typography variant="body2" sx={{ maxWidth: 450, lineHeight: 1.7 }}>
               {aboutText}
             </Typography>
+            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+              <MuiLink href={getValue(9)} target="_blank" rel="noopener">
+                <LinkedInIcon sx={{ color: "white" }} />
+              </MuiLink>
+              <MuiLink href={getValue(10)} target="_blank" rel="noopener">
+                <InstagramIcon sx={{ color: "white" }} />
+              </MuiLink>
+              <MuiLink href={getValue(8)} target="_blank" rel="noopener">
+                <FacebookIcon sx={{ color: "white" }} />
+              </MuiLink>
+              <MuiLink href="#" target="_blank" rel="noopener">
+                <XIcon sx={{ color: "white" }} />
+              </MuiLink>
+            </Box>
           </Grid>
         </Grid>
 

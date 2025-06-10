@@ -9,7 +9,11 @@
   "home": {
     "title": "Welcome to homepage",
     "seeProduct": "See product",
-    "ourHistory": "Our History"
+    "ourHistory": "Our History",
+    "White": "White",
+    "Beige": "Beige",
+    "GreyBlue": "Grey Blue",
+    "DarkGrey": "Dark Grey"
   },
   "contact": {
     "selectPurpose": "Select the purpose",
