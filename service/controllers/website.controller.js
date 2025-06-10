@@ -23,8 +23,8 @@ export const websiteController = {
       title,
       entitle,
       mntitle,
-      ensubtitle,
-      mnsubtitle,
+      endescription,
+      mndescription,
       image_url1,
       image_url2,
       image_url3,
@@ -37,8 +37,8 @@ export const websiteController = {
 
     entitle = entitle ?? null;
     mntitle = mntitle ?? null;
-    ensubtitle = ensubtitle ?? null;
-    mnsubtitle = mnsubtitle ?? null;
+    endescription = endescription ?? null;
+    mndescription = mndescription ?? null;
     image_url1 = image_url1 ?? null;
     image_url2 = image_url2 ?? null;
     image_url3 = image_url3 ?? null;
@@ -46,7 +46,7 @@ export const websiteController = {
 
     try {
       const response =
-        await sql`INSERT INTO website(title,entitle,mntitle,ensubtitle,mnsubtitle, image_url1,image_url2,image_url3,image_url4) VALUES (${title},${entitle}, ${mntitle},${ensubtitle},${mnsubtitle},${image_url1},${image_url2},${image_url3},${image_url4}) RETURNING *`;
+        await sql`INSERT INTO website(title,entitle,mntitle,endescribtion,mndescription, image_url1,image_url2,image_url3,image_url4) VALUES (${title},${entitle}, ${mntitle},${endescribtion},${mndescription},${image_url1},${image_url2},${image_url3},${image_url4}) RETURNING *`;
       res.status(201).json(response);
     } catch (error) {
       console.error("Error creating website:", error);
@@ -59,8 +59,8 @@ export const websiteController = {
     let {
       entitle,
       mntitle,
-      ensubtitle,
-      mnsubtitle,
+      endescription,
+      mndescription,
       image_url1,
       image_url2,
       image_url3,
@@ -73,8 +73,8 @@ export const websiteController = {
 
     entitle = entitle ?? null;
     mntitle = mntitle ?? null;
-    ensubtitle = ensubtitle ?? null;
-    mnsubtitle = mnsubtitle ?? null;
+    endescription = endescription ?? null;
+    mndescription = mndescription ?? null;
     image_url1 = image_url1 ?? null;
     image_url2 = image_url2 ?? null;
     image_url3 = image_url3 ?? null;
@@ -82,7 +82,7 @@ export const websiteController = {
 
     try {
       const response =
-        await sql`UPDATE website SET entitle=${entitle}, mntitle=${mntitle}, ensubtitle=${ensubtitle}, mnsubtitle=${mnsubtitle},image_url1=${image_url1}, image_url2 = ${image_url2}, image_url3 = ${image_url3}, image_url4 = ${image_url4} WHERE id = ${id} RETURNING *`;
+        await sql`UPDATE website SET entitle=${entitle}, mntitle=${mntitle}, endescription=${endescription}, mndescription=${mndescription},image_url1=${image_url1}, image_url2 = ${image_url2}, image_url3 = ${image_url3}, image_url4 = ${image_url4} WHERE id = ${id} RETURNING *`;
 
       res.status(201).json(response);
     } catch (error) {

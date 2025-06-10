@@ -21,7 +21,7 @@ export const headerController = {
   },
   updateHeader: async (req, res) => {
     const id = req.params.id;
-    let { entitle, mntitle, ensubtitle, mnsubtitle, image_url1 } = req.body;
+    let { entitle, mntitle, ensubtitle, mnsubtitle, image_url } = req.body;
 
     if (!id) {
       return res.status(400).json({ error: "id is required" });
@@ -31,11 +31,11 @@ export const headerController = {
     mntitle = mntitle ?? null;
     ensubtitle = ensubtitle ?? null;
     mnsubtitle = mnsubtitle ?? null;
-    image_url1 = image_url1 ?? null;
+    image_url = image_url ?? null;
 
     try {
       const response =
-        await sql`UPDATE website SET entitle=${entitle}, mntitle=${mntitle}, ensubtitle=${ensubtitle}, mnsubtitle=${mnsubtitle},image_url1=${image_url1}, image_url2 = ${image_url2}, image_url3 = ${image_url3}, image_url4 = ${image_url4} WHERE id = ${id} RETURNING *`;
+        await sql`UPDATE website_headers SET entitle=${entitle}, mntitle=${mntitle}, ensubtitle=${ensubtitle}, mnsubtitle=${mnsubtitle},image_url=${image_url} WHERE id = ${id} RETURNING *`;
       res.status(201).json(response);
     } catch (error) {
       console.error("Error creating website:", error);

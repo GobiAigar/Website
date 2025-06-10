@@ -27,13 +27,12 @@ export const productController = {
   put: async (req, res) => {
     const id = req.params.id;
 
-    let { title, entitle, mntitle, endescription, mndescription, image_url1 } =
+    let { entitle, mntitle, endescription, mndescription, image_url1 } =
       req.body;
 
     try {
       const response = await sql`UPDATE products 
       SET 
-              title = ${title}, 
                       entitle = ${entitle}, 
                               mntitle = ${mntitle}, 
                                       endescription = ${endescription}, 
