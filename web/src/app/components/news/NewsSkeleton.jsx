@@ -3,8 +3,61 @@ import { Box, Container, Skeleton, Grid } from "@mui/material";
 
 const NewsSkeleton = ({ itemsPerPage }) => (
   <Box sx={{ bgcolor: "background.default" }}>
-    <Box sx={{ width: "100%", minHeight: "60vh", bgcolor: "grey.300" }}>
-      <Skeleton variant="rectangular" width="100%" height="100%" />
+    <Box
+      sx={{
+        position: "relative",
+        width: "100%",
+        height: "20rem",
+        backgroundColor: "grey.300",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          bgcolor: "rgba(0,0,0,0.3)",
+        }}
+      />
+      <Box
+        sx={{
+          minHeight: "60vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "black",
+          px: 4,
+          mt: 10,
+          position: "absolute",
+          zIndex: 1,
+        }}
+      >
+        <Container maxWidth="sm">
+          <Skeleton
+            variant="text"
+            width="80%"
+            height={40}
+            sx={{
+              mx: "auto",
+              bgcolor: "grey.500",
+            }}
+          />
+          <Skeleton
+            variant="text"
+            width="60%"
+            height={24}
+            sx={{
+              mt: 2,
+              mx: "auto",
+              bgcolor: "grey.500",
+            }}
+          />
+        </Container>
+      </Box>
     </Box>
     <Container>
       <Box sx={{ py: 8 }}>

@@ -82,7 +82,7 @@ const Home = () => {
         }}
       >
         <Box
-          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.6)" }}
+          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
         />
         <Header />
         <Container

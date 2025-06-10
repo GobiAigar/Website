@@ -12,6 +12,10 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import Link from "next/link";
 import { GobiAigarIcon } from "./Icon";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import XIcon from "@mui/icons-material/X";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Footer = () => {
   const t = useTranslations("footer");
@@ -72,16 +76,40 @@ const Footer = () => {
 
           <Grid size={{ xs: 6, sm: 6, md: 3 }}>
             <Box display="flex" flexDirection="column" gap={1}>
-              <MuiLink href="#" underline="hover" color="inherit">
+              <MuiLink
+                href="#"
+                underline="hover"
+                color="inherit"
+                sx={{ display: "flex", gap: 1 }}
+              >
+                <FacebookIcon sx={{ color: "#1877F2" }} />
                 {t("social.facebook")}
               </MuiLink>
-              <MuiLink href="#" underline="hover" color="inherit">
+              <MuiLink
+                href="#"
+                underline="hover"
+                color="inherit"
+                sx={{ display: "flex", gap: 1 }}
+              >
+                <XIcon sx={{ color: "#000000" }} />
                 {t("social.twitter")}
               </MuiLink>
-              <MuiLink href="#" underline="hover" color="inherit">
+              <MuiLink
+                href="#"
+                underline="hover"
+                color="inherit"
+                sx={{ display: "flex", gap: 1 }}
+              >
+                <LinkedInIcon sx={{ color: "#0077B5" }} />
                 {t("social.linkedin")}
               </MuiLink>
-              <MuiLink href="#" underline="hover" color="inherit">
+              <MuiLink
+                href="#"
+                underline="hover"
+                color="inherit"
+                sx={{ display: "flex", gap: 1 }}
+              >
+                <InstagramIcon sx={{ color: "#C13584" }} />
                 {t("social.instagram")}
               </MuiLink>
             </Box>

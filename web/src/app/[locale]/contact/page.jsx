@@ -104,7 +104,7 @@ const Contact = () => {
       >
         <Header />
         <Box
-          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.3)" }}
+          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
         />
         <Box
           sx={{

@@ -29,7 +29,7 @@ const ToggleButton = () => {
       }}
     >
       <ReactCountryFlag
-        countryCode={currentLocale === "mn" ? "MN" : "US"}
+        countryCode={currentLocale === "mn" ? "US" : "MN"}
         svg
         style={{
           fontSize: "1.7rem",
