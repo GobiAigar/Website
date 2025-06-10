@@ -51,9 +51,15 @@
     "seeMore": "See more"
   },
   "footer": {
-    "address": "130a, manufacturing west area, 20th khoroo Bayangol District, Ulaanbaatar, Mongolia",
-    "phone": "+(976) 7777 6040",
-    "email": "support@agrixglobal.com",
+    "brand": "GOBI AIGAR CASHMERE",
+    "tradingName": "TRADING NAME:",
+    "brandName": "BRAND NAME:",
+    "location": "LOCATION:",
+    "contact": "CONTACT",
+    "email": "EMAIL:",
+    "tel": "PHONE:",
+    "mobile": "Mobile",
+    "office": "Office",
     "nav": {
       "about": "About",
       "product": "Product",
@@ -67,7 +73,9 @@
       "linkedin": "LinkedIn",
       "instagram": "Instagram"
     },
-    "copyright": "© 2025 GOBI AIGAR. All rights reserved."
+    "copyright": "GOBI AIGAR. All rights reserved.",
+    "copy": "©",
+    "aboutUs": "About us"
   },
   "faq": {
     "title": "FAQ",

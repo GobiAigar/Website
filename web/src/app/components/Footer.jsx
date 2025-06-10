@@ -10,125 +10,116 @@ import {
 import ScrollTopButton from "./ScrollTopButton";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
-import Link from "next/link";
 import { GobiAigarIcon } from "./Icon";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import XIcon from "@mui/icons-material/X";
+import { useAppData } from "../../context/AppDataProvider";
 
 const Footer = () => {
+  const { company } = useAppData();
   const t = useTranslations("footer");
   const locale = useLocale();
-  const navLinks = [
-    { href: `/${locale}/`, label: t("nav.about") },
-    { href: `/${locale}/product`, label: t("nav.product") },
-    { href: `/${locale}/sustainability`, label: t("nav.sustainability") },
-    { href: `/${locale}/`, label: t("nav.partners") },
-    { href: `/${locale}/contact`, label: t("nav.contact") },
-  ];
+
+  const getValue = (id) => {
+    const item = company?.find((e) => e.id === id);
+    return locale === "mn" ? item?.mongolia : item?.english;
+  };
+
+  const aboutText = getValue(7) || null;
 
   return (
     <Box
       sx={{
-        bgcolor: "white",
+        bgcolor: "#1A1A1A",
         py: { xs: 6, sm: 8, lg: 10 },
-        color: "black",
-        borderTopWidth: "1px",
-        borderTopStyle: "solid",
-        borderTopColor: "#8C182A",
+        color: "white",
       }}
     >
       <Container maxWidth="lg">
-        <Grid
-          container
-          spacing={5}
-          justifyContent="space-between"
-          alignItems="flex-start"
-          textAlign="start"
-          sx={{ pt: 2 }}
-        >
-          <Grid size={{ xs: 6, md: 3 }}>
-            <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-              <GobiAigarIcon />
-            </Box>
+        <Grid container spacing={4} alignItems="stretch">
+          <Grid
+            size={{ xs: 12, sm: 6, md: 4 }}
+            sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+          >
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2 }}>
+              {t("brand")}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              {t("tradingName")}
+            </Typography>
+            <Typography variant="body2">{getValue(2)}</Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, mt: 2 }}>
+              {t("brandName")}
+            </Typography>
+            <Typography variant="body2">{getValue(1)}</Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, mt: 2 }}>
+              {t("location")}
+            </Typography>
+            <Typography variant="body2">{getValue(3)}</Typography>
           </Grid>
 
-          <Grid size={{ xs: 6, md: 3 }}>
-            <Box display="flex" flexDirection="column" gap={1}>
-              <Typography variant="body1">{t("address")}</Typography>
-              <Typography variant="body2">{t("phone")}</Typography>
-              <Typography variant="body2">{t("email")}</Typography>
+          <Grid
+            size={{ xs: 12, sm: 6, md: 4 }}
+            sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+          >
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2 }}>
+              {t("contact")}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              {t("email")}
+            </Typography>
+            <Typography variant="body2">{getValue(6)}</Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, mt: 2 }}>
+              {t("tel")}
+            </Typography>
+            <Typography variant="body2" sx={{ mt: 2 }}>
+              {t("mobile")}: {getValue(4)}
+            </Typography>
+            <Typography variant="body2">
+              {t("office")}: {getValue(5)}
+            </Typography>
+            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+              <MuiLink href={getValue(9)} target="_blank" rel="noopener">
+                <LinkedInIcon sx={{ color: "white" }} />
+              </MuiLink>
+              <MuiLink href={getValue(10)} target="_blank" rel="noopener">
+                <InstagramIcon sx={{ color: "white" }} />
+              </MuiLink>
+              <MuiLink href={getValue(8)} target="_blank" rel="noopener">
+                <FacebookIcon sx={{ color: "white" }} />
+              </MuiLink>
+              <MuiLink href="#" target="_blank" rel="noopener">
+                <XIcon sx={{ color: "white" }} />
+              </MuiLink>
             </Box>
           </Grid>
-
-          <Grid size={{ xs: 6, md: 3 }}>
-            <Box display="flex" flexDirection="column" gap={1}>
-              {navLinks.map(({ href, label }, index) => (
-                <Link key={index} href={href} passHref legacyBehavior>
-                  <MuiLink underline="hover" color="inherit" sx={{ mx: 1 }}>
-                    {label}
-                  </MuiLink>
-                </Link>
-              ))}
-            </Box>
-          </Grid>
-
-          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
-            <Box display="flex" flexDirection="column" gap={1}>
-              <MuiLink
-                href="#"
-                underline="hover"
-                color="inherit"
-                sx={{ display: "flex", gap: 1 }}
-              >
-                <FacebookIcon sx={{ color: "#1877F2" }} />
-                {t("social.facebook")}
-              </MuiLink>
-              <MuiLink
-                href="#"
-                underline="hover"
-                color="inherit"
-                sx={{ display: "flex", gap: 1 }}
-              >
-                <XIcon sx={{ color: "#000000" }} />
-                {t("social.twitter")}
-              </MuiLink>
-              <MuiLink
-                href="#"
-                underline="hover"
-                color="inherit"
-                sx={{ display: "flex", gap: 1 }}
-              >
-                <LinkedInIcon sx={{ color: "#0077B5" }} />
-                {t("social.linkedin")}
-              </MuiLink>
-              <MuiLink
-                href="#"
-                underline="hover"
-                color="inherit"
-                sx={{ display: "flex", gap: 1 }}
-              >
-                <InstagramIcon sx={{ color: "#C13584" }} />
-                {t("social.instagram")}
-              </MuiLink>
-            </Box>
+          <Grid
+            size={{ xs: 12, sm: 12, md: 4 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: { xs: "center", md: "start" },
+              textAlign: { xs: "center", md: "start" },
+              justifyContent: "flex-start",
+              gap: 2,
+            }}
+          >
+            <GobiAigarIcon size={170} />
+            <strong>{t("aboutUs")}</strong>
+            <Typography variant="body2" sx={{ maxWidth: 450, lineHeight: 1.7 }}>
+              {aboutText}
+            </Typography>
           </Grid>
         </Grid>
 
-        <Grid size={{ xs: 6, sm: 6, md: 3 }}>
-          <Box mt={{ xs: 2, lg: 0 }}>
-            <ScrollTopButton />
-          </Box>
-        </Grid>
+        <Box mt={4} textAlign="center">
+          <ScrollTopButton />
+        </Box>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          align="center"
-          sx={{ mt: 6 }}
-        >
-          {t("copyright")}
+        <Typography variant="body2" color="white" align="center" sx={{ mt: 6 }}>
+          {t("copy")} {new Date().getFullYear()} {t("copyright")}
         </Typography>
       </Container>
     </Box>

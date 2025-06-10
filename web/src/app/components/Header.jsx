@@ -90,7 +90,7 @@ const Header = () => {
               transition: "background-color 0.3s ease",
             }}
           >
-            <GobiAigarIcon />
+            <GobiAigarIcon size={200} />
           </Box>
 
           {isMobile ? (

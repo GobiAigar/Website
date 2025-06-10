@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const SplitSection = ({ sections, reverse }) => {
   const theme = useTheme();
@@ -25,6 +28,8 @@ const SplitSection = ({ sections, reverse }) => {
         const [isPlaying, setIsPlaying] = useState(false);
         const [showFull, setShowFull] = useState(false);
         const [isOverflowing, setIsOverflowing] = useState(false);
+        const [progress, setProgress] = useState(0);
+        const [activeIndex, setActiveIndex] = useState(0);
         const textRef = useRef(null);
         const videoRef = useRef(null);
 
@@ -38,6 +43,30 @@ const SplitSection = ({ sections, reverse }) => {
           return () => clearTimeout(timer);
         }, [section?.text]);
 
+        useEffect(() => {
+          let frame;
+          let start = Date.now();
+
+          const animate = () => {
+            const elapsed = Date.now() - start;
+            const percent = (elapsed / 3000) * 100;
+            setProgress(percent >= 100 ? 100 : percent);
+            if (percent < 100) frame = requestAnimationFrame(animate);
+          };
+
+          if (images.length > 1) {
+            setProgress(0);
+            frame = requestAnimationFrame(animate);
+          }
+
+          return () => cancelAnimationFrame(frame);
+        }, [activeIndex, images.length]);
+
+        const handleBeforeChange = (_, next) => {
+          setActiveIndex(next);
+          setProgress(0);
+        };
+
         const handleTogglePlay = () => {
           if (!videoRef.current) return;
           if (videoRef.current.paused) {
@@ -49,6 +78,140 @@ const SplitSection = ({ sections, reverse }) => {
           }
         };
 
+        const renderSlides = () =>
+          images.map((src, i) => {
+            const isVideo = Boolean(src.match(/\.(mp4|webm|ogg)(\?.*)?$/i));
+            const commonSx = {
+              width: "100%",
+              height: { xs: "auto", md: "30rem", lg: "37.5rem" },
+              objectFit: "cover",
+              borderRadius: 2,
+              display: "block",
+            };
+
+            if (isVideo) {
+              return (
+                <Box
+                  key={`video-${index}-${i}`}
+                  sx={{ position: "relative" }}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
+                  <Box
+                    ref={videoRef}
+                    component="video"
+                    src={src}
+                    loop
+                    muted
+                    autoPlay
+                    playsInline
+                    sx={commonSx}
+                  />
+                  {isHovered && (
+                    <IconButton
+                      onClick={handleTogglePlay}
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        backgroundColor: "rgba(0,0,0,0.4)",
+                        color: "#fff",
+                        zIndex: 2,
+                        "&:hover": {
+                          backgroundColor: "rgba(0,0,0,0.6)",
+                        },
+                      }}
+                    >
+                      {isPlaying ? (
+                        <PauseCircleIcon sx={{ fontSize: "3rem" }} />
+                      ) : (
+                        <PlayCircleIcon sx={{ fontSize: "3rem" }} />
+                      )}
+                    </IconButton>
+                  )}
+                </Box>
+              );
+            }
+
+            return (
+              <Box
+                key={`img-${index}-${i}`}
+                component="img"
+                src={src}
+                alt={`Section image ${i + 1}`}
+                sx={commonSx}
+              />
+            );
+          });
+
+        const mediaContent =
+          images.length > 1 ? (
+            <Box sx={{ position: "relative" }}>
+              <Slider
+                dots={false}
+                arrows={false}
+                infinite
+                speed={600}
+                slidesToShow={1}
+                slidesToScroll={1}
+                autoplay
+                autoplaySpeed={3000}
+                pauseOnHover={false}
+                fade
+                beforeChange={handleBeforeChange}
+              >
+                {renderSlides()}
+              </Slider>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  display: "flex",
+                  gap: 0.5,
+                  px: 1,
+                  pt: 1,
+                }}
+              >
+                {images.map((_, i) => (
+                  <Box
+                    key={i}
+                    sx={{
+                      flex: 1,
+                      height: 2,
+                      bgcolor: "rgba(255,255,255,0.3)",
+                      borderRadius: 1,
+                      overflow: "hidden",
+                      position: "relative",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        height: "100%",
+                        width:
+                          i < activeIndex
+                            ? "100%"
+                            : i === activeIndex
+                            ? `${progress}%`
+                            : "0%",
+                        bgcolor: "#8C182A",
+                        transition:
+                          i === activeIndex ? "none" : "width 0.3s ease",
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          ) : (
+            <Box sx={{ width: "100%" }}>{renderSlides()}</Box>
+          );
+
         return (
           <Grid
             container
@@ -58,90 +221,7 @@ const SplitSection = ({ sections, reverse }) => {
             alignItems="stretch"
             sx={{ width: "100%" }}
           >
-            <Grid
-              size={{ xs: 12, md: 6 }}
-              sx={{
-                display: "flex",
-                height: { xs: "auto", md: "30rem", lg: "37.5rem" },
-              }}
-            >
-              <Box
-                sx={{
-                  display: images.length > 1 ? "grid" : "flex",
-                  justifyContent: "center",
-                  gridTemplateColumns:
-                    images.length > 1 ? "repeat(2, 1fr)" : "none",
-                  gap: 2,
-                  flex: 1,
-                  height: "100%",
-                }}
-              >
-                {images.map((src, i) => {
-                  const isVideo = Boolean(
-                    src.match(/\.(mp4|webm|ogg)(\?.*)?$/i)
-                  );
-                  const commonSx = {
-                    width: { xs: "100%", md: "30rem", lg: "37.5rem" },
-                    height: { xs: "auto", md: "30rem", lg: "37.5rem" },
-                    objectFit: "cover",
-                    borderRadius: 2,
-                    display: "block",
-                  };
-
-                  if (isVideo) {
-                    return (
-                      <Box
-                        key={`video-wrapper-${index}-${i}`}
-                        sx={{ position: "relative" }}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                      >
-                        <Box
-                          ref={videoRef}
-                          component="video"
-                          src={src}
-                          loop
-                          sx={commonSx}
-                        />
-                        {isHovered && (
-                          <IconButton
-                            onClick={handleTogglePlay}
-                            sx={{
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                              backgroundColor: "rgba(0,0,0,0.4)",
-                              color: "#fff",
-                              zIndex: 2,
-                              "&:hover": {
-                                backgroundColor: "rgba(0,0,0,0.6)",
-                              },
-                            }}
-                          >
-                            {isPlaying ? (
-                              <PauseCircleIcon sx={{ fontSize: "3rem" }} />
-                            ) : (
-                              <PlayCircleIcon sx={{ fontSize: "3rem" }} />
-                            )}
-                          </IconButton>
-                        )}
-                      </Box>
-                    );
-                  }
-
-                  return (
-                    <Box
-                      key={`image-${index}-${i}`}
-                      component="img"
-                      src={src}
-                      alt={`Section image ${i + 1}`}
-                      sx={commonSx}
-                    />
-                  );
-                })}
-              </Box>
-            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>{mediaContent}</Grid>
 
             <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
               <Box
@@ -155,7 +235,6 @@ const SplitSection = ({ sections, reverse }) => {
                     variant="h5"
                     fontWeight={700}
                     sx={{
-                      textAlign: "center",
                       textAlign: reverse ? "left" : "right",
                       fontSize: {
                         xs: "22px",

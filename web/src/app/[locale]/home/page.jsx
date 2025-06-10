@@ -32,22 +32,21 @@ const Home = () => {
   const statisticsList = rawData.statistics || [];
   const faqs = rawData.faq || [];
 
-  const getSingleByTitle = (title) =>
-    websiteData.find((item) => item.title === title);
+  const getSingleById = (id) => websiteData?.find((item) => item.id === id);
 
   const homeSectionA = rawData?.hero?.[0];
-  const homeSectionB = getSingleByTitle("HomeSectionb");
-  const endSection = getSingleByTitle("HomeEndsection");
-  const herderSection = getSingleByTitle("Herder");
-  const statisticsSection = getSingleByTitle("Statistics");
+  const homeSectionB = getSingleById(6);
+  const endSection = getSingleById(9);
+  const herderSection = getSingleById(7);
+  const statisticsSection = getSingleById(8);
 
-  const infoCards = ["sloganA", "sloganB", "sloganC"]
-    .map((title) => getSingleByTitle(title))
+  const infoCards = [2, 3, 4]
+    .map((title) => getSingleById(title))
     .filter(Boolean);
 
-  const splitSections = ["HomeSectionc", "HomeSectiond"]
+  const splitSections = [5, 1]
     .map((title) => {
-      const sec = getSingleByTitle(title);
+      const sec = getSingleById(title);
       return sec
         ? {
             img: [
