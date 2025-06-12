@@ -13,10 +13,13 @@ import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useTranslations } from "next-intl";
 
 const SectionItem = ({ section, index, isReversed }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+
+  const t = useTranslations("product");
 
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -74,6 +77,7 @@ const SectionItem = ({ section, index, isReversed }) => {
     }
   };
 
+  const hasMedia = images.length > 0;
   const renderSlides = () =>
     images.map((src, i) => {
       const isVideo = Boolean(src.match(/\.(mp4|webm|ogg)(\?.*)?$/i));
@@ -215,21 +219,19 @@ const SectionItem = ({ section, index, isReversed }) => {
       alignItems="stretch"
       sx={{ width: "100%" }}
     >
-      <Grid size={{ xs: 12, md: 6 }}>{mediaContent}</Grid>
+      {hasMedia && <Grid size={{ xs: 12, md: 6 }}>{mediaContent}</Grid>}
 
-      <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
-        <Box
-          sx={{
-            flex: 1,
-            textAlign: { xs: "start", md: isReversed ? "right" : "left" },
-          }}
-        >
+      <Grid size={{ xs: 12, md: hasMedia ? 6 : 12 }} sx={{ display: "flex" }}>
+        <Box>
           {section?.title && (
             <Typography
               variant="h5"
               fontWeight={700}
               sx={{
-                textAlign: isReversed ? "right" : "left",
+                textAlign: {
+                  xs: "center",
+                  md: hasMedia ? (isReversed ? "left" : "right") : "center",
+                },
                 fontSize: {
                   xs: "22px",
                   sm: "26px",
@@ -295,7 +297,7 @@ const SectionItem = ({ section, index, isReversed }) => {
                 userSelect: "none",
               }}
             >
-              {showFull ? "See less" : "See more"}
+              {showFull ? t("seeLess") : t("seeMore")}
             </Typography>
           )}
         </Box>
