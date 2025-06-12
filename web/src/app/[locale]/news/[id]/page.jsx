@@ -94,7 +94,7 @@ export default function NewsDetailPage() {
         sx={{
           position: "relative",
           width: "100%",
-          minHeight: "60vh",
+          height: { xs: "20rem" },
           backgroundImage: `url('${newsItem.image_url}')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -103,6 +103,7 @@ export default function NewsDetailPage() {
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
+          paddingBottom: "5rem",
         }}
       >
         <Box

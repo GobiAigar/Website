@@ -28,11 +28,11 @@ const FAQSection = ({ faqItems = [], lang = "en" }) => {
         >
           {t("contact")}
         </Link>
-        .
       </Typography>
 
       <Box
         mt={4}
+        pb={2}
         sx={{
           maxHeight: {
             xs: "none",

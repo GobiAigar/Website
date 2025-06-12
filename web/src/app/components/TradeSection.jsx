@@ -115,7 +115,15 @@ const TradeSection = ({
             variant="h5"
             fontWeight={700}
             mb={2}
-            sx={{ color: "#333" }}
+            sx={{
+              color: "#333",
+              fontSize: {
+                xs: "22px",
+                sm: "26px",
+                md: "30px",
+                lg: "32px",
+              },
+            }}
           >
             {title}
           </Typography>
@@ -146,8 +154,14 @@ const TradeSection = ({
                 color: "#5C4B47",
                 overflow: isDesktop && !showFull ? "hidden" : "visible",
                 display: isDesktop && !showFull ? "-webkit-box" : "block",
-                WebkitLineClamp: isDesktop && !showFull ? 15 : "unset",
+                WebkitLineClamp: isDesktop && !showFull ? 12 : "unset",
                 WebkitBoxOrient: "vertical",
+                fontSize: {
+                  xs: "12px",
+                  sm: "14px",
+                  md: "16px",
+                  lg: "18px",
+                },
               }}
             >
               {description}
