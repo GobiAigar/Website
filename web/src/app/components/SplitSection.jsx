@@ -105,9 +105,16 @@ const SectionItem = ({ section, index, isReversed }) => {
 
     if (isSliderPlaying) {
       sliderRef.current.slickPause();
+
+      elapsedRef.current = 0;
+      setProgress(0);
+      startRef.current = Date.now();
     } else {
       sliderRef.current.slickPlay();
+      startRef.current = Date.now();
+      animationFrameRef.current = requestAnimationFrame(animate);
     }
+
     setIsSliderPlaying(!isSliderPlaying);
   };
 
