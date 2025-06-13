@@ -88,7 +88,7 @@ const Sustainability = () => {
                 left: "50%",
                 top: 0,
                 bottom: 0,
-                width: "2px",
+                width: "0.125rem",
                 bgcolor: "#828282",
                 transform: "translateX(-50%)",
                 zIndex: 0,
@@ -200,9 +200,9 @@ const Sustainability = () => {
               variant="h3"
               sx={{
                 fontSize: {
-                  xs: "24px",
-                  sm: "28px",
-                  md: "32px",
+                  xs: "1.5rem",
+                  sm: "1.75rem",
+                  md: "2rem",
                   color: "white",
                 },
                 fontWeight: "bold",
@@ -215,9 +215,9 @@ const Sustainability = () => {
               sx={{
                 mt: 2,
                 fontSize: {
-                  xs: "12px",
-                  sm: "16px",
-                  md: "20px",
+                  xs: "0.75rem",
+                  sm: "1rem",
+                  md: "1.25rem",
                   color: "white",
                 },
               }}
@@ -236,7 +236,7 @@ const Sustainability = () => {
               left: "50%",
               top: 0,
               bottom: 0,
-              width: "2px",
+              width: "0.125rem",
               bgcolor: "#828282",
               transform: "translateX(-50%)",
               zIndex: 0,
@@ -254,7 +254,7 @@ const Sustainability = () => {
                 flexDirection: index % 2 === 0 ? "row" : "row-reverse",
                 alignItems: "flex-start",
                 position: "relative",
-                top: "140px",
+                top: "8.75rem",
               }}
             >
               <Box
@@ -266,7 +266,7 @@ const Sustainability = () => {
                   height: 16,
                   backgroundColor: "#fff",
                   borderRadius: "50%",
-                  border: "1px solid black",
+                  border: "0.0625rem solid black",
                   transform: "translate(-50%, -50%)",
                   zIndex: 10,
                   pointerEvents: "none",
@@ -278,7 +278,7 @@ const Sustainability = () => {
                   top: 0,
                   [index % 2 === 0 ? "right" : "left"]: "50%",
                   width: "calc(35% - 330px)",
-                  height: "1px",
+                  height: "0.0625rem",
                   backgroundColor: "#828282",
                   transform: "translateY(-50%)",
                   zIndex: 0,
@@ -313,13 +313,13 @@ const Sustainability = () => {
                     src={item.image}
                     alt={item.label}
                     sx={{
-                      width: "400px",
-                      height: "600px",
+                      width: "25rem",
+                      height: "37.5rem",
                       objectFit: "cover",
                       transition: "transform 0.2s",
                       "&:hover": { transform: "scale(1.05)" },
                       borderRadius: 3,
-                      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
+                      boxShadow: "0 0.25rem 1.25rem rgba(0, 0, 0, 0.4)",
                     }}
                   />
                 </Box>
@@ -379,7 +379,7 @@ const Sustainability = () => {
               height: "auto",
               objectFit: "contain",
               borderRadius: 2,
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0 0.25rem 1.25rem rgba(0, 0, 0, 0.5)",
             }}
           />
         </Box>

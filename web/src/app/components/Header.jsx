@@ -117,7 +117,7 @@ const Header = () => {
                       left: 0,
                       bottom: -4,
                       width: isActive(link.path) ? "100%" : 0,
-                      height: "2px",
+                      height: "0.125rem",
                       backgroundColor: "white",
                       transition: "width 0.3s ease",
                     },

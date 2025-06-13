@@ -14,11 +14,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useTranslations } from "next-intl";
+import { Pause, PlayArrow } from "@mui/icons-material";
 
 const SectionItem = ({ section, index, isReversed }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-
+  const sliderRef = useRef(null);
   const t = useTranslations("product");
 
   const [isHovered, setIsHovered] = useState(false);
@@ -27,8 +28,12 @@ const SectionItem = ({ section, index, isReversed }) => {
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isSliderPlaying, setIsSliderPlaying] = useState(true);
   const textRef = useRef(null);
   const videoRef = useRef(null);
+  const animationFrameRef = useRef(null);
+  const elapsedRef = useRef(0);
+  const startRef = useRef(Date.now());
 
   const images = section?.img || [];
 
@@ -42,24 +47,36 @@ const SectionItem = ({ section, index, isReversed }) => {
     return () => clearTimeout(timer);
   }, [section?.text]);
 
-  useEffect(() => {
-    let frame;
-    let start = Date.now();
+  const animate = () => {
+    const elapsed = Date.now() - startRef.current;
+    const percent = (elapsed / 5000) * 100;
 
-    const animate = () => {
-      const elapsed = Date.now() - start;
-      const percent = (elapsed / 5000) * 100;
-      setProgress(percent >= 100 ? 100 : percent);
-      if (percent < 100) frame = requestAnimationFrame(animate);
-    };
-
-    if (images.length > 1) {
-      setProgress(0);
-      frame = requestAnimationFrame(animate);
+    if (percent >= 100) {
+      setProgress(100);
+      elapsedRef.current = 0;
+      return;
     }
 
-    return () => cancelAnimationFrame(frame);
-  }, [activeIndex, images.length]);
+    setProgress(percent);
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+  };
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    if (isSliderPlaying) {
+      startRef.current = Date.now() - elapsedRef.current;
+      animationFrameRef.current = requestAnimationFrame(animate);
+    } else {
+      elapsedRef.current = Date.now() - startRef.current;
+    }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [activeIndex, images.length, isSliderPlaying]);
 
   const handleBeforeChange = (_, next) => {
     setActiveIndex(next);
@@ -75,6 +92,23 @@ const SectionItem = ({ section, index, isReversed }) => {
       videoRef.current.pause();
       setIsPlaying(false);
     }
+  };
+
+  const handleMediaClick = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const handleSliderPlayPause = () => {
+    if (!sliderRef.current) return;
+
+    if (isSliderPlaying) {
+      sliderRef.current.slickPause();
+    } else {
+      sliderRef.current.slickPlay();
+    }
+    setIsSliderPlaying(!isSliderPlaying);
   };
 
   const hasMedia = images.length > 0;
@@ -94,6 +128,7 @@ const SectionItem = ({ section, index, isReversed }) => {
           <Box
             key={`video-${index}-${i}`}
             sx={{ position: "relative" }}
+            onClick={handleMediaClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -124,9 +159,9 @@ const SectionItem = ({ section, index, isReversed }) => {
                 }}
               >
                 {isPlaying ? (
-                  <PauseCircleIcon sx={{ fontSize: "3rem" }} />
+                  <PauseCircleIcon sx={{ fontSize: "2rem" }} />
                 ) : (
-                  <PlayCircleIcon sx={{ fontSize: "3rem" }} />
+                  <PlayCircleIcon sx={{ fontSize: "2rem" }} />
                 )}
               </IconButton>
             )}
@@ -140,6 +175,7 @@ const SectionItem = ({ section, index, isReversed }) => {
           component="img"
           src={src}
           alt={`Section image ${i + 1}`}
+          onClick={handleMediaClick}
           sx={commonSx}
         />
       );
@@ -149,6 +185,7 @@ const SectionItem = ({ section, index, isReversed }) => {
     images.length > 1 ? (
       <Box sx={{ position: "relative" }}>
         <Slider
+          ref={sliderRef}
           dots={false}
           arrows={false}
           infinite
@@ -163,6 +200,26 @@ const SectionItem = ({ section, index, isReversed }) => {
         >
           {renderSlides()}
         </Slider>
+        <IconButton
+          onClick={handleSliderPlayPause}
+          sx={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            zIndex: 3,
+            backgroundColor: "rgba(0,0,0,0.4)",
+            color: "#fff",
+            "&:hover": {
+              backgroundColor: "rgba(0,0,0,0.6)",
+            },
+          }}
+        >
+          {isSliderPlaying ? (
+            <Pause sx={{ fontSize: "1rem" }} />
+          ) : (
+            <PlayArrow sx={{ fontSize: "1rem" }} />
+          )}
+        </IconButton>
         <Box
           sx={{
             position: "absolute",
@@ -233,10 +290,10 @@ const SectionItem = ({ section, index, isReversed }) => {
                   md: hasMedia ? (isReversed ? "left" : "right") : "center",
                 },
                 fontSize: {
-                  xs: "22px",
-                  sm: "26px",
-                  md: "30px",
-                  lg: "32px",
+                  xs: "1.375rem",
+                  sm: "1.625rem",
+                  md: "1.875rem",
+                  lg: "2rem",
                 },
                 mb: 2,
               }}
@@ -252,14 +309,14 @@ const SectionItem = ({ section, index, isReversed }) => {
                 pr: isDesktop && showFull ? 1 : 0,
                 scrollbarWidth: isDesktop ? "thin" : "none",
                 "&::-webkit-scrollbar": {
-                  width: isDesktop ? 0 : "0px",
+                  width: isDesktop ? 0 : "0rem",
                 },
                 "&:hover::-webkit-scrollbar": {
-                  width: isDesktop ? "6px" : "0px",
+                  width: isDesktop ? "0.375rem" : "0rem",
                 },
                 "&::-webkit-scrollbar-thumb": {
                   backgroundColor: "#aaa",
-                  borderRadius: "6px",
+                  borderRadius: "0.375rem",
                 },
               }}
             >
@@ -274,10 +331,10 @@ const SectionItem = ({ section, index, isReversed }) => {
                   WebkitLineClamp: isDesktop && !showFull ? 19 : "unset",
                   WebkitBoxOrient: "vertical",
                   fontSize: {
-                    xs: "12px",
-                    sm: "14px",
-                    md: "16px",
-                    lg: "18px",
+                    xs: "0.75rem",
+                    sm: "0.875rem",
+                    md: "1rem",
+                    lg: "1.125rem",
                   },
                 }}
               >

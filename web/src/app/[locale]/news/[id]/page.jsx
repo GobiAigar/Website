@@ -122,7 +122,13 @@ export default function NewsDetailPage() {
             variant="h3"
             fontWeight="bold"
             color="white"
-            sx={{ fontSize: { xs: "24px", sm: "32px", md: "48px" } }}
+            sx={{
+              fontSize: {
+                xs: "1.5rem",
+                sm: "2rem",
+                md: "3rem",
+              },
+            }}
           >
             {lang === "mn" ? newsItem.mntitle : newsItem.entitle}
           </Typography>
@@ -149,7 +155,7 @@ export default function NewsDetailPage() {
               <span
                 style={{
                   fontWeight: "bold",
-                  fontSize: "20px",
+                  fontSize: "1.25rem",
                   marginLeft: 7,
                 }}
               >

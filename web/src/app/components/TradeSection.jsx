@@ -118,10 +118,10 @@ const TradeSection = ({
             sx={{
               color: "#333",
               fontSize: {
-                xs: "22px",
-                sm: "26px",
-                md: "30px",
-                lg: "32px",
+                xs: "1.375rem",
+                sm: "1.625rem",
+                md: "1.875rem",
+                lg: "2rem",
               },
             }}
           >
@@ -157,10 +157,10 @@ const TradeSection = ({
                 WebkitLineClamp: isDesktop && !showFull ? 12 : "unset",
                 WebkitBoxOrient: "vertical",
                 fontSize: {
-                  xs: "12px",
-                  sm: "14px",
-                  md: "16px",
-                  lg: "18px",
+                  xs: "0.75rem",
+                  sm: "0.875rem",
+                  md: "1rem",
+                  lg: "1.125rem",
                 },
               }}
             >

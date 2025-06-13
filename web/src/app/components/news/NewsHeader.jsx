@@ -42,9 +42,9 @@ const NewsHeader = ({ displayNews }) => {
             variant="h3"
             sx={{
               fontSize: {
-                xs: "24px",
-                sm: "28px",
-                md: "32px",
+                xs: "1.5rem",
+                sm: "1.75rem",
+                md: "2rem",
                 color: "white",
               },
               fontWeight: "bold",
@@ -57,9 +57,9 @@ const NewsHeader = ({ displayNews }) => {
             sx={{
               mt: 2,
               fontSize: {
-                xs: "12px",
-                sm: "16px",
-                md: "20px",
+                xs: "0.75rem",
+                sm: "1rem",
+                md: "1.25rem",
                 color: "white",
               },
             }}
