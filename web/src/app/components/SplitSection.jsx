@@ -159,9 +159,9 @@ const SectionItem = ({ section, index, isReversed }) => {
                 }}
               >
                 {isPlaying ? (
-                  <PauseCircleIcon sx={{ fontSize: "2rem" }} />
+                  <PauseCircleIcon sx={{ fontSize: "3rem" }} />
                 ) : (
-                  <PlayCircleIcon sx={{ fontSize: "2rem" }} />
+                  <PlayCircleIcon sx={{ fontSize: "3rem" }} />
                 )}
               </IconButton>
             )}
