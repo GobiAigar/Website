@@ -7,6 +7,7 @@ import AppThemeProvider from "./theme-provider";
 export const metadata = {
   title: "Gobi Aigar",
   description: "Cashmere",
+  icon: { url: "/IMG_3198.PNG", type: "image/png" },
 };
 
 const roboto = Roboto({
