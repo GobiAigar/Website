@@ -46,11 +46,14 @@ const Contact = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const res = await fetch("http://localhost:8000/api/messages", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/messages`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(values),
+          }
+        );
 
         if (res.ok) {
           setSnackbarMessage(t("success"));

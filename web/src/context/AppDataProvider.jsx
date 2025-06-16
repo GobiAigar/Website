@@ -20,7 +20,7 @@ export const AppDataProvider = ({ children }) => {
     const fetchAll = async () => {
       try {
         const websiteRes = await fetch(
-          "http://localhost:8000/api/website"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/website`
         ).then((r) => r.json());
 
         setData((prev) => ({
@@ -29,21 +29,21 @@ export const AppDataProvider = ({ children }) => {
           loadingWebsite: false,
         }));
 
-        const productPromise = fetch("http://localhost:8000/api/product").then(
-          (r) => r.json()
-        );
+        const productPromise = fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/product`
+        ).then((r) => r.json());
 
         const sustainabilityPromise = fetch(
-          "http://localhost:8000/api/sustainability"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/sustainability`
         ).then((r) => r.json());
 
         const messagePromise = fetch(
-          "http://localhost:8000/api/contactHeader"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contactHeader`
         ).then((r) => r.json());
 
-        const companyPromise = fetch("http://localhost:8000/api/company").then(
-          (r) => r.json()
-        );
+        const companyPromise = fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/company`
+        ).then((r) => r.json());
 
         const [productRes, sustainabilityRes, messageRes, companyRes] =
           await Promise.all([

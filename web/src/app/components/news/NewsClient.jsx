@@ -20,7 +20,7 @@ const NewsClient = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:8000/api/news/paginated?page=${currentPage}&limit=6`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/news/paginated?page=${currentPage}&limit=6`,
           { cache: "no-store" }
         );
         const data = await res.json();
