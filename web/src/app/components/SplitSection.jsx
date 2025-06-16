@@ -144,7 +144,6 @@ const SectionItem = ({ section, index, isReversed }) => {
               component="video"
               src={src}
               loop
-              autoPlay
               playsInline
               sx={commonSx}
             />
