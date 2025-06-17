@@ -250,7 +250,7 @@ const Sustainability = () => {
               spacing={4}
               key={index}
               sx={{
-                mb: 12,
+                mb: -35,
                 flexDirection: index % 2 === 0 ? "row" : "row-reverse",
                 alignItems: "flex-start",
                 position: "relative",
@@ -384,7 +384,7 @@ const Sustainability = () => {
           />
         </Box>
       </Dialog>
-
+      <Box marginBottom={50}></Box>
       <Footer />
     </Box>
   );

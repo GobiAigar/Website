@@ -329,6 +329,12 @@ const Home = () => {
                     listStyleType: "disc",
                     m: 0,
                     color: "text.secondary",
+                    fontSize: {
+                      xs: "0.875rem",
+                      sm: "1rem",
+                      md: "1.125rem",
+                      lg: "1.25rem",
+                    },
                   }}
                 >
                   {statisticsList.map((item) => (

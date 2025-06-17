@@ -19,8 +19,8 @@ const NewsClient = () => {
     const fetchNews = async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/news/paginated?page=${currentPage}&limit=6`,
+       const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/news/paginated?page=${currentPage}&limit=3`,
           { cache: "no-store" }
         );
         const data = await res.json();
@@ -38,7 +38,7 @@ const NewsClient = () => {
     fetchNews();
   }, [currentPage]);
 
-  if (loading) return <NewsSkeleton itemsPerPage={6} />;
+  if (loading) return <NewsSkeleton itemsPerPage={3} />;
 
   if (!initialNews) {
     return (
@@ -61,10 +61,10 @@ const NewsClient = () => {
         <NewsList news={news} />
       </Container>
 
-      {total > 6 && (
+      {total > 3 && (
         <Box display="flex" justifyContent="center" pb={4}>
           <Pagination
-            count={Math.ceil(total / 6)}
+            count={Math.ceil(total / 3)}
             page={currentPage}
             onChange={(_, page) => setCurrentPage(page)}
             color="primary"

@@ -105,7 +105,7 @@ export const newsController = {
   },
   getPaginatedNews: async (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = 6;
+    const limit = 3;
     const offset = (page - 1) * limit;
 
     try {

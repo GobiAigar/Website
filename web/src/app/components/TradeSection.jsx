@@ -157,10 +157,10 @@ const TradeSection = ({
                 WebkitLineClamp: isDesktop && !showFull ? 12 : "unset",
                 WebkitBoxOrient: "vertical",
                 fontSize: {
-                  xs: "0.75rem",
-                  sm: "0.875rem",
-                  md: "1rem",
-                  lg: "1.125rem",
+                  xs: "0.875rem",
+                  sm: "1rem",
+                  md: "1.125rem",
+                  lg: "1.25rem",
                 },
               }}
             >

@@ -52,7 +52,7 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                     color: "#fff",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-start",
+                    justifyContent: "center",
                     alignItems: "center",
                     textAlign: "center",
                     opacity: 0,

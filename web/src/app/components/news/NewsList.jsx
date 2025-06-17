@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
-
 import { useRouter } from "next/navigation";
 
 const truncateChars = (text, limit) =>
@@ -18,7 +17,6 @@ const truncateChars = (text, limit) =>
 const NewsList = ({ news }) => {
   const lang = useLocale();
   const t = useTranslations("news");
-
   const router = useRouter();
 
   return (
@@ -32,14 +30,12 @@ const NewsList = ({ news }) => {
               boxShadow: 4,
               overflow: "hidden",
               height: "18.75rem",
-              transition: "all 0.3s ease",
               cursor: "pointer",
               "&:hover .media": {
-                transform: "translateY(-30%)",
+                transform: "scale(1.05)",
               },
-              "&:hover .content": {
+              "&:hover .overlay": {
                 opacity: 1,
-                transform: "translateY(0)",
               },
             }}
             onClick={() => router.push(`/${lang}/news/${item.id}`)}
@@ -54,23 +50,45 @@ const NewsList = ({ news }) => {
                   height: "100%",
                   width: "100%",
                   objectFit: "cover",
-                  transition: "transform 0.4s ease",
+                  transition: "transform 0.5s ease",
                 }}
                 loading="lazy"
               />
 
+              <Box
+                className="overlay"
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "80%",
+                  bgcolor: "rgba(0, 0, 0, 0.5)",
+                  color: "#fff",
+                  opacity: 0,
+                  transition: "opacity 0.4s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  px: 2,
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                  zIndex: 2,
+                }}
+              >
+                {t("news")}
+              </Box>
+
               <CardContent
-                className="content"
                 sx={{
                   position: "absolute",
                   bottom: 0,
                   width: "100%",
-                  bgcolor: "rgba(255, 255, 255, 0.9)",
+                  bgcolor: "rgba(255, 255, 255, 0.95)",
                   px: 2,
                   py: 1.5,
-                  transform: "translateY(100%)",
-                  transition: "transform 0.4s ease, opacity 0.4s ease",
-                  opacity: 0,
+                  zIndex: 3,
                 }}
               >
                 <Typography variant="subtitle1" fontWeight="bold">
@@ -83,7 +101,6 @@ const NewsList = ({ news }) => {
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    gap: 2,
                     justifyContent: "space-between",
                     mt: 1,
                   }}
@@ -119,4 +136,5 @@ const NewsList = ({ news }) => {
     </Grid>
   );
 };
+
 export default NewsList;

@@ -41,7 +41,8 @@
     "journalist": "Journalist",
     "seeLess": "Compile",
     "clickSeeMore": "Click on the news to read more.",
-    "notFoundNews": "No news found yet."
+    "notFoundNews": "No news found yet.",
+    "news": "Click on the news to read more."
   },
   "sustainability": {
     "notFoundInformations": "No information found yet."
