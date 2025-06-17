@@ -60,15 +60,6 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                     transform: "translateY(100%)",
                     px: 2,
                     py: 2,
-                    overflowY: "auto",
-                    scrollbarWidth: "thin",
-                    "&::-webkit-scrollbar": {
-                      width: "4px",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                      backgroundColor: "#ffffff88",
-                      borderRadius: "4px",
-                    },
                   }}
                 >
                   <Typography variant="h6" fontWeight={700} gutterBottom>
