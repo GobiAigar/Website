@@ -134,8 +134,6 @@ const SectionItem = ({ section, index, isReversed }) => {
       (isYouTubeUrl(src) || /\.(mp4|webm|ogg|jpg|jpeg|png|webp)$/i.test(src))
   );
 
-  console.log("hasMedia", hasMedia);
-
   const renderSlides = () =>
     images.map((src, i) => {
       const isYouTube = isYouTubeUrl(src);
