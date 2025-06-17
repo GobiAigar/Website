@@ -13,15 +13,15 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslations } from "next-intl";
 import { Link } from "../../i18n/navigation";
 
-const FAQSection = ({ faqItems = [], lang = "en" }) => {
+const FAQSection = ({ faqItems = [], lang = "en", fqaHeader = [] }) => {
   const t = useTranslations("faq");
   return (
     <Container maxWidth="md" sx={{ color: "black", py: 8, p: 0 }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        {t("title")}
+        {lang === "mn" ? fqaHeader.mntitle : fqaHeader.entitle}
       </Typography>
-      <Typography variant="body1" paragraph>
-        {t("subtitle")}
+      <Typography variant="body1">
+        {lang === "mn" ? fqaHeader.mnsubtitle : fqaHeader.ensubtitle}
         <Link
           href="/contact"
           style={{ textDecoration: "underline", color: "#1976d2" }}

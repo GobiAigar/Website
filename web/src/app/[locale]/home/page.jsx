@@ -33,12 +33,18 @@ const Home = () => {
   const faqs = rawData.faq || [];
 
   const getSingleById = (id) => websiteData?.find((item) => item.id === id);
+  const getMultibyId = (ids) => {
+    return websiteData?.filter((item) => ids.includes(item.id)) || [];
+  };
+
+  const fourGoats = getMultibyId([7, 8, 9, 10]);
 
   const homeSectionA = rawData?.hero?.[0];
-  const homeSectionB = getSingleById(6);
-  const endSection = getSingleById(9);
-  const herderSection = getSingleById(7);
-  const statisticsSection = getSingleById(8);
+  // const homeSectionB = getSingleById(6);
+  const endSection = getSingleById(14);
+  const herderSection = getSingleById(11);
+  const statisticsSection = getSingleById(12);
+  const fqaSection = getSingleById(13);
 
   const infoCards = [2, 3, 4]
     .map((title) => getSingleById(title))
@@ -270,7 +276,7 @@ const Home = () => {
         {loadingWebsite ? (
           <Skeleton variant="rectangular" width="100%" height="18.75rem" />
         ) : (
-          <ProductImageList sections={homeSectionB} lang={lang} />
+          <ProductImageList sections={fourGoats} lang={lang} />
         )}
       </Container>
 
@@ -364,7 +370,11 @@ const Home = () => {
               {loadingWebsite ? (
                 <Skeleton variant="rectangular" width="100%" height="12.5rem" />
               ) : (
-                <FAQSection faqItems={faqs} lang={lang} />
+                <FAQSection
+                  faqItems={faqs}
+                  lang={lang}
+                  fqaHeader={fqaSection}
+                />
               )}
             </Grid>
           </Grid>
