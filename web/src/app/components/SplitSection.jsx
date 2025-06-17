@@ -16,6 +16,16 @@ import "slick-carousel/slick/slick-theme.css";
 import { useTranslations } from "next-intl";
 import { Pause, PlayArrow } from "@mui/icons-material";
 
+const isYouTubeUrl = (url) =>
+  /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/.test(url);
+
+const getYouTubeEmbedUrl = (url) => {
+  const match = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/
+  );
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+};
+
 const SectionItem = ({ section, index, isReversed }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -61,6 +71,7 @@ const SectionItem = ({ section, index, isReversed }) => {
 
     animationFrameRef.current = requestAnimationFrame(animate);
   };
+
   useEffect(() => {
     if (images.length <= 1) return;
 
@@ -105,7 +116,6 @@ const SectionItem = ({ section, index, isReversed }) => {
 
     if (isSliderPlaying) {
       sliderRef.current.slickPause();
-
       elapsedRef.current = 0;
       setProgress(0);
       startRef.current = Date.now();
@@ -118,9 +128,17 @@ const SectionItem = ({ section, index, isReversed }) => {
     setIsSliderPlaying(!isSliderPlaying);
   };
 
-  const hasMedia = images.length > 0;
+  const hasMedia = images.some(
+    (src) =>
+      src &&
+      (isYouTubeUrl(src) || /\.(mp4|webm|ogg|jpg|jpeg|png|webp)$/i.test(src))
+  );
+
+  console.log("hasMedia", hasMedia);
+
   const renderSlides = () =>
     images.map((src, i) => {
+      const isYouTube = isYouTubeUrl(src);
       const isVideo = Boolean(src.match(/\.(mp4|webm|ogg)(\?.*)?$/i));
       const commonSx = {
         width: "100%",
@@ -129,6 +147,39 @@ const SectionItem = ({ section, index, isReversed }) => {
         borderRadius: 2,
         display: "block",
       };
+
+      if (isYouTube) {
+        const embedUrl = getYouTubeEmbedUrl(src);
+        if (!embedUrl) return null;
+
+        return (
+          <Box
+            key={`youtube-${index}-${i}`}
+            sx={{
+              position: "relative",
+              paddingTop: "56.25%",
+              borderRadius: 2,
+              overflow: "hidden",
+            }}
+          >
+            <Box
+              component="iframe"
+              src={embedUrl}
+              title={`YouTube video ${i}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none",
+              }}
+            />
+          </Box>
+        );
+      }
 
       if (isVideo) {
         return (
@@ -282,7 +333,6 @@ const SectionItem = ({ section, index, isReversed }) => {
       sx={{ width: "100%" }}
     >
       {hasMedia && <Grid size={{ xs: 12, md: 6 }}>{mediaContent}</Grid>}
-
       <Grid size={{ xs: 12, md: hasMedia ? 6 : 12 }} sx={{ display: "flex" }}>
         <Box>
           {section?.title && (
