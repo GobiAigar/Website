@@ -24,6 +24,8 @@ const Sustainability = () => {
   const [loading, setLoading] = useState(true);
   const [openImage, setOpenImage] = useState(null);
 
+  console.log("sustainability", sustainability);
+
   useEffect(() => {
     if (rawLoading) {
       setLoading(true);
@@ -35,12 +37,12 @@ const Sustainability = () => {
 
   const data = sustainability || [];
   const mainInfo = data?.hero?.[0];
-  const roadmapItems = data?.response
-    ?.filter((item) => item.id !== 1)
-    .map((item) => ({
-      label: lang === "mn" ? item.mndescription : item.endescription,
-      image: item.image_url,
-    }));
+  const roadmapItems = data?.response?.cerficates?.map((item) => ({
+    label: lang === "mn" ? item.mndescription : item.endescription,
+    image: item.image_url,
+  }));
+
+  const sustainabilityText = sustainability?.response?.title?.[0];
 
   if (loading && (!sustainability || !sustainability.data?.length)) {
     return (
@@ -227,6 +229,63 @@ const Sustainability = () => {
           </Container>
         </Box>
       </Box>
+
+      <Container
+        disableGutters
+        maxWidth={false}
+        sx={{
+          pt: { xs: 6, md: 10 },
+          px: { sm: 6, md: 10, lg: 20 },
+          color: "black",
+        }}
+      >
+        <Box
+          sx={{
+            bgcolor: "#F5F5F5",
+            p: { xs: 3, sm: 4, md: 5 },
+            borderRadius: 3,
+            boxShadow: "0 0.25rem 1.25rem rgba(0, 0, 0, 0.05)",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: {
+                xs: "1.375rem",
+                sm: "1.625rem",
+                md: "1.875rem",
+                lg: "2rem",
+              },
+              mb: 3,
+            }}
+            fontWeight={700}
+            textAlign="start"
+          >
+            {lang === "mn"
+              ? sustainabilityText?.mntitle
+              : sustainabilityText?.entitle}
+          </Typography>
+
+          <Typography
+            variant="body1"
+            sx={{
+              whiteSpace: "pre-line",
+              lineHeight: 1.8,
+              textAlign: "justify",
+              fontSize: {
+                xs: "1rem",
+                sm: "1.225rem",
+                md: "1.375rem",
+                lg: "1.4rem",
+              },
+              color: "text.secondary",
+            }}
+          >
+            {lang === "mn"
+              ? sustainabilityText?.mndescription
+              : sustainabilityText?.endescription}
+          </Typography>
+        </Box>
+      </Container>
 
       <Container sx={{ pb: 10, color: "black" }}>
         <Box sx={{ position: "relative" }}>
