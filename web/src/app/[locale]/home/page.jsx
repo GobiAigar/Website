@@ -38,6 +38,7 @@ const Home = () => {
   };
 
   const fourGoats = getMultibyId([7, 8, 9, 10]);
+  const goatsHeader = getSingleById(6);
 
   const homeSectionA = rawData?.hero?.[0];
   const endSection = getSingleById(14);
@@ -272,21 +273,50 @@ const Home = () => {
         )}
       </Container>
 
-      <Container sx={{ py: "2rem" }}>
+      <Container disableGutters maxWidth={false} sx={{ py: "2rem" }}>
         {loadingWebsite ? (
           <Skeleton variant="rectangular" width="100%" height="18.75rem" />
         ) : (
-          <ProductImageList sections={fourGoats} lang={lang} />
+          <>
+            <Typography
+              fontWeight={700}
+              sx={{
+                fontSize: {
+                  xs: "1.375rem",
+                  sm: "1.625rem",
+                  md: "1.875rem",
+                  lg: "2rem",
+                },
+              }}
+              mb="1rem"
+              textAlign="center"
+            >
+              {lang === "mn" ? goatsHeader.mntitle : goatsHeader.entitle}
+            </Typography>
+            <ProductImageList sections={fourGoats} lang={lang} />
+          </>
         )}
       </Container>
 
       {herderSection && (
-        <Container sx={{ py: "2rem" }}>
+        <Container disableGutters maxWidth={false} sx={{ py: "2rem" }}>
           {loadingWebsite ? (
             <Skeleton variant="rectangular" width="100%" height="25rem" />
           ) : (
             <>
-              <Typography variant="h4" fontWeight={700} mb="1rem">
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "1.375rem",
+                    sm: "1.625rem",
+                    md: "1.875rem",
+                    lg: "2rem",
+                  },
+                }}
+                fontWeight={700}
+                mb="1rem"
+                ml={{ sm: "3rem", xs: "1rem" }}
+              >
                 {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
               </Typography>
               <Box
@@ -308,11 +338,15 @@ const Home = () => {
             <Grid size={{ xs: 12, md: 6 }}>
               <Box component="ul">
                 <Typography
-                  variant="h4"
                   fontWeight={700}
                   mb="1rem"
                   sx={{
-                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
+                    fontSize: {
+                      xs: "1.375rem",
+                      sm: "1.625rem",
+                      md: "1.875rem",
+                      lg: "2rem",
+                    },
                   }}
                 >
                   {loadingWebsite
@@ -360,7 +394,18 @@ const Home = () => {
                 <Skeleton variant="rectangular" width="100%" height="12.5rem" />
               ) : (
                 <>
-                  <Typography variant="h4" fontWeight={700} mb="0.5rem">
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "1.375rem",
+                        sm: "1.625rem",
+                        md: "1.875rem",
+                        lg: "2rem",
+                      },
+                    }}
+                    fontWeight={700}
+                    mb="0.5rem"
+                  >
                     {lang === "mn" ? endSection.mntitle : endSection.entitle}
                   </Typography>
                   <Box

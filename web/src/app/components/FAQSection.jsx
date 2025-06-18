@@ -17,10 +17,31 @@ const FAQSection = ({ faqItems = [], lang = "en", fqaHeader = [] }) => {
   const t = useTranslations("faq");
   return (
     <Container maxWidth="md" sx={{ color: "black", py: 8, p: 0 }}>
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
+      <Typography
+        sx={{
+          fontSize: {
+            xs: "1.375rem",
+            sm: "1.625rem",
+            md: "1.875rem",
+            lg: "2rem",
+          },
+        }}
+        fontWeight="bold"
+        gutterBottom
+      >
         {lang === "mn" ? fqaHeader.mntitle : fqaHeader.entitle}
       </Typography>
-      <Typography variant="body1">
+      <Typography
+        variant="body1"
+        sx={{
+          fontSize: {
+            xs: "1rem",
+            sm: "1.225rem",
+            md: "1.475rem",
+            lg: "1.6rem",
+          },
+        }}
+      >
         {lang === "mn" ? fqaHeader.mndescription : fqaHeader.endescription}
         <Link
           href="/contact"
