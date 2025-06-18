@@ -162,11 +162,9 @@ const TradeSection = ({
           >
             <Typography
               ref={textRef}
-              variant="body1"
               align="justify"
               whiteSpace="pre-line"
               sx={{
-                color: "#5C4B47",
                 overflow: isDesktop && !showFull ? "hidden" : "visible",
                 display: isDesktop && !showFull ? "-webkit-box" : "block",
                 WebkitLineClamp: isDesktop && !showFull ? 12 : "unset",

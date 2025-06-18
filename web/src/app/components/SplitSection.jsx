@@ -134,7 +134,7 @@ const SectionItem = ({ section, index, isReversed }) => {
       spacing={4}
       direction={{ xs: "column", md: isReversed ? "row-reverse" : "row" }}
       alignItems="stretch"
-      sx={{ width: "100%" }} 
+      sx={{ width: "100%" }}
     >
       {hasMedia && <Grid size={{ xs: 12, md: 6 }}>{mediaContent}</Grid>}
       <Grid size={{ xs: 12, md: hasMedia ? 6 : 12 }} sx={{ display: "flex" }}>
@@ -183,7 +183,6 @@ const SectionItem = ({ section, index, isReversed }) => {
                 ref={textRef}
                 sx={{
                   textAlign: "justify",
-                  color: "text.secondary",
                   whiteSpace: "pre-line",
                   overflow: isDesktop && !showFull ? "hidden" : "visible",
                   display: isDesktop && !showFull ? "-webkit-box" : "block",

@@ -305,6 +305,22 @@ const Home = () => {
             >
               {lang === "mn" ? goatsHeader.mntitle : goatsHeader.entitle}
             </Typography>
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "0.875rem",
+                  sm: "1rem",
+                  md: "1.125rem",
+                  lg: "1.25rem",
+                },
+              }}
+              mb="1rem"
+              textAlign="start"
+            >
+              {lang === "mn"
+                ? goatsHeader.mndescription
+                : goatsHeader.endescription}
+            </Typography>
             <ProductImageList sections={fourGoats} lang={lang} />
           </>
         )}
@@ -378,7 +394,6 @@ const Home = () => {
                     lineHeight: 2,
                     listStyleType: "disc",
                     m: 0,
-                    color: "text.secondary",
                     fontSize: {
                       xs: "0.875rem",
                       sm: "1rem",

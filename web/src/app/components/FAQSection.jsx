@@ -32,7 +32,6 @@ const FAQSection = ({ faqItems = [], lang = "en", fqaHeader = [] }) => {
         {lang === "mn" ? fqaHeader.mntitle : fqaHeader.entitle}
       </Typography>
       <Typography
-        variant="body1"
         sx={{
           fontSize: {
             xs: "1rem",
