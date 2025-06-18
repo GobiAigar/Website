@@ -21,7 +21,7 @@ const FAQSection = ({ faqItems = [], lang = "en", fqaHeader = [] }) => {
         {lang === "mn" ? fqaHeader.mntitle : fqaHeader.entitle}
       </Typography>
       <Typography variant="body1">
-        {lang === "mn" ? fqaHeader.mnsubtitle : fqaHeader.ensubtitle}
+        {lang === "mn" ? fqaHeader.mndescription : fqaHeader.endescription}
         <Link
           href="/contact"
           style={{ textDecoration: "underline", color: "#1976d2" }}
