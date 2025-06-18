@@ -37,20 +37,20 @@ const Home = () => {
     return websiteData?.filter((item) => ids.includes(item.id)) || [];
   };
 
-  const fourGoats = getMultibyId([7, 8, 9, 10]);
-  const goatsHeader = getSingleById(6);
+  const fourGoats = getMultibyId([8, 9, 10, 11]);
+  const goatsHeader = getSingleById(7);
 
   const homeSectionA = rawData?.hero?.[0];
-  const endSection = getSingleById(14);
-  const herderSection = getSingleById(11);
-  const statisticsSection = getSingleById(12);
-  const fqaSection = getSingleById(13);
+  const endSection = getSingleById(15);
+  const herderSection = getSingleById(12);
+  const statisticsSection = getSingleById(13);
+  const fqaSection = getSingleById(14);
 
-  const infoCards = [2, 3, 4]
+  const infoCards = [3, 4, 5]
     .map((title) => getSingleById(title))
     .filter(Boolean);
 
-  const splitSections = [5, 1]
+  const splitSections = [6, 1, 2]
     .map((title) => {
       const sec = getSingleById(title);
       return sec
@@ -216,6 +216,14 @@ const Home = () => {
         )}
       </Container>
 
+      <Container>
+        {loadingWebsite ? (
+          <Skeleton variant="rectangular" width="100%" height="25rem" />
+        ) : (
+          <SplitSection sections={[splitSections[2]]} reverse={false} />
+        )}
+      </Container>
+
       <Container maxWidth="lg" sx={{ py: "2rem" }}>
         {loadingWebsite ? (
           <Grid container spacing={2}>
@@ -269,7 +277,7 @@ const Home = () => {
         {loadingWebsite ? (
           <Skeleton variant="rectangular" width="100%" height="25rem" />
         ) : (
-          <SplitSection sections={[splitSections[0]]} reverse={false} />
+          <SplitSection sections={[splitSections[0]]} reverse={true} />
         )}
       </Container>
 

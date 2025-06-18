@@ -45,7 +45,12 @@ const TradeSection = ({
   }, [description]);
 
   return (
-    <Grid container spacing={4} alignItems="flex-start">
+    <Grid
+      container
+      spacing={4}
+      alignItems="flex-start"
+      flexDirection={{ xs: "column-reverse", md: "row" }}
+    >
       <Grid size={{ xs: 12, md: 6 }}>
         <Box>
           <Grid container mb={3}>
@@ -239,8 +244,8 @@ const TradeSection = ({
             src={image}
             alt={title}
             sx={{
-              width: "37.5rem",
-              height: "37.5rem",
+              width: "100%",
+              height: { xs: "auto", sm: "25rem", md: "37.5rem" },
               objectFit: "cover",
               boxShadow: 3,
               borderRadius: 1,

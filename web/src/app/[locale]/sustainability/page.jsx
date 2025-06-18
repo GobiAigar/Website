@@ -24,8 +24,6 @@ const Sustainability = () => {
   const [loading, setLoading] = useState(true);
   const [openImage, setOpenImage] = useState(null);
 
-  console.log("sustainability", sustainability);
-
   useEffect(() => {
     if (rawLoading) {
       setLoading(true);
@@ -272,10 +270,10 @@ const Sustainability = () => {
               lineHeight: 1.8,
               textAlign: "justify",
               fontSize: {
-                xs: "1rem",
-                sm: "1.225rem",
-                md: "1.375rem",
-                lg: "1.4rem",
+                xs: "0.875rem",
+                sm: "1rem",
+                md: "1.125rem",
+                lg: "1.25rem",
               },
               color: "text.secondary",
             }}
