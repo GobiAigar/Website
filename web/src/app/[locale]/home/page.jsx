@@ -281,7 +281,11 @@ const Home = () => {
         )}
       </Container>
 
-      <Container disableGutters maxWidth={false} sx={{ py: "2rem" }}>
+      <Container
+        disableGutters
+        maxWidth={false}
+        sx={{ py: "2rem", px: { xs: "1rem", md: "0rem" } }}
+      >
         {loadingWebsite ? (
           <Skeleton variant="rectangular" width="100%" height="18.75rem" />
         ) : (
@@ -307,7 +311,11 @@ const Home = () => {
       </Container>
 
       {herderSection && (
-        <Container disableGutters maxWidth={false} sx={{ py: "2rem" }}>
+        <Container
+          disableGutters
+          maxWidth={false}
+          sx={{ py: "2rem", px: { xs: "1rem", md: "0rem" } }}
+        >
           {loadingWebsite ? (
             <Skeleton variant="rectangular" width="100%" height="25rem" />
           ) : (
@@ -320,10 +328,10 @@ const Home = () => {
                     md: "1.875rem",
                     lg: "2rem",
                   },
+                  ml: { xs: "0rem", md: "3rem" },
                 }}
                 fontWeight={700}
                 mb="1rem"
-                ml={{ sm: "3rem", xs: "1rem" }}
               >
                 {lang === "mn" ? herderSection.mntitle : herderSection.entitle}
               </Typography>

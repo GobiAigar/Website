@@ -82,6 +82,8 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                   py: 1.5,
                   flexGrow: 1,
                   height: "auto",
+                  borderBottomRightRadius: { xs: "0.2rem" },
+                  borderBottomLeftRadius: { xs: "0.2rem" },
                 }}
               >
                 <Typography
