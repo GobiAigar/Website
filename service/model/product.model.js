@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
-export const createWebsiteModel = async (sequelize) => {
-  const Website = sequelize.define("Website", {
+export const createProductModel = async (sequelize) => {
+  const Product = sequelize.define("Product", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -28,7 +28,7 @@ export const createWebsiteModel = async (sequelize) => {
       allowNull: false,
     },
     image_url1: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     image_url2: {
@@ -45,5 +45,5 @@ export const createWebsiteModel = async (sequelize) => {
     },
   });
 
-  return Website;
+  return Product;
 };

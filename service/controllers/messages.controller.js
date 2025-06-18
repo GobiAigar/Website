@@ -36,8 +36,6 @@ export const messageController = {
   },
 
   createMessage: async (req, res) => {
-    console.log(req.body);
-
     const { purpose, firstname, email, plan } = req.body;
 
     const date = new Date();

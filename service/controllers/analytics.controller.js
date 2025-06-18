@@ -64,7 +64,7 @@ export const getAnalyticsViews = async (req, res) => {
       const [dateOrHour, path, country, city] = row.dimensionValues.map(
         (d) => d.value
       );
-      const [  
+      const [
         screenPageViews,
         activeUsers,
         newUsers,

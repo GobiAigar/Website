@@ -1,49 +1,48 @@
 import { DataTypes } from "sequelize";
 
-export const createWebsiteModel = async (sequelize) => {
-  const Website = sequelize.define("Website", {
+export const createNewsModel = async (sequelize) => {
+  const News = sequelize.define("News", {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: Number,
+      AUTO_INCREMENT,
       primaryKey: true,
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     entitle: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     mntitle: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     endescription: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     mndescription: {
       type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    image_url1: {
-      type: DataTypes.TEXT,
       allowNull: true,
     },
-    image_url2: {
+    enjournalist: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    image_url3: {
+    mnjournalist: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    image_url4: {
+    image_url: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    thumbnail: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    date: {
+      type: DataTypes.DATE,
       allowNull: true,
     },
   });
-
-  return Website;
+  return News;
 };
