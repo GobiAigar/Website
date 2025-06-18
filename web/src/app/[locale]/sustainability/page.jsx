@@ -215,9 +215,9 @@ const Sustainability = () => {
               sx={{
                 mt: 2,
                 fontSize: {
-                  xs: "0.75rem",
-                  sm: "1rem",
-                  md: "1.25rem",
+                  xs: "0.8rem",
+                  md: "1rem",
+                  lg: "1.2rem",
                   color: "white",
                 },
               }}
@@ -250,7 +250,7 @@ const Sustainability = () => {
               spacing={4}
               key={index}
               sx={{
-                mb: -35,
+                mb: { md: -35, xs: 10 },
                 flexDirection: index % 2 === 0 ? "row" : "row-reverse",
                 alignItems: "flex-start",
                 position: "relative",
@@ -313,8 +313,8 @@ const Sustainability = () => {
                     src={item.image}
                     alt={item.label}
                     sx={{
-                      width: "25rem",
-                      height: "37.5rem",
+                      width: { sm: "25rem", xs: "auto" },
+                      height: { sm: "37.5rem", xs: "auto" },
                       objectFit: "cover",
                       transition: "transform 0.2s",
                       "&:hover": { transform: "scale(1.05)" },
@@ -384,7 +384,7 @@ const Sustainability = () => {
           />
         </Box>
       </Dialog>
-      <Box marginBottom={50}></Box>
+      <Box marginBottom={{ md: 50, xs: 10 }}></Box>
       <Footer />
     </Box>
   );

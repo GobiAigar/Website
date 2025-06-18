@@ -7,7 +7,7 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Grid container spacing={0.2}>
+      <Grid container spacing={{ xs: 1, sm: 0.4, md: 0.2 }}>
         {sections.map((item, index) => (
           <Grid
             key={item.id || index}
@@ -18,9 +18,11 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
               sx={{
                 position: "relative",
                 width: "100%",
-                height: { sx: 250, md: 250 },
+                height: { xs: 300 },
                 overflow: "hidden",
-                borderRadius: "0.2rem",
+                borderRadius: { md: "0.2rem" },
+                borderTopRightRadius: { xs: "0.2rem" },
+                borderTopLeftRadius: { xs: "0.2rem" },
                 "&:hover .overlay": {
                   opacity: isTabletOrLess ? 1 : 1,
                   transform: isTabletOrLess ? "none" : "translateY(0)",
@@ -33,7 +35,7 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                 alt={lang === "mn" ? item.mntitle : item.entitle}
                 sx={{
                   width: "100%",
-                  height: "100%",
+                  height: { xs: 300 },
                   objectFit: "cover",
                   display: "block",
                 }}

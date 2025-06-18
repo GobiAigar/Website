@@ -12,7 +12,7 @@ const ImageCard = ({ src, alt = "Image", borderRadius = 2 }) => {
         alt={alt}
         sx={{
           width: "100%",
-          height: "27.5rem",
+          height: { md: "27.5rem", xs: "auto" },
           objectFit: "cover",
           borderRadius,
         }}

@@ -161,9 +161,9 @@ const Contact = () => {
                   sx={{
                     mt: 2,
                     fontSize: {
-                      xs: "0.75rem",
-                      sm: "1rem",
-                      md: "1.25rem",
+                      xs: "0.8rem",
+                      md: "1rem",
+                      lg: "1.2rem",
                       color: "white",
                     },
                   }}

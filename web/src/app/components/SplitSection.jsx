@@ -56,7 +56,7 @@ const SectionItem = ({ section, index, isReversed }) => {
       const isEmbed = isEmbedUrl(src);
       const commonSx = {
         width: "100%",
-        height: { xs: "auto", md: "30rem", lg: "37.5rem" },
+        height: { xs: "auto", sm: "25rem", md: "37.5rem" },
         objectFit: "cover",
         borderRadius: 2,
         display: "block",
@@ -134,7 +134,7 @@ const SectionItem = ({ section, index, isReversed }) => {
       spacing={4}
       direction={{ xs: "column", md: isReversed ? "row-reverse" : "row" }}
       alignItems="stretch"
-      sx={{ width: "100%" }}
+      sx={{ width: "100%" }} 
     >
       {hasMedia && <Grid size={{ xs: 12, md: 6 }}>{mediaContent}</Grid>}
       <Grid size={{ xs: 12, md: hasMedia ? 6 : 12 }} sx={{ display: "flex" }}>

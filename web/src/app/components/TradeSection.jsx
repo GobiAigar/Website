@@ -65,7 +65,12 @@ const TradeSection = ({
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 1,
-                  fontSize: "16px",
+                  fontSize: {
+                    xs: "0.575rem",
+                    sm: "0.8rem",
+                    md: "0.85rem",
+                    lg: "1rem",
+                  },
                   fontWeight: 500,
                   px: 2,
                   py: 1.5,
@@ -95,7 +100,12 @@ const TradeSection = ({
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 1,
-                  fontSize: "1rem",
+                  fontSize: {
+                    xs: "0.575rem",
+                    sm: "0.8rem",
+                    md: "0.85rem",
+                    lg: "1rem",
+                  },
                   fontWeight: 500,
                   px: 2,
                   py: 1.5,
@@ -208,11 +218,14 @@ const TradeSection = ({
                   backgroundColor: "#4a0d17",
                   color: "white",
                 },
-                fontSize: "1rem",
+                fontSize: {
+                  sm: "0.85rem",
+                  md: "1rem",
+                },
                 whiteSpace: "nowrap",
               }}
             >
-              <EditIcon size={20} />
+              <EditIcon />
               {t("getStartToday")}
             </Button>
           </Box>

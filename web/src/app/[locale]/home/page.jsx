@@ -40,7 +40,6 @@ const Home = () => {
   const fourGoats = getMultibyId([7, 8, 9, 10]);
 
   const homeSectionA = rawData?.hero?.[0];
-  // const homeSectionB = getSingleById(6);
   const endSection = getSingleById(14);
   const herderSection = getSingleById(11);
   const statisticsSection = getSingleById(12);
@@ -143,8 +142,7 @@ const Home = () => {
                     mb="1rem"
                     sx={{
                       fontSize: {
-                        xs: "0.5rem",
-                        sm: "0.8rem",
+                        xs: "0.8rem",
                         md: "1rem",
                         lg: "1.2rem",
                       },
@@ -369,7 +367,11 @@ const Home = () => {
                     component="img"
                     src={endSection.image_url1}
                     alt="end-section"
-                    sx={{ width: "100%", borderRadius: "0.125rem" }}
+                    sx={{
+                      width: "100%",
+                      borderRadius: "0.125rem",
+                      height: "80% ",
+                    }}
                   />
                 </>
               )}
