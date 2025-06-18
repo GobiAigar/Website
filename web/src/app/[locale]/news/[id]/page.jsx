@@ -22,7 +22,9 @@ export default function NewsDetailPage() {
   const router = useRouter();
   useEffect(() => {
     const fetchNews = async () => {
-      const res = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/api/news/${id}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/news/${id}`
+      );
       const data = await res.json();
       setNewsItem(data);
       setLoading(false);

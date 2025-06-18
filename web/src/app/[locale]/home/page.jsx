@@ -114,52 +114,54 @@ const Home = () => {
             <>
               <Box
                 sx={{
-                  gap: "3.75rem",
+                  gap: "3rem",
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
-                <Typography
-                  variant="h3"
-                  fontWeight="bold"
-                  color="common.white"
-                  gutterBottom
-                  sx={{
-                    fontSize: {
-                      xs: "1.75rem",
-                      sm: "2.25rem",
-                      md: "3rem",
-                      lg: "3.5rem",
-                    },
-                  }}
-                >
-                  {lang === "mn"
-                    ? homeSectionA?.mntitle
-                    : homeSectionA?.entitle}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  color="common.white"
-                  mb="1rem"
-                  sx={{
-                    fontSize: {
-                      xs: "0.75rem",
-                      sm: "1rem",
-                      md: "1.25rem",
-                      lg: "1.75rem",
-                    },
-                    px: {
-                      xs: "3rem",
-                      sm: "6rem",
-                      md: "8rem",
-                      lg: "12rem",
-                    },
-                  }}
-                >
-                  {lang === "mn"
-                    ? homeSectionA?.mnsubtitle
-                    : homeSectionA?.ensubtitle}
-                </Typography>
+                <Box>
+                  <Typography
+                    variant="h3"
+                    fontWeight="bold"
+                    color="common.white"
+                    gutterBottom
+                    sx={{
+                      fontSize: {
+                        xs: "1.75rem",
+                        sm: "2.25rem",
+                        md: "3rem",
+                        lg: "3.5rem",
+                      },
+                    }}
+                  >
+                    {lang === "mn"
+                      ? homeSectionA?.mntitle
+                      : homeSectionA?.entitle}
+                  </Typography>
+                  <Typography
+                    color="common.white"
+                    mb="1rem"
+                    sx={{
+                      fontSize: {
+                        xs: "0.5rem",
+                        sm: "0.8rem",
+                        md: "1rem",
+                        lg: "1.2rem",
+                      },
+                      px: {
+                        xs: "3rem",
+                        sm: "6rem",
+                        md: "8rem",
+                        lg: "12rem",
+                      },
+                    }}
+                  >
+                    {lang === "mn"
+                      ? homeSectionA?.mnsubtitle
+                      : homeSectionA?.ensubtitle}
+                  </Typography>
+                </Box>
+
                 <Grid container spacing={2} justifyContent="center">
                   <Grid size="auto">
                     <Button
@@ -170,7 +172,7 @@ const Home = () => {
                         textTransform: "none",
                         py: { xs: "0.6rem", sm: "0.7rem", md: "0.8rem" },
                         px: { xs: "2rem", sm: "3rem", md: "4rem" },
-                        borderRadius: "0.75rem",
+                        borderRadius: "5rem",
                         background: "white",
                         color: "black",
                         fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
@@ -192,7 +194,7 @@ const Home = () => {
                         px: { xs: "2rem", sm: "3rem", md: "4rem" },
                         color: "white",
                         borderColor: "white",
-                        borderRadius: "0.75rem",
+                        borderRadius: "5rem",
                         fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
                         width: { xs: "auto" },
                       }}
