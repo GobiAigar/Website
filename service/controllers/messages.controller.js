@@ -1,4 +1,5 @@
 import { sql } from "../server.js";
+import { sendCollabrationEmail } from "../utils/mail.js";
 export const messageController = {
   web: async (_, res) => {
     try {
@@ -37,6 +38,8 @@ export const messageController = {
 
   createMessage: async (req, res) => {
     const { purpose, firstname, email, plan } = req.body;
+
+    sendCollabrationEmail(purpose, email, firstname, plan);
 
     const date = new Date();
 
