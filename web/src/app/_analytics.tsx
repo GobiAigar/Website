@@ -8,7 +8,7 @@ export default function Analytics() {
 
   useEffect(() => {
     if (window.gtag) {
-      window.gtag("config", "G-9TCLSPVFEL", {
+      window.gtag("config", "G-V3VMVV9C1F", {
         page_path: pathname,
       });
     }
