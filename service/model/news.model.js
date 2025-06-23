@@ -3,8 +3,8 @@ import { DataTypes } from "sequelize";
 export const createNewsModel = async (sequelize) => {
   const News = sequelize.define("News", {
     id: {
-      type: Number,
-      AUTO_INCREMENT,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     entitle: {
