@@ -39,7 +39,7 @@ const SectionItem = ({ section, index, isReversed }) => {
       setIsOverflowing(scrollHeight > clientHeight);
     }, 50);
     return () => clearTimeout(timer);
-  }, [section?.text]);
+  }, [section?.description]);
 
   const hasMedia = images.some(
     (src) =>
@@ -160,7 +160,7 @@ const SectionItem = ({ section, index, isReversed }) => {
               {section?.title}
             </Typography>
           )}
-          {section?.text && (
+          {section?.description && (
             <Box
               sx={{
                 maxHeight: isDesktop && showFull ? "32rem" : "none",
@@ -196,7 +196,7 @@ const SectionItem = ({ section, index, isReversed }) => {
                   },
                 }}
               >
-                {section?.text}
+                {section?.description}
               </Typography>
             </Box>
           )}

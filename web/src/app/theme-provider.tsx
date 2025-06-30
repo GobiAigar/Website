@@ -9,11 +9,7 @@ const theme = createTheme({
   },
 });
 
-export default function AppThemeProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function AppThemeProvider({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

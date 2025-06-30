@@ -17,11 +17,9 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Header from "../../components/Header";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useAppData } from "../../../context/AppDataProvider";
-import Footer from "../../components/Footer";
 
 const Contact = () => {
   const t = useTranslations("contact");
@@ -87,7 +85,7 @@ const Contact = () => {
       sx={{
         overflow: "hidden",
         bgcolor: "background.default",
-        minHeight: "100vh",
+        minHeight: "",
       }}
     >
       <Box
@@ -105,7 +103,6 @@ const Contact = () => {
           flexDirection: "column",
         }}
       >
-        <Header />
         <Box
           sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
         />
@@ -299,8 +296,6 @@ const Contact = () => {
           </Grid>
         </Container>
       </Box>
-
-      <Footer />
 
       <Snackbar
         open={snackbarOpen}

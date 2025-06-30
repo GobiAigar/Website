@@ -22,13 +22,11 @@ const ScrollTopButton = () => {
   return (
     <Zoom in={showScroll}>
       <Fab
-        color="primary"
+        color="white"
         onClick={scrollToTop}
         aria-label="scroll back to top"
         sx={{
           position: "fixed",
-          bottom: 24,
-          right: 24,
           zIndex: 1300,
           boxShadow: 6,
         }}

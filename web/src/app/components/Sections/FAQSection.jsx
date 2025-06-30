@@ -10,45 +10,47 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useTranslations } from "next-intl";
-import { Link } from "../../i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "../../../i18n/navigation";
+import Title from "../keyComponents/Title";
 
-const FAQSection = ({ faqItems = [], lang = "en", fqaHeader = [] }) => {
+const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
+  const lang = useLocale();
   const t = useTranslations("faq");
   return (
     <Container maxWidth="md" sx={{ color: "black", py: 8, p: 0 }}>
-      <Typography
+      <Title
+        mntitle={fqaHeader.mntitle}
+        entitle={fqaHeader.entitle}
+        reverse={false}
+      />
+      <Box
         sx={{
-          fontSize: {
-            xs: "1.375rem",
-            sm: "1.625rem",
-            md: "1.875rem",
-            lg: "2rem",
-          },
-        }}
-        fontWeight="bold"
-        gutterBottom
-      >
-        {lang === "mn" ? fqaHeader.mntitle : fqaHeader.entitle}
-      </Typography>
-      <Typography
-        sx={{
-          fontSize: {
-            xs: "1rem",
-            sm: "1.225rem",
-            md: "1.475rem",
-            lg: "1.6rem",
-          },
+          display: "flex",
+          flexDirection: { xs: "column" },
         }}
       >
-        {lang === "mn" ? fqaHeader.mndescription : fqaHeader.endescription}
+        <Typography>
+          {lang === "mn" ? fqaHeader.mndescription : fqaHeader.endescription}
+        </Typography>
         <Link
           href="/contact"
-          style={{ textDecoration: "underline", color: "#1976d2" }}
+          style={{
+            marginTop: 0,
+            fontWeight: "normal",
+            fontStyle: "normal",
+            lineHeight: "150%",
+            color: "#44372B",
+            fontSize: {
+              xs: "1rem",
+              md: "1.5rem",
+              lg: "2rem",
+            },
+          }}
         >
           {t("contact")}
         </Link>
-      </Typography>
+      </Box>
 
       <Box
         mt={4}

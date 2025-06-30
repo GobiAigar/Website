@@ -1,58 +1,38 @@
 "use client";
+
 import {
-  Button,
   Box,
+  Button,
+  Container,
   Grid,
-  Typography,
-  useTheme,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import { EditIcon, GlobeIcon, HomeHashtagIcon } from "./Icon";
-import { useTranslations } from "next-intl";
-import { Link } from "../../i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
+import Description from "../keyComponents/Description";
+import { EditIcon, GlobeIcon, HomeHashtagIcon } from "../Icon";
+import Title from "../keyComponents/Title";
+import { Link } from "../../../i18n/navigation";
 
-const TradeSection = ({
-  title,
-  image,
-  description,
-  selectedId,
-  setSelectedId,
-}) => {
+const TradeSection = ({ datas }) => {
+  const [selectedId, setSelectedId] = useState(3);
   const t = useTranslations("product");
-
   const theme = useTheme();
+  const selectedData = datas.find((data) => data?.id === selectedId);
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-
-  const textRef = useRef(null);
-  const [showFull, setShowFull] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-
-  useEffect(() => {
-    const el = textRef.current;
-    if (!el) return;
-
-    const timer = setTimeout(() => {
-      const { scrollHeight, clientHeight } = el;
-      setIsOverflowing(scrollHeight > clientHeight);
-    }, 50);
-
-    return () => clearTimeout(timer);
-  }, [description]);
-
-  useEffect(() => {
-    setShowFull(false);
-  }, [description]);
+  const lang = useLocale();
 
   return (
-    <Grid
-      container
-      spacing={4}
-      alignItems="flex-start"
-      flexDirection={{ xs: "column-reverse", md: "row" }}
-    >
-      <Grid size={{ xs: 12, md: 6 }}>
-        <Box>
+    <Container>
+      <Grid
+        container
+        spacing={4}
+        alignItems="flex-start"
+        flexDirection={{ xs: "column-reverse", md: "row" }}
+        sx={{ md: "relative" }}
+      >
+        <Grid size={{ xs: 12, md: 6 }}>
           <Grid container mb={3}>
             <Grid size={{ xs: 6 }}>
               <Button
@@ -126,76 +106,10 @@ const TradeSection = ({
             </Grid>
           </Grid>
 
-          <Typography
-            variant="h5"
-            fontWeight={700}
-            mb={2}
-            sx={{
-              color: "#333",
-              fontSize: {
-                xs: "1.375rem",
-                sm: "1.625rem",
-                md: "1.875rem",
-                lg: "2rem",
-              },
-            }}
-          >
-            {title}
-          </Typography>
-          <Box
-            sx={{
-              maxHeight: isDesktop && showFull ? "23rem" : "none",
-              overflowY: isDesktop && showFull ? "auto" : "visible",
-              pr: isDesktop && showFull ? 1 : 0,
-              scrollbarWidth: isDesktop ? "thin" : "none",
-              "&::-webkit-scrollbar": {
-                width: isDesktop ? 0 : "0px",
-              },
-              "&:hover::-webkit-scrollbar": {
-                width: isDesktop ? "6px" : "0px",
-              },
-              "&::-webkit-scrollbar-thumb": {
-                backgroundColor: "#aaa",
-                borderRadius: "6px",
-              },
-            }}
-          >
-            <Typography
-              ref={textRef}
-              align="justify"
-              whiteSpace="pre-line"
-              sx={{
-                overflow: isDesktop && !showFull ? "hidden" : "visible",
-                display: isDesktop && !showFull ? "-webkit-box" : "block",
-                WebkitLineClamp: isDesktop && !showFull ? 12 : "unset",
-                WebkitBoxOrient: "vertical",
-                fontSize: {
-                  xs: "0.875rem",
-                  sm: "1rem",
-                  md: "1.125rem",
-                  lg: "1.25rem",
-                },
-              }}
-            >
-              {description}
-            </Typography>
-          </Box>
-
-          {isOverflowing && isDesktop && (
-            <Typography
-              onClick={() => setShowFull(!showFull)}
-              sx={{
-                mt: 1,
-                color: "primary.main",
-                cursor: "pointer",
-                fontWeight: 500,
-                textAlign: "right",
-                userSelect: "none",
-              }}
-            >
-              {showFull ? t("seeLess") : t("seeMore")}
-            </Typography>
-          )}
+          <Description
+            endescription={selectedData?.endescription}
+            mndescription={selectedData?.mndescription}
+          />
 
           <Box
             display="flex"
@@ -232,15 +146,22 @@ const TradeSection = ({
               {t("getStartToday")}
             </Button>
           </Box>
-        </Box>
-      </Grid>
+        </Grid>
 
-      <Grid size={{ xs: 12, md: 6 }}>
-        <Box display="flex" justifyContent="start" alignItems="start">
+        <Grid
+          size={{ xs: 12, md: 6 }}
+          sx={{
+            position: { md: "sticky" },
+            top: 64,
+            backgroundColor: "white",
+            zIndex: 10,
+            padding: 2,
+          }}
+        >
           <Box
             component="img"
-            src={image}
-            alt={title}
+            src={selectedData?.image_url1}
+            alt={selectedData?.title}
             sx={{
               width: "100%",
               height: { xs: "auto", sm: "25rem", md: "37.5rem" },
@@ -249,9 +170,9 @@ const TradeSection = ({
               borderRadius: 1,
             }}
           />
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

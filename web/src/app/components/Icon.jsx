@@ -208,7 +208,7 @@ export const ArrowTopIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export const GobiAigarIcon = ({ size = 24, className = "" }) => (
+export const GobiAigarIcon = ({ size = 24, className = "", color }) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +220,7 @@ export const GobiAigarIcon = ({ size = 24, className = "" }) => (
   >
     <g
       transform="translate(0.000000,102.000000) scale(0.100000,-0.100000)"
-      fill="#6E1221"
+      fill={color || "#6E1221"}
       stroke="none"
     >
       <path

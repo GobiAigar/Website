@@ -10,8 +10,6 @@ import {
   Skeleton,
 } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 
 export default function NewsDetailPage() {
   const { id } = useParams();
@@ -35,8 +33,6 @@ export default function NewsDetailPage() {
   if (loading) {
     return (
       <Box sx={{ bgcolor: "white" }}>
-        <Header />
-
         <Box
           sx={{
             width: "100%",
@@ -70,8 +66,6 @@ export default function NewsDetailPage() {
             />
           </Box>
         </Container>
-
-        <Footer />
       </Box>
     );
   }
@@ -84,14 +78,15 @@ export default function NewsDetailPage() {
         justifyContent="center"
         alignItems="center"
       >
-        <Typography>News not found</Typography>
+        <Typography>
+          {lang === "mn" ? "Одоогоор мэдээ оруулаагүй байна" : "News not found"}
+        </Typography>
       </Box>
     );
   }
 
   return (
     <Box sx={{ bgcolor: "white" }}>
-      <Header />
       <Box
         sx={{
           position: "relative",
@@ -180,7 +175,6 @@ export default function NewsDetailPage() {
           </Button>
         </Box>
       </Container>
-      <Footer />
     </Box>
   );
 }

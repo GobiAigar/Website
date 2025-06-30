@@ -7,13 +7,7 @@ const NewsClient = dynamic(() => import("../../components/news/NewsClient"), {
 });
 
 const NewsPage = () => {
-  return (
-    <div>
-      <Header />
-      <NewsClient />
-      <Footer />
-    </div>
-  );
+  return <NewsClient />;
 };
 
 export default NewsPage;
