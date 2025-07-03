@@ -60,8 +60,6 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                     opacity: 0,
                     transition: "all 0.3s ease",
                     transform: "translateY(100%)",
-                    px: 2,
-                    py: 2,
                   }}
                 >
                   <Typography variant="h6" fontWeight={700} gutterBottom>
@@ -78,8 +76,7 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
               <Box
                 sx={{
                   bgcolor: "#EFE1CE",
-                  px: 2,
-                  py: 1.5,
+
                   flexGrow: 1,
                   height: "auto",
                   borderBottomRightRadius: { xs: "0.2rem" },

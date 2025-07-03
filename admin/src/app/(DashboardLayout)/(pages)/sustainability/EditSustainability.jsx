@@ -84,6 +84,8 @@ const EditSustainability = ({ data }) => {
                   margin="dense"
                   label="Description"
                   fullWidth
+                  multiline
+                  minRows={4}
                   value={values.endescription}
                   onChange={(e) =>
                     setFieldValue("endescription", e.target.value)
@@ -93,6 +95,8 @@ const EditSustainability = ({ data }) => {
                   margin="dense"
                   label="Дэд гарчиг"
                   fullWidth
+                  multiline
+                  minRows={4}
                   value={values.mndescription}
                   onChange={(e) =>
                     setFieldValue("mndescription", e.target.value)
@@ -101,23 +105,9 @@ const EditSustainability = ({ data }) => {
                 <FileUploader
                   setFieldValue={setFieldValue}
                   fieldName="image_url"
+                  initialPreview={data?.image_url}
+                  alt="Uploaded"
                 />
-                {data?.image_url && (
-                  <Box sx={{ my: 2 }}>
-                    <Typography variant="body2">Одоогийн зураг:</Typography>
-                    <CardMedia
-                      component="img"
-                      image={data.image_url}
-                      alt="Uploaded"
-                      sx={{
-                        objectFit: "contain",
-                        width: "100%",
-                        maxHeight: 300,
-                        borderRadius: 2,
-                      }}
-                    />
-                  </Box>
-                )}
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Буцах</Button>

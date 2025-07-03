@@ -22,7 +22,6 @@ const Page = () => {
     try {
       const response = await fetch(`${Backend_Endpoint}/api/news`);
       const data = await response.json();
-      console.log(data);
 
       setDatas(data?.data?.response || []);
     } catch (error) {

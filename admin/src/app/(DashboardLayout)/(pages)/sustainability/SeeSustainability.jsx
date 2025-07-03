@@ -44,7 +44,7 @@ const SeeSustainability = ({ data }) => {
           {data?.id === 1 ? (
             <Box sx={{ position: "relative", width: "100%" }}>
               <CardMedia
-                sx={{ height: 200 }}
+                sx={{ height: { xs: "20rem", sm: "30rem" } }}
                 image={data?.image_url}
                 title={data?.entitle || "Image"}
               />

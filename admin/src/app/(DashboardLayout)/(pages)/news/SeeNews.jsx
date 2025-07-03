@@ -40,6 +40,12 @@ export default function SeeNews({ data }) {
         maxWidth="md"
         fullWidth
         scroll="body"
+        PaperProps={{
+          sx: {
+            borderRadius: 4,
+            overflow: "hidden",
+          },
+        }}
       >
         <Card sx={{ maxWidth: "100%", boxShadow: "none" }}>
           <Box
@@ -73,12 +79,19 @@ export default function SeeNews({ data }) {
               </Typography>
             </Container>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              display: "flex",
+              top: 16,
+              right: 16,
+            }}
+          >
             <Button
               variant="outlined"
+              style={{ color: "white", borderColor: "white" }}
               size="small"
               onClick={() => setLang(lang === "en" ? "mn" : "en")}
-              sx={{ ml: "auto", mr: 2, mt: 2 }}
             >
               {lang === "en" ? "Монгол" : "English"}
             </Button>

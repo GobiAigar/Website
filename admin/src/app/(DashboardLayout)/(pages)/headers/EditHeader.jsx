@@ -97,23 +97,8 @@ const EditHeader = ({ data }) => {
                 <FileUploader
                   setFieldValue={setFieldValue}
                   fieldName="image_url"
+                  initialPreview={values.image_url}
                 />
-                {data?.image_url && (
-                  <Box sx={{ my: 2 }}>
-                    <Typography variant="body2">Одоогийн зураг:</Typography>
-                    <CardMedia
-                      component="img"
-                      image={data.image_url}
-                      alt="Uploaded"
-                      sx={{
-                        objectFit: "contain",
-                        width: "100%",
-                        maxHeight: 300,
-                        borderRadius: 2,
-                      }}
-                    />
-                  </Box>
-                )}
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Буцах</Button>

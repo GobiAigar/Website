@@ -74,7 +74,7 @@ const Header = () => {
       position="fixed"
       elevation={isScrolled ? 4 : 0}
       sx={{
-        backgroundColor: isScrolled ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0)",
+        backgroundColor: isScrolled ? "#fff" : "rgba(0,0,0,0)",
         backdropFilter: isScrolled ? "blur(6px)" : "none",
         transition: "all 0.3s ease",
       }}
@@ -90,7 +90,12 @@ const Header = () => {
               transition: "background-color 0.3s ease",
             }}
           >
-            <GobiAigarIcon size={200} />
+            {
+              isScrolled?
+              <GobiAigarIcon size={200} />:
+              <GobiAigarIcon size={200} color={"#fff"}/>
+
+            }
           </Box>
 
           {isMobile ? (
@@ -118,7 +123,8 @@ const Header = () => {
                       bottom: -4,
                       width: isActive(link.path) ? "100%" : 0,
                       height: "0.125rem",
-                      backgroundColor: "white",
+                     
+                     backgroundColor: isScrolled ? "black" : "white",
                       transition: "width 0.3s ease",
                     },
                     "&:hover:after": {
@@ -129,7 +135,10 @@ const Header = () => {
                 >
                   <Link
                     href={`/${locale}/${link.path}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
+                    style={{
+                      textDecoration: "none",
+                      color: isScrolled ? "#333" : "white",
+                    }}
                   >
                     <Typography
                       component="span"

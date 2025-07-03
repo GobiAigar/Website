@@ -194,10 +194,12 @@ const EditNews = ({ data }) => {
 
                 <FileUploader
                   setFieldValue={formik.setFieldValue}
+                  initialPreview={formik.values.image_url}
                   fieldName="image_url"
                   onClear={() => {
                     formik.setFieldValue("image_url", "");
                     formik.setFieldValue("thumbnail", "");
+                    i;
                   }}
                 />
                 {formik.touched.image_url && formik.errors.image_url && (

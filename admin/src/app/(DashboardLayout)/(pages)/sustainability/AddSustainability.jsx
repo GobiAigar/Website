@@ -81,6 +81,8 @@ const AddSustainability = () => {
                   margin="dense"
                   label="Тайлбар /Англи/"
                   fullWidth
+                  multiline
+                  minRows={4}
                   value={values.endescription}
                   onChange={(e) =>
                     setFieldValue("endescription", e.target.value)
@@ -90,6 +92,8 @@ const AddSustainability = () => {
                   margin="dense"
                   label="Тайлбар /Монгол/"
                   fullWidth
+                  multiline
+                  minRows={4}
                   value={values.mndescription}
                   onChange={(e) =>
                     setFieldValue("mndescription", e.target.value)
