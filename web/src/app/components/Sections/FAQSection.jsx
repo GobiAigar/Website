@@ -27,7 +27,8 @@ const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column" },
+          flexDirection: { xs: "column", sm: "column", md: "row" },
+          gap: { xs: 1, md: 2 },
         }}
       >
         <Typography>
@@ -40,11 +41,15 @@ const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
             fontWeight: "normal",
             fontStyle: "normal",
             lineHeight: "150%",
-            color: "#44372B",
+            color: "#fff",
             fontSize: {
               xs: "1rem",
               md: "1.5rem",
               lg: "2rem",
+            },
+            "&:hover": {
+              textDecoration: "underline",
+              color: "#fff",
             },
           }}
         >
@@ -65,6 +70,11 @@ const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
             md: "auto",
           },
           pr: 1,
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
         }}
       >
         {faqItems.map((faq) => (

@@ -58,7 +58,6 @@ const SectionItem = ({ section, index, isReversed }) => {
         width: "100%",
         height: { xs: "auto", sm: "25rem", md: "37.5rem" },
         objectFit: "cover",
-        borderRadius: 2,
         display: "block",
       };
 
@@ -71,7 +70,6 @@ const SectionItem = ({ section, index, isReversed }) => {
               position: "relative",
               height: { xs: "auto", md: "30rem", lg: "37.5rem" },
               paddingTop: "56.25%",
-              borderRadius: 2,
               overflow: "hidden",
             }}
           >

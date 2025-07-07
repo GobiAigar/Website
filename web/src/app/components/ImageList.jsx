@@ -6,8 +6,8 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
   const isTabletOrLess = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Grid container spacing={{ xs: 1, sm: 0.4, md: 0.2 }}>
+    <Box sx={{ width: "100%", marginBottom: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 0 }} justifyContent="center">
         {sections.map((item, index) => (
           <Grid
             key={item.id || index}
@@ -20,9 +20,7 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                 width: "100%",
                 height: { xs: 300 },
                 overflow: "hidden",
-                borderRadius: { md: "0.2rem" },
-                borderTopRightRadius: { xs: "0.2rem" },
-                borderTopLeftRadius: { xs: "0.2rem" },
+
                 "&:hover .overlay": {
                   opacity: isTabletOrLess ? 1 : 1,
                   transform: isTabletOrLess ? "none" : "translateY(0)",
@@ -75,12 +73,9 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
             {isTabletOrLess && (
               <Box
                 sx={{
-                  bgcolor: "#EFE1CE",
-
                   flexGrow: 1,
                   height: "auto",
-                  borderBottomRightRadius: { xs: "0.2rem" },
-                  borderBottomLeftRadius: { xs: "0.2rem" },
+                  px: 1,
                 }}
               >
                 <Typography
@@ -90,7 +85,7 @@ export default function ProductImageList({ sections = [], lang = "en" }) {
                 >
                   {lang === "mn" ? item.mntitle : item.entitle}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                <Typography variant="body2">
                   {lang === "mn" ? item.mndescription : item.endescription}
                 </Typography>
               </Box>

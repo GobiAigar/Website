@@ -19,20 +19,8 @@ import CerficateSection from "../../components/Sections/CerficateSection";
 
 const Sustainability = () => {
   const { sustainability, loading: rawLoading } = useAppData();
-  const lang = useLocale();
   const t = useTranslations("sustainability");
-
-  const [loading, setLoading] = useState(true);
-  const [openImage, setOpenImage] = useState(null);
-
-  useEffect(() => {
-    if (rawLoading) {
-      setLoading(true);
-    } else {
-      const timer = setTimeout(() => setLoading(false), 1200);
-      return () => clearTimeout(timer);
-    }
-  }, [rawLoading]);
+  const lang = useLocale();
 
   const data = sustainability || {};
   const mainInfo = data?.hero?.[0];
@@ -53,7 +41,7 @@ const Sustainability = () => {
       {certificates.map((data, index) => {
         return (
           <Box
-            sx={{ width: "100%", bgcolor: index % 2 ? "grey.100" : "grey.200" }}
+            sx={{ width: "100%", bgcolor: index % 2 ?? "grey.100" }}
             key={data?.id}
           >
             <CerficateSection data={data} index={index} />

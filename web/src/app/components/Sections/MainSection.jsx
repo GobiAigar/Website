@@ -16,8 +16,9 @@ const MainSection = ({ datas, reverse }) => {
   return (
     <Container
       sx={{
-        padding: { xs: 3, sm: 4, md: 5 },
+        padding: { xs: 3, sm: 4, md: 8 },
       }}
+      height="720px"
     >
       <Grid
         container
@@ -31,7 +32,6 @@ const MainSection = ({ datas, reverse }) => {
           sx={{
             position: { md: "sticky" },
             top: 64,
-
             zIndex: 10,
           }}
         >

@@ -41,7 +41,6 @@ const Product = () => {
         color: "text.primary",
         display: "flex",
         flexDirection: "column",
-        gap: 8,
       }}
     >
       <Box
@@ -64,7 +63,6 @@ const Product = () => {
         />
         <Box
           sx={{
-            minHeight: "60vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -108,11 +106,22 @@ const Product = () => {
           </Container>
         </Box>
       </Box>
-
-      <MainSection datas={data?.response[0]} reverse={false} />
-      <MainSection datas={data?.response[1]} reverse={true} />
-      <TradeSection datas={tradeDatas} />
-      <MainSection datas={data?.response[4]} reverse={true} />
+      <Box>
+        <MainSection datas={data?.response[0]} reverse={false} />
+      </Box>
+      <Box backgroundColor="#E8DFD9">
+        <MainSection datas={data?.response[1]} reverse={true} />
+      </Box>
+      <Box
+        sx={{
+          padding: { xs: 3, sm: 4, md: 8 },
+        }}
+      >
+        <TradeSection datas={tradeDatas} />
+      </Box>
+      <Box backgroundColor="#E8DFD9">
+        <MainSection datas={data?.response[4]} reverse={true} />
+      </Box>
     </Box>
   );
 };

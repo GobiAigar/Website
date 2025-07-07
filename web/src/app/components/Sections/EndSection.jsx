@@ -1,7 +1,7 @@
-import { Container, Grid } from "@mui/material";
+import { CardMedia, Container, Grid } from "@mui/material";
 import React from "react";
 import Title from "../keyComponents/Title";
-import ImageCard from "../Card/ImageCard";
+
 import FAQSection from "./FAQSection";
 import FlagDescription from "../keyComponents/FlagDescription";
 
@@ -19,7 +19,20 @@ const EndSection = ({ datas, faqs, fqaSection }) => {
             mndescription={datas?.mndescription}
             endescription={datas?.endescription}
           />
-          <ImageCard data={datas?.image_url1} />
+
+          <CardMedia
+            component="img"
+            src={datas.image_url1}
+            alt={datas?.entitle}
+            sx={{
+              borderRadius: "none",
+
+              padding: 0,
+              width: "100%",
+
+              objectFit: "cover",
+            }}
+          />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <FAQSection faqItems={faqs} fqaHeader={fqaSection} />

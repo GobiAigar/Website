@@ -165,7 +165,6 @@ const TradeSection = ({ datas }) => {
               height: { xs: "auto", sm: "25rem", md: "37.5rem" },
               objectFit: "cover",
               boxShadow: 3,
-              borderRadius: 1,
             }}
           />
         </Grid>

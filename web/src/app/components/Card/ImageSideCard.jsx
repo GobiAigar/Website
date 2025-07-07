@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { Box } from "@mui/material";
+import { Box, Card, CardMedia } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,11 +15,13 @@ const ImageSideCard = ({ data }) => {
         width: "100%",
         height: { xs: "auto", sm: "20rem", md: "31.5rem" },
         objectFit: "cover",
-        borderRadius: 2,
         display: "block",
+        sx: {
+          boxShadow: (theme) => theme.shadows[1],
+        },
       };
       return (
-        <Box
+        <CardMedia
           key={`img-${i}`}
           component="img"
           src={src}

@@ -103,24 +103,26 @@ const Home = () => {
       <BrandSection datas={valueGoalVision} />
       {/* 4 ymaatai */}
 
-      <Box mx={2} paddingY={{ sx: 3, sm: 4, md: 5 }}>
+      <Box marginX={{ xs: 2, sm: 0 }} paddingY={{ sx: 3, sm: 4, md: 5 }}>
         <Title entitle={goatsHeader?.entitle} mntitle={goatsHeader?.mntitle} />
-        <Typography
-          sx={{
-            fontSize: {
-              xs: "0.875rem",
-              sm: "1rem",
-              md: "1.125rem",
-              lg: "1.25rem",
-            },
-          }}
-          mb="1rem"
-          textAlign="start"
-        >
-          {lang === "mn"
-            ? goatsHeader?.mndescription
-            : goatsHeader?.endescription}
-        </Typography>
+        <Box paddingX={{ xs: 2, sm: 0 }} marginBottom={2}>
+          <Typography
+            sx={{
+              fontSize: {
+                xs: "0.875rem",
+                sm: "1rem",
+                md: "1.125rem",
+                lg: "1.25rem",
+              },
+            }}
+            mb="1rem"
+            textAlign="start"
+          >
+            {lang === "mn"
+              ? goatsHeader?.mndescription
+              : goatsHeader?.endescription}
+          </Typography>
+        </Box>
         <ProductImageList sections={fourGoats} lang={lang} />
       </Box>
       <Box sx={{ backgroundColor: "#E8DFD9" }}>
@@ -130,7 +132,9 @@ const Home = () => {
       <ImageSection datas={section4} />
 
       {/* <StatisticsSection datas={section5} statisticsList={statisticsList} /> */}
-      <EndSection datas={endSection} faqs={faqs} fqaSection={fqaSection} />
+      <Box sx={{ backgroundColor: "#E8DFD9" }}>
+        <EndSection datas={endSection} faqs={faqs} fqaSection={fqaSection} />
+      </Box>
     </Box>
   );
 };

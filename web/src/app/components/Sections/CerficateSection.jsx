@@ -1,12 +1,14 @@
 "use client";
 
-import { Box, Container, Grid } from "@mui/material";
-import ImageCard from "../Card/ImageCard";
+import { Box, CardMedia, Container, Grid } from "@mui/material";
+
 import CerficateTextCard from "../Card/CerficateTextCard";
 import { useEffect, useState } from "react";
+import { useLocale } from "next-intl";
 
 const CerficateSection = ({ data, index }) => {
   const [reverse, setReverse] = useState(false);
+  const lang = useLocale();
 
   useEffect(() => {
     setReverse(index % 2 !== 0);
@@ -16,7 +18,7 @@ const CerficateSection = ({ data, index }) => {
     <Box
       sx={{
         width: "100%",
-        bgcolor: reverse ? "#f5fefd" : "#E8DFD9",
+        bgcolor: reverse ? "#E8DFD9" : "#fff",
         overflow: "visible",
       }}
     >
@@ -41,7 +43,20 @@ const CerficateSection = ({ data, index }) => {
             <CerficateTextCard data={data} />
           </Grid>
           <Grid item size={{ xs: 12, md: 6 }}>
-            <ImageCard data={data.image_url} />
+            <CardMedia
+              component="img"
+              src={lang === "mn" ? data.image_url1 : data.image_url2}
+              alt={data}
+              sx={{
+                borderRadius: "none",
+                border: "1px solid",
+                borderColor: "#333",
+                padding: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
           </Grid>
         </Grid>
       </Container>

@@ -25,7 +25,6 @@ const VideoSideCard = ({ data }) => {
               position: "relative",
               height: { xs: "auto", md: "30rem", lg: "37.5rem" },
               paddingTop: "56.25%",
-              borderRadius: 2,
               overflow: "hidden",
             }}
           >

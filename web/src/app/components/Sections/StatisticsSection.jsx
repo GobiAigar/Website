@@ -1,7 +1,6 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useLocale } from "next-intl";
 import Title from "../keyComponents/Title";
-import ImageCard from "../Card/ImageCard";
 
 const StatisticsSection = ({ datas, statisticsList }) => {
   const lang = useLocale();
@@ -45,11 +44,6 @@ const StatisticsSection = ({ datas, statisticsList }) => {
               </Typography>
             ))}
           </Box>
-        </Grid>
-
-        {/* Right column */}
-        <Grid size={{ xs: 12, md: 6 }} sx={{ height: "auto" }}>
-          <ImageCard data={datas?.image_url1} />
         </Grid>
       </Grid>
     </Container>

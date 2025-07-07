@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Container, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardMedia,
+  Container,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useLocale } from "next-intl";
 import Title from "../keyComponents/Title";
 import FlagDescription from "../keyComponents/FlagDescription";
@@ -9,13 +16,13 @@ const BrandSection = ({ datas }) => {
   const theme = useTheme();
 
   return (
-    <Box paddingY={{ sx: 3, sm: 4, md: 5 }}>
+    <Box padding={{ xs: 4, sm: 3, md: 4 }}>
       <Container
         sx={{
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
-
           backgroundColor: "#",
+          gap: { xs: 2, sm: 3, md: 4 },
         }}
       >
         {datas?.map((data) => {
@@ -41,14 +48,16 @@ const BrandSection = ({ datas }) => {
                   },
                   color: theme.palette.text.primary,
                   display: "flex",
+                  gap: { xs: 0.5, sm: 0.8, md: 1 },
                   flexDirection: "column",
                   alignItems: "center",
                 }}
               >
-                <img
+                <CardMedia
+                  component="img"
                   src={data?.image_url1}
                   alt={data?.title || "Info image"}
-                  sx={{ width: 48, height: 48 }}
+                  sx={{ flexShrink: 0, width: "50px" }}
                 />
 
                 <Title entitle={data?.entitle} mntitle={data?.mntitle} />

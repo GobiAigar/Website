@@ -21,7 +21,6 @@ const Test = ({ sustainabilityText }) => {
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
           p: { xs: 3, sm: 4, md: 5 },
-          borderRadius: 3,
         }}
       >
         <Box
@@ -31,7 +30,6 @@ const Test = ({ sustainabilityText }) => {
             top: 0,
             bgcolor: "rgba(0, 0, 0, 0.6)",
             zIndex: 0,
-            borderRadius: 3,
           }}
         />
         <Box
