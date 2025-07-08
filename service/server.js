@@ -14,7 +14,6 @@ import sustainabilityRouter from "./routes/sustainability.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 import pageHeader from "./routes/page_header.route.js";
 import { companyRouter } from "./routes/company.route.js";
-import { connection } from "./postgres/postgres.js";
 
 dotenv.config();
 
@@ -44,5 +43,3 @@ server.use("/api", companyRouter);
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-connection();
