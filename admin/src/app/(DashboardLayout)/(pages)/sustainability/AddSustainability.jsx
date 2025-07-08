@@ -38,7 +38,8 @@ const AddSustainability = () => {
             mntitle: "",
             endescription: "",
             mndescription: "",
-            image_url: "",
+            image_url1: "",
+            image_url2: "",
           }}
           onSubmit={async (values) => {
             try {
@@ -101,7 +102,11 @@ const AddSustainability = () => {
                 />
                 <FileUploader
                   setFieldValue={setFieldValue}
-                  fieldName="image_url"
+                  fieldName="image_url1"
+                />
+                <FileUploader
+                  setFieldValue={setFieldValue}
+                  fieldName="image_url2"
                 />
               </DialogContent>
               <DialogActions>

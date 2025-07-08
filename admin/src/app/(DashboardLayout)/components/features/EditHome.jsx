@@ -4,6 +4,7 @@ import {
   Grid,
   InputLabel,
   DialogActions,
+  Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
 import FileUploader from "../website/FileUploader";
@@ -66,35 +67,56 @@ export default function EditHome({ data, onClose, onSubmitSuccess }) {
             value={formik.values.entitle}
           />
         </Grid>
-
-        {![12, 13].includes(data.id) && (
-          <>
-            <Grid size={{ xs: 6 }}>
-              <InputLabel htmlFor="mndescription">Тайлбар /Монгол/</InputLabel>
-              <TextField
-                fullWidth
-                id="mndescription"
-                name="mndescription"
-                multiline
-                onChange={formik.handleChange}
-                value={formik.values.mndescription}
-              />
+        <Grid size={12}>
+          <InputLabel htmlFor="endescription">Тайлбар /Монгол/</InputLabel>
+          <TextField
+            fullWidth
+            id="endescription"
+            name="endescription"
+            multiline
+            minRows={4}
+            onChange={formik.handleChange}
+            value={formik.values.endescription}
+          />
+        </Grid>
+        <Grid size={12}>
+          <InputLabel htmlFor="mndescription">Тайлбар /Англи/</InputLabel>
+          <TextField
+            fullWidth
+            multiline
+            minRows={4}
+            id="mndescription"
+            name="mndescription"
+            onChange={formik.handleChange}
+            value={formik.values.mndescription}
+          />
+        </Grid>
+        {[12].includes(data.id) && (
+          <Grid container size={12} spacing={2}>
+            <Grid size={12} container spacing={2}>
+              <Grid size={6}>
+                <Typography>Англи</Typography>
+                <FileUploader
+                  setFieldValue={formik.setFieldValue}
+                  fieldName={`image_url1`}
+                  initialPreview={data?.image_url1}
+                  type={"image"}
+                />
+              </Grid>
+              <Grid size={6}>
+                <Typography>Монгол</Typography>
+                <FileUploader
+                  setFieldValue={formik.setFieldValue}
+                  fieldName={`image_url2`}
+                  initialPreview={data?.image_url2}
+                  type={"image"}
+                />
+              </Grid>
             </Grid>
-            <Grid size={{ xs: 6 }}>
-              <InputLabel htmlFor="endescription">Тайлбар /Англи/</InputLabel>
-              <TextField
-                fullWidth
-                id="endescription"
-                name="endescription"
-                multiline
-                onChange={formik.handleChange}
-                value={formik.values.endescription}
-              />
-            </Grid>
-          </>
+          </Grid>
         )}
 
-        {![7, 14].includes(data.id) &&
+        {![7, 13, 12].includes(data.id) &&
           (data.id === 1
             ? [1]
             : [2, 6].includes(data.id)

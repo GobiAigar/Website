@@ -40,7 +40,8 @@ const EditSustainability = ({ data }) => {
             mntitle: data?.mntitle || "",
             endescription: data?.endescription || "",
             mndescription: data?.mndescription || "",
-            image_url: data?.image_url || "",
+            image_url1: data?.image_url1 || "",
+            image_url2: data?.image_url2 || "",
           }}
           enableReinitialize={true}
           onSubmit={async (values) => {
@@ -102,10 +103,22 @@ const EditSustainability = ({ data }) => {
                     setFieldValue("mndescription", e.target.value)
                   }
                 />
+                <Typography variant="h6" gutterBottom>
+                  Монгол хэл дээрх зураг
+                </Typography>
                 <FileUploader
                   setFieldValue={setFieldValue}
-                  fieldName="image_url"
-                  initialPreview={data?.image_url}
+                  fieldName="image_url1"
+                  initialPreview={data?.image_url1}
+                  alt="Uploaded"
+                />
+                <Typography variant="h6" gutterBottom>
+                  Англи хэл дээрх зураг
+                </Typography>
+                <FileUploader
+                  setFieldValue={setFieldValue}
+                  fieldName="image_url2"
+                  initialPreview={data?.image_url2}
                   alt="Uploaded"
                 />
               </DialogContent>

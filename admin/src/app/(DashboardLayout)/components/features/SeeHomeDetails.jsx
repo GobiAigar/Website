@@ -1,8 +1,7 @@
 "use client";
 
-import { Grid, Typography, Box, Button } from "@mui/material";
+import { Grid, Typography, Box, Button, CardMedia } from "@mui/material";
 import { useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -175,7 +174,30 @@ const HomeDetails = ({ data }) => {
           </Grid>
         </Box>
       )}
-      {![2, 3, 4, 5, 6].includes(data.id) && (
+      {data.id === 12 && (
+        <Box>
+          <Typography variant="h6" fontWeight={700} align="center" gutterBottom>
+            {eng ? data.entitle || "No Title" : data.mntitle || "Гарчиг алга"}
+          </Typography>
+          <Typography
+            variant="body"
+            fontWeight={300}
+            align="center"
+            gutterBottom
+          >
+            {eng
+              ? data.endescription || "No Description"
+              : data.mndescription || "Тайлбар алга"}
+          </Typography>
+          <CardMedia
+            component="img"
+            src={eng ? imageUrls[1] : imageUrls[0]}
+            alt="Image"
+            sx={{ maxHeight: 300, objectFit: "cover", borderRadius: 2 }}
+          />
+        </Box>
+      )}
+      {![2, 3, 4, 5, 6, 12].includes(data.id) && (
         <Box>
           <Box sx={{ marginBottom: 3 }}>
             <Typography

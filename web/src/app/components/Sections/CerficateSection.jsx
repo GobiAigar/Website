@@ -45,7 +45,7 @@ const CerficateSection = ({ data, index }) => {
           <Grid item size={{ xs: 12, md: 6 }}>
             <CardMedia
               component="img"
-              src={lang === "mn" ? data.image_url1 : data.image_url2}
+              src={lang === "mn" ? data.image_url2 : data.image_url1}
               alt={data}
               sx={{
                 borderRadius: "none",

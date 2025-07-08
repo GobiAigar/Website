@@ -24,7 +24,6 @@ const SeeSustainability = ({ data }) => {
     setOpen(false);
   };
 
-  // Handle missing data
   if (!data) {
     return (
       <IconButton disabled>
@@ -45,7 +44,7 @@ const SeeSustainability = ({ data }) => {
             <Box sx={{ position: "relative", width: "100%" }}>
               <CardMedia
                 sx={{ height: { xs: "20rem", sm: "30rem" } }}
-                image={data?.image_url}
+                image={data?.image_url1}
                 title={data?.entitle || "Image"}
               />
               <DialogContent
@@ -87,7 +86,7 @@ const SeeSustainability = ({ data }) => {
               <Grid size={12}>
                 <img
                   style={{ width: "100%", objectFit: "cover" }}
-                  src={data?.image_url}
+                  src={data?.image_url1}
                   alt={data?.entitle || "Image"}
                   title={data?.entitle || "Image"}
                 />

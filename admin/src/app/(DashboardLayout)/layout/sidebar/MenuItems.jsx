@@ -66,12 +66,7 @@ const Menuitems = [
     icon: IconFlagQuestion,
     href: "/faq",
   },
-  {
-    id: uniqueId(),
-    title: "Статистик",
-    icon: Icon360View,
-    href: "/statistics",
-  },
+
   {
     id: uniqueId(),
     title: "Мэдээлэл",

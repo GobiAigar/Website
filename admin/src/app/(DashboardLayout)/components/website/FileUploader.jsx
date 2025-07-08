@@ -277,7 +277,7 @@ const FileUploader = ({
                 ) : (
                   <CardMedia
                     component="img"
-                    height="200"
+                    height="full"
                     image={preview}
                     alt="Uploaded"
                     sx={{ borderRadius: "inherit" }}

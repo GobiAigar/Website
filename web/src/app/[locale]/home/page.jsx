@@ -42,9 +42,8 @@ const Home = () => {
   const goatsHeader = getSingleById(7);
   const fourGoats = getMultibyId([8, 9, 10, 11]);
   const section4 = getSingleById(12);
-  const section5 = getSingleById(13);
-  const fqaSection = getSingleById(14);
-  const endSection = getSingleById(15);
+  const fqaSection = getSingleById(13);
+  const endSection = getSingleById(14);
 
   if (loadingWebsite) {
     return (

@@ -29,7 +29,7 @@ const CustomButton = ({
         backgroundColor: isContained ? color : "transparent",
         color: isContained ? "black" : color,
         border: isContained ? "none" : `2px solid ${color}`,
-        boxShadow: isContained ? "0px 4px 6px rgba(0, 0, 0, 0.8)" : "none",
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.8)",
 
         ":hover": {
           backgroundColor: isContained ? "#f0f0f0" : color,

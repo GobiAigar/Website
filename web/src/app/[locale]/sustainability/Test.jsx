@@ -14,7 +14,7 @@ const Test = ({ sustainabilityText }) => {
     >
       <Box
         sx={{
-          backgroundImage: `url(${sustainabilityText?.image_url})`,
+          backgroundImage: `url(${sustainabilityText?.image_url1})`,
           backgroundSize: "cover",
           position: "relative",
           top: 0,
