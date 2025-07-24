@@ -22,7 +22,7 @@ const EndSection = ({ datas, faqs, fqaSection }) => {
 
           <CardMedia
             component="img"
-            src={datas.image_url1}
+            src={datas?.image_url1}
             alt={datas?.entitle}
             sx={{
               borderRadius: "none",

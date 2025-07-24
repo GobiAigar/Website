@@ -8,11 +8,13 @@ import {
   Typography,
   Container,
   Box,
+  colors,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../../i18n/navigation";
 import Title from "../keyComponents/Title";
+import { color } from "framer-motion";
 
 const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
   const lang = useLocale();
@@ -38,18 +40,18 @@ const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
           href="/contact"
           style={{
             marginTop: 0,
-            fontWeight: "normal",
+            fontWeight: "500",
+            textDecoration: "underline",
             fontStyle: "normal",
             lineHeight: "150%",
-            color: "#fff",
+            color: "blue",
             fontSize: {
               xs: "1rem",
               md: "1.5rem",
               lg: "2rem",
             },
             "&:hover": {
-              textDecoration: "underline",
-              color: "#fff",
+              color: "#44372B",
             },
           }}
         >
@@ -61,10 +63,6 @@ const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
         mt={4}
         pb={2}
         sx={{
-          maxHeight: {
-            xs: "none",
-            md: 400,
-          },
           overflowY: {
             xs: "visible",
             md: "auto",
@@ -74,7 +72,6 @@ const FAQSection = ({ faqItems = [], fqaHeader = [] }) => {
             display: "none",
           },
           scrollbarWidth: "none",
-          msOverflowStyle: "none",
         }}
       >
         {faqItems.map((faq) => (

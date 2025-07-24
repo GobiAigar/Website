@@ -68,7 +68,7 @@ export default function EditHome({ data, onClose, onSubmitSuccess }) {
           />
         </Grid>
         <Grid size={12}>
-          <InputLabel htmlFor="endescription">Тайлбар /Монгол/</InputLabel>
+          <InputLabel htmlFor="endescription">Тайлбар /Англи/</InputLabel>
           <TextField
             fullWidth
             id="endescription"
@@ -80,7 +80,7 @@ export default function EditHome({ data, onClose, onSubmitSuccess }) {
           />
         </Grid>
         <Grid size={12}>
-          <InputLabel htmlFor="mndescription">Тайлбар /Англи/</InputLabel>
+          <InputLabel htmlFor="mndescription">Тайлбар /Монгол/</InputLabel>
           <TextField
             fullWidth
             multiline

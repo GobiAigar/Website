@@ -8,7 +8,6 @@ import { Backend_Endpoint } from "@/constants/constants";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteButton from "../../components/features/DeleteButton";
 import AddUser from "./AddUser";
-import DashboardCard from "../../components/shared/DashboardCard";
 
 const Page = () => {
   const [datas, setDatas] = useState([]);

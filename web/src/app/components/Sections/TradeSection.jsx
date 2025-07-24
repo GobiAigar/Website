@@ -5,22 +5,52 @@ import {
   Button,
   Container,
   Grid,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { EditIcon, GlobeIcon, HomeHashtagIcon } from "../Icon";
 import { Link } from "../../../i18n/navigation";
-import FlagDescription from "../keyComponents/FlagDescription";
 
 const TradeSection = ({ datas }) => {
   const [selectedId, setSelectedId] = useState(3);
   const t = useTranslations("product");
+  const lang = useLocale();
   const theme = useTheme();
   const selectedData = datas.find((data) => data?.id === selectedId);
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  const lang = useLocale();
+
+  const textRef = useRef(null);
+  const [showFull, setShowFull] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+
+    const timer = setTimeout(() => {
+      const { scrollHeight, clientHeight } = el;
+      setIsOverflowing(scrollHeight > clientHeight);
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [
+    selectedData?.mndescription,
+    selectedData?.endescription,
+    lang,
+    selectedId,
+  ]);
+
+  useEffect(() => {
+    setShowFull(false);
+  }, [
+    selectedData?.mndescription,
+    selectedData?.endescription,
+    lang,
+    selectedId,
+  ]);
 
   return (
     <Container>
@@ -29,7 +59,6 @@ const TradeSection = ({ datas }) => {
         spacing={4}
         alignItems="flex-start"
         flexDirection={{ xs: "column-reverse", md: "row" }}
-        sx={{ md: "relative" }}
       >
         <Grid size={{ xs: 12, md: 6 }}>
           <Grid container mb={3}>
@@ -105,46 +134,59 @@ const TradeSection = ({ datas }) => {
             </Grid>
           </Grid>
 
-          <FlagDescription
-            endescription={selectedData?.endescription}
-            mndescription={selectedData?.mndescription}
-          />
-
           <Box
-            display="flex"
-            justifyContent={{ xs: "start" }}
-            sx={{ mt: "0.5rem" }}
+            sx={{
+              maxHeight: isDesktop && showFull ? "35rem" : "none",
+              overflowY: isDesktop && showFull ? "auto" : "visible",
+              pr: isDesktop && showFull ? 1 : 0,
+              scrollbarWidth: isDesktop ? "thin" : "none",
+              "&::-webkit-scrollbar": {
+                width: isDesktop ? 0 : "0px",
+              },
+              "&:hover::-webkit-scrollbar": {
+                width: isDesktop ? "6px" : "0px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#aaa",
+                borderRadius: "6px",
+              },
+            }}
           >
-            <Button
-              component={Link}
-              href="/contact"
-              variant="contained"
+            <Typography
+              ref={textRef}
+              align="justify"
+              whiteSpace="pre-line"
               sx={{
-                backgroundColor: "white",
-                borderColor: "#8C182A",
-                borderRadius: "12px",
-                border: 1,
-                color: "#8C182A",
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                px: "1.5rem",
-                py: "0.570rem",
-                "&:hover": {
-                  backgroundColor: "#4a0d17",
-                  color: "white",
-                },
+                overflow: isDesktop && !showFull ? "hidden" : "visible",
+                display: isDesktop && !showFull ? "-webkit-box" : "block",
+                WebkitLineClamp: isDesktop && !showFull ? 16 : "unset",
+                WebkitBoxOrient: "vertical",
                 fontSize: {
-                  sm: "0.85rem",
-                  md: "1rem",
+                  xs: "1",
+                  md: "1.2rem",
                 },
-                whiteSpace: "nowrap",
               }}
             >
-              <EditIcon />
-              {t("getStartToday")}
-            </Button>
+              {lang ? selectedData?.mndescription : selectedData?.endescription}
+            </Typography>
           </Box>
+
+          {isOverflowing && isDesktop && (
+            <Typography
+              onClick={() => setShowFull(!showFull)}
+              sx={{
+                mt: 1,
+                color: "primary.main",
+                cursor: "pointer",
+                fontWeight: 500,
+                textAlign: "right",
+                userSelect: "none",
+                fontWeight: 600,
+              }}
+            >
+              {showFull ? t("seeLess") : t("seeMore")}
+            </Typography>
+          )}
         </Grid>
 
         <Grid

@@ -95,7 +95,10 @@ const Home = () => {
         <Hero data={hero} />
       </Box>
 
-      <VideoSection datas={section1} />
+      <Box id="history">
+        <VideoSection datas={section1} />
+      </Box>
+
       <Box sx={{ backgroundColor: "#E8DFD9" }}>
         <MainSection datas={section2} reverse={true} />
       </Box>

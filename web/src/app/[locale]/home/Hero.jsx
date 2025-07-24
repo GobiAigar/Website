@@ -79,7 +79,7 @@ const Hero = ({ data }) => {
             </Grid>
             <Grid size="auto">
               <CustomButton
-                url={"sustainability"}
+                url={"/home#history"}
                 text={"ourHistory"}
                 variant={"outlined"}
               />

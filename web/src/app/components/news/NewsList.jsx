@@ -114,7 +114,7 @@ const NewsList = ({ news }) => {
                     }}
                   >
                     <Typography variant="subtitle2" color="text.secondary">
-                      {t("journalist")}:
+                      {t("source")}:
                     </Typography>
                     <Typography
                       variant="subtitle2"

@@ -21,8 +21,6 @@ const InformationCount = () => {
     weekNew: 0,
     monthActive: 0,
     monthNew: 0,
-    weekCity: [],
-    monthCity: [],
   });
 
   useEffect(() => {
@@ -64,20 +62,6 @@ const InformationCount = () => {
           allSummaryRes.json(),
         ]);
 
-        const mapCityData = (data) => {
-          const map = new Map();
-          data.forEach((d) => {
-            const city = d.city || "Unknown";
-            const country = d.country || "Unknown";
-            const key = `${city}, ${country}`;
-            map.set(key, (map.get(key) || 0) + 1);
-          });
-          return Array.from(map.entries()).map(([location, count]) => ({
-            location,
-            count,
-          }));
-        };
-
         setCounts({
           news: newsData?.data?.response?.length,
           messages: msgData.length,
@@ -87,8 +71,6 @@ const InformationCount = () => {
           weekNew: weekSummary.newUsers || 0,
           monthActive: monthSummary.activeUsers || 0,
           monthNew: monthSummary.newUsers || 0,
-          weekCity: mapCityData(weekViews),
-          monthCity: mapCityData(monthViews),
         });
       } catch (err) {
         console.error("Алдаа:", err);
@@ -152,29 +134,25 @@ const InformationCount = () => {
             },
             {
               icon: IconUsers,
-              label: "Нийт хэрэглэгч",
+              label: "Сайтаар зорчсон",
               value: counts.totalUsers,
             },
           ])}
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
-          {renderCard(
-            "7 хоногийн үзүүлэлт",
-            [
-              {
-                icon: IconUsers,
-                label: "Идэвхтэй хэрэглэгч",
-                value: counts.weekActive,
-              },
-              {
-                icon: IconUserPlus,
-                label: "Шинэ хэрэглэгч",
-                value: counts.weekNew,
-                color: "#66bb6a",
-              },
-            ],
-            counts.weekCity
-          )}
+          {renderCard("7 хоногийн үзүүлэлт", [
+            {
+              icon: IconUsers,
+              label: "Сайтаар зорчсон",
+              value: counts.weekActive,
+            },
+            {
+              icon: IconUserPlus,
+              label: "Шинэ хэрэглэгч",
+              value: counts.weekNew,
+              color: "#66bb6a",
+            },
+          ])}
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
           {renderCard(

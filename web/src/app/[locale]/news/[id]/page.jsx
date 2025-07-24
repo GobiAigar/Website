@@ -150,16 +150,14 @@ export default function NewsDetailPage() {
               color="text.secondary"
               sx={{ display: "flex", alignItems: "center" }}
             >
-              {t("journalist")}
+              {t("source")}
               <span
-                style={
-                  ({
-                    fontWeight: "bold",
-                    fontSize: "1.25rem",
-                    marginLeft: 7,
-                  },
-                  capitalize)
-                }
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "1.25rem",
+                  marginLeft: 7,
+                  textTransform: "capitalize", // This mimics MUI's `capitalize` utility
+                }}
               >
                 {lang === "mn" ? newsItem.mnjournalist : newsItem.enjournalist}
               </span>

@@ -5,10 +5,7 @@ import PageContainer from "@/app/(DashboardLayout)/components/container/PageCont
 import { Backend_Endpoint } from "@/constants/constants";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteButton from "../../components/features/DeleteButton";
 import Loading from "../../loading";
-import EditStatistic from "./EditCompany";
-import SeeStatistics from "./SeeCompany";
 import SeeCompany from "./SeeCompany";
 import EditCompany from "./EditCompany";
 

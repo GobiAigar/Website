@@ -22,6 +22,7 @@ import { Backend_Endpoint } from "@/constants/constants";
 const Login2 = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openSnackbar2, setOpenSnackbar2] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const validationSchema = Yup.object({
@@ -36,6 +37,7 @@ const Login2 = () => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
+      setLoading(true);
       try {
         const response = await fetch(`${Backend_Endpoint}/api/user`, {
           method: "POST",
@@ -54,6 +56,7 @@ const Login2 = () => {
           setOpenSnackbar2(true);
           formik.setStatus({ loginError: data.message });
         }
+        setLoading(false);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -131,6 +134,7 @@ const Login2 = () => {
                   variant="contained"
                   fullWidth
                   type="submit"
+                  disabled={loading}
                   sx={{
                     mt: 1,
                     py: 1.5,
