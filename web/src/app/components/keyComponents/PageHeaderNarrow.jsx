@@ -1,23 +1,22 @@
-"use client";
 import { Box, Container, Typography } from "@mui/material";
 import { useLocale } from "next-intl";
 
-const NewsHeader = ({ displayNews }) => {
+const PageHeaderNarrow = ({ data }) => {
   const lang = useLocale();
   return (
     <Box
       sx={{
-        position: "relative",
         width: "100%",
-        height: "20rem",
-        backgroundImage: `url('${displayNews?.image_url}')`,
+        height: { xs: "25rem" },
+        backgroundImage: `url(${data?.image_url})`,
         backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        textAlign: "center",
+        flexDirection: "column",
+        gap: 8,
       }}
     >
       <Box
@@ -25,7 +24,6 @@ const NewsHeader = ({ displayNews }) => {
       />
       <Box
         sx={{
-          minHeight: "60vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -50,7 +48,7 @@ const NewsHeader = ({ displayNews }) => {
               fontWeight: "bold",
             }}
           >
-            {lang === "mn" ? displayNews.mntitle : displayNews.entitle}
+            {lang === "mn" ? data?.mntitle : data?.entitle}
           </Typography>
           <Typography
             variant="h6"
@@ -64,11 +62,12 @@ const NewsHeader = ({ displayNews }) => {
               },
             }}
           >
-            {lang === "mn" ? displayNews.mnsubtitle : displayNews.ensubtitle}
+            {lang === "mn" ? data?.mnsubtitle : data?.ensubtitle}
           </Typography>
         </Container>
       </Box>
     </Box>
   );
 };
-export default NewsHeader;
+
+export default PageHeaderNarrow;

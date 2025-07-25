@@ -26,7 +26,6 @@ const NewsList = ({ news }) => {
           <Card
             sx={{
               position: "relative",
-              borderRadius: 3,
               boxShadow: 4,
               overflow: "hidden",
               height: "18.75rem",
@@ -92,10 +91,7 @@ const NewsList = ({ news }) => {
                 }}
               >
                 <Typography variant="subtitle1" fontWeight="bold">
-                  {truncateChars(
-                    lang === "mn" ? item.mntitle : item.entitle,
-                    39
-                  )}
+                  {lang === "mn" ? item.mntitle : item.entitle}
                 </Typography>
                 <Box
                   sx={{
@@ -112,21 +108,7 @@ const NewsList = ({ news }) => {
                       alignItems: "center",
                       gap: 1,
                     }}
-                  >
-                    <Typography variant="subtitle2" color="text.secondary">
-                      {t("source")}:
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      color="text.primary"
-                      fontWeight="bold"
-                    >
-                      {lang === "mn" ? item.mnjournalist : item.enjournalist}
-                    </Typography>
-                  </Box>
-                  <Typography variant="subtitle2">
-                    {new Date(item.date).toLocaleDateString()}
-                  </Typography>
+                  ></Box>
                 </Box>
               </CardContent>
             </CardActionArea>

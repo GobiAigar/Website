@@ -77,7 +77,7 @@ const Page = () => {
 
   return (
     <PageContainer title="Статистик" description="Статистик">
-      <Box sx={{ height: 650, width: "100%" }}>
+      <Box sx={{ height: "auto", width: "100%" }}>
         <Box
           sx={{
             display: "flex",

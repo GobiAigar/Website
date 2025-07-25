@@ -20,11 +20,13 @@ import * as Yup from "yup";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useAppData } from "../../../context/AppDataProvider";
+import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 
 const Contact = () => {
   const t = useTranslations("contact");
   const lang = useLocale();
   const { message, loading } = useAppData();
+  console.log(message);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -88,90 +90,7 @@ const Contact = () => {
         minHeight: "",
       }}
     >
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          height: "20rem",
-          backgroundImage:
-            loaded && data?.image_url ? `url(${data?.image_url})` : "none",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
-        />
-        <Box
-          sx={{
-            minHeight: "60vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            color: "black",
-            px: 4,
-            mt: 10,
-            position: "absolute",
-            zIndex: 1,
-            width: "100%",
-          }}
-        >
-          <Container maxWidth="sm">
-            {!loaded ? (
-              <>
-                <Skeleton
-                  variant="text"
-                  width="80%"
-                  height={40}
-                  sx={{ mx: "auto", mb: 2 }}
-                />
-                <Skeleton
-                  variant="text"
-                  width="60%"
-                  height={30}
-                  sx={{ mx: "auto" }}
-                />
-              </>
-            ) : (
-              <>
-                <Typography
-                  variant="h3"
-                  sx={{
-                    fontSize: {
-                      xs: "1.5rem",
-                      sm: "1.75rem",
-                      md: "2rem",
-                      color: "white",
-                    },
-                    fontWeight: "bold",
-                  }}
-                >
-                  {lang === "mn" ? data?.mntitle : data?.entitle}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mt: 2,
-                    fontSize: {
-                      xs: "0.8rem",
-                      md: "1rem",
-                      lg: "1.2rem",
-                      color: "white",
-                    },
-                  }}
-                >
-                  {lang === "mn" ? data?.mnsubtitle : data?.ensubtitle}
-                </Typography>
-              </>
-            )}
-          </Container>
-        </Box>
-      </Box>
+      <PageHeaderNarrow data={data} />
 
       <Box sx={{ position: "relative", zIndex: 1, pb: "56px", pt: "42px" }}>
         <Container maxWidth="lg">

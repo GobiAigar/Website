@@ -199,7 +199,6 @@ const EditNews = ({ data }) => {
                   onClear={() => {
                     formik.setFieldValue("image_url", "");
                     formik.setFieldValue("thumbnail", "");
-                    i;
                   }}
                 />
                 {formik.touched.image_url && formik.errors.image_url && (

@@ -31,11 +31,25 @@ const DeleteButton = ({ type, id }) => {
           "Content-type": "application/json",
         },
       });
-      const data = await response.json();
-      handleClose();
-      window.location.reload();
+      if (response.ok) {
+        setSnackbar({
+          open: true,
+          message: "Амжилттай устгагдлаа",
+          severity: "success",
+        });
+      } else {
+        setSnackbar({
+          open: true,
+          message: "Устгах үед алдаа гарлаа. Дахин оролдоно уу!",
+          severity: "error",
+        });
+      }
     } catch (error) {
-      console.log(error);
+      setSnackbar({
+        open: true,
+        message: "Устгах үед алдаа гарлаа. Дахин оролдоно уу!",
+        severity: "error",
+      });
     }
   };
   return (

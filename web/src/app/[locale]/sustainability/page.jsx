@@ -16,6 +16,7 @@ import { useAppData } from "../../../context/AppDataProvider";
 import Test from "./Test";
 import TestHeader from "./TestHeader";
 import CerficateSection from "../../components/Sections/CerficateSection";
+import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 
 const Sustainability = () => {
   const { sustainability, loading: rawLoading } = useAppData();
@@ -36,7 +37,8 @@ const Sustainability = () => {
         flexDirection: "column",
       }}
     >
-      <TestHeader mainInfo={mainInfo} />
+      <PageHeaderNarrow data={mainInfo} />
+
       <Test sustainabilityText={sustainabilityText} />
       {certificates.map((data, index) => {
         return (

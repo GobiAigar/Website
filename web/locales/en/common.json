@@ -8,7 +8,7 @@
   },
   "home": {
     "title": "Welcome to homepage",
-    "seeProduct": "See product",
+    "seeProduct": "Product",
     "ourHistory": "Our History",
     "White": "White",
     "Beige": "Beige",
@@ -37,13 +37,13 @@
     "loading": "Loading...",
     "error": "Failed to load news.",
     "back": "Back",
-    "seeMore": "See more",
+    "seeMore": "",
     "source": "Source",
     "date": "Date",
     "seeLess": "Compile",
-    "clickSeeMore": "Click on the news to read more.",
+    "clickSeeMore": "See more",
     "notFoundNews": "No news found yet.",
-    "news": "Click on the news to read more."
+    "news": ""
   },
   "sustainability": {
     "notFoundInformations": "No information found yet.",

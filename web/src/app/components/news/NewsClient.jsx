@@ -2,9 +2,9 @@
 import { Box, Container, Typography, Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import NewsHeader from "./NewsHeader";
 import NewsList from "./NewsList";
 import NewsSkeleton from "./NewsSkeleton";
+import PageHeaderNarrow from "../keyComponents/PageHeaderNarrow";
 
 const NewsClient = () => {
   const [initialNews, setInitialNews] = useState(null);
@@ -19,7 +19,7 @@ const NewsClient = () => {
     const fetchNews = async () => {
       setLoading(true);
       try {
-       const res = await fetch(
+        const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/news/paginated?page=${currentPage}&limit=3`,
           { cache: "no-store" }
         );
@@ -45,18 +45,21 @@ const NewsClient = () => {
       <Box
         minHeight="100vh"
         display="flex"
-        justifyContent="center"
+        flexDirection="column"
         alignItems="center"
+        backgroundColor="#ddd"
       >
-        <Typography>{t("notFoundNews")}</Typography>
+        <PageHeaderNarrow data={initialNews} />
+        <Box display="flex" justifyContent="center">
+          <Typography>{t("notFoundNews")}</Typography>
+        </Box>
       </Box>
     );
   }
 
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
-      <NewsHeader displayNews={initialNews} />
-
+      <PageHeaderNarrow data={initialNews} />
       <Container>
         <NewsList news={news} />
       </Container>

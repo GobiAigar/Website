@@ -19,6 +19,7 @@ import { IconTrash } from "@tabler/icons-react";
 
 import { Backend_Endpoint } from "@/constants/constants";
 import { IconEye } from "@tabler/icons-react";
+import DeleteButton from "../features/DeleteButton";
 
 const columns = (setSnackbar, handleRowDelete) => [
   {
@@ -78,11 +79,14 @@ const columns = (setSnackbar, handleRowDelete) => [
     align: "center",
     headerAlign: "center",
     renderCell: (params) => (
-      <ActionButtons
-        row={params.row}
-        setSnackbar={setSnackbar}
-        handleRowDelete={handleRowDelete}
-      />
+      <Box>
+        <ActionButtons
+          row={params.row}
+          setSnackbar={setSnackbar}
+          handleRowDelete={handleRowDelete}
+        />
+        <DeleteButton type="messages" id={params.row} />
+      </Box>
     ),
   },
 ];
@@ -90,41 +94,6 @@ const columns = (setSnackbar, handleRowDelete) => [
 const ActionButtons = ({ row, setSnackbar, handleRowDelete }) => {
   const [open, setOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-
-  const handleDelete = async () => {
-    try {
-      const response = await fetch(
-        `${Backend_Endpoint}/api/messages/${row.id}`,
-        {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      if (response.ok) {
-        setSnackbar({
-          open: true,
-          message: "Амжилттай устгагдлаа",
-          severity: "success",
-        });
-        handleRowDelete(row.id);
-      } else {
-        setSnackbar({
-          open: true,
-          message: "Устгах үед алдаа гарлаа. Дахин оролдоно уу!",
-          severity: "error",
-        });
-      }
-    } catch (error) {
-      setSnackbar({
-        open: true,
-        message: "Устгах үед алдаа гарлаа. Дахин оролдоно уу!",
-        severity: "error",
-      });
-    } finally {
-      setConfirmOpen(false);
-    }
-  };
 
   const fieldNames = {
     purpose: "Зорилго",

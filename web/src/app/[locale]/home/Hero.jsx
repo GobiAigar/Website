@@ -54,7 +54,7 @@ const Hero = ({ data }) => {
                 fontSize: {
                   xs: "0.8rem",
                   md: "1rem",
-                  lg: "1.2rem",
+                  lg: "2rem",
                 },
                 px: {
                   xs: "3rem",

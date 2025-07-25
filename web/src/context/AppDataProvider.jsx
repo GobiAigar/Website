@@ -63,7 +63,6 @@ export const AppDataProvider = ({ children }) => {
           error: null,
         }));
       } catch (err) {
-        console.error("AppData fetch failed:", err);
         setData((prev) => ({
           ...prev,
           loadingWebsite: false,
