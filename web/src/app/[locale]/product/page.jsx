@@ -48,7 +48,7 @@ const Product = () => {
       <Box>
         <MainSection datas={data?.response[0]} reverse={false} />
       </Box>
-      <Box backgroundColor="#E8DFD9">
+      <Box>
         <MainSection datas={data?.response[1]} reverse={true} />
       </Box>
       <Box
@@ -58,7 +58,7 @@ const Product = () => {
       >
         <TradeSection datas={tradeDatas} />
       </Box>
-      <Box backgroundColor="#E8DFD9">
+      <Box>
         <MainSection datas={data?.response[4]} reverse={true} />
       </Box>
     </Box>

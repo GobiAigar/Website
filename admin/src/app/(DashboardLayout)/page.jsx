@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <PageContainer title={"Хяналтын самбар"}>
       <Grid container spacing={3}>
-        <Grid size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }} display="flex" flexDirection="column" gap={2}>
           <InformationCount />
           <AnalyticsChart />
           <UserTimeChart />

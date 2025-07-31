@@ -1,18 +1,16 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
-
-import TextMain from "../keyComponents/TextMain";
+import { Box, Grid } from "@mui/material";
+import Description from "../keyComponents/Description";
 import VideoSide from "../Card/VideoSideCard";
+import Title from "../keyComponents/Title";
+
 const VideoSection = ({ datas }) => {
   const imageUrls = [datas?.image_url1].filter(Boolean);
 
   return (
-    <Container sx={{ marginY: { xs: 3, sm: 4, md: 6 } }}>
-      <Grid container spacing={3} alignItems="flex-start">
-        <Grid size={12}>
-          <VideoSide data={imageUrls} />
-        </Grid>
+    <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
+      <Grid container spacing={3} alignItems="center">
         <Grid
           size={12}
           sx={{
@@ -21,15 +19,24 @@ const VideoSection = ({ datas }) => {
             zIndex: 10,
           }}
         >
-          <TextMain
-            mntitle={datas?.mntitle}
-            entitle={datas?.entitle}
-            endescription={datas?.endescription}
-            mndescription={datas?.mndescription}
-          />
+          <Box width={"80%"} textAlign={"center"} margin="auto">
+            <Title
+              mntitle={datas?.mntitle}
+              entitle={datas?.entitle}
+              textAlign={"center"}
+            />
+            <Description
+              mndescription={datas?.mndescription}
+              endescription={datas?.endescription}
+              textAlign={"center"}
+            />
+          </Box>
+        </Grid>
+        <Grid size={12}>
+          <VideoSide data={imageUrls} />
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

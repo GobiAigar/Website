@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { Box, Container, Typography, Skeleton } from "@mui/material";
+import { Box, Container, Typography, Skeleton, Divider } from "@mui/material";
 
 import { useLocale, useTranslations } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
@@ -11,20 +10,19 @@ import MainSection from "../../components/Sections/MainSection";
 import ProductImageList from "../../components/ImageList";
 import ImageSection from "../../components/Sections/ImageSection";
 import Hero from "./Hero";
-import StatisticsSection from "../../components/Sections/StatisticsSection";
 import EndSection from "../../components/Sections/EndSection";
 import BrandSection from "../../components/Sections/BrandSection";
+import NewMainSection from "../../components/newComponents/NewMainSection";
 import Title from "../../components/keyComponents/Title";
 
 const Home = () => {
   const { website, loadingWebsite } = useAppData();
+
   const lang = useLocale();
   const t = useTranslations("home");
 
   const rawData = website?.data || {};
   const websiteData = rawData?.response || [];
-  const statisticsList = rawData.statistics || [];
-  const faqs = rawData.faq || [];
 
   const getSingleById = (id) => websiteData?.find((item) => item.id === id);
   const getMultibyId = (ids) => {
@@ -42,7 +40,7 @@ const Home = () => {
   const goatsHeader = getSingleById(7);
   const fourGoats = getMultibyId([8, 9, 10, 11]);
   const section4 = getSingleById(12);
-  const fqaSection = getSingleById(13);
+
   const endSection = getSingleById(14);
 
   if (loadingWebsite) {
@@ -75,23 +73,7 @@ const Home = () => {
         flexDirection: "column",
       }}
     >
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          minHeight: "100vh",
-          backgroundImage: `url(${hero?.image_url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
-        />
+      <Box>
         <Hero data={hero} />
       </Box>
 
@@ -99,44 +81,30 @@ const Home = () => {
         <VideoSection datas={section1} />
       </Box>
 
-      <Box sx={{ backgroundColor: "#E8DFD9" }}>
-        <MainSection datas={section2} reverse={true} />
-      </Box>
+      <NewMainSection data={section2} />
+      <Divider />
+
       <BrandSection datas={valueGoalVision} />
-      {/* 4 ymaatai */}
+      <Divider />
 
-      <Box marginX={{ xs: 2, sm: 0 }} paddingY={{ sx: 3, sm: 4, md: 5 }}>
-        <Title entitle={goatsHeader?.entitle} mntitle={goatsHeader?.mntitle} />
-        <Box paddingX={{ xs: 2, sm: 0 }} marginBottom={2}>
-          <Typography
-            sx={{
-              fontSize: {
-                xs: "0.875rem",
-                sm: "1rem",
-                md: "1.125rem",
-                lg: "1.25rem",
-              },
-            }}
-            mb="1rem"
-            textAlign="start"
-          >
-            {lang === "mn"
-              ? goatsHeader?.mndescription
-              : goatsHeader?.endescription}
-          </Typography>
+      <MainSection datas={section3} />
+
+      <Divider />
+
+      <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
+        <Box marginBottom={{ xs: 1.25, sm: 1.875, md: 2.5 }}>
+          <Title
+            mntitle={goatsHeader?.mntitle}
+            entitle={goatsHeader?.entitle}
+            textAlign={true}
+          />
         </Box>
-        <ProductImageList sections={fourGoats} lang={lang} />
+        <ProductImageList sections={fourGoats} />
       </Box>
-      <Box sx={{ backgroundColor: "#E8DFD9" }}>
-        <MainSection datas={section3} reverse={false} />
-      </Box>
+      <Divider />
+      {/* <ImageSection datas={section4} /> */}
 
-      <ImageSection datas={section4} />
-
-      {/* <StatisticsSection datas={section5} statisticsList={statisticsList} /> */}
-      <Box sx={{ backgroundColor: "#E8DFD9" }}>
-        <EndSection datas={endSection} faqs={faqs} fqaSection={fqaSection} />
-      </Box>
+      <EndSection datas={endSection} />
     </Box>
   );
 };

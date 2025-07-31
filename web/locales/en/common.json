@@ -13,7 +13,8 @@
     "White": "White",
     "Beige": "Beige",
     "GreyBlue": "Grey Blue",
-    "DarkGrey": "Dark Grey"
+    "DarkGrey": "Dark Grey",
+    "brandSectionTitle": "OURS"
   },
   "contact": {
     "selectPurpose": "Select the purpose",
@@ -61,8 +62,9 @@
     "CompanyName": "Company Name:",
     "location": "Address:",
     "connection": "Contact Information",
-    "email": "EMAIL:",
+    "email": "EMAIL",
     "phone": "Phone",
+    "faq": "FAQ",
     "nav": {
       "about": "About",
       "product": "Product",

@@ -2,7 +2,7 @@
 
 import { Box } from "@mui/material";
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
-import Messages from "@/app/(DashboardLayout)/components/website/Messeges";
+import Messages from "@/app/(DashboardLayout)/(pages)/messages/Messeges";
 import { useEffect, useState } from "react";
 import { Backend_Endpoint } from "@/constants/constants";
 

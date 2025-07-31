@@ -26,7 +26,6 @@ const Contact = () => {
   const t = useTranslations("contact");
   const lang = useLocale();
   const { message, loading } = useAppData();
-  console.log(message);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");

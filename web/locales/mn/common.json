@@ -13,7 +13,8 @@
     "White": "Цагаан",
     "Beige": "Шаргал",
     "GreyBlue": "Хөх саарал",
-    "DarkGrey": "Хар саарал"
+    "DarkGrey": "Хар саарал",
+    "brandSectionTitle": "Бидний"
   },
   "contact": {
     "selectPurpose": "Зорилгоо сонгоно уу",
@@ -61,6 +62,7 @@
     "connection": "Холбоо барих",
     "email": "Цахим хаяг",
     "phone": "Утас",
+    "faq": "Түгээмэл асуултууд",
     "nav": {
       "about": "Бидний тухай",
       "product": "Бүтээгдэхүүн",

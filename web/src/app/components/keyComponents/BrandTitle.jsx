@@ -1,21 +1,22 @@
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useLocale } from "next-intl";
-
-const Title = ({ mntitle, entitle, textAlign }) => {
+const BrandTitle = ({ entitle, mntitle }) => {
   const lang = useLocale();
+
   return (
     <>
       <Typography
-        variant="h2"
+        variant="h4"
         sx={{
+          fontWeight: "600",
+          fontStyle: "normal",
           lineHeight: "150%",
-          color: "#292929",
-          textAlign: textAlign ? "center" : "left",
-
+          color: "#44372B",
+          textAlign: "center",
           fontSize: {
-            xs: "2rem",
-            md: "2.5rem",
-            lg: "3rem",
+            xs: "1rem",
+            md: "1.2rem",
+            lg: "1.5rem",
           },
 
           maxHeight: {
@@ -30,4 +31,4 @@ const Title = ({ mntitle, entitle, textAlign }) => {
   );
 };
 
-export default Title;
+export default BrandTitle;

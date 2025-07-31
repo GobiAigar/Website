@@ -1,44 +1,53 @@
-import { CardMedia, Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
-import Title from "../keyComponents/Title";
+import NewTitle from "../newComponents/NewTitle";
+import Description from "../keyComponents/Description";
 
-import FAQSection from "./FAQSection";
-import FlagDescription from "../keyComponents/FlagDescription";
-
-const EndSection = ({ datas, faqs, fqaSection }) => {
+const EndSection = ({ datas }) => {
   return (
-    <Container sx={{ marginY: { xs: 3, sm: 4, md: 6 } }}>
-      <Grid container spacing={6}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Title
-            mntitle={datas?.mntitle}
-            entitle={datas?.entitle}
-            reverse={false}
-          />
-          <FlagDescription
-            mndescription={datas?.mndescription}
-            endescription={datas?.endescription}
-          />
+    <Box
+      sx={{
+        marginTop: { xs: 4, md: 6 },
+        height: "350px",
+        position: "relative",
+        backgroundImage: `url(${datas?.image_url1})`,
+        backgroundColor: "#E8DFD9",
+        backdropFilter: "blur(2px)",
+        backgroundOrigin: "border-box",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
 
-          <CardMedia
-            component="img"
-            src={datas?.image_url1}
-            alt={datas?.entitle}
-            sx={{
-              borderRadius: "none",
-
-              padding: 0,
-              width: "100%",
-
-              objectFit: "cover",
-            }}
-          />
-        </Grid>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <FAQSection faqItems={faqs} fqaHeader={fqaSection} />
-        </Grid>
-      </Grid>
-    </Container>
+        overflow: "hidden",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          zIndex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Container maxWidth="lg">
+          <Grid container spacing={6}>
+            <Grid size={{ xs: 12 }} color={"#fff"}>
+              <NewTitle
+                mntitle={datas?.mntitle}
+                entitle={datas?.entitle}
+                reverse={false}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 

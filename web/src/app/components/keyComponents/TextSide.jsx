@@ -1,7 +1,8 @@
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+
 import { useLocale } from "next-intl";
 import Title from "./Title";
-import FlagDescription from "./FlagDescription";
+import Description from "./Description";
 
 const TextSide = ({
   entitle,
@@ -15,13 +16,15 @@ const TextSide = ({
   const lang = useLocale();
 
   return (
-    <Box sx={{ width: "100%", textAlign: reverse ? "right" : "left" }}>
-      <Title entitle={entitle} mntitle={mntitle} reverse={reverse} />
+    <Box sx={{ width: "100%", textAlign: "right" }}>
+      {!isMobile && (
+        <Title entitle={entitle} mntitle={mntitle} reverse={reverse} />
+      )}
 
-      <FlagDescription
+      <Description
         endescription={endescription}
         mndescription={mndescription}
-        textAlign={"justify"}
+        justifyContent={isMobile ? "center" : "flex-end"}
       />
     </Box>
   );

@@ -22,7 +22,6 @@ const Footer = () => {
   const { company } = useAppData();
   const t = useTranslations("footer");
   const locale = useLocale();
-  console.log(company);
 
   const getValue = (id) => {
     const item = company?.find((e) => e.id === id);
@@ -61,11 +60,11 @@ const Footer = () => {
               {t("connection")}
             </Typography>
             <Typography variant="body2">
-              {t("email")}: {getValue(3)}
+              {t("email")}: {getValue(4)}
             </Typography>
 
             <Link variant="body2" type="button" href={`tel:${getValue(5)}`}>
-              {t("phone")}: {getValue(4)}
+              {t("phone")}: {getValue(3)}
             </Link>
           </Grid>
           <Grid
@@ -80,6 +79,8 @@ const Footer = () => {
             }}
           >
             <GobiAigarIcon size={170} />
+
+            <Link href={`faq`}>{t("faq")}</Link>
 
             <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
               <MuiLink href={getValue(5)} target="_blank" rel="noopener">

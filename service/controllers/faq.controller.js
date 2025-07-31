@@ -47,7 +47,6 @@ export const faqController = {
       const response = await sql`DELETE FROM faq WHERE id = ${id}`;
       res.status(200).json(response);
     } catch (error) {
-      console.log("log", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },

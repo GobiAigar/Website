@@ -8,11 +8,19 @@ import {
   DialogActions,
   DialogTitle,
   IconButton,
+  Snackbar,
 } from "@mui/material";
 import { useState } from "react";
 import { IconTrash } from "@tabler/icons-react";
+import MuiAlert from "@mui/material/Alert";
 
 const DeleteButton = ({ type, id }) => {
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -80,6 +88,22 @@ const DeleteButton = ({ type, id }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <Box sx={{ height: "auto", position: "relative" }}>
+        <Snackbar
+          open={snackbar.open}
+          autoHideDuration={3000}
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <MuiAlert
+            onClose={() => setSnackbar({ ...snackbar, open: false })}
+            severity={snackbar.severity}
+            sx={{ width: "100%" }}
+          >
+            {snackbar.message}
+          </MuiAlert>
+        </Snackbar>
+      </Box>
     </Box>
   );
 };

@@ -15,7 +15,6 @@ const InformationCount = () => {
   const [counts, setCounts] = useState({
     news: 0,
     messages: 0,
-    totalUsers: 0,
     newUsersAll: 0,
     weekActive: 0,
     weekNew: 0,
@@ -131,11 +130,6 @@ const InformationCount = () => {
               label: "Зурвас",
               value: counts.messages,
               color: "#66bb6a",
-            },
-            {
-              icon: IconUsers,
-              label: "Сайтаар зорчсон",
-              value: counts.totalUsers,
             },
           ])}
         </Grid>

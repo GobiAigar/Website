@@ -11,10 +11,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "../../../i18n/navigation";
-import Title from "../keyComponents/Title";
 
-const FAQSection = ({ faqItems = [], fqaHeader = {} }) => {
+const FAQSection = ({ faqs }) => {
   const lang = useLocale();
   const t = useTranslations("faq");
 
@@ -26,46 +24,14 @@ const FAQSection = ({ faqItems = [], fqaHeader = {} }) => {
 
   return (
     <Container maxWidth="md" sx={{ color: "black" }}>
-      <Title
-        mntitle={fqaHeader.mntitle}
-        entitle={fqaHeader.entitle}
-        reverse={false}
-      />
-
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          gap: 2,
-          mt: 2,
-        }}
-      >
-        <Typography sx={{ flex: 1 }}>
-          {lang === "mn" ? fqaHeader.mndescription : fqaHeader.endescription}
-        </Typography>
-        <Link
-          href="/contact"
-          style={{
-            fontWeight: 500,
-            textDecoration: "underline",
-            color: "blue",
-            fontSize: "1rem",
-          }}
-        >
-          {t("contact")}
-        </Link>
-      </Box>
-
-      <Box
-        pb={2}
+        mb={8}
+        mt={8}
         sx={{
           overflowY: { xs: "visible", md: "auto" },
-          pr: 1,
-          "&::-webkit-scrollbar": { display: "none" },
-          scrollbarWidth: "none",
         }}
       >
-        {faqItems.map((faq) => {
+        {faqs?.map((faq) => {
           const panelId = `panel-${faq.id}`;
           return (
             <Accordion

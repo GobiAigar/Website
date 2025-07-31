@@ -1,24 +1,67 @@
 "use client";
-import React, { useRef } from "react";
-import { Box, Card, CardMedia } from "@mui/material";
+import React, { useRef, useEffect, useState, useMemo } from "react";
+import { Box, CardMedia, CircularProgress } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 const ImageSideCard = ({ data }) => {
   const sliderRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const progressIntervalRef = useRef(null);
 
-  const renderSlides = () =>
-    data?.map((src, i) => {
+  const SLIDE_DURATION = 5000;
+
+  useEffect(() => {
+    setProgress(0);
+
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+
+    if (data && data.length > 1) {
+      progressIntervalRef.current = setInterval(() => {
+        setProgress((prev) => {
+          const newProgress = prev + 100 / (SLIDE_DURATION / 100);
+
+          if (newProgress >= 100) {
+            clearInterval(progressIntervalRef.current);
+            // Let react-slick handle the auto-advance
+            return 0;
+          }
+          return newProgress;
+        });
+      }, 100);
+    }
+
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, [currentIndex, data]);
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    setProgress(0);
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(index);
+    }
+  };
+
+  const handleSlideChange = (index) => {
+    setCurrentIndex(index);
+    setProgress(0);
+  };
+
+  const renderSlides = useMemo(() => {
+    return data.map((src, i) => {
       const commonSx = {
         width: "100%",
-        height: { xs: "auto", sm: "20rem", md: "31.5rem" },
         objectFit: "cover",
         display: "block",
-        sx: {
-          boxShadow: (theme) => theme.shadows[1],
-        },
+        boxShadow: (theme) => theme.shadows[1],
       };
       return (
         <CardMedia
@@ -30,81 +73,74 @@ const ImageSideCard = ({ data }) => {
         />
       );
     });
+  }, [data]);
 
-  const NextArrow = ({ onClick }) => (
-    <Box
-      onClick={onClick}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        right: 10,
-        transform: "translateY(-50%)",
-        zIndex: 1,
-        width: 30,
-        height: 30,
-        color: "#fff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        "&:hover": {
-          backgroundColor: "rgba(0,0,0,0.7)",
-          borderRadius: "50%",
-        },
-      }}
-    >
-      <ChevronRightIcon />
-    </Box>
-  );
-
-  const PrevArrow = ({ onClick }) => (
-    <Box
-      onClick={onClick}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        left: 10,
-        transform: "translateY(-50%)",
-        zIndex: 1,
-        width: 30,
-        height: 30,
-        color: "#fff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        "&:hover": {
-          backgroundColor: "rgba(0,0,0,0.7)",
-          borderRadius: "50%",
-        },
-      }}
-    >
-      <ChevronLeftIcon />
-    </Box>
-  );
+  const sliderSettings = {
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: SLIDE_DURATION,
+    pauseOnHover: true,
+    fade: true,
+    beforeChange: (oldIndex, newIndex) => handleSlideChange(newIndex),
+  };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      {data.length > 1 ? (
-        <Slider
-          ref={sliderRef}
-          dots={true}
-          arrows={true}
-          infinite={true}
-          speed={500}
-          slidesToShow={1}
-          slidesToScroll={1}
-          autoplay={true}
-          autoplaySpeed={5000}
-          pauseOnHover={false}
-          nextArrow={<NextArrow />}
-          prevArrow={<PrevArrow />}
-          fade
-        >
-          {renderSlides()}
-        </Slider>
+    <Box sx={{ width: "100%", position: "relative" }}>
+      {data && data.length > 1 ? (
+        <Box>
+          <Box
+            sx={{
+              position: "absolute",
+              top: 8,
+              left: 8,
+              right: 8,
+              zIndex: 30,
+              display: "flex",
+              gap: "4px",
+            }}
+          >
+            {data.map((_, index) => (
+              <Box
+                key={index}
+                onClick={() => goToSlide(index)}
+                sx={{
+                  flex: 1,
+                  height: "4px",
+                  backgroundColor: "rgba(255,255,255,0.3)",
+                  borderRadius: "2px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  position: "relative",
+                }}
+              >
+                <Box
+                  sx={{
+                    height: "100%",
+                    backgroundColor: "white",
+                    borderRadius: "2px",
+                    transition: "width 0.1s ease-linear",
+                    width:
+                      index < currentIndex
+                        ? "100%"
+                        : index === currentIndex
+                        ? `${progress}%`
+                        : "0%",
+                  }}
+                />
+              </Box>
+            ))}
+          </Box>
+
+          <Slider ref={sliderRef} {...sliderSettings}>
+            {renderSlides}
+          </Slider>
+        </Box>
       ) : (
-        renderSlides()
+        renderSlides
       )}
     </Box>
   );

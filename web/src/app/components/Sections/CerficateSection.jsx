@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, CardMedia, Container, Grid } from "@mui/material";
+import { Box, CardMedia, Container, Divider, Grid } from "@mui/material";
 
 import CerficateTextCard from "../Card/CerficateTextCard";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const CerficateSection = ({ data, index }) => {
     <Box
       sx={{
         width: "100%",
-        bgcolor: reverse ? "#E8DFD9" : "#fff",
+
         overflow: "visible",
       }}
     >
@@ -60,6 +60,7 @@ const CerficateSection = ({ data, index }) => {
           </Grid>
         </Grid>
       </Container>
+      <Divider />
     </Box>
   );
 };

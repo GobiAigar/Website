@@ -138,7 +138,6 @@ const UserTimeChart = () => {
     <Container
       maxWidth="lg"
       sx={{
-        mt: 4,
         backgroundColor: "#fff",
         borderRadius: 2,
         p: 2,

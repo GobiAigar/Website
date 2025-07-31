@@ -57,7 +57,6 @@ const AddNews = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
         });
-        console.log(values);
 
         if (response.ok) {
           setOpenSnackbar(true);

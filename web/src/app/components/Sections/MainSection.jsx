@@ -1,11 +1,14 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid, useMediaQuery, useTheme } from "@mui/material";
 
 import TextSide from "../keyComponents/TextSide";
 import ImageSide from "../Card/ImageSideCard";
 
 const MainSection = ({ datas, reverse }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const imageUrls = [
     datas?.image_url1,
     datas?.image_url2,
@@ -14,12 +17,7 @@ const MainSection = ({ datas, reverse }) => {
   ].filter(Boolean);
 
   return (
-    <Container
-      sx={{
-        padding: { xs: 3, sm: 4, md: 8 },
-      }}
-      height="720px"
-    >
+    <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
       <Grid
         container
         spacing={3}
@@ -27,6 +25,9 @@ const MainSection = ({ datas, reverse }) => {
         direction={reverse ? "row-reverse" : "row"}
         sx={{ md: "relative" }}
       >
+        <Grid size={{ xs: 12, md: 6 }}>
+          <ImageSide data={imageUrls} />
+        </Grid>
         <Grid
           size={{ xs: 12, md: 6 }}
           sx={{
@@ -40,15 +41,10 @@ const MainSection = ({ datas, reverse }) => {
             entitle={datas?.entitle}
             endescription={datas?.endescription}
             mndescription={datas?.mndescription}
-            reverse={reverse}
           />
         </Grid>
-
-        <Grid size={{ xs: 12, md: 6 }}>
-          <ImageSide data={imageUrls} />
-        </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

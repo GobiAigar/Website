@@ -8,7 +8,8 @@ const TextMain = ({ entitle, mntitle, mndescription, endescription }) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Title entitle={entitle} mntitle={mntitle} />
+      <Title entitle={entitle} mntitle={mntitle} textAlign={"center"} />
+
       <Description
         mndescription={mndescription}
         endescription={endescription}
