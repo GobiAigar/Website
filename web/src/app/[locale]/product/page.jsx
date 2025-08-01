@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, Container, Typography, Grid, Skeleton } from "@mui/material";
-import { useLocale } from "next-intl";
+import { Box, Container, Skeleton, Divider } from "@mui/material";
 import { useAppData } from "../../../context/AppDataProvider";
 import MainSection from "../../components/Sections/MainSection";
 import TradeSection from "../../components/Sections/TradeSection";
@@ -9,7 +8,6 @@ import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 
 const Product = () => {
   const { product, loadingWebsite } = useAppData();
-  const lang = useLocale();
   const data = product?.data;
   const banner = data?.hero.find((item) => item.id === 2);
   const tradeDatas = [data?.response[2], data?.response[3]];
@@ -45,22 +43,13 @@ const Product = () => {
       }}
     >
       <PageHeaderNarrow data={banner} />
-      <Box>
-        <MainSection datas={data?.response[0]} reverse={false} />
-      </Box>
-      <Box>
-        <MainSection datas={data?.response[1]} reverse={true} />
-      </Box>
-      <Box
-        sx={{
-          padding: { xs: 3, sm: 4, md: 8 },
-        }}
-      >
-        <TradeSection datas={tradeDatas} />
-      </Box>
-      <Box>
-        <MainSection datas={data?.response[4]} reverse={true} />
-      </Box>
+      <MainSection datas={data?.response[0]} />
+      <Divider />
+      <MainSection datas={data?.response[1]} />
+      <Divider />
+      <TradeSection datas={tradeDatas} />
+      <Divider />
+      <MainSection datas={data?.response[4]} />
     </Box>
   );
 };

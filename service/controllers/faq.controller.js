@@ -10,6 +10,15 @@ export const faqController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  getHeader: async (_, res) => {
+    try {
+      const response = await sql`SELECT * FROM website_headers WHERE id = 6`;
+      res.status(200).json(response);
+    } catch {
+      console.log("error", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
   postFaq: async (req, res) => {
     const { mnquestion, enquestion, mnanswer, enanswer } = req.body;
     try {

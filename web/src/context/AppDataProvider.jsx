@@ -45,18 +45,28 @@ export const AppDataProvider = ({ children }) => {
         const companyPromise = fetch(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/company`
         ).then((r) => r.json());
+        const faqHeaderPromise = fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/faqHeader`
+        ).then((r) => r.json());
         const faqPromise = fetch(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/faq`
         ).then((r) => r.json());
 
-        const [productRes, sustainabilityRes, messageRes, companyRes, faqRes] =
-          await Promise.all([
-            productPromise,
-            sustainabilityPromise,
-            messagePromise,
-            companyPromise,
-            faqPromise,
-          ]);
+        const [
+          productRes,
+          sustainabilityRes,
+          messageRes,
+          companyRes,
+          faqRes,
+          faqHeaderRes,
+        ] = await Promise.all([
+          productPromise,
+          sustainabilityPromise,
+          messagePromise,
+          companyPromise,
+          faqPromise,
+          faqHeaderPromise,
+        ]);
 
         setData((prev) => ({
           ...prev,
@@ -65,6 +75,7 @@ export const AppDataProvider = ({ children }) => {
           message: messageRes,
           company: companyRes,
           faqs: faqRes,
+          faqHeader: faqHeaderRes,
           loadingAll: false,
           error: null,
         }));

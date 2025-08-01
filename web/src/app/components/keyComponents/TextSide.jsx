@@ -12,19 +12,19 @@ const TextSide = ({
   reverse,
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
   const lang = useLocale();
 
   return (
     <Box sx={{ width: "100%", textAlign: "right" }}>
-      {!isMobile && (
+      {!isTablet && (
         <Title entitle={entitle} mntitle={mntitle} reverse={reverse} />
       )}
 
       <Description
         endescription={endescription}
         mndescription={mndescription}
-        justifyContent={isMobile ? "center" : "flex-end"}
+        justifyContent={isTablet ? "center" : "flex-end"}
       />
     </Box>
   );

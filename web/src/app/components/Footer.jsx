@@ -17,6 +17,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import XIcon from "@mui/icons-material/X";
 import { useAppData } from "../../context/AppDataProvider";
 import Link from "next/link";
+import { hover } from "framer-motion";
 
 const Footer = () => {
   const { company } = useAppData();
@@ -80,7 +81,9 @@ const Footer = () => {
           >
             <GobiAigarIcon size={170} />
 
-            <Link href={`faq`}>{t("faq")}</Link>
+            <MuiLink href={`faq`} underline="hover" color="white">
+              {t("faq")}
+            </MuiLink>
 
             <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
               <MuiLink href={getValue(5)} target="_blank" rel="noopener">

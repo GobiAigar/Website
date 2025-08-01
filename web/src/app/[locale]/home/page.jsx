@@ -7,8 +7,8 @@ import { useAppData } from "../../../context/AppDataProvider";
 
 import VideoSection from "../../components/Sections/VideoSection";
 import MainSection from "../../components/Sections/MainSection";
-import ProductImageList from "../../components/ImageList";
-import ImageSection from "../../components/Sections/ImageSection";
+import ProductImageList from "../../components/ProductImageList";
+
 import Hero from "./Hero";
 import EndSection from "../../components/Sections/EndSection";
 import BrandSection from "../../components/Sections/BrandSection";
