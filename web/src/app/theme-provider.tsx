@@ -5,11 +5,8 @@ import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2", // You can change this hex to your preferred primary color
+      main: "#1976d2",
     },
-  },
-  typography: {
-    fontFamily: "Roboto, sans-serif",
   },
 });
 

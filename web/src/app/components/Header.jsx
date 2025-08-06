@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import ToggleButton from "./Button";
+import LanguageButton from "./LanguageButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -79,84 +79,83 @@ const Header = () => {
         transition: "all 0.3s ease",
       }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+      <Toolbar>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            transition: "background-color 0.3s ease",
+          }}
+        >
+          {isScrolled ? (
+            <GobiAigarIcon size={200} />
+          ) : (
+            <GobiAigarIcon size={200} color={"#fff"} />
+          )}
+        </Box>
+
+        {isMobile ? (
+          <IconButton onClick={toggleMobileMenu} color="inherit">
+            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </IconButton>
+        ) : (
           <Box
             sx={{
               display: "flex",
+              gap: { lg: 5, md: 4, sm: 1.5 },
               alignItems: "center",
-              height: { xs: 30, sm: 40 },
-              width: { xs: 120, sm: 160, md: 200 },
-              transition: "background-color 0.3s ease",
+              width: "100%",
+              justifyContent: "flex-end",
             }}
           >
-            {
-              isScrolled?
-              <GobiAigarIcon size={200} />:
-              <GobiAigarIcon size={200} color={"#fff"}/>
+            {navLinks.map((link) => (
+              <Box
+                key={link.path}
+                sx={{
+                  position: "relative",
+                  cursor: "pointer",
+                  "&:after": {
+                    content: '""',
+                    position: "absolute",
+                    left: 0,
+                    bottom: -4,
+                    width: isActive(link.path) ? "100%" : 0,
+                    height: "0.125rem",
 
-            }
-          </Box>
-
-          {isMobile ? (
-            <IconButton onClick={toggleMobileMenu} color="inherit">
-              {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                gap: { lg: 5, md: 4, sm: 1.5 },
-                alignItems: "center",
-              }}
-            >
-              {navLinks.map((link) => (
-                <Box
-                  key={link.path}
-                  sx={{
-                    position: "relative",
-                    cursor: "pointer",
-                    "&:after": {
-                      content: '""',
-                      position: "absolute",
-                      left: 0,
-                      bottom: -4,
-                      width: isActive(link.path) ? "100%" : 0,
-                      height: "0.125rem",
-                     
-                     backgroundColor: isScrolled ? "black" : "white",
-                      transition: "width 0.3s ease",
-                    },
-                    "&:hover:after": {
-                      width: "100%",
-                    },
-                    display: "flex",
+                    backgroundColor: isScrolled ? "black" : "white",
+                    transition: "width 0.3s ease",
+                  },
+                  "&:hover:after": {
+                    width: "100%",
+                  },
+                  display: "flex",
+                }}
+              >
+                <Link
+                  href={`/${locale}/${link.path}`}
+                  style={{
+                    textDecoration: "none",
+                    color: isScrolled ? "#333" : "white",
                   }}
                 >
-                  <Link
-                    href={`/${locale}/${link.path}`}
-                    style={{
-                      textDecoration: "none",
-                      color: isScrolled ? "#333" : "white",
+                  <Typography
+                    component="span"
+                    variant="body1"
+                    sx={{
+                      fontSize: { sm: 10, md: 12, lg: 16 },
                     }}
                   >
-                    <Typography
-                      component="span"
-                      variant="body1"
-                      sx={{
-                        fontSize: { sm: 10, md: 12, lg: 16 },
-                      }}
-                    >
-                      {link.label}
-                    </Typography>
-                  </Link>
-                </Box>
-              ))}
-              <ToggleButton />
-            </Box>
-          )}
-        </Toolbar>
-      </Container>
+                    {link.label}
+                  </Typography>
+                </Link>
+              </Box>
+            ))}
+            <Toolbar>
+              <LanguageButton />
+            </Toolbar>
+          </Box>
+        )}
+      </Toolbar>
 
       <Drawer
         anchor="left"
@@ -187,9 +186,8 @@ const Header = () => {
                 </ListItemButton>
               </ListItem>
             ))}
-            <ListItem>
-              <ToggleButton />
-            </ListItem>
+
+            <LanguageButton />
           </List>
         </Box>
       </Drawer>

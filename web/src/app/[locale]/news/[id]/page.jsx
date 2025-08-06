@@ -1,16 +1,10 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  Container,
-  Typography,
-  Box,
-  CircularProgress,
-  Button,
-  Skeleton,
-  capitalize,
-} from "@mui/material";
+import { Container, Typography, Box, Button } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
+import Loading from "../../../components/keyComponents/Loading";
+import Description from "../../../components/keyComponents/Description";
 
 export default function NewsDetailPage() {
   const { id } = useParams();
@@ -33,43 +27,7 @@ export default function NewsDetailPage() {
   }, [id]);
 
   if (loading) {
-    return (
-      <Box sx={{ bgcolor: "white" }}>
-        <Box
-          sx={{
-            width: "100%",
-            minHeight: "60vh",
-            bgcolor: "grey.300",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Skeleton variant="rectangular" width="100%" height="100%" />
-        </Box>
-
-        <Container>
-          <Box sx={{ py: 8 }}>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              mb={2}
-            >
-              <Skeleton variant="text" width="30%" height={20} />
-              <Skeleton variant="text" width="40%" height={20} />
-            </Box>
-
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height={100}
-              sx={{ borderRadius: 2 }}
-            />
-          </Box>
-        </Container>
-      </Box>
-    );
+    return <Loading />;
   }
 
   if (!newsItem) {
@@ -153,24 +111,23 @@ export default function NewsDetailPage() {
               {t("source")}
               <span
                 style={{
-                  fontWeight: "bold",
-                  fontSize: "1.25rem",
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
                   marginLeft: 7,
-                  textTransform: "capitalize", // This mimics MUI's `capitalize` utility
+                  textTransform: "capitalize",
                 }}
               >
-                {lang === "mn" ? newsItem.mnjournalist : newsItem.enjournalist}
+                {lang === "mn"
+                  ? newsItem?.mnjournalist
+                  : newsItem?.enjournalist}
               </span>
             </Typography>
           </Box>
 
-          <Typography
-            variant="body1"
-            color="black"
-            sx={{ whiteSpace: "pre-line" }}
-          >
-            {lang === "mn" ? newsItem.mndescription : newsItem.endescription}
-          </Typography>
+          <Description
+            endescription={newsItem?.endescription}
+            mndescription={newsItem?.mndescription}
+          />
         </Box>
         <Box textAlign="end" sx={{ mb: "1.5rem" }}>
           <Button variant="outlined" onClick={() => router.back()}>

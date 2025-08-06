@@ -14,8 +14,8 @@ const Title = ({ mntitle, entitle, textAlign }) => {
 
           fontSize: {
             xs: "2rem",
-            md: "2.5rem",
-            lg: "3rem",
+            md: "2.25rem",
+            lg: "2.5rem",
           },
 
           maxHeight: {

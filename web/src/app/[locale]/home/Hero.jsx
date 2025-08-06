@@ -27,7 +27,7 @@ const Hero = ({ data }) => {
       sx={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "98vh",
         overflow: "hidden",
         display: "flex",
         alignItems: "center",

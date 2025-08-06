@@ -15,8 +15,8 @@ const BrandTitle = ({ entitle, mntitle }) => {
           textAlign: "center",
           fontSize: {
             xs: "1rem",
-            md: "1.2rem",
-            lg: "1.5rem",
+            md: "1.125rem",
+            lg: "1.2rem",
           },
 
           maxHeight: {

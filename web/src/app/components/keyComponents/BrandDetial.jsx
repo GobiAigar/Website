@@ -12,10 +12,6 @@ const BrandDetial = ({ datas }) => {
       sx={{
         textAlign: "center",
         width: "100%",
-        maxWidth: {
-          xs: "100%",
-        },
-        minHeight: { xs: 300, sm: 350, md: 400 },
         backgroundImage: `url(${datas?.image_url1})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -34,7 +30,6 @@ const BrandDetial = ({ datas }) => {
         <BrandDescription
           endescription={datas?.endescription}
           mndescription={datas?.mndescription}
-          textAlign="center"
         />
       </Box>
     </Box>

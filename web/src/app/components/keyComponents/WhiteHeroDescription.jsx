@@ -20,8 +20,7 @@ const WhiteDescription = ({ mndescription, endescription, textAlign }) => {
         marginTop: "1rem",
 
         fontSize: {
-          xs: "0.5",
-          md: "0.875rem",
+          xs: "0.875rem",
         },
       }}
     >

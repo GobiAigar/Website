@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, Typography, Skeleton, Divider } from "@mui/material";
-
+import { gsap } from "gsap";
 import { useLocale, useTranslations } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 
@@ -14,6 +14,11 @@ import EndSection from "../../components/Sections/EndSection";
 import BrandSection from "../../components/Sections/BrandSection";
 import NewMainSection from "../../components/newComponents/NewMainSection";
 import Title from "../../components/keyComponents/Title";
+import Loading from "../../components/keyComponents/Loading";
+import { ScrollTrigger } from "gsap/all";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
   const { website, loadingWebsite } = useAppData();
@@ -43,25 +48,35 @@ const Home = () => {
 
   const endSection = getSingleById(14);
 
+  const sectionsRefs = useRef([]);
+
+  useEffect(() => {
+    if (loadingWebsite) return;
+
+    sectionsRefs.current.forEach((section, i) => {
+      if (!section) return;
+
+      gsap.fromTo(
+        section,
+        { autoAlpha: 0, y: 20 },
+        {
+          duration: 1,
+          autoAlpha: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+          delay: i * 0.3, // stagger each by 0.3s delay
+        }
+      );
+    });
+  }, [loadingWebsite]);
+
   if (loadingWebsite) {
-    return (
-      <Box sx={{ bgcolor: "background.default", color: "text.primary" }}>
-        <Container
-          sx={{
-            position: "relative",
-            textAlign: "center",
-            height: "100vh",
-            width: "100vw",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Skeleton variant="rectangular" color="#333" />
-        </Container>
-      </Box>
-    );
+    return <Loading />;
   }
 
   return (
@@ -73,36 +88,39 @@ const Home = () => {
         flexDirection: "column",
       }}
     >
-      <Box>
-        <Hero data={hero} />
-      </Box>
+      <Hero data={hero} />
 
-      <Box id="history">
+      <Box id="history" ref={(el) => (sectionsRefs.current[1] = el)}>
         <VideoSection datas={section1} />
       </Box>
 
-      <NewMainSection data={section2} />
-      <Divider />
-
-      <BrandSection datas={valueGoalVision} />
-      <Divider />
-
-      <MainSection datas={section3} />
-
-      <Divider />
-
-      <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
-        <Box marginBottom={{ xs: 1.25, sm: 1.875, md: 2.5 }}>
-          <Title
-            mntitle={goatsHeader?.mntitle}
-            entitle={goatsHeader?.entitle}
-            textAlign={true}
-          />
-        </Box>
-        <ProductImageList sections={fourGoats} />
+      <Box ref={(el) => (sectionsRefs.current[2] = el)}>
+        <NewMainSection data={section2} />
       </Box>
       <Divider />
-      {/* <ImageSection datas={section4} /> */}
+
+      <Box ref={(el) => (sectionsRefs.current[3] = el)}>
+        <BrandSection datas={valueGoalVision} />
+      </Box>
+      <Divider />
+
+      <Box ref={(el) => (sectionsRefs.current[4] = el)}>
+        <MainSection datas={section3} />
+      </Box>
+
+      <Divider />
+      <Box ref={(el) => (sectionsRefs.current[5] = el)}>
+        <Container>
+          <Box marginBottom={{ xs: 1.25, sm: 1.875, md: 2.5 }}>
+            <Title
+              mntitle={goatsHeader?.mntitle}
+              entitle={goatsHeader?.entitle}
+              textAlign={true}
+            />
+          </Box>
+          <ProductImageList sections={fourGoats} />
+        </Container>
+      </Box>
 
       <EndSection datas={endSection} />
     </Box>

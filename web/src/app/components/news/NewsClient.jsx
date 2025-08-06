@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import NewsList from "./NewsList";
 import NewsSkeleton from "./NewsSkeleton";
 import PageHeaderNarrow from "../keyComponents/PageHeaderNarrow";
+import Loading from "../keyComponents/Loading";
 
 const NewsClient = () => {
   const [initialNews, setInitialNews] = useState(null);
@@ -38,7 +39,9 @@ const NewsClient = () => {
     fetchNews();
   }, [currentPage]);
 
-  if (loading) return <NewsSkeleton itemsPerPage={3} />;
+  if (loading) {
+    return <Loading />;
+  }
 
   if (!initialNews) {
     return (
@@ -56,7 +59,6 @@ const NewsClient = () => {
       </Box>
     );
   }
-
   return (
     <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
       <PageHeaderNarrow data={initialNews} />

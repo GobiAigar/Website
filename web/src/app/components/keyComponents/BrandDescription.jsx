@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import { useLocale } from "next-intl";
-import React from "react";
 
 const BrandDescription = ({ mndescription, endescription }) => {
   const lang = useLocale();
@@ -17,8 +16,7 @@ const BrandDescription = ({ mndescription, endescription }) => {
         },
 
         fontSize: {
-          xs: "0.85",
-          md: "1rem",
+          xs: "0.875",
         },
       }}
     >

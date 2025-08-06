@@ -27,7 +27,7 @@ const ImageSideCard = ({ data }) => {
 
           if (newProgress >= 100) {
             clearInterval(progressIntervalRef.current);
-            // Let react-slick handle the auto-advance
+
             return 0;
           }
           return newProgress;
@@ -65,6 +65,7 @@ const ImageSideCard = ({ data }) => {
       };
       return (
         <CardMedia
+          width="100%"
           key={`img-${i}`}
           component="img"
           src={src}
@@ -119,7 +120,8 @@ const ImageSideCard = ({ data }) => {
               >
                 <Box
                   sx={{
-                    height: "100%",
+                    minHeight: "400px",
+                    maxHeight: "700px",
                     backgroundColor: "white",
                     borderRadius: "2px",
                     transition: "width 0.1s ease-linear",

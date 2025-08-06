@@ -1,27 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Skeleton,
-  Dialog,
-  IconButton,
-} from "@mui/material";
-import { useLocale, useTranslations } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
+import { Box } from "@mui/material";
+import { useLocale, useTranslations } from "next-intl";
 import Test from "./Test";
-import TestHeader from "./TestHeader";
 import CerficateSection from "../../components/Sections/CerficateSection";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
+import Loading from "../../components/keyComponents/Loading";
 
 const Sustainability = () => {
-  const { sustainability, loading: rawLoading } = useAppData();
+  const { sustainability, loadingWebsite } = useAppData();
   const t = useTranslations("sustainability");
   const lang = useLocale();
+
+  if (loadingWebsite) {
+    return <Loading />;
+  }
 
   const data = sustainability || {};
   const mainInfo = data?.hero?.[0];
@@ -38,18 +32,18 @@ const Sustainability = () => {
       }}
     >
       <PageHeaderNarrow data={mainInfo} />
-
       <Test sustainabilityText={sustainabilityText} />
-      {certificates.map((data, index) => {
-        return (
-          <Box
-            sx={{ width: "100%", bgcolor: index % 2 ?? "grey.100" }}
-            key={data?.id}
-          >
-            <CerficateSection data={data} index={index} />
-          </Box>
-        );
-      })}
+
+      {certificates.map((data, index) => (
+        <Box
+          key={data?.id}
+          sx={{
+            width: "100%",
+          }}
+        >
+          <CerficateSection data={data} index={index} />
+        </Box>
+      ))}
     </Box>
   );
 };

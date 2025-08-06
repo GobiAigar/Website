@@ -60,13 +60,11 @@ const Contact = () => {
           setSnackbarOpen(true);
           resetForm();
         } else {
-          console.error("Failed to send message");
           setSnackbarMessage(t("error"));
           setSnackbarSeverity("error");
           setSnackbarOpen(true);
         }
       } catch (error) {
-        console.error("Error submitting form:", error);
         setSnackbarMessage(t("error"));
         setSnackbarSeverity("error");
         setSnackbarOpen(true);

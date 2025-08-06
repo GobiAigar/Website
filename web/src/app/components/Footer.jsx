@@ -7,7 +7,6 @@ import {
   Typography,
   Link as MuiLink,
 } from "@mui/material";
-import ScrollTopButton from "./ScrollTopButton";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { GobiAigarIcon } from "./Icon";
@@ -17,7 +16,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import XIcon from "@mui/icons-material/X";
 import { useAppData } from "../../context/AppDataProvider";
 import Link from "next/link";
-import { hover } from "framer-motion";
 
 const Footer = () => {
   const { company } = useAppData();
@@ -37,8 +35,8 @@ const Footer = () => {
         color: "white",
       }}
     >
-      <Container maxWidth="lg">
-        <Grid container spacing={4} alignItems="stretch">
+      <Container>
+        <Grid container justifyContent="space-between" spacing={6}>
           <Grid
             size={{ xs: 12, sm: 6, md: 4 }}
             sx={{ display: "flex", flexDirection: "column", gap: 1 }}

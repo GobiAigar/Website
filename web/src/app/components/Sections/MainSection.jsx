@@ -19,66 +19,73 @@ const MainSection = ({ datas }) => {
   ].filter(Boolean);
 
   return (
-    <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
-      {isMobile && (
-        <Box marginBottom={{ xs: "0.5rem", sm: "1.875rem", md: "2.5rem" }}>
-          <Title mntitle={datas?.mntitle} entitle={datas?.entitle} />
-        </Box>
-      )}
-      <Grid
-        container
-        spacing={3}
-        alignItems="flex-start"
-        sx={{ md: "relative" }}
-      >
-        {imageUrls.length > 0 && (
-          <Grid size={{ xs: 12, md: 6 }}>
-            <ImageSide data={imageUrls} />
-          </Grid>
+    <Container>
+      <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
+        {isMobile && (
+          <Box marginBottom={{ xs: "0.5rem", sm: "1.875rem", md: "2.5rem" }}>
+            <Title mntitle={datas?.mntitle} entitle={datas?.entitle} />
+          </Box>
         )}
         <Grid
-          size={{ xs: 12, md: 6 }}
-          sx={{
-            position: { md: "sticky" },
-            top: 64,
-            zIndex: 10,
-          }}
+          container
+          spacing={3}
+          alignItems="flex-start"
+          sx={{ md: "relative" }}
         >
           {imageUrls.length > 0 && (
-            <TextSide
-              mntitle={datas?.mntitle}
-              entitle={datas?.entitle}
-              endescription={datas?.endescription}
-              mndescription={datas?.mndescription}
-            />
+            <Grid size={{ xs: 12, md: 6 }}>
+              <ImageSide data={imageUrls} />
+            </Grid>
           )}
-        </Grid>
-
-        {imageUrls.length == 0 && (
           <Grid
-            size={{ xs: 12 }}
+            size={{ xs: 12, md: 6 }}
             sx={{
-              display: "flex",
-              gap: 4,
+              position: { md: "sticky" },
+              top: 64,
+              zIndex: 10,
             }}
           >
-            {!isMobile && (
-              <Grid size={{ xs: 12, sm: 6 }}>
-                <Box width={"80%"}>
-                  <Title mntitle={datas?.mntitle} entitle={datas?.entitle} />
-                </Box>
-              </Grid>
+            {imageUrls.length > 0 && (
+              <>
+                <TextSide
+                  entitle={datas?.entitle}
+                  mntitle={datas?.mntitle}
+                  reverse={imageUrls.length > 1}
+                />
+                <Description
+                  mndescription={datas?.mndescription}
+                  endescription={datas?.endescription}
+                />
+              </>
             )}
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <Description
-                mndescription={datas?.mndescription}
-                endescription={datas?.endescription}
-              />
-            </Grid>
           </Grid>
-        )}
-      </Grid>
-    </Box>
+
+          {imageUrls.length == 0 && (
+            <Grid
+              size={{ xs: 12 }}
+              sx={{
+                display: "flex",
+                gap: 4,
+              }}
+            >
+              {!isMobile && (
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <Box width={"80%"}>
+                    <Title mntitle={datas?.mntitle} entitle={datas?.entitle} />
+                  </Box>
+                </Grid>
+              )}
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <Description
+                  mndescription={datas?.mndescription}
+                  endescription={datas?.endescription}
+                />
+              </Grid>
+            </Grid>
+          )}
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 
