@@ -95,9 +95,11 @@ const Header = () => {
         </Box>
 
         {isMobile ? (
-          <IconButton onClick={toggleMobileMenu} color="inherit">
-            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
+          <Box sx={{ marginLeft: "auto" }}>
+            <IconButton onClick={toggleMobileMenu} color="inherit">
+              {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+          </Box>
         ) : (
           <Box
             sx={{
@@ -138,21 +140,12 @@ const Header = () => {
                     color: isScrolled ? "#333" : "white",
                   }}
                 >
-                  <Typography
-                    component="span"
-                    variant="body1"
-                    sx={{
-                      fontSize: { sm: 10, md: 12, lg: 16 },
-                    }}
-                  >
+                  <Typography component="span" variant="body1">
                     {link.label}
                   </Typography>
                 </Link>
               </Box>
             ))}
-            <Toolbar>
-              <LanguageButton />
-            </Toolbar>
           </Box>
         )}
       </Toolbar>

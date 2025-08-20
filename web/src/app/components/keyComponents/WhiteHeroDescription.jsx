@@ -18,10 +18,6 @@ const WhiteDescription = ({ mndescription, endescription, textAlign }) => {
           lg: "2rem",
         },
         marginTop: "1rem",
-
-        fontSize: {
-          xs: "0.875rem",
-        },
       }}
     >
       {lang === "mn" ? mndescription : endescription}

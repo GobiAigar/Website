@@ -1,11 +1,13 @@
 "use client";
 
-import { Box, Container, Skeleton, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import { useAppData } from "../../../context/AppDataProvider";
 import MainSection from "../../components/Sections/MainSection";
 import TradeSection from "../../components/Sections/TradeSection";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 import Loading from "../../components/keyComponents/Loading";
+import ProductImageSection from "./_ProductImageSection";
+import ProductMainSection from "./_ProductMainSection";
 
 const Product = () => {
   const { product, loadingWebsite } = useAppData();
@@ -27,13 +29,11 @@ const Product = () => {
       }}
     >
       <PageHeaderNarrow data={banner} />
-      <MainSection datas={data?.response[0]} />
-      {data?.response[0] && <Divider />}
-      <MainSection datas={data?.response[1]} />
-      {data?.response[2] && <Divider />}
+      <ProductMainSection data={data?.response[0]} />
+      <ProductImageSection data={data?.response[1]} />
+      <ProductMainSection data={data?.response[4]} />
+      <ProductImageSection data={data?.response[1]} />
       <TradeSection datas={tradeDatas} />
-      {data?.response[4] && <Divider />}
-      <MainSection datas={data?.response[4]} />
     </Box>
   );
 };

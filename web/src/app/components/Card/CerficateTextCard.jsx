@@ -1,16 +1,22 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Title from "../keyComponents/Title";
-import Description from "../keyComponents/Description";
+import { useLocale } from "next-intl";
 
 const CerficateTextCard = ({ data }) => {
+  const lang = useLocale();
   return (
     <Box sx={{ width: "100%" }}>
       <Title entitle={data?.entitle} mntitle={data?.mntitle} />
-
-      <Description
-        endescription={data?.endescription}
-        mndescription={data?.mndescription}
-      />
+      <Typography
+        color="#333"
+        variant="body1"
+        sx={{
+          whiteSpace: "pre-line",
+          lineHeight: "1.5",
+        }}
+      >
+        {lang === "mn" ? data?.mndescription : data?.endescription}
+      </Typography>
     </Box>
   );
 };

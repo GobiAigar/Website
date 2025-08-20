@@ -1,22 +1,20 @@
 "use client";
 
-import { Box, Container, Typography, Skeleton, Divider } from "@mui/material";
+import { Box, Container, Typography, Skeleton } from "@mui/material";
 import { gsap } from "gsap";
 import { useLocale, useTranslations } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 
 import VideoSection from "../../components/Sections/VideoSection";
-import MainSection from "../../components/Sections/MainSection";
 import ProductImageList from "../../components/ProductImageList";
-
-import Hero from "./Hero";
+import NewHero from "./_NewHero";
 import EndSection from "../../components/Sections/EndSection";
-import BrandSection from "../../components/Sections/BrandSection";
-import NewMainSection from "../../components/newComponents/NewMainSection";
 import Title from "../../components/keyComponents/Title";
 import Loading from "../../components/keyComponents/Loading";
 import { ScrollTrigger } from "gsap/all";
-import { useEffect, useRef } from "react";
+import GoldenDivider from "../../components/keyComponents/GoldenDivider";
+import Mvg from "./_Mvg.jsx";
+import MainSection from "./_MainSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,33 +46,6 @@ const Home = () => {
 
   const endSection = getSingleById(14);
 
-  const sectionsRefs = useRef([]);
-
-  useEffect(() => {
-    if (loadingWebsite) return;
-
-    sectionsRefs.current.forEach((section, i) => {
-      if (!section) return;
-
-      gsap.fromTo(
-        section,
-        { autoAlpha: 0, y: 20 },
-        {
-          duration: 1,
-          autoAlpha: 1,
-          y: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-          delay: i * 0.3, // stagger each by 0.3s delay
-        }
-      );
-    });
-  }, [loadingWebsite]);
-
   if (loadingWebsite) {
     return <Loading />;
   }
@@ -88,41 +59,46 @@ const Home = () => {
         flexDirection: "column",
       }}
     >
-      <Hero data={hero} />
+      <NewHero data={hero} />
 
-      <Box id="history" ref={(el) => (sectionsRefs.current[1] = el)}>
+      <Box
+        sx={{
+          backgroundImage: "url('/background.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "100%",
+        }}
+      >
         <VideoSection datas={section1} />
-      </Box>
 
-      <Box ref={(el) => (sectionsRefs.current[2] = el)}>
-        <NewMainSection data={section2} />
-      </Box>
-      <Divider />
-
-      <Box ref={(el) => (sectionsRefs.current[3] = el)}>
-        <BrandSection datas={valueGoalVision} />
-      </Box>
-      <Divider />
-
-      <Box ref={(el) => (sectionsRefs.current[4] = el)}>
-        <MainSection datas={section3} />
-      </Box>
-
-      <Divider />
-      <Box ref={(el) => (sectionsRefs.current[5] = el)}>
-        <Container>
-          <Box marginBottom={{ xs: 1.25, sm: 1.875, md: 2.5 }}>
+        <Box paddingY={{ xs: 6, sm: 8, md: 10 }}>
+          <Container>
             <Title
               mntitle={goatsHeader?.mntitle}
               entitle={goatsHeader?.entitle}
               textAlign={true}
             />
-          </Box>
-          <ProductImageList sections={fourGoats} />
-        </Container>
+            <GoldenDivider />
+            <ProductImageList sections={fourGoats} />
+          </Container>
+        </Box>
       </Box>
+      <Box
+        sx={{
+          backgroundImage: "url('/background.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
 
-      <EndSection datas={endSection} />
+          backgroundPosition: "center",
+          width: "100%",
+        }}
+      >
+        <Mvg datas={valueGoalVision} />
+        <MainSection data={section2} />
+        <MainSection data={section3} />
+        <EndSection datas={endSection} />
+      </Box>
     </Box>
   );
 };

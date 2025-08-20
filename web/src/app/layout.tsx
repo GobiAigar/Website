@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Roboto } from "next/font/google";
 import Script from "next/script";
 import Analytics from "./_analytics";
 import AppThemeProvider from "./theme-provider";
@@ -7,13 +6,10 @@ import AppThemeProvider from "./theme-provider";
 export const metadata = {
   title: "Gobi Aigar",
   description: "Cashmere",
-  icon: { url: "/IMG_3198.PNG", type: "image/png" },
+  icons: {
+    icon: "/smallLogo.png.png",
+  },
 };
-
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-});
 
 export default function RootLayout({
   children,
@@ -43,7 +39,7 @@ export default function RootLayout({
         />
         <link rel="icon" href="/smallLogo.png.png" />
       </head>
-      <body className={roboto.className}>
+      <body>
         <AppThemeProvider>{children}</AppThemeProvider>
         <Analytics />
       </body>

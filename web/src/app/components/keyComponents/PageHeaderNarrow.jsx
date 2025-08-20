@@ -1,8 +1,9 @@
 import { Box, Container, Typography } from "@mui/material";
-import { useLocale } from "next-intl";
+
+import WhiteHero from "./WhiteHeroTitle";
+import WhiteDescription from "./WhiteHeroDescription";
 
 const PageHeaderNarrow = ({ data }) => {
-  const lang = useLocale();
   return (
     <Box
       sx={{
@@ -36,34 +37,11 @@ const PageHeaderNarrow = ({ data }) => {
         }}
       >
         <Container maxWidth="sm">
-          <Typography
-            variant="h3"
-            sx={{
-              fontSize: {
-                xs: "1.5rem",
-                sm: "1.75rem",
-                md: "2rem",
-                color: "white",
-              },
-              fontWeight: "bold",
-            }}
-          >
-            {lang === "mn" ? data?.mntitle : data?.entitle}
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              mt: 2,
-              fontSize: {
-                xs: "0.8rem",
-                md: "1rem",
-                lg: "1.2rem",
-                color: "white",
-              },
-            }}
-          >
-            {lang === "mn" ? data?.mnsubtitle : data?.ensubtitle}
-          </Typography>
+          <WhiteHero entitle={data?.entitle} mntitle={data?.mntitle} />
+          <WhiteDescription
+            endescription={data?.ensubtitle}
+            mndescription={data?.mnsubtitle}
+          />
         </Container>
       </Box>
     </Box>

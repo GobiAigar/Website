@@ -1,27 +1,15 @@
 import { Typography } from "@mui/material";
 import { useLocale } from "next-intl";
 
-const NewTitle = ({ mntitle, entitle, textAlign }) => {
+const NewTitle = ({ mntitle, entitle }) => {
   const lang = useLocale();
   return (
     <>
       <Typography
-        variant="h2"
         sx={{
-          lineHeight: "150%",
-          color: "#fff",
-          textAlign: textAlign ? "center" : "left",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-          fontSize: {
-            xs: "2rem",
-            md: "2.5rem",
-            lg: "3rem",
-          },
-
-          maxHeight: {
-            xs: "none",
-            md: "37.5rem",
-          },
+          color: "#1F2A37",
+          fontWeight: "bold",
+          fontSize: { xs: "1.5rem", sm: "2rem", md: "3rem" },
         }}
       >
         {lang === "mn" ? mntitle : entitle}

@@ -1,26 +1,17 @@
 import { Typography } from "@mui/material";
 import { useLocale } from "next-intl";
 
-const Description = ({ mndescription, endescription, textAlign }) => {
+const Description = ({ mndescription, endescription }) => {
   const lang = useLocale();
 
   return (
     <Typography
+      color="#333"
       variant="body1"
       sx={{
-        textAlign: textAlign || "left",
+        textAlign: "center",
         whiteSpace: "pre-line",
-        color: "graphite",
         lineHeight: "1.5",
-        marginTop: "1rem",
-        marginBottom: {
-          xs: "1rem",
-          lg: "2rem",
-        },
-
-        fontSize: {
-          xs: "0.875rem",
-        },
       }}
     >
       {lang === "mn" ? mndescription : endescription}

@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useEffect, useState, useMemo } from "react";
-import { Box, CardMedia, CircularProgress } from "@mui/material";
+import { Box, CardMedia } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

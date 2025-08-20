@@ -16,12 +16,6 @@ const Text = ({ mndescription, endescription }) => {
           xs: "1rem",
           lg: "2rem",
         },
-
-        fontSize: {
-          xs: "0.875rem",
-          md: "1rem",
-          lg: "1.125rem",
-        },
       }}
     >
       {lang === "mn" ? mndescription : endescription}

@@ -199,6 +199,7 @@ const Contact = () => {
                             background: "#6E1221",
                             border: "2px solid #6E1221",
                             "&:hover": { backgroundColor: "#4a0d17" },
+                            color: "white",
                           }}
                         >
                           {t("submit")}

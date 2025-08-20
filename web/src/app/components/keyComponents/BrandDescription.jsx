@@ -7,16 +7,13 @@ const BrandDescription = ({ mndescription, endescription }) => {
     <Typography
       variant="body1"
       sx={{
+        color: "#333",
         textAlign: "center",
         whiteSpace: "pre-line",
         color: "graphite",
 
         marginBottom: {
           xs: "1rem",
-        },
-
-        fontSize: {
-          xs: "0.875",
         },
       }}
     >

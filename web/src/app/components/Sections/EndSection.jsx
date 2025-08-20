@@ -28,24 +28,20 @@ const EndSection = ({ datas }) => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+
           zIndex: 1,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          paddingLeft: "10%",
         }}
       >
-        <Container maxWidth="lg">
-          <Grid container spacing={6}>
-            <Grid size={{ xs: 12 }} color={"#fff"}>
-              <NewTitle
-                mntitle={datas?.mntitle}
-                entitle={datas?.entitle}
-                reverse={false}
-              />
-            </Grid>
-          </Grid>
-        </Container>
+        <Box width={{ xs: "75%", md: "50%", lg: "30%" }}>
+          <NewTitle
+            mntitle={datas?.mntitle}
+            entitle={datas?.entitle}
+            reverse={false}
+          />
+        </Box>
       </Box>
     </Box>
   );

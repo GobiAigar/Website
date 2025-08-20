@@ -2,9 +2,7 @@
 
 import { Grid, Box, useMediaQuery, useTheme, Container } from "@mui/material";
 
-import NewDescription from "./NewDescription";
 import Title from "../keyComponents/Title";
-import { useLocale } from "next-intl";
 import Description from "../keyComponents/Description";
 
 const NewMainSection = ({ data }) => {
@@ -12,7 +10,7 @@ const NewMainSection = ({ data }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Container>
-      <Box minHeight={"inherit"} padding={{ xs: 2, sm: 4, md: 6 }}>
+      <Box height={"700px"} padding={{ xs: 2, sm: 4, md: 6 }}>
         <Grid container spacing={2} alignItems="stretch" size={12}>
           {isMobile && (
             <Title mntitle={data?.mntitle} entitle={data?.entitle} />
@@ -24,7 +22,7 @@ const NewMainSection = ({ data }) => {
                 alt={`${data?.mntitle} Image`}
                 style={{
                   width: "100%",
-                  maxHeight: "700px",
+                  height: "400px",
                   objectFit: "cover",
                 }}
                 loading="lazy"

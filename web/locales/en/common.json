@@ -8,7 +8,7 @@
   },
   "home": {
     "title": "Welcome to homepage",
-    "seeProduct": "Product",
+    "seeProduct": "See Product",
     "ourHistory": "Our History",
     "White": "White",
     "Beige": "Beige",
@@ -62,16 +62,11 @@
     "CompanyName": "Company Name:",
     "location": "Address:",
     "connection": "Contact Information",
-    "email": "EMAIL",
+    "email": "Email",
     "phone": "Phone",
-    "faq": "FAQ",
-    "nav": {
-      "about": "About",
-      "product": "Product",
-      "sustainability": "Sustainability",
-      "partners": "Partners",
-      "contact": "Contact"
-    },
+    "faq": "Frequently Asked Questions",
+    "term": "Service Terms",
+
     "social": {
       "facebook": "Facebook",
       "twitter": "Twitter",

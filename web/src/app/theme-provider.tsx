@@ -3,9 +3,18 @@
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "Fraunces",
+  },
   palette: {
     primary: {
-      main: "#1976d2",
+      main: "#F5BF03",
+    },
+    secondary: {
+      main: "#333333",
+    },
+    background: {
+      default: "#ffffff",
     },
   },
 });

@@ -9,7 +9,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useTranslations } from "use-intl";
 import { useLocale } from "next-intl";
 import ImageSide from "../Card/ImageSideCard";
 import Description from "../keyComponents/Description";
@@ -17,7 +16,6 @@ import Title from "../keyComponents/Title";
 import ScrollStack, { ScrollStackItem } from "../gsap/ScrollStack";
 
 const BrandSection = ({ datas }) => {
-  const t = useTranslations("home");
   const lang = useLocale();
   const [selected, setSelected] = useState([
     datas[0]?.image_url1,

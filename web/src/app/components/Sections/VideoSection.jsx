@@ -1,31 +1,35 @@
 "use client";
 
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Divider, Grid } from "@mui/material";
 import Description from "../keyComponents/Description";
 import VideoSide from "../Card/VideoSideCard";
 import Title from "../keyComponents/Title";
+import GoldenDivider from "../keyComponents/GoldenDivider";
 
 const VideoSection = ({ datas }) => {
   const imageUrls = [datas?.image_url1].filter(Boolean);
 
   return (
-    <Container>
-      <Box padding={{ xs: 2, sm: 4, md: 6 }} width="100%">
-        <Grid container spacing={3} alignItems="center">
+    <Box>
+      <Box width="100%" id="aboutUs">
+        <Container>
           <Grid
             size={12}
             sx={{
-              top: 64,
-              backgroundColor: "white",
+              top: 80,
               zIndex: 10,
             }}
           >
-            <Box width={"80%"} textAlign={"center"} margin="auto">
-              <Title
-                mntitle={datas?.mntitle}
-                entitle={datas?.entitle}
-                textAlign={"center"}
-              />
+            <Box
+              width={"60%"}
+              textAlign={"center"}
+              margin="auto"
+              paddingY={{ xs: 6, sm: 8, md: 10 }}
+            >
+              <Title mntitle={datas?.mntitle} entitle={datas?.entitle} />
+
+              <GoldenDivider />
+
               <Description
                 mndescription={datas?.mndescription}
                 endescription={datas?.endescription}
@@ -33,12 +37,11 @@ const VideoSection = ({ datas }) => {
               />
             </Box>
           </Grid>
-          <Grid size={12}>
-            <VideoSide data={imageUrls} />
-          </Grid>
-        </Grid>
+        </Container>
+
+        <VideoSide data={imageUrls} />
       </Box>
-    </Container>
+    </Box>
   );
 };
 

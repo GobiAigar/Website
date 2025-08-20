@@ -10,8 +10,6 @@ import Loading from "../../components/keyComponents/Loading";
 
 const Sustainability = () => {
   const { sustainability, loadingWebsite } = useAppData();
-  const t = useTranslations("sustainability");
-  const lang = useLocale();
 
   if (loadingWebsite) {
     return <Loading />;
@@ -33,17 +31,13 @@ const Sustainability = () => {
     >
       <PageHeaderNarrow data={mainInfo} />
       <Test sustainabilityText={sustainabilityText} />
-
-      {certificates.map((data, index) => (
-        <Box
-          key={data?.id}
-          sx={{
-            width: "100%",
-          }}
-        >
-          <CerficateSection data={data} index={index} />
-        </Box>
-      ))}
+      <Box>
+        {certificates.map((data, index) => (
+          <Box key={data?.id}>
+            <CerficateSection data={data} index={index} />
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };

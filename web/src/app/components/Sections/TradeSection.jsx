@@ -173,10 +173,23 @@ const TradeSection = ({ datas }) => {
                 },
               }}
             >
-              <Description
-                mndescription={selectedData?.mndescription}
-                endescription={selectedData?.endescription}
-              />
+              <Typography
+                color="#333"
+                variant="body1"
+                sx={{
+                  whiteSpace: "pre-line",
+                  lineHeight: "1.5",
+                  marginTop: "1rem",
+                  marginBottom: {
+                    xs: "1rem",
+                    lg: "2rem",
+                  },
+                }}
+              >
+                {lang === "mn"
+                  ? selectedData?.mndescription
+                  : selectedData?.endescription}
+              </Typography>
             </Box>
           </Grid>
         </Grid>
