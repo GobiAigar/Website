@@ -80,19 +80,18 @@ const Mvg = ({ datas }) => {
         sx={{
           height: { xs: "400px", sm: "350px", md: "300px" },
           paddingY: 7.5,
+          position: "relative",
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
           gap: 2,
-          color: "#374151",
-          position: "relative",
-          background: `
-            radial-gradient(circle at top left, #F3EFDE 0%, transparent 30%),
-            radial-gradient(circle at bottom right, #F3EFDE 0%, transparent 40%),
-            #F3F4F6
-          `,
+          backgroundImage: "url('/slogan.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "100%",
           overflow: "hidden",
         }}
       >

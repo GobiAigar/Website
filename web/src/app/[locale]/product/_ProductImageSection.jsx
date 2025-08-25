@@ -12,8 +12,6 @@ import {
 import { useLocale } from "next-intl";
 
 const ProductImageSection = ({ data }) => {
-  console.log(data);
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const lang = useLocale();
@@ -30,7 +28,7 @@ const ProductImageSection = ({ data }) => {
             justifyContent: { sx: "center", md: "end" },
           }}
         >
-          <Box height={400} width={"100%"}>
+          <Box height={500} width={"100%"}>
             <img
               src={data?.image_url1}
               alt={`${data?.mntitle} Image`}
@@ -53,7 +51,7 @@ const ProductImageSection = ({ data }) => {
             justifyContent: { sx: "center", md: "start" },
           }}
         >
-          <Box height={400} width={"100%"}>
+          <Box height={500} width={"100%"}>
             <img
               src={data?.image_url2}
               alt={`${data?.mntitle} Image`}

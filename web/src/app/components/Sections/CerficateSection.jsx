@@ -8,8 +8,6 @@ import { useLocale } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const CerficateSection = ({ data, index }) => {
   const [reverse, setReverse] = useState(false);
   const lang = useLocale();
@@ -20,14 +18,15 @@ const CerficateSection = ({ data, index }) => {
         <Grid
           container
           paddingY={8}
+          gap={1}
           direction={reverse ? "row-reverse" : "row"}
           sx={{ xs: { position: "static" }, md: { position: "relative" } }}
         >
-          <Grid item size={{ xs: 12, md: 6 }}>
+          <Grid item size={{ xs: 12, md: 5.5 }}>
             <CardMedia
               component="img"
               src={lang === "mn" ? data.image_url2 : data.image_url1}
-              alt={data}
+              alt={data?.entitle}
               sx={{
                 borderRadius: "none",
                 border: "1px solid",
@@ -41,7 +40,7 @@ const CerficateSection = ({ data, index }) => {
           </Grid>
           <Grid
             item
-            size={{ xs: 12, md: 6 }}
+            size={{ xs: 12, md: 5.5 }}
             sx={{
               position: { md: "sticky" },
               top: 64,

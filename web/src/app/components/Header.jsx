@@ -74,81 +74,90 @@ const Header = () => {
       position="fixed"
       elevation={isScrolled ? 4 : 0}
       sx={{
-        backgroundColor: isScrolled ? "#fff" : "rgba(0,0,0,0)",
+        // backgroundColor: isScrolled ? "#fff" : "rgba(0,0,0,0)",
+        backgroundColor: "#fff",
         backdropFilter: isScrolled ? "blur(6px)" : "none",
         transition: "all 0.3s ease",
       }}
     >
-      <Toolbar>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            transition: "background-color 0.3s ease",
-          }}
-        >
-          {isScrolled ? (
-            <GobiAigarIcon size={200} />
-          ) : (
-            <GobiAigarIcon size={200} color={"#fff"} />
-          )}
-        </Box>
-
-        {isMobile ? (
-          <Box sx={{ marginLeft: "auto" }}>
-            <IconButton onClick={toggleMobileMenu} color="inherit">
-              {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
-          </Box>
-        ) : (
+      <Container>
+        <Toolbar>
           <Box
             sx={{
               display: "flex",
-              gap: { lg: 5, md: 4, sm: 1.5 },
               alignItems: "center",
-              width: "100%",
-              justifyContent: "flex-end",
+              transition: "background-color 0.3s ease",
             }}
           >
-            {navLinks.map((link) => (
-              <Box
-                key={link.path}
-                sx={{
-                  position: "relative",
-                  cursor: "pointer",
-                  "&:after": {
-                    content: '""',
-                    position: "absolute",
-                    left: 0,
-                    bottom: -4,
-                    width: isActive(link.path) ? "100%" : 0,
-                    height: "0.125rem",
+            {isScrolled ? (
+              <Link href={"/"}>
+                <GobiAigarIcon size={200} />
+              </Link>
+            ) : (
+              <Link href={"/"}>
+                <GobiAigarIcon size={200} />
+                {/* <GobiAigarIcon size={200} color={"#fff"} /> */}
+              </Link>
+            )}
+          </Box>
 
-                    backgroundColor: isScrolled ? "black" : "white",
-                    transition: "width 0.3s ease",
-                  },
-                  "&:hover:after": {
-                    width: "100%",
-                  },
-                  display: "flex",
-                }}
-              >
-                <Link
-                  href={`/${locale}/${link.path}`}
-                  style={{
-                    textDecoration: "none",
-                    color: isScrolled ? "#333" : "white",
+          {isMobile ? (
+            <Box sx={{ marginLeft: "auto" }}>
+              <IconButton onClick={toggleMobileMenu} color="inherit">
+                {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+              </IconButton>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                gap: { lg: 5, md: 4, sm: 1.5 },
+                alignItems: "center",
+                width: "100%",
+                justifyContent: "flex-end",
+              }}
+            >
+              {navLinks.map((link) => (
+                <Box
+                  key={link.path}
+                  sx={{
+                    position: "relative",
+                    cursor: "pointer",
+                    "&:after": {
+                      content: '""',
+                      position: "absolute",
+                      left: 0,
+                      bottom: -4,
+                      width: isActive(link.path) ? "100%" : 0,
+                      height: "0.125rem",
+
+                      backgroundColor: isScrolled ? "black" : "white",
+                      transition: "width 0.3s ease",
+                    },
+                    "&:hover:after": {
+                      width: "100%",
+                    },
+                    display: "flex",
                   }}
                 >
-                  <Typography component="span" variant="body1">
-                    {link.label}
-                  </Typography>
-                </Link>
-              </Box>
-            ))}
-          </Box>
-        )}
-      </Toolbar>
+                  <Link
+                    href={`/${locale}/${link.path}`}
+                    style={{
+                      textDecoration: "none",
+                      // color: isScrolled ? "#333" : "white",
+                      color: "#333",
+                    }}
+                  >
+                    <Typography component="span" variant="body1">
+                      {link.label}
+                    </Typography>
+                  </Link>
+                </Box>
+              ))}
+            </Box>
+          )}
+        </Toolbar>
+      </Container>
 
       <Drawer
         anchor="left"

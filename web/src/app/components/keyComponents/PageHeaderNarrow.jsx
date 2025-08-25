@@ -8,7 +8,7 @@ const PageHeaderNarrow = ({ data }) => {
     <Box
       sx={{
         width: "100%",
-        height: { xs: "25rem" },
+        height: { xs: "300px", sm: "400px", md: "600px" },
         backgroundImage: `url(${data?.image_url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -20,9 +20,6 @@ const PageHeaderNarrow = ({ data }) => {
         gap: 8,
       }}
     >
-      <Box
-        sx={{ position: "absolute", inset: 0, bgcolor: "rgba(0,0,0,0.5)" }}
-      />
       <Box
         sx={{
           display: "flex",

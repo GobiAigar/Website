@@ -82,9 +82,11 @@ const Contact = () => {
   return (
     <Box
       sx={{
+        position: "relative",
+        top: 64,
         overflow: "hidden",
         bgcolor: "background.default",
-        minHeight: "",
+        minHeight: "90vh",
       }}
     >
       <PageHeaderNarrow data={data} />

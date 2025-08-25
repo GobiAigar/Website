@@ -46,11 +46,15 @@ const NewsClient = () => {
   if (!initialNews) {
     return (
       <Box
-        minHeight="100vh"
+        minHeight="90vh"
         display="flex"
         flexDirection="column"
         alignItems="center"
         backgroundColor="#ddd"
+        sx={{
+          position: "relative",
+          top: 64,
+        }}
       >
         <PageHeaderNarrow data={initialNews} />
         <Box display="flex" justifyContent="center">
@@ -60,7 +64,14 @@ const NewsClient = () => {
     );
   }
   return (
-    <Box sx={{ overflow: "hidden", bgcolor: "background.default" }}>
+    <Box
+      sx={{
+        overflow: "hidden",
+        bgcolor: "background.default",
+        position: "relative",
+        top: 64,
+      }}
+    >
       <PageHeaderNarrow data={initialNews} />
       <Container>
         <NewsList news={news} />

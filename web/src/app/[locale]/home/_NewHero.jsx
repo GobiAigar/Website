@@ -115,7 +115,7 @@ const NewHero = ({ data }) => {
       ref={heroRef}
       sx={{
         position: "relative",
-        width: "100vw",
+        width: "100%",
         height: viewportHeight, // Use dynamic viewport height
         minHeight: "100vh", // Fallback for older browsers
         overflow: "hidden",
@@ -226,76 +226,6 @@ const NewHero = ({ data }) => {
             >
               {t("seeProduct")}
             </Button>
-          </Box>
-        </Box>
-      </Box>
-
-      {/* Fixed Scroll Button with better positioning */}
-      <Box
-        ref={scrollButtonRef}
-        sx={{
-          position: "absolute",
-          bottom: { xs: "20px", sm: "30px", md: "40px" }, // Responsive bottom spacing
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 10,
-        }}
-      >
-        <Box
-          component="button"
-          onClick={handleScrollToContent}
-          sx={{
-            width: { xs: "45px", md: "50px" },
-            height: { xs: "45px", md: "50px" },
-            borderRadius: "50%",
-            backgroundColor: "rgba(255, 255, 255, 0.9)",
-            border: "2px solid rgba(255, 255, 255, 0.8)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "all 0.3s ease",
-            backdropFilter: "blur(10px)",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-            "&:hover": {
-              backgroundColor: "rgba(255, 255, 255, 1)",
-              transform: "scale(1.1)",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-            },
-            "&:active": {
-              transform: "scale(0.95)",
-            },
-          }}
-          aria-label="Scroll to content"
-        >
-          <Box
-            component="svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            sx={{
-              animation: "bounce 2s infinite",
-              "@keyframes bounce": {
-                "0%, 20%, 50%, 80%, 100%": {
-                  transform: "translateY(0)",
-                },
-                "40%": {
-                  transform: "translateY(-5px)",
-                },
-                "60%": {
-                  transform: "translateY(-3px)",
-                },
-              },
-            }}
-          >
-            <path
-              d="M7 10L12 15L17 10"
-              stroke="#333"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
           </Box>
         </Box>
       </Box>

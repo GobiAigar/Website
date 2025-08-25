@@ -42,7 +42,6 @@ const Home = () => {
   const section3 = getSingleById(6);
   const goatsHeader = getSingleById(7);
   const fourGoats = getMultibyId([8, 9, 10, 11]);
-  const section4 = getSingleById(12);
 
   const endSection = getSingleById(14);
 
@@ -53,6 +52,9 @@ const Home = () => {
   return (
     <Box
       sx={{
+        position: "relative",
+        top: 64,
+        width: "100%",
         bgcolor: "background.default",
         color: "text.primary",
         display: "flex",
@@ -89,7 +91,6 @@ const Home = () => {
           backgroundImage: "url('/background.png')",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-
           backgroundPosition: "center",
           width: "100%",
         }}

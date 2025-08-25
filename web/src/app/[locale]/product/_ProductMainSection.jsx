@@ -12,8 +12,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Title from "../../components/keyComponents/Title";
 import { useLocale } from "next-intl";
+import { ScrollTrigger } from "gsap/all";
 
 const ProductMainSection = ({ data }) => {
+  gsap.registerPlugin(ScrollTrigger);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const lang = useLocale();
@@ -64,7 +66,6 @@ const ProductMainSection = ({ data }) => {
         <Grid container gap={2}>
           <Grid
             ref={imgRef}
-            item
             size={{ xs: 12, md: 5.5 }}
             sx={{
               opacity: 0,
@@ -78,7 +79,6 @@ const ProductMainSection = ({ data }) => {
           </Grid>
 
           <Grid
-            item
             size={{ xs: 12, md: 5.5 }}
             sx={{
               opacity: 0,

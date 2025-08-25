@@ -2,11 +2,12 @@
 
 import { useAppData } from "../../../context/AppDataProvider";
 import { Box } from "@mui/material";
-import { useLocale, useTranslations } from "next-intl";
-import Test from "./Test";
+import Test from "./_Test";
 import CerficateSection from "../../components/Sections/CerficateSection";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 import Loading from "../../components/keyComponents/Loading";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Sustainability = () => {
   const { sustainability, loadingWebsite } = useAppData();
@@ -23,21 +24,27 @@ const Sustainability = () => {
   return (
     <Box
       sx={{
-        bgcolor: "background.default",
-        color: "text.primary",
+        backgroundImage: "url(./background.png)",
+        backgroundImage: "url('/background.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        width: "100%",
+        position: "relative",
+        top: 64,
         display: "flex",
         flexDirection: "column",
       }}
     >
       <PageHeaderNarrow data={mainInfo} />
-      <Test sustainabilityText={sustainabilityText} />
       <Box>
-        {certificates.map((data, index) => (
-          <Box key={data?.id}>
-            <CerficateSection data={data} index={index} />
-          </Box>
-        ))}
+        <Test sustainabilityText={sustainabilityText} />
       </Box>
+      {/* {certificates.map((data, index) => (
+        <Box key={data?.id}>
+          <CerficateSection data={data} index={index} />
+        </Box>
+      ))} */}
     </Box>
   );
 };

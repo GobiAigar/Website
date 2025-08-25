@@ -46,7 +46,14 @@ export default function NewsDetailPage() {
   }
 
   return (
-    <Box sx={{ bgcolor: "white" }}>
+    <Box
+      sx={{
+        bgcolor: "white",
+        minHeight: "90vh",
+        position: "relative",
+        top: 64,
+      }}
+    >
       <Box
         sx={{
           position: "relative",
@@ -123,11 +130,22 @@ export default function NewsDetailPage() {
               </span>
             </Typography>
           </Box>
-
-          <Description
-            endescription={newsItem?.endescription}
-            mndescription={newsItem?.mndescription}
-          />
+          <Typography
+            color="#333"
+            variant="body1"
+            sx={{
+              whiteSpace: "pre-line",
+              lineHeight: "1.5",
+              marginTop: "1rem",
+              marginBottom: {
+                xs: "1rem",
+                lg: "2rem",
+              },
+              textAlign: "justify",
+            }}
+          >
+            {lang === "mn" ? newsItem?.mndescription : newsItem?.endescription}
+          </Typography>
         </Box>
         <Box textAlign="end" sx={{ mb: "1.5rem" }}>
           <Button variant="outlined" onClick={() => router.back()}>

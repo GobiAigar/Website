@@ -2,7 +2,6 @@
 
 import { Box } from "@mui/material";
 import { useAppData } from "../../../context/AppDataProvider";
-import MainSection from "../../components/Sections/MainSection";
 import TradeSection from "../../components/Sections/TradeSection";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 import Loading from "../../components/keyComponents/Loading";
@@ -26,14 +25,26 @@ const Product = () => {
         color: "text.primary",
         display: "flex",
         flexDirection: "column",
+        position: "relative",
+        top: 64,
       }}
     >
       <PageHeaderNarrow data={banner} />
-      <ProductMainSection data={data?.response[0]} />
-      <ProductImageSection data={data?.response[1]} />
-      <ProductMainSection data={data?.response[4]} />
-      <ProductImageSection data={data?.response[1]} />
-      <TradeSection datas={tradeDatas} />
+      <Box
+        sx={{
+          backgroundImage: "url('/background.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "100%",
+        }}
+      >
+        <ProductMainSection data={data?.response[0]} />
+        <ProductImageSection data={data?.response[0]} />
+        <ProductMainSection data={data?.response[1]} />
+        <ProductImageSection data={data?.response[1]} />
+        <TradeSection datas={tradeDatas} />
+      </Box>
     </Box>
   );
 };

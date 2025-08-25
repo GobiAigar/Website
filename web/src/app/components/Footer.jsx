@@ -35,76 +35,81 @@ const Footer = () => {
         py: { xs: "2.5rem" },
         px: { xs: 2.5, sm: "auto" },
         color: "white",
-        display: { xs: "flex" },
-        flexDirection: { xs: "column", sm: "row" },
-        alignItems: "center",
-        gap: 2,
       }}
     >
-      <Box
+      <Container
         sx={{
-          width: "100%",
           display: { xs: "flex" },
-          flexDirection: { xs: "column" },
-
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: "center",
           gap: 2,
         }}
       >
-        <Link variant="body2" href={"product"}>
-          {t("term")}
-        </Link>
+        <Box
+          sx={{
+            width: "100%",
+            display: { xs: "flex" },
+            flexDirection: { xs: "column" },
 
-        <Link variant="body2" href={"faq"}>
-          {t("faq")}
-        </Link>
-      </Box>
+            gap: 2,
+          }}
+        >
+          <Link variant="body2" href={"product/#tradeTerm"}>
+            {t("term")}
+          </Link>
 
-      <Box
-        sx={{
-          width: "100%",
-          display: { xs: "flex" },
-          flexDirection: { xs: "column" },
-
-          gap: 2,
-        }}
-      >
-        <Typography type="button" variant="body2">
-          {t("email")}: {getValue(4)}
-        </Typography>
-
-        <Link variant="body2" type="button" href={`tel:${getValue(5)}`}>
-          {t("phone")}: {getValue(3)}
-        </Link>
-      </Box>
-      <Box
-        sx={{
-          width: "100%",
-          display: { xs: "flex" },
-          flexDirection: { xs: "column" },
-          gap: 2,
-        }}
-      >
-        <Box display={"flex"} gap={2}>
-          <MuiLink href={getValue(5)} target="_blank" rel="noopener">
-            <FacebookIcon sx={{ color: "white" }} />
-          </MuiLink>
-
-          <MuiLink href={getValue(6)} target="_blank" rel="noopener">
-            <LinkedInIcon sx={{ color: "white" }} />
-          </MuiLink>
-
-          <MuiLink href={getValue(7)} target="_blank" rel="noopener">
-            <InstagramIcon sx={{ color: "white" }} />
-          </MuiLink>
-
-          <MuiLink href={getValue(8)} target="_blank" rel="noopener">
-            <XIcon sx={{ color: "white" }} />
-          </MuiLink>
+          <Link variant="body2" href={"faq"}>
+            {t("faq")}
+          </Link>
         </Box>
-        <Typography variant="body2" color="white">
-          {t("copy")} {new Date().getFullYear()} {t("copyright")}
-        </Typography>
-      </Box>
+
+        <Box
+          sx={{
+            width: "100%",
+            display: { xs: "flex" },
+            flexDirection: { xs: "column" },
+
+            gap: 2,
+          }}
+        >
+          <Typography type="button" variant="body2">
+            {t("email")}: {getValue(4)}
+          </Typography>
+
+          <Link variant="body2" type="button" href={`tel:${getValue(5)}`}>
+            {t("phone")}: {getValue(3)}
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: { xs: "flex" },
+            flexDirection: { xs: "column" },
+            gap: 2,
+          }}
+        >
+          <Box display={"flex"} gap={2}>
+            <MuiLink href={getValue(5)} target="_blank" rel="noopener">
+              <FacebookIcon sx={{ color: "white" }} />
+            </MuiLink>
+
+            <MuiLink href={getValue(6)} target="_blank" rel="noopener">
+              <LinkedInIcon sx={{ color: "white" }} />
+            </MuiLink>
+
+            <MuiLink href={getValue(7)} target="_blank" rel="noopener">
+              <InstagramIcon sx={{ color: "white" }} />
+            </MuiLink>
+
+            <MuiLink href={getValue(8)} target="_blank" rel="noopener">
+              <XIcon sx={{ color: "white" }} />
+            </MuiLink>
+          </Box>
+          <Typography variant="body2" color="white">
+            {t("copy")} {new Date().getFullYear()} {t("copyright")}
+          </Typography>
+        </Box>
+      </Container>
     </Box>
   );
 };

@@ -12,7 +12,6 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import { GlobeIcon, HomeHashtagIcon } from "../Icon";
-import Description from "../keyComponents/Description";
 
 const TradeSection = ({ datas }) => {
   const [selectedId, setSelectedId] = useState(3);
@@ -53,7 +52,7 @@ const TradeSection = ({ datas }) => {
   ]);
 
   return (
-    <Container>
+    <Container id={"tradeTerm"}>
       <Box padding={{ xs: 2, sm: 4, md: 6 }}>
         <Grid
           container
@@ -100,10 +99,10 @@ const TradeSection = ({ datas }) => {
                     justifyContent: "center",
                     gap: 1,
                     fontSize: {
-                      xs: "0.575rem",
-                      sm: "0.8rem",
-                      md: "0.85rem",
-                      lg: "1rem",
+                      xs: "1rem",
+                      sm: "1.2rem",
+                      md: "1.25rem",
+                      lg: "1.5rem",
                     },
                     fontWeight: 500,
                     px: 2,
@@ -135,10 +134,10 @@ const TradeSection = ({ datas }) => {
                     justifyContent: "center",
                     gap: 1,
                     fontSize: {
-                      xs: "0.575rem",
-                      sm: "0.8rem",
-                      md: "0.85rem",
-                      lg: "1rem",
+                      xs: "1rem",
+                      sm: "1.2rem",
+                      md: "1.25rem",
+                      lg: "1.5rem",
                     },
                     fontWeight: 500,
 
