@@ -1,43 +1,41 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
-import {
-  Box,
-  FormControl,
-  MenuItem,
-  Select,
-  Toolbar,
-  Tooltip,
-} from "@mui/material";
+import { Box, FormControl, MenuItem, Select } from "@mui/material";
 
 const LanguageButton = () => {
-  const pathname = usePathname();
-  const currentLocale = useLocale();
+	const pathname = usePathname();
+	const router = useRouter();
+	const locale = useLocale();
 
-  const toggleLocale = () => {
-    const newLocale = currentLocale === "mn" ? "en" : "mn";
-    const regex = /^\/(en|mn)(\/|$)/;
-    const pathWithoutLocale = pathname.replace(regex, "/");
-    const newPath = `/${newLocale}${pathWithoutLocale}`;
-    window.location.assign(newPath);
-  };
+	const handleChange = (event) => {
+		const newLocale = event.target.value;
+		const regex = /^\/(en|mn)(\/|$)/;
+		const pathWithoutLocale = pathname.replace(regex, "/");
+		router.push(`/${newLocale}${pathWithoutLocale}`); // page reload хийхгүй
+	};
 
-  return (
-    <Box>
-      <FormControl sx={{ width: "fit" }} size="small" color="white">
-        <Select
-          color="white"
-          defaultValue="MN"
-          value={currentLocale}
-          onChange={toggleLocale}
-        >
-          <MenuItem value="mn">MN</MenuItem>
-          <MenuItem value="en">EN</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
+	return (
+		<Box>
+			<FormControl size="small" sx={{ minWidth: 100 }}>
+				<Select
+					value={locale}
+					onChange={handleChange}
+					autoWidth
+					MenuProps={{
+						disableScrollLock: true,
+						disablePortal: true,
+						keepMounted: true, // DOM-д байлгана, overlay хэвээрээ
+						PaperProps: { sx: { maxHeight: 200 } } // mobile-д dropdown өндөр
+					}}
+				>
+					<MenuItem value="mn">Mongolia</MenuItem>
+					<MenuItem value="en">English</MenuItem>
+				</Select>
+			</FormControl>
+		</Box>
+	);
 };
 
 export default LanguageButton;
