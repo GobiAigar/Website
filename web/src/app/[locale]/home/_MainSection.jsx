@@ -62,7 +62,7 @@ const MainSection = ({ data }) => {
   return (
     <Box marginY={{ xs: "7.5rem", md: "15rem" }}>
       <Container>
-        <Grid container gap={3}>
+        <Grid container gap={3} justifyContent={"space-between"}>
           <Grid
             ref={imgRef}
             item
@@ -93,7 +93,7 @@ const MainSection = ({ data }) => {
 
           <Grid
             item
-            size={{ xs: 12, md: 5.5 }}
+            size={{ xs: 12, md: 6 }}
             sx={{
               display: "flex",
               flexDirection: "column",

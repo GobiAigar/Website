@@ -11,9 +11,6 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
-const truncateChars = (text, limit) =>
-  text.length > limit ? text.slice(0, limit) + "..." : text;
-
 const NewsList = ({ news }) => {
   const lang = useLocale();
   const t = useTranslations("news");
@@ -21,10 +18,11 @@ const NewsList = ({ news }) => {
 
   return (
     <Grid container spacing={3} sx={{ py: 8, px: 2 }}>
-      {news.map((item) => (
+      {news?.slice(1).map((item) => (
         <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
           <Card
             sx={{
+              borderRadius: "0",
               position: "relative",
               boxShadow: 4,
               overflow: "hidden",
@@ -48,8 +46,9 @@ const NewsList = ({ news }) => {
                 sx={{
                   height: "100%",
                   width: "100%",
-                  objectFit: "cover",
+                  objectFit: "fit",
                   transition: "transform 0.5s ease",
+                  borderRadius: "0",
                 }}
                 loading="lazy"
               />
@@ -85,6 +84,7 @@ const NewsList = ({ news }) => {
                   bottom: 0,
                   width: "100%",
                   bgcolor: "rgba(255, 255, 255, 0.95)",
+                  height: "88px",
                   px: 2,
                   py: 1.5,
                   zIndex: 3,
