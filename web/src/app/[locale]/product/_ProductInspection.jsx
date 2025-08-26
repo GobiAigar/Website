@@ -55,37 +55,63 @@ const ProductInspection = ({ data }) => {
             spacing={3}
           >
             <Grid size={{ xs: 12, sm: 5.8, md: 2.9 }}>
-              <Typography variant="h3">+40 MM</Typography>
-              <Typography variant="body1">
-                {lang === "mn" ? "Урт" : "Length"}
-              </Typography>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"100%"}
+              >
+                <Typography variant="h3">+40 MM</Typography>
+                <Typography variant="body1">
+                  {lang === "mn" ? "Урт" : "Length"}
+                </Typography>
+              </Box>
             </Grid>
-            <Grid size={{ xs: 12 }}>
-              <Divider orientation={{ xs: "horziontal", md: "vertical" }} />
-            </Grid>
+
             <Grid size={{ xs: 12, sm: 5.8, md: 2.9 }}>
-              <Typography variant="h3">-16.8 МКМ</Typography>
-              <Typography variant="body1">
-                {lang === "mn" ? "Микрон" : "Micron"}
-              </Typography>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"100%"}
+              >
+                <Typography variant="h3">-16.8 МКМ</Typography>
+                <Typography variant="body1">
+                  {lang === "mn" ? "Микрон" : "Micron"}
+                </Typography>
+              </Box>
             </Grid>
-            <Grid size={{ xs: 12 }}>
-              <Divider orientation={{ md: "vertical" }} />
-            </Grid>
+
             <Grid size={{ xs: 12, sm: 5.8, md: 2.9 }}>
-              <Typography variant="h3">-0.2%</Typography>
-              <Typography variant="body1">
-                {lang === "mn" ? "Хаг" : "Dandruff"}
-              </Typography>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"100%"}
+              >
+                <Typography variant="h3">-0.2%</Typography>
+                <Typography variant="body1">
+                  {lang === "mn" ? "Хаг" : "Dandruff"}
+                </Typography>
+              </Box>
             </Grid>
-            <Grid size={{ xs: 12 }}>
-              <Divider orientation={{ md: "vertical" }} />
-            </Grid>
+
             <Grid size={{ xs: 12, sm: 5.8, md: 2.9 }}>
-              <Typography variant="h3">-0.2%</Typography>
-              <Typography variant="body1">
-                {lang === "mn" ? "Бүдүүн хялгас" : "Coarse Hair"}
-              </Typography>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"100%"}
+              >
+                <Typography variant="h3">-0.2%</Typography>
+                <Typography variant="body1">
+                  {lang === "mn" ? "Бүдүүн хялгас" : "Coarse Hair"}
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
         </Container>
