@@ -58,7 +58,7 @@ export default function NewsDetailPage() {
         sx={{
           position: "relative",
           width: "100%",
-          height: { xs: "20rem" },
+          height: { xs: "250px", sm: "400px", md: "600px" },
           backgroundImage: `url('${newsItem.image_url}')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
