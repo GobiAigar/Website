@@ -20,7 +20,13 @@ const VideoSection = ({ datas }) => {
 							zIndex: 10
 						}}
 					>
-						<Box width={"60%"} textAlign={"center"} margin="auto" paddingY={{ xs: 6, sm: 8, md: 10 }}>
+						<Box
+							width={"80%"}
+							textAlign={"center"}
+							margin="auto"
+							paddingTop={{ xs: 6, sm: 8, md: 6 }}
+							paddingBottom={{ xs: 4, sm: 6, md: 8 }}
+						>
 							<Title mntitle={datas?.mntitle} entitle={datas?.entitle} />
 
 							<GoldenDivider />

@@ -80,8 +80,8 @@ const Header = () => {
 				transition: "all 0.3s ease"
 			}}
 		>
-			<Container>
-				<Toolbar>
+			<Container disableGutters>
+				<Toolbar disableGutters>
 					<Box
 						sx={{
 							display: "flex",

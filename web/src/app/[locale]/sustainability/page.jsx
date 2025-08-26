@@ -9,40 +9,37 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Sustainability = () => {
-  const { sustainability, loadingWebsite } = useAppData();
+	const { sustainability, loadingWebsite } = useAppData();
 
-  if (loadingWebsite) {
-    return <Loading />;
-  }
+	if (loadingWebsite) {
+		return <Loading />;
+	}
 
-  const data = sustainability || {};
-  const mainInfo = data?.hero?.[0];
-  const sustainabilityText = sustainability?.response?.title[0];
-  const certificates = data?.response?.cerficates || [];
+	const data = sustainability || {};
+	const mainInfo = data?.hero?.[0];
+	const sustainabilityText = sustainability?.response?.title[0];
+	const certificates = data?.response?.cerficates || [];
 
-  return (
-    <Box
-      sx={{
-        backgroundImage: "url(./background.png)",
-        backgroundImage: "url('/background.png')",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        width: "100%",
-        position: "relative",
-        top: 64,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <PageHeaderNarrow data={mainInfo} />
+	return (
+		<Box
+			sx={{
+				backgroundImage: "url(./background.png)",
+				backgroundImage: "url('/background.png')",
+				backgroundRepeat: "no-repeat",
+				backgroundSize: "cover",
+				backgroundPosition: "center",
+				width: "100%",
+				position: "relative",
+				top: 64,
+				display: "flex",
+				flexDirection: "column"
+			}}
+		>
+			<PageHeaderNarrow data={mainInfo} />
 
-      <Test
-        sustainabilityText={sustainabilityText}
-        certificates={certificates}
-      />
-    </Box>
-  );
+			<Test sustainabilityText={sustainabilityText} certificates={certificates} />
+		</Box>
+	);
 };
 
 export default Sustainability;
