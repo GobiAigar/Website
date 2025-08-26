@@ -52,7 +52,6 @@ const MainSection = ({ data, imgFirst }) => {
 		);
 	}, []);
 
-<<<<<<< HEAD
 	return (
 		<Box marginY={{ xs: "3.5rem", md: "5rem" }}>
 			<Container disableGutters>
@@ -121,72 +120,6 @@ const MainSection = ({ data, imgFirst }) => {
 			</Container>
 		</Box>
 	);
-=======
-  return (
-    <Box marginY={{ xs: "7.5rem", md: "15rem" }}>
-      <Container>
-        <Grid container gap={3} justifyContent={"space-between"}>
-          <Grid
-            ref={imgRef}
-            item
-            size={{ xs: 12, md: 5.5 }}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Box>
-              {isMobile && (
-                <Title mntitle={data?.mntitle} entitle={data?.entitle} />
-              )}
-              <img
-                src={data?.image_url1}
-                alt={`${data?.mntitle} Image`}
-                loading="lazy"
-                style={{
-                  border: `1px solid ${theme.palette.primary.main}`,
-                  width: "500px",
-                  height: "400px",
-                  objectFit: "cover",
-                }}
-              />
-            </Box>
-          </Grid>
-
-          <Grid
-            item
-            size={{ xs: 12, md: 6 }}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "fill",
-            }}
-            ref={textRef}
-          >
-            {!isMobile && (
-              <>
-                <Title mntitle={data?.mntitle} entitle={data?.entitle} />
-                <GoldenDivider />
-              </>
-            )}
-            <Typography
-              color="#333"
-              variant="body1"
-              sx={{
-                whiteSpace: "pre-line",
-                lineHeight: "1.5",
-                textAlign: "justify",
-              }}
-            >
-              {lang === "mn" ? data?.mndescription : data?.endescription}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
-  );
->>>>>>> ccab09f7da811a1ace4f16a58cc03488e1f7ac7e
 };
 
 export default MainSection;
