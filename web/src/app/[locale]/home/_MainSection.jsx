@@ -62,7 +62,7 @@ const MainSection = ({ data }) => {
   return (
     <Box marginY={{ xs: "7.5rem", md: "15rem" }}>
       <Container>
-        <Grid container gap={1}>
+        <Grid container gap={3}>
           <Grid
             ref={imgRef}
             item
@@ -97,6 +97,7 @@ const MainSection = ({ data }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
+              width: "fill",
             }}
             ref={textRef}
           >

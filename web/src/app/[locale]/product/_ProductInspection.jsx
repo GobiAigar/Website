@@ -48,12 +48,7 @@ const ProductInspection = ({ data }) => {
         }}
       >
         <Container>
-          <Grid
-            container
-            size={12}
-            justifyContent={"space-between"}
-            spacing={3}
-          >
+          <Grid container size={12} justifyContent={"space-between"}>
             <Grid size={{ xs: 12, sm: 5.8, md: 2.9 }}>
               <Box
                 display={"flex"}
@@ -61,6 +56,7 @@ const ProductInspection = ({ data }) => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 height={"100%"}
+                borderBottom={{ xs: `solid 1px #333`, md: "none" }}
               >
                 <Typography variant="h3">+40 MM</Typography>
                 <Typography variant="body1">
@@ -76,6 +72,8 @@ const ProductInspection = ({ data }) => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 height={"100%"}
+                borderBottom={{ xs: `solid 1px #333`, md: "none" }}
+                borderLeft={{ xs: "none", lg: `solid 1px #333` }}
               >
                 <Typography variant="h3">-16.8 МКМ</Typography>
                 <Typography variant="body1">
@@ -91,6 +89,8 @@ const ProductInspection = ({ data }) => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 height={"100%"}
+                borderBottom={{ xs: `solid 1px #333`, sm: "none" }}
+                borderLeft={{ xs: "none", lg: `solid 1px #333` }}
               >
                 <Typography variant="h3">-0.2%</Typography>
                 <Typography variant="body1">
@@ -106,6 +106,7 @@ const ProductInspection = ({ data }) => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 height={"100%"}
+                borderLeft={{ xs: "none", lg: `solid 1px #333` }}
               >
                 <Typography variant="h3">-0.2%</Typography>
                 <Typography variant="body1">
