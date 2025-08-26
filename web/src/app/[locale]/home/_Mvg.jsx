@@ -23,10 +23,8 @@ const Mvg = ({ datas }) => {
 
     const tl = gsap.timeline({
       onComplete: () => {
-        // хуучин контентыг нуусны дараа state-г солих
         setSelected(newIndex);
 
-        // шинэ контент дээр fade-in
         gsap.fromTo(
           elements,
           { opacity: 0, y: 40 },
@@ -35,7 +33,6 @@ const Mvg = ({ datas }) => {
       },
     });
 
-    // хуучин контент fade-out
     tl.to(elements, {
       opacity: 0,
       y: -40,
@@ -44,13 +41,11 @@ const Mvg = ({ datas }) => {
     });
   };
 
-  // сонголт солих
   const handleSelectionChange = (newIndex) => {
     if (newIndex === selected) return;
     animateContent(newIndex);
   };
 
-  // Автоматаар 5 секунд тутам солих
   useEffect(() => {
     if (!datas || datas.length === 0) return;
     const interval = setInterval(() => {

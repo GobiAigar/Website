@@ -29,12 +29,16 @@ const Footer = () => {
 
   return (
     <Box
+      position={"relative"}
       sx={{
         width: "100%",
         bgcolor: "#111928",
         py: { xs: "2.5rem" },
-        px: { xs: 2.5, sm: "auto" },
+        px: "auto",
         color: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyItems: "center",
       }}
     >
       <Container
@@ -50,7 +54,6 @@ const Footer = () => {
             width: "100%",
             display: { xs: "flex" },
             flexDirection: { xs: "column" },
-
             gap: 2,
           }}
         >

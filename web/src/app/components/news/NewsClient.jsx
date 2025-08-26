@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, Container, Typography, Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";

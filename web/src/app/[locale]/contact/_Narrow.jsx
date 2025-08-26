@@ -1,14 +1,13 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
-import WhiteHero from "./WhiteHeroTitle";
-import WhiteDescription from "./WhiteHeroDescription";
+import WhiteHero from "../../components/keyComponents/WhiteHeroTitle";
 
-const PageHeaderNarrow = ({ data }) => {
+const Narrow = ({ data }) => {
   return (
     <Box
       sx={{
         width: "100%",
-        height: { xs: "250px", sm: "400px", md: "600px" },
+        height: { xs: "300px", sm: "400px", md: "600px" },
         backgroundImage: `url(${data?.image_url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -27,7 +26,7 @@ const PageHeaderNarrow = ({ data }) => {
           alignItems: "center",
           textAlign: "center",
           color: "black",
-
+          px: 4,
           mt: 10,
           position: "absolute",
           zIndex: 1,
@@ -35,14 +34,10 @@ const PageHeaderNarrow = ({ data }) => {
       >
         <Container maxWidth="sm">
           <WhiteHero entitle={data?.entitle} mntitle={data?.mntitle} />
-          <WhiteDescription
-            endescription={data?.ensubtitle}
-            mndescription={data?.mnsubtitle}
-          />
         </Container>
       </Box>
     </Box>
   );
 };
 
-export default PageHeaderNarrow;
+export default Narrow;

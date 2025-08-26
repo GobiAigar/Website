@@ -5,8 +5,9 @@ import { useAppData } from "../../../context/AppDataProvider";
 import TradeSection from "../../components/Sections/TradeSection";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 import Loading from "../../components/keyComponents/Loading";
-import ProductImageSection from "./_ProductImageSection";
 import ProductMainSection from "./_ProductMainSection";
+import ProductInspection from "./_ProductInspection";
+import OurFactory from "./_OurFactory";
 
 const Product = () => {
   const { product, loadingWebsite } = useAppData();
@@ -40,9 +41,10 @@ const Product = () => {
         }}
       >
         <ProductMainSection data={data?.response[0]} />
-        <ProductImageSection data={data?.response[0]} />
-        <ProductMainSection data={data?.response[1]} />
-        <ProductImageSection data={data?.response[1]} />
+        <OurFactory data={data?.response[1]} />
+
+        <ProductInspection data={data?.response[4]} />
+
         <TradeSection datas={tradeDatas} />
       </Box>
     </Box>

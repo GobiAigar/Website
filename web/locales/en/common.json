@@ -4,7 +4,9 @@
     "product": "Product",
     "sustainability": "Sustainability",
     "news": "News",
-    "contact": "Contact"
+    "contact": "Contact",
+    "english": "English",
+    "mongol": "Монгол"
   },
   "home": {
     "title": "Welcome to homepage",
@@ -17,7 +19,7 @@
     "brandSectionTitle": "OURS"
   },
   "contact": {
-    "selectPurpose": "Select the purpose",
+    "phoneNumber": "Your phone (optional)",
     "support": "Support",
     "business": "Business",
     "firstName": "Name",

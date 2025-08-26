@@ -12,6 +12,8 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import { GlobeIcon, HomeHashtagIcon } from "../Icon";
+import Title from "../keyComponents/Title";
+import GoldenDivider from "../keyComponents/GoldenDivider";
 
 const TradeSection = ({ datas }) => {
   const [selectedId, setSelectedId] = useState(3);
@@ -52,148 +54,155 @@ const TradeSection = ({ datas }) => {
   ]);
 
   return (
-    <Container id={"tradeTerm"}>
-      <Box padding={{ xs: 2, sm: 4, md: 6 }}>
-        <Grid
-          container
-          spacing={4}
-          alignItems="flex-start"
-          flexDirection={{ xs: "column-reverse", md: "row" }}
-        >
+    <Box marginY={{ xs: "7.5rem", md: "10rem" }}>
+      <Container id={"tradeTerm"}>
+        <Title
+          entitle={selectedData?.entitle}
+          mntitle={selectedData?.mntitle}
+        />
+        <GoldenDivider />
+        <Box padding={{ xs: 2, sm: 4, md: 6 }}>
           <Grid
-            size={{ xs: 12, md: 6 }}
-            sx={{
-              position: { md: "sticky" },
-              top: 100,
-              backgroundColor: "white",
-              zIndex: 10,
-            }}
+            container
+            spacing={4}
+            alignItems="flex-start"
+            flexDirection={{ xs: "column-reverse", md: "row" }}
           >
-            <Box
-              component="img"
-              src={selectedData?.image_url1}
-              alt={selectedData?.title}
+            <Grid
+              size={{ xs: 12, md: 6 }}
               sx={{
-                width: "100%",
-                objectFit: "cover",
-                boxShadow: 3,
-              }}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Grid container mb={3}>
-              <Grid size={{ xs: 6 }}>
-                <Button
-                  onClick={() => setSelectedId(3)}
-                  fullWidth
-                  sx={{
-                    backgroundColor: "transparent",
-                    color: "#6E1221",
-                    borderBottom:
-                      selectedId === 3
-                        ? "0.125rem solid #6E1221"
-                        : "0.125rem solid transparent",
-                    borderRadius: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 1,
-                    fontSize: {
-                      xs: "1rem",
-                      sm: "1.2rem",
-                      md: "1.25rem",
-                      lg: "1.5rem",
-                    },
-                    fontWeight: 500,
-                    px: 2,
-                    py: 1.5,
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      borderBottom: "0.125rem solid #",
-                    },
-                  }}
-                >
-                  <HomeHashtagIcon color="#6E1221" />
-                  {t("domestic")}
-                </Button>
-              </Grid>
-              <Grid size={{ xs: 6 }}>
-                <Button
-                  onClick={() => setSelectedId(4)}
-                  fullWidth
-                  sx={{
-                    backgroundColor: "transparent",
-                    color: "#6E1221",
-                    borderBottom:
-                      selectedId === 4
-                        ? "0.125rem solid #6E1221"
-                        : "0.125rem solid transparent",
-                    borderRadius: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 1,
-                    fontSize: {
-                      xs: "1rem",
-                      sm: "1.2rem",
-                      md: "1.25rem",
-                      lg: "1.5rem",
-                    },
-                    fontWeight: 500,
-
-                    py: 1.5,
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      borderBottom: "0.125rem solid #",
-                    },
-                  }}
-                >
-                  <GlobeIcon color="#6E1221" />
-                  {t("international")}
-                </Button>
-              </Grid>
-            </Grid>
-
-            <Box
-              sx={{
-                maxHeight: isDesktop && showFull ? "auto" : "none",
-                overflowY: isDesktop && showFull ? "auto" : "visible",
-                pr: isDesktop && showFull ? 1 : 0,
-                scrollbarWidth: isDesktop ? "thin" : "none",
-                "&::-webkit-scrollbar": {
-                  width: isDesktop ? 0 : "0px",
-                },
-                "&:hover::-webkit-scrollbar": {
-                  width: isDesktop ? "6px" : "0px",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: "#aaa",
-                  borderRadius: "6px",
-                },
+                position: { md: "sticky" },
+                top: 100,
+                backgroundColor: "white",
+                zIndex: 10,
               }}
             >
-              <Typography
-                color="#333"
-                variant="body1"
+              <Box
+                component="img"
+                src={selectedData?.image_url1}
+                alt={selectedData?.title}
                 sx={{
-                  whiteSpace: "pre-line",
-                  lineHeight: "1.5",
-                  marginTop: "1rem",
-                  marginBottom: {
-                    xs: "1rem",
-                    lg: "2rem",
+                  width: "100%",
+                  objectFit: "cover",
+                  boxShadow: 3,
+                }}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Grid container mb={3}>
+                <Grid size={{ xs: 6 }}>
+                  <Button
+                    onClick={() => setSelectedId(3)}
+                    fullWidth
+                    sx={{
+                      backgroundColor: "transparent",
+                      color: "#6E1221",
+                      borderBottom:
+                        selectedId === 3
+                          ? "0.125rem solid #6E1221"
+                          : "0.125rem solid transparent",
+                      borderRadius: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 1,
+                      fontSize: {
+                        xs: "1rem",
+                        sm: "1.2rem",
+                        md: "1.25rem",
+                        lg: "1.5rem",
+                      },
+                      fontWeight: 500,
+                      px: 2,
+                      py: 1.5,
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                        borderBottom: "0.125rem solid #",
+                      },
+                    }}
+                  >
+                    <HomeHashtagIcon color="#6E1221" />
+                    {t("domestic")}
+                  </Button>
+                </Grid>
+                <Grid size={{ xs: 6 }}>
+                  <Button
+                    onClick={() => setSelectedId(4)}
+                    fullWidth
+                    sx={{
+                      backgroundColor: "transparent",
+                      color: "#6E1221",
+                      borderBottom:
+                        selectedId === 4
+                          ? "0.125rem solid #6E1221"
+                          : "0.125rem solid transparent",
+                      borderRadius: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 1,
+                      fontSize: {
+                        xs: "1rem",
+                        sm: "1.2rem",
+                        md: "1.25rem",
+                        lg: "1.5rem",
+                      },
+                      fontWeight: 500,
+
+                      py: 1.5,
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                        borderBottom: "0.125rem solid #",
+                      },
+                    }}
+                  >
+                    <GlobeIcon color="#6E1221" />
+                    {t("international")}
+                  </Button>
+                </Grid>
+              </Grid>
+
+              <Box
+                sx={{
+                  maxHeight: isDesktop && showFull ? "auto" : "none",
+                  overflowY: isDesktop && showFull ? "auto" : "visible",
+                  pr: isDesktop && showFull ? 1 : 0,
+                  scrollbarWidth: isDesktop ? "thin" : "none",
+                  "&::-webkit-scrollbar": {
+                    width: isDesktop ? 0 : "0px",
+                  },
+                  "&:hover::-webkit-scrollbar": {
+                    width: isDesktop ? "6px" : "0px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#aaa",
+                    borderRadius: "6px",
                   },
                 }}
               >
-                {lang === "mn"
-                  ? selectedData?.mndescription
-                  : selectedData?.endescription}
-              </Typography>
-            </Box>
+                <Typography
+                  color="#333"
+                  variant="body1"
+                  sx={{
+                    whiteSpace: "pre-line",
+                    lineHeight: "1.5",
+                    marginTop: "1rem",
+                    marginBottom: {
+                      xs: "1rem",
+                      lg: "2rem",
+                    },
+                  }}
+                >
+                  {lang === "mn"
+                    ? selectedData?.mndescription
+                    : selectedData?.endescription}
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

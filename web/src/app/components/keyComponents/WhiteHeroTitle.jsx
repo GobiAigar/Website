@@ -6,7 +6,6 @@ const WhiteTitle = ({ mntitle, entitle, reverse }) => {
   if (!reverse) false;
   return (
     <Typography
-      variant="h4"
       sx={{
         marginTop: 0,
         fontWeight: "600",
@@ -16,9 +15,12 @@ const WhiteTitle = ({ mntitle, entitle, reverse }) => {
         textAlign:
           reverse === undefined ? "center" : reverse ? "right" : "left",
 
-        maxHeight: {
-          xs: "none",
-          md: "37.5rem",
+        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        fontSize: {
+          xs: "1.75rem",
+          sm: "2.25rem",
+          md: "3rem",
+          lg: "3rem",
         },
       }}
     >

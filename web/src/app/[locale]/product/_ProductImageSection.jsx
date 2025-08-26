@@ -21,7 +21,7 @@ const ProductImageSection = ({ data }) => {
       <Grid container size={12}>
         <Grid
           item
-          size={{ xs: 12, md: 6 }}
+          size={{ xs: 12, md: 3 }}
           sx={{
             display: "flex",
             alignItems: "center",

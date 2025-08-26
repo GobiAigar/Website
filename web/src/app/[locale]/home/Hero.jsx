@@ -84,7 +84,7 @@ const Hero = ({ data }) => {
               gutterBottom
               sx={{
                 textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                fontFamily: "nunito",
+
                 fontSize: {
                   xs: "1.75rem",
                   sm: "2.25rem",
