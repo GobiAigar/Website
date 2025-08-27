@@ -76,17 +76,6 @@ const NewsClient = () => {
       <Container>
         <NewsList news={news} />
       </Container>
-
-      {total > 3 && (
-        <Box display="flex" justifyContent="center" pb={4}>
-          <Pagination
-            count={Math.ceil(total / 3)}
-            page={currentPage}
-            onChange={(_, page) => setCurrentPage(page)}
-            color="primary"
-          />
-        </Box>
-      )}
     </Box>
   );
 };

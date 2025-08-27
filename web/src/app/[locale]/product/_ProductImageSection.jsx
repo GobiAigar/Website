@@ -13,6 +13,7 @@ import { useLocale } from "next-intl";
 
 const ProductImageSection = ({ data }) => {
   const theme = useTheme();
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const lang = useLocale();
 

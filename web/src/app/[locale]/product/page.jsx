@@ -11,9 +11,18 @@ import OurFactory from "./_OurFactory";
 
 const Product = () => {
   const { product, loadingWebsite } = useAppData();
+
   const data = product?.data;
+
+  const detials = [
+    data?.response[4],
+    data?.response[5],
+    data?.response[6],
+    data?.response[7],
+  ];
+
   const banner = data?.hero.find((item) => item.id === 2);
-  const tradeDatas = [data?.response[2], data?.response[3]];
+  const tradeDatas = [data?.response[8], data?.response[9]];
 
   if (loadingWebsite) {
     return <Loading />;
@@ -41,10 +50,8 @@ const Product = () => {
         }}
       >
         <ProductMainSection data={data?.response[0]} />
-        <OurFactory data={data?.response[1]} />
-
-        <ProductInspection data={data?.response[4]} />
-
+        <OurFactory data={data?.response[1]} datas={data?.response[2]} />
+        <ProductInspection data={data?.response[3]} detials={detials} />
         <TradeSection datas={tradeDatas} />
       </Box>
     </Box>

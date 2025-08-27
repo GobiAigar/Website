@@ -17,6 +17,8 @@ import * as Yup from "yup";
 import FileUploader from "../website/FileUploader";
 import { Backend_Endpoint } from "@/constants/constants";
 
+const multiImageIds = [1, 2, 3];
+
 const validationSchema = Yup.object({
   entitle: Yup.string().required("English title is required"),
   mntitle: Yup.string().required("Mongolian title is required"),
@@ -24,7 +26,6 @@ const validationSchema = Yup.object({
   mndescription: Yup.string().required("Mongolian description is required"),
   image_url1: Yup.string().url("Please enter a valid URL"),
 });
-const multiImageIds = [1, 2, 5];
 
 export default function EditProduct({ data, onClose, onSubmitSuccess }) {
   const [loading, setLoading] = useState(false);

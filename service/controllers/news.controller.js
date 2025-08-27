@@ -108,9 +108,10 @@ export const newsController = {
       const header = await sql`SELECT * FROM website_headers WHERE id = 4`;
       const data = await sql`SELECT id, entitle,
         mntitle,
-        enjournalist,
-        mnjournalist,
-        thumbnail, date FROM news ORDER BY date DESC `;
+        endescription,
+        mndescription,
+        thumbnail, 
+        date FROM news ORDER BY date DESC `;
 
       const [{ count }] = await sql`SELECT COUNT(*)::int as count FROM news`;
       res.status(200).json({ header, data, total: count });

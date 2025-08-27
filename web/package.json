@@ -30,6 +30,7 @@
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^3.1.0",
+    "react-image-magnifier-zoom": "^0.0.9",
     "react-slick": "^0.30.3",
     "react-world-flags": "^1.6.0",
     "slick-carousel": "^1.8.1",

@@ -7,7 +7,7 @@ export const metadata = {
   title: "Gobi Aigar",
   description: "Cashmere",
   icons: {
-    icon: "/smallLogo.png.png",
+    icon: "/smallLogo.png",
   },
 };
 

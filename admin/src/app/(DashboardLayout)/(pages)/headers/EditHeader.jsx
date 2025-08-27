@@ -83,6 +83,7 @@ const EditHeader = ({ data }) => {
                 <TextField
                   margin="dense"
                   label="Дэд гарчиг /Англи/"
+                  multiline
                   fullWidth
                   value={values.ensubtitle}
                   onChange={(e) => setFieldValue("ensubtitle", e.target.value)}
@@ -90,6 +91,7 @@ const EditHeader = ({ data }) => {
                 <TextField
                   margin="dense"
                   label="Дэд гарчиг /Монгол/"
+                  multiline
                   fullWidth
                   value={values.mnsubtitle}
                   onChange={(e) => setFieldValue("mnsubtitle", e.target.value)}

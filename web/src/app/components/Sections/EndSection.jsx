@@ -1,9 +1,9 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import NewTitle from "../newComponents/NewTitle";
-import Description from "../keyComponents/Description";
+import { useLocale } from "next-intl";
 
 const EndSection = ({ datas }) => {
+  const lang = useLocale();
   return (
     <Box
       sx={{
@@ -35,12 +35,17 @@ const EndSection = ({ datas }) => {
           paddingLeft: "10%",
         }}
       >
-        <Box width={{ xs: "75%", md: "50%", lg: "30%" }}>
-          <NewTitle
-            mntitle={datas?.mntitle}
-            entitle={datas?.entitle}
-            reverse={false}
-          />
+        <Box width={{ xs: "75%", md: "60%" }}>
+          <Typography
+            sx={{
+              color: "#000",
+              textShadow: " 1px 1px 1px #333",
+              fontWeight: "bold",
+              fontSize: { xs: "1.5rem", sm: "2rem" },
+            }}
+          >
+            {lang === "mn" ? datas?.mntitle : datas?.entitle}
+          </Typography>
         </Box>
       </Box>
     </Box>

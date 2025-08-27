@@ -2,11 +2,13 @@ import { useLocale } from "next-intl";
 import { Grid, Box, useMediaQuery, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import ImageZoom from "react-image-magnifier-zoom";
 
 export default function ProductImage({ data }) {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const lang = useLocale();
 
   const getImages = [
@@ -31,7 +33,6 @@ export default function ProductImage({ data }) {
                   height: 300,
                   objectFit: "fit",
                   display: "block",
-                  borderRadius: 1,
                 }}
               />
             </Box>
@@ -93,16 +94,14 @@ export default function ProductImage({ data }) {
               },
             }}
           >
-            <Box
-              component="img"
+            <ImageZoom
               src={url}
               alt={lang === "mn" ? data.mntitle : data.entitle}
-              sx={{
-                width: "100%",
-                height: "100%",
-                objectFit: "fit",
-                display: "block",
-              }}
+              width={276}
+              height={300}
+              magnifierSize={100}
+              zoomLevel={1.5}
+              enabled={true}
             />
           </Box>
         </Grid>

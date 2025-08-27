@@ -13,7 +13,6 @@ import { useLocale } from "next-intl";
 import ImageSide from "../Card/ImageSideCard";
 import Description from "../keyComponents/Description";
 import Title from "../keyComponents/Title";
-import ScrollStack, { ScrollStackItem } from "../gsap/ScrollStack";
 
 const BrandSection = ({ datas }) => {
   const lang = useLocale();
@@ -22,9 +21,6 @@ const BrandSection = ({ datas }) => {
     datas[1]?.image_url1,
     datas[2]?.image_url1,
   ]);
-
-  const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Container>
@@ -57,7 +53,7 @@ const BrandSection = ({ datas }) => {
 
           {/* Content Section */}
           <Grid container item size={{ xs: 12, sm: 8 }}>
-            <Grid item size={{ xs: 12, sm: 6 }} justifyContent="">
+            <Grid item size={{ xs: 12, sm: 6 }}>
               <Description
                 mndescription={datas[0]?.mndescription}
                 endescription={datas[0]?.endescription}
