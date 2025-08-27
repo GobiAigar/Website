@@ -15,29 +15,59 @@ const columns = () => [
     align: "center",
     headerAlign: "center",
   },
-  {
-    field: "purpose",
-    headerName: "Зорилго",
-    flex: 1,
-    align: "center",
-    headerAlign: "center",
-  },
 
   {
     field: "firstname",
     headerName: "Нэр",
     flex: 1,
-
     align: "center",
     headerAlign: "center",
+  },
+  {
+    field: "phonenumber",
+    headerName: "Утасны дугаар",
+    flex: 1,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (params) => (
+      <a
+        href={`tel:${params.value}`}
+        style={{
+          color: "#1976d2",
+          textDecoration: "underline",
+          cursor: "pointer",
+        }}
+      >
+        {params.value}
+      </a>
+    ),
   },
   {
     field: "email",
     headerName: "И-мэйл",
     flex: 1,
-
     align: "center",
     headerAlign: "center",
+    renderCell: (params) => {
+      const handleCopy = () => {
+        navigator.clipboard.writeText(params.value).then(() => {
+          alert("Имэйл хуулагдлаа!");
+        });
+      };
+
+      return (
+        <span
+          onClick={handleCopy}
+          style={{
+            color: "#1976d2",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+        >
+          {params.value}
+        </span>
+      );
+    },
   },
   {
     field: "date",
