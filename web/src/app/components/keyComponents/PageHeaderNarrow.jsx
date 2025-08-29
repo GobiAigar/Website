@@ -8,7 +8,7 @@ const PageHeaderNarrow = ({ data }) => {
     <Box
       sx={{
         width: "100%",
-        height: { xs: "250px", sm: "400px", md: "600px" },
+        height: { xs: "250px", sm: "350px", md: "600px" },
         backgroundImage: `url(${data?.image_url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

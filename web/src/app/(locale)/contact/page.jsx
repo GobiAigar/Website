@@ -17,13 +17,13 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useAppData } from "../../../context/AppDataProvider";
 import Narrow from "./_Narrow";
 import Description from "../../components/keyComponents/Description";
-import PageLoader from "next/dist/client/page-loader";
 import Loading from "../../components/keyComponents/Loading";
+import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
 
 const Contact = () => {
   const t = useTranslations("contact");
@@ -91,7 +91,7 @@ const Contact = () => {
         minHeight: "90vh",
       }}
     >
-      <Narrow data={data} />
+      <PageHeaderNarrow data={data} />
       <Box
         display={"flex"}
         justifyContent={"center"}
@@ -105,13 +105,17 @@ const Contact = () => {
           width: "100%",
         }}
       >
-        <Box maxWidth="680px" paddingX={{ xs: "2rem", sm: "1rem", md: "0" }}>
-          <Box marginY={"2rem"}>
+        <Box
+          maxWidth="680px"
+          marginY={"2rem"}
+          paddingX={{ xs: "2rem", sm: "1rem", md: "0" }}
+        >
+          {/* <Box marginY={"2rem"}>
             <Description
               mndescription={data?.mnsubtitle}
               endescription={data?.ensubtitle}
             />
-          </Box>
+          </Box> */}
           <Box marginBottom={"8rem"}>
             <Grid container spacing={4}>
               <Grid size={{ xs: 12 }}>

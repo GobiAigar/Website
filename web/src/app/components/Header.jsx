@@ -34,12 +34,12 @@ const Header = () => {
   const t = useTranslations();
   const locale = useLocale();
 
-  const isHome = pathname === `/${locale}/home`;
+  const isHome = pathname === `/home`;
   const isActive = (path) => {
     if (path === "home") {
-      return pathname === `/${locale}` || pathname === `/${locale}/home`;
+      return pathname === `/home`;
     }
-    return pathname === `/${locale}/${path}`;
+    return pathname === `/${path}`;
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -144,7 +144,7 @@ const Header = () => {
                   }}
                 >
                   <Link
-                    href={`/${locale}/${link.path}`}
+                    href={`/${link.path}`}
                     style={{
                       textDecoration: "none",
                       // color: isScrolled ? "#333" : "white",
@@ -185,10 +185,7 @@ const Header = () => {
                 disablePadding
                 onClick={toggleMobileMenu}
               >
-                <ListItemButton
-                  component={Link}
-                  href={`/${locale}/${link.path}`}
-                >
+                <ListItemButton component={Link} href={`/${link.path}`}>
                   <ListItemText primary={link.label} />
                 </ListItemButton>
               </ListItem>

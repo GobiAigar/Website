@@ -14,7 +14,7 @@ const WhiteDescription = ({ mndescription, endescription, textAlign }) => {
         lineHeight: "1.5",
         textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
         marginBottom: {
-          xs: "1rem",
+          xs: "0.875rem",
           lg: "2rem",
         },
         marginTop: "1rem",

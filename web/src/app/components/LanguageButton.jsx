@@ -3,18 +3,16 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 import { Box, FormControl, MenuItem, Select } from "@mui/material";
+import Cookies from "js-cookie";
 
 const LanguageButton = ({ isMobile }) => {
-  const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
 
-  const handleChange = (event) => {
-    const newLocale = event.target.value;
-    const regex = /^\/(en|mn)(\/|$)/;
-    const pathWithoutLocale = pathname.replace(regex, "/");
-    router.push(`/${newLocale}${pathWithoutLocale}`); // page reload хийхгүй
-  };
+  function switchTo(locale) {
+    Cookies.set("NEXT_LOCALE", locale, { expires: 365 });
+    router.refresh();
+  }
 
   return (
     <Box marginX={2}>
@@ -33,7 +31,7 @@ const LanguageButton = ({ isMobile }) => {
       >
         <Select
           value={locale}
-          onChange={handleChange}
+          onChange={(e) => switchTo(e.target.value)}
           autoWidth
           sx={{
             color: isMobile ? "white" : "black", // сонгогдсон value текстийн өнгө
