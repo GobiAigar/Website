@@ -10,7 +10,7 @@ import ProductInspection from "./_ProductInspection";
 import OurFactory from "./_OurFactory";
 
 const Product = () => {
-  const { product, loadingWebsite } = useAppData();
+  const { product, loadingAll } = useAppData();
 
   const data = product?.data;
 
@@ -24,7 +24,7 @@ const Product = () => {
   const banner = data?.hero.find((item) => item.id === 2);
   const tradeDatas = [data?.response[8], data?.response[9]];
 
-  if (loadingWebsite) {
+  if (loadingAll) {
     return <Loading />;
   }
 

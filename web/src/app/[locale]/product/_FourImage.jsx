@@ -9,9 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useLocale } from "next-intl";
-import { Swiper, SwiperSlide } from "swiper/react";
 import CloseIcon from "@mui/icons-material/Close";
-import "swiper/css";
 
 const FourImage = ({ data }) => {
   const theme = useTheme();
@@ -22,7 +20,9 @@ const FourImage = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const lang = useLocale();
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const getImages = [
     data?.image_url1,
@@ -33,38 +33,35 @@ const FourImage = ({ data }) => {
 
   if (isMobile) {
     return (
-      <Box sx={{ width: "100%" }}>
-        <Swiper
-          spaceBetween={2}
-          slidesPerView={1.5}
-          centeredSlides
-          style={{ width: "auto", height: "auto" }}
-        >
-          {getImages?.map((url, idx) => (
-            <SwiperSlide key={idx}>
+      <Grid container spacing={1} sx={{ width: "100%" }} px={2}>
+        {getImages?.map((url, idx) => (
+          <Grid size={{ xs: 6 }} key={idx}>
+            <Box
+              sx={{
+                position: "relative",
+                width: "auto",
+                height: "auto",
+              }}
+            >
               <Box
+                component="img"
+                src={url}
+                alt={lang === "mn" ? data?.mntitle : data?.entitle}
                 sx={{
-                  position: "relative",
                   width: "auto",
                   height: "auto",
+                  objectFit: "cover",
+                  display: "block",
                 }}
-              >
-                <Box
-                  component="img"
-                  src={url}
-                  alt={lang === "mn" ? data?.mntitle : data?.entitle}
-                  sx={{
-                    width: "auto",
-                    height: "auto",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </Box>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box>
+                onClick={() => {
+                  setSelectedImage(url);
+                  setOpen(true);
+                }}
+              />
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
     );
   }
 
@@ -84,6 +81,10 @@ const FourImage = ({ data }) => {
                   objectFit: "fit",
                   display: "block",
                 }}
+                onClick={() => {
+                  setSelectedImage(url);
+                  setOpen(true);
+                }}
               />
             </Grid>
           );
@@ -97,10 +98,8 @@ const FourImage = ({ data }) => {
       <Grid container spacing={2}>
         {getImages.map((url, idx) => (
           <Grid
-            item
             key={idx}
-            xs={6}
-            md={3}
+            size={{ xs: 12, sm: 6, md: 3 }}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -112,7 +111,6 @@ const FourImage = ({ data }) => {
               src={url}
               alt={lang === "mn" ? data?.mntitle : data?.entitle}
               sx={{
-                width: 276,
                 height: 155,
                 objectFit: "cover",
                 cursor: "pointer",
@@ -126,38 +124,36 @@ const FourImage = ({ data }) => {
         ))}
       </Grid>
 
-      {!isMobile && (
-        <Dialog open={open} onClose={() => setOpen(false)} maxWidth="lg">
-          <IconButton
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              top: 10,
-              right: 10,
-              color: "white",
-              zIndex: 10,
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              ":hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-              },
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Box
-            component="img"
-            src={selectedImage}
-            alt={lang === "mn" ? data?.mntitle : data?.entitle}
-            sx={{
-              width: "100%",
-              height: "auto",
-              objectFit: "contain",
-              borderRadius: "0",
-              border: "2px solid #F5BF03",
-            }}
-          />
-        </Dialog>
-      )}
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <IconButton
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+            color: "white",
+            zIndex: 10,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            ":hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+            },
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Box
+          component="img"
+          src={selectedImage}
+          alt={lang === "mn" ? data?.mntitle : data?.entitle}
+          sx={{
+            width: "100%",
+            height: "auto",
+            objectFit: "contain",
+            borderRadius: "0",
+            border: "2px solid #F5BF03",
+          }}
+        />
+      </Dialog>
     </>
   );
 };

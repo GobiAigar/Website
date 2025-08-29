@@ -67,7 +67,7 @@ const MainSection = ({ data, imgFirst }) => {
   }, []);
 
   return (
-    <Box marginY={{ xs: "5rem", md: "7rem" }}>
+    <Box marginY={{ xs: "3rem", sm: "5rem", md: "7rem" }}>
       <Container>
         <Grid container gap={3} direction={imgFirst ? "row-reverse" : "row"}>
           <Grid
@@ -75,6 +75,7 @@ const MainSection = ({ data, imgFirst }) => {
             size={{ xs: 12, md: 5.5 }}
             sx={{
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
             }}

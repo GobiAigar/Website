@@ -120,7 +120,7 @@ export default function ProductImageList({ sections = [] }) {
               alt={lang === "mn" ? item.mntitle : item.entitle}
               sx={{
                 width: "100%",
-                height: { xs: 300 },
+                height: 300,
                 objectFit: "cover",
                 display: "block",
               }}

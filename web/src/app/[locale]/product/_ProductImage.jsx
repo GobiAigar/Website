@@ -67,15 +67,11 @@ export default function ProductImage({ data }) {
   }
 
   return (
-    <Grid container spacing={{ xs: 2, sm: 0.5 }} justifyContent="space-between">
+    <Grid container spacing={{ xs: 2, sm: 1 }} justifyContent="space-between">
       {getImages.map((url, idx) => (
         <Grid
           key={idx}
-          item
-          xs={12}
-          sm={6}
-          md={3}
-          lg={3}
+          size={{ xs: 12, sm: 6, md: 3 }}
           sx={{
             display: "flex",
             flexDirection: "column",

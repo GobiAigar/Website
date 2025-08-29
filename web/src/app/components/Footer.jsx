@@ -46,6 +46,7 @@ const Footer = () => {
           display: { xs: "flex" },
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
+          justifyItems: "center",
           gap: 2,
         }}
       >
@@ -108,6 +109,7 @@ const Footer = () => {
               <XIcon sx={{ color: "white" }} />
             </MuiLink>
           </Box>
+
           <Typography variant="body2" color="white">
             {t("copy")} {new Date().getFullYear()} {t("copyright")}
           </Typography>

@@ -55,7 +55,7 @@ const TradeSection = ({ datas }) => {
   ]);
 
   return (
-    <Box marginBottom={{ xs: "1.5rem", md: "5rem" }}>
+    <Box marginBottom={{ xs: "3rem", md: "5rem" }}>
       <Container id={"tradeTerm"}>
         <Title
           entitle={selectedData?.entitle}
@@ -87,7 +87,7 @@ const TradeSection = ({ datas }) => {
                   src={selectedData?.image_url1}
                   alt={selectedData?.title}
                   sx={{
-                    height: "700px",
+                    height: { xs: "350px", sm: "400px", md: "700px" },
                     width: "100%",
                     objectFit: "cover",
                     boxShadow: 3,
@@ -205,6 +205,7 @@ const TradeSection = ({ datas }) => {
                   <Typography
                     color="#333"
                     variant="body1"
+                    textAlign={"justify"}
                     sx={{
                       whiteSpace: "pre-line",
                       lineHeight: "1.5",

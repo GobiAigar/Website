@@ -156,6 +156,9 @@ const CertificateSlider = ({ certificates }) => {
                     justifyContent: "center",
                     alignItems: "center",
                     bgcolor: "white",
+                    ":hover": {
+                      cursor: "pointer",
+                    },
                   }}
                 >
                   <CardMedia

@@ -38,7 +38,6 @@ const NewsList = ({ news }) => {
               borderRadius: "0",
               position: "relative",
               boxShadow: 4,
-
               cursor: "pointer",
               "&:hover .media": {
                 transform: "scale(1.05)",
@@ -119,7 +118,7 @@ const NewsList = ({ news }) => {
       )}
       <Grid container size={12} width={"100%"}>
         {news.slice(isSmall ? 0 : 1).map((item) => (
-          <Grid key={item.id} size={{ xs: 12, md: 6, md: 4 }}>
+          <Grid key={item.id} size={{ xs: 12, sm: 4 }}>
             <Card
               sx={{
                 borderRadius: "0",

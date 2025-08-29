@@ -9,9 +9,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Sustainability = () => {
-  const { sustainability, loadingWebsite } = useAppData();
+  const { sustainability, loadingAll } = useAppData();
 
-  if (loadingWebsite) {
+  if (loadingAll) {
     return <Loading />;
   }
 

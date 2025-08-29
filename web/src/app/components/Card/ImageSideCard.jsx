@@ -45,7 +45,8 @@ const ImageSideCard = ({ data }) => {
             sx={{
               border: `2px solid ${theme.palette.primary.main}`,
               width: "100%",
-              height: isMobile ? "250px" : "400px",
+              height: "auto",
+              maxHeight: "400px",
               objectFit: "cover",
             }}
           />
