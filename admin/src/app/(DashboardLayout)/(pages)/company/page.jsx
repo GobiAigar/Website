@@ -88,7 +88,7 @@ const Page = () => {
         ></Box>
 
         <DataGrid
-          rows={(datas || []).map((row, idx) => ({
+          rows={(datas.rows || []).map((row, idx) => ({
             ...row,
             ui_id: idx + 1,
           }))}

@@ -9,7 +9,9 @@ const Title = ({ mntitle, entitle }) => {
         sx={{
           textAlign: "center",
           color: "#292929",
+          lineHeight: 1,
           fontSize: { xs: "1.5rem", sm: "2rem", md: "3rem" },
+          fontWeight: "500",
         }}
       >
         {lang === "mn" ? mntitle : entitle}

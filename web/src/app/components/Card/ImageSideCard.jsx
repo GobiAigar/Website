@@ -32,6 +32,26 @@ const ImageSideCard = ({ data }) => {
     );
   }
 
+  if (data.length === 1) {
+    return (
+      <Box>
+        <CardMedia
+          component="img"
+          src={data[0]}
+          alt="Section image 0"
+          loading="lazy"
+          sx={{
+            border: `2px solid #F5BF03`,
+            width: "100%",
+            height: "auto",
+            maxHeight: "400px",
+            objectFit: "cover",
+          }}
+        />
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ width: "100%", position: "relative" }}>
       <Slider ref={sliderRef} {...sliderSettings}>
@@ -43,7 +63,7 @@ const ImageSideCard = ({ data }) => {
             alt={`Section image ${ind}`}
             loading="lazy"
             sx={{
-              border: `2px solid ${theme.palette.primary.main}`,
+              border: `2px solid #F5BF03`,
               width: "100%",
               height: "auto",
               maxHeight: "400px",

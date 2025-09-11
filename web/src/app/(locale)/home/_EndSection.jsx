@@ -1,6 +1,7 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useLocale } from "next-intl";
+import Subtitle from "../../components/keyComponents/Subtitle";
 
 const EndSection = ({ datas }) => {
   const lang = useLocale();
@@ -17,7 +18,6 @@ const EndSection = ({ datas }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-
         overflow: "hidden",
       }}
     >
@@ -36,16 +36,7 @@ const EndSection = ({ datas }) => {
         }}
       >
         <Box width={{ xs: "75%", md: "60%" }}>
-          <Typography
-            sx={{
-              color: "#000",
-              textShadow: " 1px 1px 1px #333",
-              fontWeight: "bold",
-              fontSize: { xs: "1.5rem", sm: "2rem" },
-            }}
-          >
-            {lang === "mn" ? datas?.mntitle : datas?.entitle}
-          </Typography>
+          <Subtitle mntitle={datas?.mntitle} entitle={datas?.entitle} />
         </Box>
       </Box>
     </Box>

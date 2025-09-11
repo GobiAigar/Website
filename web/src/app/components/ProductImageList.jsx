@@ -88,7 +88,6 @@ export default function ProductImageList({ sections = [] }) {
       {sections.map((item, index) => (
         <Grid
           key={item.id || index}
-          item
           width={"100%"}
           size={{
             xs: 12,

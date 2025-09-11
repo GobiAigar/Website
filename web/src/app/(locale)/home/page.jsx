@@ -1,16 +1,15 @@
 "use client";
 
-import { Box, Container, Typography, Skeleton } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { gsap } from "gsap";
-import { useLocale, useTranslations } from "next-intl";
 import { useAppData } from "../../../context/AppDataProvider";
 
 import VideoSection from "../../components/Sections/VideoSection";
 import ProductImageList from "../../components/ProductImageList";
 import NewHero from "./_NewHero";
-import EndSection from "../../components/Sections/EndSection";
+import EndSection from "./_EndSection";
 import Title from "../../components/keyComponents/Title";
-import Loading from "../../components/keyComponents/Loading";
+import HomeSkeleton from "./_HomeSkeleton";
 import { ScrollTrigger } from "gsap/all";
 import GoldenDivider from "../../components/keyComponents/GoldenDivider";
 import Mvg from "./_Mvg.jsx";
@@ -19,20 +18,15 @@ import MainSection from "./_MainSection";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-  const { website, loadingWebsite } = useAppData();
+  const { website, loadingAll } = useAppData();
 
-  const lang = useLocale();
-  const t = useTranslations("home");
+  const websiteData = website?.data?.response || {};
+  const rows = websiteData?.rows || [];
 
-  const rawData = website?.data || {};
-  const websiteData = rawData?.response || [];
+  const getSingleById = (id) => rows.find((item) => item.id === id);
+  const getMultibyId = (ids) => rows.filter((item) => ids.includes(item.id));
 
-  const getSingleById = (id) => websiteData?.find((item) => item.id === id);
-  const getMultibyId = (ids) => {
-    return websiteData?.filter((item) => ids.includes(item.id)) || [];
-  };
-
-  const hero = rawData?.hero?.[0];
+  const hero = website?.data?.hero.rows[0];
 
   const section1 = getSingleById(1);
   const section2 = getSingleById(2);
@@ -45,8 +39,8 @@ const Home = () => {
 
   const endSection = getSingleById(14);
 
-  if (loadingWebsite) {
-    return <Loading />;
+  if (loadingAll) {
+    return <HomeSkeleton />;
   }
 
   return (
@@ -82,7 +76,6 @@ const Home = () => {
             <Title
               mntitle={goatsHeader?.mntitle}
               entitle={goatsHeader?.entitle}
-              textAlign={true}
             />
             <GoldenDivider />
             <ProductImageList sections={fourGoats} />

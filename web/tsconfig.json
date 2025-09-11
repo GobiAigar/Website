@@ -26,7 +26,10 @@
     "**/*.tsx",
     "src/i18n/request.ts",
     "src/i18n/routing.ts",
-    "src/i18n/navigation.ts"
-, "src/app/[locale]/home/page.jsx"  ],
+    "src/i18n/navigation.ts",
+    "src/app/[locale]/home/page.jsx",
+    "src/app/(locale)/sustainability/_Sustainability.jsx",
+    "src/app/layout.tsx"
+  ],
   "exclude": ["node_modules"]
 }

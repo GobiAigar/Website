@@ -14,7 +14,6 @@ import { useLocale, useTranslations } from "next-intl";
 
 const FAQSection = ({ faqs }) => {
   const lang = useLocale();
-  const t = useTranslations("faq");
 
   const [expanded, setExpanded] = React.useState(false);
 

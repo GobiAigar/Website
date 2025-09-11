@@ -3,7 +3,7 @@ import { sql } from "../server.js";
 export const companyController = {
   get: async (_, res) => {
     try {
-      const response = await sql`SELECT * FROM company ORDER BY id ASC`;
+      const response = await sql.query(`SELECT * FROM company ORDER BY id ASC`);
       res.status(200).json(response);
     } catch (error) {
       console.log("error", error);
@@ -13,8 +13,10 @@ export const companyController = {
   postFaq: async (req, res) => {
     const { title, english, mongolia } = req.body;
     try {
-      const response =
-        await sql`INSERT INTO company( title, english, mongolia) VALUES(${title},${english},${mongolia}) RETURNING *`;
+      const response = await sql.query(
+        `INSERT INTO company( title, english, mongolia) VALUES($1,$2,$3) RETURNING *`,
+        [title, english, mongolia]
+      );
       res.status(200).json(response);
     } catch (error) {
       res
@@ -27,13 +29,16 @@ export const companyController = {
     const { title, english, mongolia } = req.body;
 
     try {
-      const response = await sql`UPDATE company
+      const response = await sql.query(
+        `UPDATE company
     SET 
-    title = ${title},
-      english = ${english}, 
-      mongolia = ${mongolia}
-      WHERE id = ${id} 
-      RETURNING *`;
+    title = $1,
+      english = $2, 
+      mongolia = $3
+      WHERE id = $4
+      RETURNING *`,
+        [title, english, mongolia, id]
+      );
 
       res.status(200).json(response);
     } catch (error) {

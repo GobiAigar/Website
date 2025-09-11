@@ -6,10 +6,18 @@ import {
   useMediaQuery,
   useTheme,
   IconButton,
+  Container,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useLocale } from "next-intl";
 import CloseIcon from "@mui/icons-material/Close";
+
+// Swiper imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const FourImage = ({ data }) => {
   const theme = useTheme();
@@ -17,89 +25,85 @@ const FourImage = ({ data }) => {
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
   const [open, setOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const lang = useLocale();
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = () => setOpen(false);
+
+  const allImages = data.flatMap((item) =>
+    [item.image_url1, item.image_url2, item.image_url3, item.image_url4].filter(
+      Boolean
+    )
+  );
+
+  const handleOpen = (idx) => {
+    setSelectedIndex(idx);
+    setOpen(true);
   };
 
-  const getImages = [
-    data?.image_url1,
-    data?.image_url2,
-    data?.image_url3,
-    data?.image_url4,
-  ].filter(Boolean);
-
+  // --- Mobile Layout ---
   if (isMobile) {
     return (
-      <Grid container spacing={1} sx={{ width: "100%" }} px={2}>
-        {getImages?.map((url, idx) => (
-          <Grid size={{ xs: 6 }} key={idx}>
-            <Box
-              sx={{
-                position: "relative",
-                width: "auto",
-                height: "auto",
-              }}
-            >
+      <Container>
+        <Swiper
+          initialSlide={selectedIndex}
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+          style={{ width: "100%", height: "100%" }}
+        >
+          {allImages.map((url, idx) => (
+            <SwiperSlide key={idx}>
               <Box
                 component="img"
                 src={url}
                 alt={lang === "mn" ? data?.mntitle : data?.entitle}
                 sx={{
-                  width: "auto",
+                  width: "100%",
                   height: "auto",
-                  objectFit: "cover",
-                  display: "block",
-                }}
-                onClick={() => {
-                  setSelectedImage(url);
-                  setOpen(true);
+                  objectFit: "contain",
                 }}
               />
-            </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+    );
+  }
+
+  // --- Tablet Layout ---
+  if (isTablet) {
+    return (
+      <Grid container spacing={2} px={3}>
+        {allImages.map((url, idx) => (
+          <Grid xs={6} key={idx}>
+            <Box
+              component="img"
+              src={url}
+              alt={lang === "mn" ? data.mntitle : data.entitle}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                cursor: "pointer",
+              }}
+              onClick={() => handleOpen(idx)}
+            />
           </Grid>
         ))}
       </Grid>
     );
   }
 
-  if (isTablet) {
-    return (
-      <Grid container spacing={2} px={3}>
-        {getImages?.map((url, idx) => {
-          return (
-            <Grid size={6} key={idx}>
-              <Box
-                component="img"
-                src={url}
-                alt={lang === "mn" ? data.mntitle : data.entitle}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "fit",
-                  display: "block",
-                }}
-                onClick={() => {
-                  setSelectedImage(url);
-                  setOpen(true);
-                }}
-              />
-            </Grid>
-          );
-        })}
-      </Grid>
-    );
-  }
-
+  // --- Desktop Layout ---
   return (
-    <>
+    <Container>
       <Grid container spacing={2}>
-        {getImages.map((url, idx) => (
+        {allImages.map((url, idx) => (
           <Grid
             key={idx}
-            size={{ xs: 12, sm: 6, md: 3 }}
+            xs={12}
+            sm={6}
+            md={3}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -115,16 +119,14 @@ const FourImage = ({ data }) => {
                 objectFit: "cover",
                 cursor: "pointer",
               }}
-              onClick={() => {
-                setSelectedImage(url);
-                setOpen(true);
-              }}
+              onClick={() => handleOpen(idx)}
             />
           </Grid>
         ))}
       </Grid>
 
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      {/* Dialog with Swiper Carousel */}
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
         <IconButton
           onClick={handleClose}
           sx={{
@@ -141,20 +143,31 @@ const FourImage = ({ data }) => {
         >
           <CloseIcon />
         </IconButton>
-        <Box
-          component="img"
-          src={selectedImage}
-          alt={lang === "mn" ? data?.mntitle : data?.entitle}
-          sx={{
-            width: "100%",
-            height: "auto",
-            objectFit: "contain",
-            borderRadius: "0",
-            border: "2px solid #F5BF03",
-          }}
-        />
+
+        <Swiper
+          initialSlide={selectedIndex}
+          navigation
+          pagination={{ clickable: true }}
+          modules={[Navigation, Pagination]}
+          style={{ width: "100%", height: "100%" }}
+        >
+          {allImages.map((url, idx) => (
+            <SwiperSlide key={idx}>
+              <Box
+                component="img"
+                src={url}
+                alt={lang === "mn" ? data?.mntitle : data?.entitle}
+                sx={{
+                  width: "100%",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Dialog>
-    </>
+    </Container>
   );
 };
 

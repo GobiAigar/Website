@@ -4,10 +4,10 @@ import { Box } from "@mui/material";
 import { useAppData } from "../../../context/AppDataProvider";
 import TradeSection from "../../components/Sections/TradeSection";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
-import Loading from "../../components/keyComponents/Loading";
 import ProductMainSection from "./_ProductMainSection";
 import ProductInspection from "./_ProductInspection";
 import OurFactory from "./_OurFactory";
+import ProductSkeleton from "./_ProductSkelton";
 
 const Product = () => {
   const { product, loadingAll } = useAppData();
@@ -15,17 +15,21 @@ const Product = () => {
   const data = product?.data;
 
   const detials = [
-    data?.response[4],
-    data?.response[5],
-    data?.response[6],
-    data?.response[7],
+    data?.response.rows[4],
+    data?.response.rows[5],
+    data?.response.rows[6],
+    data?.response.rows[7],
   ];
 
-  const banner = data?.hero.find((item) => item.id === 2);
-  const tradeDatas = [data?.response[8], data?.response[9]];
+  const banner = data?.hero.rows.find((item) => item.id === 2);
+  const tradeDatas = [data?.response.rows[8], data?.response.rows[9]];
+
+  const manufacture = [];
+  manufacture.push(data?.response.rows[1]);
+  manufacture.push(data?.response.rows[2]);
 
   if (loadingAll) {
-    return <Loading />;
+    return <ProductSkeleton />;
   }
 
   return (
@@ -49,9 +53,9 @@ const Product = () => {
           width: "100%",
         }}
       >
-        <ProductMainSection data={data?.response[0]} />
-        <OurFactory data={data?.response[1]} datas={data?.response[2]} />
-        <ProductInspection data={data?.response[3]} detials={detials} />
+        <ProductMainSection data={data?.response.rows[0]} />
+        <OurFactory data={manufacture} />
+        <ProductInspection data={data?.response.rows[3]} detials={detials} />
         <TradeSection datas={tradeDatas} />
       </Box>
     </Box>

@@ -8,14 +8,14 @@ const WhiteTitle = ({ mntitle, entitle, reverse }) => {
     <Typography
       sx={{
         marginTop: 0,
-        fontWeight: "600",
+        fontWeight: "500",
         fontStyle: "normal",
         lineHeight: "150%",
         color: "white",
         textAlign:
           reverse === undefined ? "center" : reverse ? "right" : "left",
 
-        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+        textShadow: "2px 2px 4px rgba(0, 0, 0, 1)",
         fontSize: {
           xs: "1.75rem",
           sm: "2.25rem",

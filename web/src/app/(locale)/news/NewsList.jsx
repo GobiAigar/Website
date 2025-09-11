@@ -9,9 +9,12 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Chip,
 } from "@mui/material";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { readingTime } from "reading-time-estimator";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 const NewsList = ({ news }) => {
   const lang = useLocale();
@@ -20,6 +23,19 @@ const NewsList = ({ news }) => {
 
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const getReadingTime = (content) => {
+    if (!content) return lang === "mn" ? "1 мин" : "1 min";
+    const result = readingTime(content, 180);
+
+    if (result.minutes < 1) {
+      const minText = lang === "mn" ? "мин" : "min";
+      return `1 ${minText}`;
+    }
+
+    const minText = lang === "mn" ? "мин" : "min";
+    return `${result.minutes} ${minText}`;
+  };
 
   if (!news || news.length === 0) {
     return (
@@ -40,7 +56,7 @@ const NewsList = ({ news }) => {
               boxShadow: 4,
               cursor: "pointer",
               "&:hover .media": {
-                transform: "scale(1.05)",
+                transform: "scale(1.02)",
               },
               "&:hover .overlay": {
                 opacity: 1,
@@ -55,23 +71,48 @@ const NewsList = ({ news }) => {
                 borderRadius: 1,
                 overflow: "hidden",
               }}
-              onClick={() => router.push(`/${lang}/news/${news[0].id}`)}
+              onClick={() => router.push(`/news/${news[0].id}`)}
             >
               <Grid size={6}>
-                <CardMedia
-                  component="img"
-                  image={news[0]?.thumbnail}
-                  alt={news[0]?.entitle}
-                  className="media"
-                  sx={{
-                    height: "400px",
-                    width: "100%",
-                    objectFit: "cover",
-                    transition: "transform 0.5s ease",
-                    borderRadius: "0",
-                  }}
-                  loading="lazy"
-                />
+                <Box sx={{ position: "relative" }}>
+                  <CardMedia
+                    component="img"
+                    image={news[0]?.thumbnail}
+                    alt={news[0]?.entitle}
+                    className="media"
+                    sx={{
+                      height: "400px",
+                      width: "100%",
+                      objectFit: "cover",
+                      transition: "transform 0.5s ease",
+                      borderRadius: "0",
+                    }}
+                    loading="lazy"
+                  />
+                  {/* Reading Time Chip for Featured Article */}
+                  <Chip
+                    icon={<AccessTimeIcon sx={{ fontSize: "16px" }} />}
+                    label={getReadingTime(
+                      lang === "mn"
+                        ? news[0]?.mndescription
+                        : news[0]?.endescription
+                    )}
+                    sx={{
+                      position: "absolute",
+                      top: 16,
+                      right: 16,
+                      backgroundColor: "rgba(0, 0, 0, 0.7)",
+                      color: "white",
+                      fontSize: "0.75rem",
+                      height: "28px",
+                      "& .MuiChip-icon": {
+                        color: "white",
+                        fontSize: "14px",
+                      },
+                    }}
+                    size="small"
+                  />
+                </Box>
               </Grid>
               <Grid size={6}>
                 <Box
@@ -134,7 +175,7 @@ const NewsList = ({ news }) => {
                   opacity: 1,
                 },
               }}
-              onClick={() => router.push(`/${lang}/news/${item.id}`)}
+              onClick={() => router.push(`/news/${item.id}`)}
             >
               <CardActionArea sx={{ height: "100%", position: "relative" }}>
                 <CardMedia
@@ -150,6 +191,32 @@ const NewsList = ({ news }) => {
                     borderRadius: "0",
                   }}
                   loading="lazy"
+                />
+
+                {/* Reading Time Chip for Regular Cards */}
+                <Chip
+                  icon={<AccessTimeIcon sx={{ fontSize: "14px" }} />}
+                  label={getReadingTime(
+                    lang === "mn" ? item?.mndescription : item?.endescription
+                  )}
+                  sx={{
+                    position: "absolute",
+                    top: 12,
+                    right: 12,
+                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    color: "white",
+                    fontSize: "0.7rem",
+                    height: "24px",
+                    zIndex: 4,
+                    "& .MuiChip-icon": {
+                      color: "white",
+                      fontSize: "12px",
+                    },
+                    "& .MuiChip-label": {
+                      px: 1,
+                    },
+                  }}
+                  size="small"
                 />
 
                 <Box

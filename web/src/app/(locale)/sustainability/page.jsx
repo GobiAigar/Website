@@ -4,7 +4,7 @@ import { useAppData } from "../../../context/AppDataProvider";
 import { Box } from "@mui/material";
 import Test from "./_Test";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
-import Loading from "../../components/keyComponents/Loading";
+import SustainabilitySkeleton from "./_SustainabilitySkeleton";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -12,13 +12,12 @@ const Sustainability = () => {
   const { sustainability, loadingAll } = useAppData();
 
   if (loadingAll) {
-    return <Loading />;
+    return <SustainabilitySkeleton />;
   }
-
   const data = sustainability || {};
-  const mainInfo = data?.hero?.[0];
-  const sustainabilityText = sustainability?.response?.title[0];
-  const certificates = data?.response?.cerficates || [];
+  const mainInfo = data?.hero;
+  const sustainabilityText = sustainability?.response.title || [];
+  const certificates = data?.response?.certificates || [];
 
   return (
     <Box

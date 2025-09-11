@@ -21,15 +21,13 @@ const Page = () => {
 
     try {
       const response = await fetch(`${Backend_Endpoint}/api/header`);
-
       if (!response.ok) {
         throw new Error(
           `Failed to fetch data: ${response.status} ${response.statusText}`
         );
       }
-
       const data = await response.json();
-      setDatas(data?.response);
+      setDatas(data?.response?.rows);
     } catch (error) {
       console.error("Failed to fetch sustainability data:", error);
       setError(error.message || "Failed to load data. Please try again.");
@@ -37,11 +35,6 @@ const Page = () => {
       setLoading(false);
     }
   }, []);
-
-  const handleRefresh = useCallback(() => {
-    fetchdata();
-    setSuccessMessage("Data refreshed successfully");
-  }, [fetchdata]);
 
   const handleSuccess = useCallback(
     (message = "Operation completed successfully") => {
@@ -63,7 +56,11 @@ const Page = () => {
         width: "70",
         align: "center",
         headerAlign: "center",
+        alignItems: "center",
         sortable: false,
+        renderCell: (params) => {
+          return <Box>{params?.id}</Box>;
+        },
       },
       {
         field: "title",
@@ -122,7 +119,7 @@ const Page = () => {
     () =>
       (datas || []).map((row, idx) => ({
         ...row,
-        ui_id: idx + 1,
+        id: row.id,
       })),
     [datas]
   );

@@ -25,10 +25,13 @@ const Page = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+      console.log(data);
+
       const mergedData = [
-        ...data?.response?.title,
-        ...data?.response.cerficates,
+        data?.response.title,
+        ...data?.response?.certificates,
       ];
+
       setDatas(mergedData);
     } catch (error) {
       console.error("Failed to fetch sustainability data:", error);
@@ -53,6 +56,7 @@ const Page = () => {
       width: 70,
       align: "center",
       headerAlign: "center",
+      renderCell: (params) => <Box>{params.row.id}</Box>,
     },
     { field: "entitle", headerName: "Гарчиг /Англи/", flex: 1 },
     { field: "mntitle", headerName: "Гарчиг /Монгол/", flex: 1 },
@@ -67,15 +71,14 @@ const Page = () => {
       sortable: false,
       filterable: false,
       renderCell: (params) => {
-        const rowData = params.row;
         return (
           <Box sx={{ display: "flex" }}>
-            <SeeSustainability data={rowData} onSuccess={handleRefresh} />
-            <EditSustainability data={rowData} onSuccess={handleRefresh} />
-            {rowData.id != 1 && (
+            <SeeSustainability data={params} onSuccess={handleRefresh} />
+            <EditSustainability data={params} onSuccess={handleRefresh} />
+            {params.id != 1 && (
               <DeleteButton
                 type={"sustainability"}
-                id={rowData}
+                id={params}
                 onSuccess={handleRefresh}
               />
             )}
@@ -100,16 +103,15 @@ const Page = () => {
         </Box>
 
         <DataGrid
-          rows={(datas || []).map((row, idx) => ({
+          rows={(datas || []).map((row) => ({
             ...row,
-            ui_id: idx + 1,
           }))}
           columns={columns}
           loading={loading}
           disableMultipleRowSelection
           disableAutosize
           disableColumnResize
-          getRowId={(row) => row.id}
+          getRowId={(row) => row?.id}
           sx={{
             border: "2px solid #ddd",
             borderRadius: 2,

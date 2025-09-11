@@ -35,11 +35,8 @@ const AddSustainability = () => {
         <Formik
           initialValues={{
             entitle: "",
-            mntitle: "",
-            endescription: "",
-            mndescription: "",
+
             image_url1: "",
-            image_url2: "",
           }}
           onSubmit={async (values) => {
             try {
@@ -71,42 +68,10 @@ const AddSustainability = () => {
                   value={values.entitle}
                   onChange={(e) => setFieldValue("entitle", e.target.value)}
                 />
-                <TextField
-                  margin="dense"
-                  label="Гарчиг /Монгол/"
-                  fullWidth
-                  value={values.mntitle}
-                  onChange={(e) => setFieldValue("mntitle", e.target.value)}
-                />
-                <TextField
-                  margin="dense"
-                  label="Тайлбар /Англи/"
-                  fullWidth
-                  multiline
-                  minRows={4}
-                  value={values.endescription}
-                  onChange={(e) =>
-                    setFieldValue("endescription", e.target.value)
-                  }
-                />
-                <TextField
-                  margin="dense"
-                  label="Тайлбар /Монгол/"
-                  fullWidth
-                  multiline
-                  minRows={4}
-                  value={values.mndescription}
-                  onChange={(e) =>
-                    setFieldValue("mndescription", e.target.value)
-                  }
-                />
+
                 <FileUploader
                   setFieldValue={setFieldValue}
                   fieldName="image_url1"
-                />
-                <FileUploader
-                  setFieldValue={setFieldValue}
-                  fieldName="image_url2"
                 />
               </DialogContent>
               <DialogActions>

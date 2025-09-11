@@ -124,7 +124,7 @@ const Page = () => {
         <DataGrid
           rows={processedRows}
           columns={columns}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.ui_id}
           initialState={{
             pagination: {
               paginationModel: {

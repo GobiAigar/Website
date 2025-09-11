@@ -55,7 +55,7 @@ const TradeSection = ({ datas }) => {
   ]);
 
   return (
-    <Box marginBottom={{ xs: "3rem", md: "5rem" }}>
+    <Box marginBottom={{ xs: "3rem", md: "5rem" }} minHeight={"800px"}>
       <Container id={"tradeTerm"}>
         <Title
           entitle={selectedData?.entitle}

@@ -23,7 +23,7 @@ const Page = () => {
       const response = await fetch(`${Backend_Endpoint}/api/news`);
       const data = await response.json();
 
-      setDatas(data?.data?.response || []);
+      setDatas(data?.data?.news || []);
     } catch (error) {
       setError(error);
       throw new Error(error.message);
@@ -47,6 +47,9 @@ const Page = () => {
       width: 70,
       align: "center",
       headerAlign: "center",
+      renderCell: (params) => {
+        return <span>{params.row.id}</span>;
+      },
     },
     { field: "mntitle", headerName: "Гарчиг", flex: 1, headerAlign: "center" },
     {
@@ -106,9 +109,8 @@ const Page = () => {
         </Box>
 
         <DataGrid
-          rows={(datas || []).map((row, idx) => ({
+          rows={datas.map((row) => ({
             ...row,
-            ui_id: idx + 1,
           }))}
           columns={columns}
           loading={loading}

@@ -3,14 +3,14 @@
 import { Box, Container, Typography, Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import NewsList from "../../components/news/NewsList";
+import NewsList from "./NewsList";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
-import Loading from "../../components/keyComponents/Loading";
+import NewsSkeleton from "./_NewsSkeleton";
 
 const NewsClient = () => {
   const [initialNews, setInitialNews] = useState(null);
   const [news, setNews] = useState([]);
-  const [total, setTotal] = useState(0);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +27,7 @@ const NewsClient = () => {
         const data = await res.json();
 
         setNews(data?.data);
-        setTotal(data?.total || 0);
+
         setInitialNews(data?.header?.[0]);
       } catch (err) {
         console.error("Fetch error:", err);
@@ -37,10 +37,10 @@ const NewsClient = () => {
     };
 
     fetchNews();
-  }, [currentPage]);
+  }, []);
 
   if (loading) {
-    return <Loading />;
+    return <NewsSkeleton />;
   }
 
   if (!initialNews) {

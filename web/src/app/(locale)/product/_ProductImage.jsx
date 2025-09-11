@@ -47,15 +47,15 @@ export default function ProductImage({ data }) {
       <Grid container>
         {getImages?.map((url, idx) => {
           return (
-            <Grid size={6} key={idx}>
+            <Grid size={4} key={idx}>
               <Box
                 component="img"
                 src={url}
                 alt={lang === "mn" ? data.mntitle : data.entitle}
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "fit",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
                   display: "block",
                 }}
               />

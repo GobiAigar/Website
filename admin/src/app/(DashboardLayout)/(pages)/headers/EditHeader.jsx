@@ -103,8 +103,12 @@ const EditHeader = ({ data }) => {
                 />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Буцах</Button>
-                <Button type="submit">Шинэчлэх</Button>
+                <Button onClick={handleClose} color="primary" variant="text">
+                  Буцах
+                </Button>
+                <Button type="submit" color="primary" variant="contained">
+                  Шинэчлэх
+                </Button>
               </DialogActions>
             </Form>
           )}

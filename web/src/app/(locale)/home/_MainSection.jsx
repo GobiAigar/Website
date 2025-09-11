@@ -72,12 +72,11 @@ const MainSection = ({ data, imgFirst }) => {
         <Grid container gap={3} direction={imgFirst ? "row-reverse" : "row"}>
           <Grid
             ref={imgRef}
-            size={{ xs: 12, md: 5.5 }}
+            size={{ xs: 12, md: 5 }}
             sx={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
             }}
           >
             {isMobile && (
@@ -90,7 +89,7 @@ const MainSection = ({ data, imgFirst }) => {
           </Grid>
 
           <Grid
-            size={{ xs: 12, md: 6.2 }}
+            size={{ xs: 12, md: "grow" }}
             sx={{
               display: "flex",
               flexDirection: "column",

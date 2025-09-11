@@ -3,22 +3,14 @@ import GoldenDivider from "../../components/keyComponents/GoldenDivider";
 import Title from "../../components/keyComponents/Title";
 import FourImage from "./_FourImage";
 
-const OurFactory = ({ data, datas }) => {
+const OurFactory = ({ data }) => {
+  console.log(data);
+
   return (
-    <Box marginY={"2rem"}>
-      <Title entitle={data?.entitle} mntitle={data?.mntitle} />
+    <Box marginY={"4rem"}>
+      <Title entitle={data[0]?.entitle} mntitle={data[0]?.mntitle} />
       <GoldenDivider />
-      <Box
-        display={"flex"}
-        flexDirection={"column"}
-        gap={1}
-        marginY={"2rem"}
-        alignItems={"center"}
-      >
-        <FourImage data={data} />
-        <FourImage data={datas} />
-      </Box>
-      \
+      <FourImage data={data} />
     </Box>
   );
 };

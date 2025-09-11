@@ -211,7 +211,9 @@ const EditNews = ({ data }) => {
             <Divider />
 
             <DialogActions>
-              <Button onClick={handleClose}>Буцах</Button>
+              <Button onClick={handleClose} color="primary" variant="text">
+                Буцах
+              </Button>
               <Button color="primary" variant="contained" type="submit">
                 Шинэчлэх
               </Button>

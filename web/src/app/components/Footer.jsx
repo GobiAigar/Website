@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
-import { GobiAigarIcon } from "./Icon";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -23,18 +22,18 @@ const Footer = () => {
   const locale = useLocale();
 
   const getValue = (id) => {
-    const item = company?.find((e) => e.id === id);
+    const item = company?.rows.find((e) => e.id === id);
     return locale === "mn" ? item?.mongolia : item?.english;
   };
 
   return (
     <Box
-      position={"relative"}
       sx={{
+        position: "relative",
         width: "100%",
         bgcolor: "#111928",
         py: { xs: "2.5rem" },
-        px: "auto",
+
         color: "white",
         display: "flex",
         alignItems: "center",
@@ -43,17 +42,17 @@ const Footer = () => {
     >
       <Container
         sx={{
-          display: { xs: "flex" },
+          display: "flex",
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
-          justifyItems: "center",
+          justifyItems: "space-between",
           gap: 2,
         }}
       >
         <Box
           sx={{
             width: "100%",
-            display: { xs: "flex" },
+            display: "flex",
             flexDirection: { xs: "column" },
             gap: 2,
           }}
@@ -70,7 +69,7 @@ const Footer = () => {
         <Box
           sx={{
             width: "100%",
-            display: { xs: "flex" },
+            display: "flex",
             flexDirection: { xs: "column" },
 
             gap: 2,
@@ -87,7 +86,7 @@ const Footer = () => {
         <Box
           sx={{
             width: "100%",
-            display: { xs: "flex" },
+            display: "flex",
             flexDirection: { xs: "column" },
             gap: 2,
           }}

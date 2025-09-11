@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 
 import { usePathname } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { GobiAigarIcon } from "./Icon";
 
 const Header = () => {
@@ -32,17 +32,16 @@ const Header = () => {
 
   const pathname = usePathname();
   const t = useTranslations();
-  const locale = useLocale();
 
-  const isHome = pathname === `/home`;
   const isActive = (path) => {
-    if (path === "home") {
-      return pathname === `/home`;
+    if (path === "") {
+      return pathname === `/`;
     }
-    return pathname === `/${path}`;
+    return pathname.startsWith(`/${path}`);
   };
+
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +61,7 @@ const Header = () => {
   };
 
   const navLinks = [
-    { label: t("nav.home"), path: "home" },
+    { label: t("nav.home"), path: "" },
     { label: t("nav.product"), path: "product" },
     { label: t("nav.sustainability"), path: "sustainability" },
     { label: t("nav.news"), path: "news" },
@@ -74,7 +73,6 @@ const Header = () => {
       position="fixed"
       elevation={isScrolled ? 4 : 0}
       sx={{
-        // backgroundColor: isScrolled ? "#fff" : "rgba(0,0,0,0)",
         backgroundColor: "#fff",
         backdropFilter: isScrolled ? "blur(6px)" : "none",
         transition: "all 0.3s ease",
@@ -89,16 +87,9 @@ const Header = () => {
               transition: "background-color 0.3s ease",
             }}
           >
-            {isScrolled ? (
-              <Link href={"/"}>
-                <GobiAigarIcon size={200} />
-              </Link>
-            ) : (
-              <Link href={"/"}>
-                <GobiAigarIcon size={200} />
-                {/* <GobiAigarIcon size={200} color={"#fff"} /> */}
-              </Link>
-            )}
+            <Link href={"/"}>
+              <GobiAigarIcon size={200} />
+            </Link>
           </Box>
 
           {isMobile ? (
@@ -111,7 +102,7 @@ const Header = () => {
             <Box
               sx={{
                 display: "flex",
-                gap: { lg: 5, md: 4, sm: 1.5 },
+                gap: { lg: 2.5, md: 2, sm: 1 },
                 alignItems: "center",
                 width: "100%",
                 justifyContent: "flex-end",
@@ -122,7 +113,9 @@ const Header = () => {
                   key={link.path}
                   sx={{
                     position: "relative",
-                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+
                     "&:after": {
                       content: '""',
                       position: "absolute",
@@ -140,14 +133,12 @@ const Header = () => {
                     "&:hover:after": {
                       width: "100%",
                     },
-                    display: "flex",
                   }}
                 >
                   <Link
                     href={`/${link.path}`}
                     style={{
                       textDecoration: "none",
-                      // color: isScrolled ? "#333" : "white",
                       color: "#333",
                     }}
                   >
@@ -163,6 +154,7 @@ const Header = () => {
         </Toolbar>
       </Container>
 
+      {/* Mobile Menu */}
       <Drawer
         anchor="left"
         open={isMobileMenuOpen}

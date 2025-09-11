@@ -3,27 +3,22 @@
 import {
   Box,
   Button,
-  Container,
   Grid,
-  Typography,
   TextField,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
   Snackbar,
   Alert,
-  Skeleton,
+  Container,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppData } from "../../../context/AppDataProvider";
-import Narrow from "./_Narrow";
-import Description from "../../components/keyComponents/Description";
-import Loading from "../../components/keyComponents/Loading";
+import ContactSkeleton from "./_ContactSkeleton";
+import { Typography } from "@mui/material";
+import { useLocale } from "next-intl";
 import PageHeaderNarrow from "../../components/keyComponents/PageHeaderNarrow";
+import { relative } from "path";
 
 const Contact = () => {
   const t = useTranslations("contact");
@@ -32,6 +27,8 @@ const Contact = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+
+  const lang = useLocale();
 
   const formik = useFormik({
     initialValues: {
@@ -43,7 +40,7 @@ const Contact = () => {
     validationSchema: Yup.object({
       email: Yup.string().email(t("invalidEmail")).required(t("required")),
       firstname: Yup.string().required(t("required")),
-      phonenumber: Yup.string().required(t("required")),
+      phonenumber: Yup.string(),
       plan: Yup.string().required(t("required")),
     }),
     onSubmit: async (values, { resetForm }) => {
@@ -75,145 +72,157 @@ const Contact = () => {
     },
   });
 
-  const data = message?.[0];
+  const data = message?.data;
 
   if (loadingWebsite) {
-    return <Loading />;
+    return <ContactSkeleton />;
   }
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        top: 64,
-        overflow: "hidden",
-        bgcolor: "background.default",
-        minHeight: "90vh",
-      }}
-    >
+    <Box>
       <PageHeaderNarrow data={data} />
       <Box
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        flexDirection={"column"}
+        py={8}
         sx={{
-          backgroundImage: "url('/contactBg.png')",
-          backgroundRepeat: "no-repeat",
+          backgroundImage: `url(./slogan.png)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          width: "100%",
         }}
       >
-        <Box
-          maxWidth="680px"
-          marginY={"2rem"}
-          paddingX={{ xs: "2rem", sm: "1rem", md: "0" }}
-        >
-          {/* <Box marginY={"2rem"}>
-            <Description
-              mndescription={data?.mnsubtitle}
-              endescription={data?.ensubtitle}
-            />
-          </Box> */}
-          <Box marginBottom={"8rem"}>
-            <Grid container spacing={4}>
-              <Grid size={{ xs: 12 }}>
-                <Box
-                  sx={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <form onSubmit={formik.handleSubmit}>
-                    <Grid container spacing={2}>
-                      {[
-                        { name: "email", label: t("email") },
-                        { name: "firstname", label: t("firstName") },
-                      ].map((field, index) => (
-                        <Grid size={{ xs: 12, sm: 6 }} key={index}>
+        <Container>
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Grid container spacing={4}>
+                <Grid size={{ xs: 12 }}>
+                  <Box
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <form onSubmit={formik.handleSubmit}>
+                      <Grid container spacing={2}>
+                        {[
+                          { name: "email", label: t("email") },
+                          { name: "firstname", label: t("firstName") },
+                        ].map((field, index) => (
+                          <Grid size={{ xs: 12, sm: 6 }} key={index}>
+                            <TextField
+                              InputLabelProps={{ shrink: true }}
+                              fullWidth
+                              name={field.name}
+                              label={field.label}
+                              sx={{
+                                backgroundColor: "rgba(255,255,255,0.1)", // semi-transparent
+                                borderRadius: "0",
+                                backdropFilter: "blur(2px)", // frosted-glass effect
+                              }}
+                              value={formik.values[field.name]}
+                              onChange={formik.handleChange}
+                              error={Boolean(
+                                formik.touched[field.name] &&
+                                  formik.errors[field.name]
+                              )}
+                              helperText={
+                                formik.touched[field.name] &&
+                                formik.errors[field.name]
+                              }
+                            />
+                          </Grid>
+                        ))}
+
+                        <Grid size={{ xs: 12 }}>
                           <TextField
+                            InputLabelProps={{ shrink: true }}
                             fullWidth
-                            name={field.name}
-                            label={field.label}
-                            sx={{ backgroundColor: "white" }}
-                            value={formik.values[field.name]}
+                            name="phonenumber"
+                            label={t("phoneNumber")}
+                            value={formik.values.phonenumber}
+                            sx={{
+                              backgroundColor: "rgba(255,255,255,0.1)", // semi-transparent
+                              borderRadius: "8px",
+                              backdropFilter: "blur(2px)", // frosted-glass effect
+                            }}
                             onChange={formik.handleChange}
                             error={Boolean(
-                              formik.touched[field.name] &&
-                                formik.errors[field.name]
+                              formik.touched.phonenumber &&
+                                formik.errors.phonenumber
                             )}
                             helperText={
-                              formik.touched[field.name] &&
-                              formik.errors[field.name]
+                              formik.touched.phonenumber &&
+                              formik.errors.phonenumber
                             }
                           />
                         </Grid>
-                      ))}
 
-                      <Grid size={{ xs: 12 }}>
-                        <TextField
-                          fullWidth
-                          name="phonenumber"
-                          label={t("phoneNumber")}
-                          value={formik.values.phonenumber}
-                          sx={{ backgroundColor: "white" }}
-                          onChange={formik.handleChange}
-                          error={Boolean(
-                            formik.touched.phonenumber &&
-                              formik.errors.phonenumber
-                          )}
-                          helperText={
-                            formik.touched.phonenumber &&
-                            formik.errors.phonenumber
-                          }
-                        />
-                      </Grid>
+                        <Grid size={{ xs: 12 }}>
+                          <TextField
+                            InputLabelProps={{ shrink: true }}
+                            fullWidth
+                            multiline
+                            sx={{
+                              backgroundColor: "rgba(255,255,255,0.1)",
+                              borderRadius: "8px",
+                              backdropFilter: "blur(2px)",
+                            }}
+                            rows={3}
+                            name="plan"
+                            label={t("plan")}
+                            value={formik.values.plan}
+                            onChange={formik.handleChange}
+                          />
+                        </Grid>
 
-                      <Grid size={{ xs: 12 }}>
-                        <TextField
-                          fullWidth
-                          multiline
-                          sx={{ backgroundColor: "white" }}
-                          rows={3}
-                          name="plan"
-                          label={t("plan")}
-                          value={formik.values.plan}
-                          onChange={formik.handleChange}
-                        />
-                      </Grid>
-
-                      <Grid
-                        size={{ xs: 12 }}
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          gap: 2,
-                        }}
-                      >
-                        <Button
-                          type="submit"
-                          fullWidth
-                          height="4rem"
-                          variant="contained"
+                        <Grid
+                          size={{ xs: 12 }}
                           sx={{
-                            background: "#6E1221",
-                            border: "2px solid #6E1221",
-                            "&:hover": { backgroundColor: "#4a0d17" },
-                            color: "white",
+                            display: "flex",
+                            justifyContent: "center",
+                            gap: 2,
                           }}
                         >
-                          {t("submit")}
-                        </Button>
+                          <Button
+                            type="submit"
+                            fullWidth
+                            height="4rem"
+                            variant="contained"
+                            sx={{
+                              background: "#6E1221",
+                              border: "2px solid #6E1221",
+                              "&:hover": { backgroundColor: "#4a0d17" },
+                              color: "white",
+                            }}
+                          >
+                            {t("submit")}
+                          </Button>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </form>
-                </Box>
+                    </form>
+                  </Box>
+                </Grid>
               </Grid>
             </Grid>
-          </Box>
-        </Box>
+            <Grid size={{ xs: 0, md: 6 }}>
+              <Box>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2675.7131738237736!2d106.79606814538914!3d47.883880242847844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d9693aaedc40afb%3A0x73d5d64c7d5b7f4b!2z0JPQvtCy0Ywg0JDQudCz0LDRgCDQpdCl0JogLyBHb2JpIEFpZ2FyIExMQw!5e1!3m2!1sen!2smn!4v1756974976079!5m2!1sen!2smn"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    border: 0,
+                    display: "block",
+                    minHeight: "300px",
+                  }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Gobi Aigar LLC Location Map"
+                />
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
       </Box>
 
       <Snackbar

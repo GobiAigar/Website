@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import FileUploader from "../website/FileUploader";
+import FileUploader from "../../components/website/FileUploader";
 import { Backend_Endpoint } from "@/constants/constants";
 
 export default function EditHome({ data, onClose, onSubmitSuccess }) {
@@ -153,7 +153,7 @@ export default function EditHome({ data, onClose, onSubmitSuccess }) {
       </Grid>
 
       <DialogActions>
-        <Button onClick={onClose} color="primary" variant="outlined">
+        <Button onClick={onClose} color="primary" variant="text">
           Буцах
         </Button>
         <Button type="submit" variant="contained" color="primary">

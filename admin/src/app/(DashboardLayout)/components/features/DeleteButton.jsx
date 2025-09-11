@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { IconTrash } from "@tabler/icons-react";
 import MuiAlert from "@mui/material/Alert";
+import { identity } from "lodash";
 
 const DeleteButton = ({ type, id }) => {
   const [snackbar, setSnackbar] = useState({
@@ -39,12 +40,14 @@ const DeleteButton = ({ type, id }) => {
           "Content-type": "application/json",
         },
       });
+      handleClose();
       if (response.ok) {
         setSnackbar({
           open: true,
           message: "Амжилттай устгагдлаа",
           severity: "success",
         });
+        window.location.reload();
       } else {
         setSnackbar({
           open: true,
@@ -81,7 +84,7 @@ const DeleteButton = ({ type, id }) => {
           <Button
             onClick={submit}
             autoFocus
-            variant="outlined"
+            variant="contained"
             sx={{ color: "red", borderColor: "red" }}
           >
             Тийм

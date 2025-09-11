@@ -16,15 +16,15 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import EditProduct from "../../components/features/EditProduct";
-import SeeDetailsProduct from "../../components/features/SeeDetailsProduct";
+import EditProduct from "./EditProduct";
+import SeeDetailsProduct from "./SeeDetailsProduct";
 import { IconEdit, IconEye } from "@tabler/icons-react";
 
 const Page = () => {
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedData, setSelecedData] = useState(null);
-  const [editOpen, setEditOpen] = useState(false);
+
   const [viewOpen, setViewOpen] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
 
@@ -33,14 +33,12 @@ const Page = () => {
     try {
       const response = await fetch(`${Backend_Endpoint}/api/product`);
       const data = await response.json();
-      const newData = data?.data?.response?.map((item, index) => ({
-        ...item,
-        index: index + 1,
-      }));
-      setDatas(newData || []);
+
+      setDatas(data?.data?.response?.rows);
+
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setLoading(false);
     }
   };
@@ -58,6 +56,9 @@ const Page = () => {
       width: 70,
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => {
+        return <Box>{params?.id}</Box>;
+      },
     },
     {
       field: "title",
@@ -97,24 +98,16 @@ const Page = () => {
       headerAlign: "center",
       align: "center",
       renderCell: (params) => (
-        <Box>
-          <IconButton
-            onClick={() => {
-              setSelecedData(params.row);
-              setViewOpen(true);
-            }}
-          >
-            <IconEye color="blue" />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setSelecedData(params.row);
-              setEditOpen(true);
-            }}
-            color="primary"
-          >
-            <IconEdit />
-          </IconButton>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 0.5,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SeeDetailsProduct data={params.row} />
+          <EditProduct data={params.row} />
         </Box>
       ),
     },
@@ -158,52 +151,6 @@ const Page = () => {
             }}
           />
         </Box>
-
-        <Dialog
-          open={viewOpen}
-          onClose={() => setViewOpen(false)}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle>Дэлгэрэнгүй</DialogTitle>
-          <DialogContent>
-            <SeeDetailsProduct
-              data={selectedData}
-              onClose={() => setViewOpen(false)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => setViewOpen(false)}
-              color="primary"
-              variant="outlined"
-            >
-              Буцах
-            </Button>
-          </DialogActions>
-        </Dialog>
-
-        <Dialog
-          open={editOpen}
-          onClose={() => setEditOpen(false)}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle>Засах</DialogTitle>
-          <DialogContent>
-            {selectedData && (
-              <EditProduct
-                data={selectedData}
-                onClose={() => setEditOpen(false)}
-                onSubmitSuccess={() => {
-                  setEditOpen(false);
-                  fetchdata();
-                  setSuccessOpen(true);
-                }}
-              />
-            )}
-          </DialogContent>
-        </Dialog>
       </Grid>
 
       <Snackbar

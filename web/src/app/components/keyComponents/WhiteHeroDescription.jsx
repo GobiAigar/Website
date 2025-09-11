@@ -6,10 +6,10 @@ const WhiteDescription = ({ mndescription, endescription, textAlign }) => {
 
   return (
     <Typography
-      variant="body1"
       sx={{
         textAlign: `${textAlign}`,
         whiteSpace: "pre-line",
+        fontWeight: "100",
         color: "white",
         lineHeight: "1.5",
         textShadow: "1px 1px 2px rgba(0,0,0,0.8)",

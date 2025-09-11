@@ -21,7 +21,6 @@ const ProductImageSection = ({ data }) => {
     <Box marginY={{ xs: "5rem", md: "10rem" }}>
       <Grid container size={12}>
         <Grid
-          item
           size={{ xs: 12, md: 3 }}
           sx={{
             display: "flex",
@@ -44,7 +43,6 @@ const ProductImageSection = ({ data }) => {
         </Grid>
 
         <Grid
-          item
           size={{ xs: 12, md: 6 }}
           sx={{
             display: "flex",

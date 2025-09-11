@@ -24,12 +24,7 @@ export default function RootLayout({ children }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const router = useRouter();
-  useEffect(() => {
-    const user = sessionStorage.getItem("user");
-    if (!user) {
-      router.push("/authentication/login");
-    }
-  });
+
   return (
     <MainWrapper className="mainwrapper">
       {/* ------------------------------------------- */}

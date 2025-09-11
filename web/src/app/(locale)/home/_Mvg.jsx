@@ -111,7 +111,7 @@ const Mvg = ({ datas }) => {
         <Typography
           ref={descriptionRef}
           variant="body1"
-          width={"50%"}
+          maxWidth={{ xs: "90%", sm: "70%", md: "50%" }}
           sx={{ willChange: "transform, opacity" }}
         >
           {lang === "mn"

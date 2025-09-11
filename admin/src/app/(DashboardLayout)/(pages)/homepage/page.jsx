@@ -16,8 +16,8 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import HomeDetails from "../../components/features/SeeHomeDetails";
-import EditHome from "../../components/features/EditHome";
+import HomeDetails from "./SeeHomeDetails";
+import EditHome from "./EditHome";
 import { IconEdit, IconEye } from "@tabler/icons-react";
 
 const Page = () => {
@@ -33,12 +33,9 @@ const Page = () => {
     try {
       const response = await fetch(`${Backend_Endpoint}/api/website`);
       const data = await response.json();
-      const newData = data?.data?.response?.map((item, index) => ({
-        ...item,
-        index: index + 1,
-      }));
 
-      setDatas(newData);
+      setDatas(data?.data.response.rows);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -59,6 +56,7 @@ const Page = () => {
       width: 70,
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => <Box>{params?.id}</Box>,
     },
     { field: "title", headerName: "Хэсгийн нэр", flex: 1 },
     { field: "entitle", headerName: "Гарчиг /Англи/", flex: 1 },
@@ -146,7 +144,7 @@ const Page = () => {
             <Button
               onClick={() => setViewOpen(false)}
               color="primary"
-              variant="outlined"
+              variant="text"
             >
               Буцах
             </Button>

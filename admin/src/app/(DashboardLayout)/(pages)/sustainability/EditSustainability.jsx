@@ -19,6 +19,8 @@ import { IconEdit } from "@tabler/icons-react";
 import { Backend_Endpoint } from "@/constants/constants";
 
 const EditSustainability = ({ data }) => {
+  console.log(data);
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -36,12 +38,11 @@ const EditSustainability = ({ data }) => {
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <Formik
           initialValues={{
-            entitle: data?.entitle || "",
-            mntitle: data?.mntitle || "",
-            endescription: data?.endescription || "",
-            mndescription: data?.mndescription || "",
-            image_url1: data?.image_url1 || "",
-            image_url2: data?.image_url2 || "",
+            entitle: data?.row?.entitle || "",
+            mntitle: data?.row?.mntitle || "",
+            endescription: data?.row?.endescription || "",
+            mndescription: data?.row?.mndescription || "",
+            image_url1: data?.row?.image_url1 || "",
           }}
           enableReinitialize={true}
           onSubmit={async (values) => {
@@ -109,22 +110,17 @@ const EditSustainability = ({ data }) => {
                 <FileUploader
                   setFieldValue={setFieldValue}
                   fieldName="image_url1"
-                  initialPreview={data?.image_url1}
-                  alt="Uploaded"
-                />
-                <Typography variant="h6" gutterBottom>
-                  Англи хэл дээрх зураг
-                </Typography>
-                <FileUploader
-                  setFieldValue={setFieldValue}
-                  fieldName="image_url2"
-                  initialPreview={data?.image_url2}
+                  initialPreview={data?.row?.image_url1}
                   alt="Uploaded"
                 />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Буцах</Button>
-                <Button type="submit">Шинэчлэх</Button>
+                <Button onClick={handleClose} color="primary" variant="text">
+                  Буцах
+                </Button>
+                <Button type="submit" color="primary" variant="contained">
+                  Шинэчлэх
+                </Button>
               </DialogActions>
             </Form>
           )}

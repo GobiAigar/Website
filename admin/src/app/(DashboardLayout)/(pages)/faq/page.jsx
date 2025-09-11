@@ -25,7 +25,7 @@ const Page = () => {
 
       const data = await response.json();
 
-      setDatas(data || []);
+      setDatas(data?.rows);
     } catch (error) {
       console.error("Failed to fetch sustainability data:", error);
       setError("Failed to load data. Please try again.");
@@ -49,6 +49,9 @@ const Page = () => {
       width: 70,
       align: "center",
       headerAlign: "center",
+      renderCell: (params) => {
+        return <span>{params.row.id}</span>;
+      },
     },
     {
       field: "enquestion",
@@ -116,7 +119,6 @@ const Page = () => {
         <DataGrid
           rows={(datas || []).map((row, idx) => ({
             ...row,
-            ui_id: idx + 1,
           }))}
           columns={columns}
           loading={loading}

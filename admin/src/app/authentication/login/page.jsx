@@ -68,7 +68,7 @@ const Login2 = () => {
   };
 
   return (
-    <PageContainer title="Login" description="this is Login page">
+    <PageContainer title="Нэвтрэх">
       <Box
         minHeight="100vh"
         display="flex"
