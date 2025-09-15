@@ -4,8 +4,6 @@ import Title from "../../components/keyComponents/Title";
 import FourImage from "./_FourImage";
 
 const OurFactory = ({ data }) => {
-  console.log(data);
-
   return (
     <Box marginY={"4rem"}>
       <Title entitle={data[0]?.entitle} mntitle={data[0]?.mntitle} />

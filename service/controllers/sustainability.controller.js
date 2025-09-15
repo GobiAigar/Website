@@ -101,7 +101,6 @@ export const sustainabilityController = {
   // ---------------- DELETE ----------------
   delete: async (req, res) => {
     const id = req.params.id;
-    console.log(id);
 
     try {
       const response = await sql.query(

@@ -80,14 +80,14 @@ const AddNews = () => {
         <Card sx={{ padding: 2 }}>
           <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
             <Grid container spacing={3}>
-              <Grid item size={12}>
+              <Grid size={12}>
                 <Typography variant="h4">Мэдээ нэмэх</Typography>
                 <Divider sx={{ mt: 2 }} />
               </Grid>
 
-              <Grid item size={12}>
+              <Grid size={12}>
                 <Grid container spacing={2}>
-                  <Grid item size={12} sm={6}>
+                  <Grid size={12} sm={6}>
                     <TextField
                       fullWidth
                       id="mntitle"
@@ -104,7 +104,7 @@ const AddNews = () => {
                       }
                     />
                   </Grid>
-                  <Grid item size={12} sm={6}>
+                  <Grid size={12} sm={6}>
                     <TextField
                       fullWidth
                       id="mnjournalist"
@@ -123,7 +123,7 @@ const AddNews = () => {
                       }
                     />
                   </Grid>
-                  <Grid item size={12}>
+                  <Grid size={12}>
                     <TextField
                       fullWidth
                       id="mndescription"
@@ -148,9 +148,9 @@ const AddNews = () => {
               </Grid>
 
               {/* English Section */}
-              <Grid item size={12}>
+              <Grid size={12}>
                 <Grid container spacing={2}>
-                  <Grid item size={12} sm={6}>
+                  <Grid size={12} sm={6}>
                     <TextField
                       fullWidth
                       id="entitle"
@@ -167,7 +167,7 @@ const AddNews = () => {
                       }
                     />
                   </Grid>
-                  <Grid item size={12} sm={6}>
+                  <Grid size={12} sm={6}>
                     <TextField
                       fullWidth
                       id="enjournalist"
@@ -186,7 +186,7 @@ const AddNews = () => {
                       }
                     />
                   </Grid>
-                  <Grid item size={12}>
+                  <Grid size={12}>
                     <TextField
                       fullWidth
                       id="endescription"
@@ -228,7 +228,7 @@ const AddNews = () => {
             </Grid>
 
             {/* Divider */}
-            <Grid item size={12}>
+            <Grid size={12}>
               <Divider />
             </Grid>
 

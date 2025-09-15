@@ -31,8 +31,6 @@ const validationSchema = Yup.object({
 });
 
 export default function EditProduct({ data }) {
-  console.log(data);
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

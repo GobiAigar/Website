@@ -6,7 +6,7 @@ export const companyController = {
       const response = await sql.query(`SELECT * FROM company ORDER BY id ASC`);
       res.status(200).json(response);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
@@ -26,6 +26,7 @@ export const companyController = {
   },
   updateCompany: async (req, res) => {
     const id = req.params.id;
+
     const { title, english, mongolia } = req.body;
 
     try {
@@ -42,7 +43,7 @@ export const companyController = {
 
       res.status(200).json(response);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },

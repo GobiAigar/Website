@@ -39,7 +39,7 @@ export default function EditHome({ data, onClose, onSubmitSuccess }) {
 
         if (onSubmitSuccess) onSubmitSuccess();
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
   });

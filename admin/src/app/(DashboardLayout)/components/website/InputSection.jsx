@@ -31,7 +31,7 @@ const InputSection = ({ data, id }) => {
           alert("amjilttai soligloo");
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
   });

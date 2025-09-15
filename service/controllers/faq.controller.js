@@ -6,7 +6,7 @@ export const faqController = {
       const response = await sql.query(`SELECT * FROM faq`);
       res.status(200).json(response);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
@@ -17,7 +17,7 @@ export const faqController = {
       );
       res.status(200).json(response);
     } catch {
-      console.log("error", error);
+      console.error("error", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
@@ -30,7 +30,7 @@ export const faqController = {
       );
       res.status(200).json(response);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
@@ -53,7 +53,7 @@ export const faqController = {
 
       res.status(200).json(response);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },

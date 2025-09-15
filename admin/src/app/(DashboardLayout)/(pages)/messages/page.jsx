@@ -22,7 +22,7 @@ const Page = () => {
       setDatas(data?.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setLoading(false);
     }
   };

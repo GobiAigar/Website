@@ -2,6 +2,7 @@ import { sql } from "../server.js";
 import { sendEmail } from "../utils/mail.js";
 import { generateOTP } from "../utils/otp.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const userController = {
   getUsers: async (req, res) => {
@@ -29,7 +30,21 @@ export const userController = {
           .json({ status: "failed", message: "Хэрэглэгчийн нэр буруу байна" });
       }
 
-      return res.status(200).json(rows[0]);
+      if (rows[0].password === password) {
+        return res.status(400).json({
+          status: "failed",
+          message: "Хэрэглэгчийн нууц үг буруу байна",
+        });
+      }
+      const token = jwt.sign(
+        {
+          user_id: rows[0].id,
+          username: rows[0].username,
+        },
+        process.env.JSON_WEB_TOKEN_SECRET_KEY,
+        { expiresIn: "1h" }
+      );
+      return res.status(200).json(token);
     } catch (error) {
       console.error("Error checking user:", error);
       res.status(500).json({ error: "Internal Server Error" });
@@ -38,6 +53,7 @@ export const userController = {
 
   generateOTP: async (req, res) => {
     const { email } = req.body;
+
     try {
       const { rows } = await sql.query(`SELECT * FROM users WHERE email = $1`, [
         email,
@@ -48,6 +64,7 @@ export const userController = {
           message: "Хэрэглэгчийн э-майл буруу байна",
         });
       }
+
       const otp = generateOTP();
       sendEmail(email, otp);
 
@@ -83,8 +100,9 @@ export const userController = {
           message: "Нэг удаагийн нууц үг буруу байна",
         });
       }
+      const saltRounds = 10;
 
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
 
       await sql.query(
         `UPDATE users SET password = $1, otp = null, otp_created_at = null WHERE email = $2`,

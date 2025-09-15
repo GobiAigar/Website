@@ -19,8 +19,6 @@ import { IconEdit } from "@tabler/icons-react";
 import { Backend_Endpoint } from "@/constants/constants";
 
 const EditSustainability = ({ data }) => {
-  console.log(data);
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

@@ -13,7 +13,9 @@ import sustainabilityRouter from "./routes/sustainability.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 import pageHeader from "./routes/page_header.route.js";
 import { companyRouter } from "./routes/company.route.js";
+import { authenticateIfNotGet } from "./middleware/authMiddleware.js";
 import { Pool } from "pg";
+import helmet from "helmet";
 
 dotenv.config();
 
@@ -27,7 +29,7 @@ export const sql = new Pool({
 
 sql
   .query("SELECT NOW()")
-  .then((res) => console.log("Connected to VPS PostgreSQL:", res.rows[0]))
+  .then((res) => console.error("Connected to VPS PostgreSQL:", res.rows[0]))
   .catch((err) => console.error("PostgreSQL connection error:", err));
 // export const sql = neon(`${process.env.DATABASE_URL}`);
 
@@ -37,20 +39,39 @@ const port = process.env.PORT || 8000;
 server.use(cors());
 server.use(bodyParser.json());
 
+server.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: [],
+        scriptSrc: [],
+      },
+    },
+    referrerPolicy: { policy: "no-referrer" },
+    frameguard: { action: "deny" },
+    hsts: { maxAge: 31536000 },
+    noSniff: true,
+    xssFilter: true,
+  })
+);
+
 server.get("/", (_, res) => {
   res.send("Welcome to the server!");
 });
-server.use("/api/analytics", analyticsRoutes);
-server.use("/api", websiteRouter);
-server.use("/api", newsRouter);
-server.use("/api", messageRouter);
-server.use("/api", userRouter);
-server.use("/api", faqRouter);
-server.use("/api", productRouter);
-server.use("/api", sustainabilityRouter);
-server.use("/api", pageHeader);
-server.use("/api", companyRouter);
+server.use("/api/analytics", authenticateIfNotGet, analyticsRoutes);
+server.use("/api", authenticateIfNotGet, websiteRouter);
+server.use("/api", authenticateIfNotGet, newsRouter);
+server.use("/api", authenticateIfNotGet, messageRouter);
+server.use("/api", authenticateIfNotGet, userRouter);
+server.use("/api", authenticateIfNotGet, faqRouter);
+server.use("/api", authenticateIfNotGet, productRouter);
+server.use("/api", authenticateIfNotGet, sustainabilityRouter);
+server.use("/api", authenticateIfNotGet, pageHeader);
+server.use("/api", authenticateIfNotGet, companyRouter);
+server.use((_, res, next) => {
+  res.status(404).send("Sorry can't find that!");
+});
 
 server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.error(`Server is running on port ${port}`);
 });

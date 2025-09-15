@@ -87,7 +87,7 @@ export const newsController = {
 
       res.status(200).json({ success: true, data: response.rows[0] });
     } catch (error) {
-      console.log("Error updating news:", error);
+      console.error("Error updating news:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
